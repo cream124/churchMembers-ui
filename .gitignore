@@ -1,0 +1,9 @@
+#dependencies
+node_modules/
+coverage
+report
+reports
+logs
+.vscode
+./reports/api/*
+./reports/ui/*

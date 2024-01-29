@@ -1,0 +1,48 @@
+
+.mensaje{
+  color: rgb(229, 99, 18);
+  text-decoration: underline;
+} 
+
+.expand {
+  transform: 'rotate(0deg)';
+  margin-left: 'auto';
+  
+}
+
+.expandOpen {
+  transform: 'rotate(180deg)',
+}
+
+.event {
+  /* max-width: 100%; */
+  /* display: flex; */
+  /* color: rgb(57, 18, 229);
+  background-color: aqua; */
+  /* background-color:brown; */
+  background-color: "red";
+  padding: 10em;
+  border: 1em ;
+}
+
+.day {
+  color: rgb(57, 18, 229);
+  padding: 1em;
+  /* max-width:40% ; */
+  /* max-width:340px ; */
+}
+
+.pape {
+  /* // backgroundImage: `url(${fondo1})`, */
+  background-color: blue;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  /* backgroundColor:'blue',
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'contain',
+  /* // backgroundSize: 'cover', */
+  /* backgroundPosition: 'center' */ 
+  height: 100px;
+}
+

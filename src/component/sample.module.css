@@ -1,0 +1,27 @@
+
+.mensaje{
+  color: rgb(229, 99, 18);
+  text-decoration: underline;
+} 
+
+.expand {
+  transform: 'rotate(0deg)';
+  margin-left: 'auto';
+  
+}
+
+.expandOpen {
+  transform: 'rotate(180deg)',
+}
+
+.root2 {
+  color: rgb(57, 18, 229);
+  /* max-width:40% ; */
+  max-width:340px ;
+}
+.button {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  cursor: pointer;
+}

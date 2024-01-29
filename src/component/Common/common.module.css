@@ -1,0 +1,13 @@
+
+
+.rowContainer {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+.imageChooseFileContainer {
+  width: 118px;
+  padding-left: 12px; 
+  align-items: flex-end;
+}

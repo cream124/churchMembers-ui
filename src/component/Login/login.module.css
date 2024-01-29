@@ -1,0 +1,21 @@
+.root {
+  /* background-image: url('https://media.geeksforgeeks.org/wp-content/uploads/20200506112031/image211.jpg'); */
+}
+
+
+.button {
+  margin: 7px;
+}
+.div {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  opacity: 0.8;
+  height: 100%;
+  width: 100%;
+}

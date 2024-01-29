@@ -1,0 +1,35 @@
+
+.mensaje{
+  color: rgb(229, 99, 18);
+  text-decoration: underline;
+} 
+
+.expand {
+  transform: 'rotate(0deg)';
+  margin-left: 'auto';
+  
+}
+
+.expandOpen {
+  transform: 'rotate(180deg)',
+}
+
+.event {
+  /* max-width: 100%; */
+  /* display: flex; */
+  color: rgb(57, 18, 229);
+  background-color: aqua;
+  padding: 1em;
+  border: 1em ;
+  margin-top: 2em;
+}
+
+.day {
+  /* color: rgb(57, 18, 229); */
+  background-color: aqua;
+  padding: 1em;
+  margin-top: 1em;
+  /* max-width:40% ; */
+  /* max-width:340px ; */
+}
+
