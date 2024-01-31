@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button } from '@mui/material';
 import { Link } from "react-router-dom";
-import MainSubMenu from './MainSubMenu';
+import HeaderSubMenu from './HeaderSubMenu';
 
 
 export default function MainMenu (props) {
@@ -10,7 +10,7 @@ export default function MainMenu (props) {
   return (
     <>
     {
-      data.isNemu &&  <MainSubMenu data={data}/>
+      data.isNemu &&  <HeaderSubMenu data={data}/>
     }
     { ! data.isNemu && 
         <Button sx={{ color: '#fff' }}

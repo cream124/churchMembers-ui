@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {  Grid, Paper, Typography } from "@mui/material";
 import { ActiveEventsDB } from '../../api/EvetsDB';
-import userStyles2 from "../Events/eventStyle";
+// import userStyles2 from "../Events/eventStyle";
 import Day from '../Events/Day';
 
 export default function Events() {
   const {error, loading, data} = ActiveEventsDB();
-  const classes = userStyles2();
+  const classes={};// = userStyles2();
   
   if (error) return <div> error.2......</div>
   if (loading) return <div> loading.......</div>

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Avatar, Button, FormControl, Grid, Input, Paper, Typography } from "@mui/material";
 
-import { Image } from '@material-ui/icons';
 import classes from "./common.module.css";
 
 export default function Images(props) {

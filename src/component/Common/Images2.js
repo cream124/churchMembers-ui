@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Button, Grid, Input, Paper, Typography } from "@mui/material";
 
-import { Image } from '@material-ui/icons';
 
 export default function Images() {
   const [image, setImage] = React.useState()

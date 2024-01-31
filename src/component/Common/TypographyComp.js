@@ -6,8 +6,8 @@ const currentColor = (color) => {
 }
 
 export default function TypographyComp(props) {
-  const { variant, fontWeight, align, textColor } = props;
-  const color = currentColor(textColor);
+  const { variant, fontWeight, align, textcolor } = props;
+  const color = currentColor(textcolor);
   const textAlign = align? align: 'center';
 
   return (

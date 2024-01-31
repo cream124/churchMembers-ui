@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Avatar, Button, FormControl, Grid, IconButton, Input, Paper, Typography } from "@mui/material";
 
-import { PhotoCamera } from '@material-ui/icons';
+// import { PhotoCamera } from '@material-ui/icons';
 import classes from "./common.module.css";
 
 export default function UploadImage(props) {
@@ -52,7 +52,7 @@ export default function UploadImage(props) {
                   }
                 }}
               />
-              <PhotoCamera />
+              {/* <PhotoCamera /> */}
             </IconButton>
           
           </FormControl>

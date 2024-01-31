@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {  Grid, Paper, Typography } from "@mui/material";
-import userStyles2 from "../../Events/eventStyle";
 import Box from './Box';
 // import Day from '../Events/Day';
 // import { ActiveEventsDB } from '../../api/EvetsDB';
@@ -15,7 +14,7 @@ const data= {
 
 export default function Verse() {
   // const {error, loading, data} = ActiveEventsDB();
-  const classes = userStyles2();
+  const classes = {};
   
   
   // if (error) return <div> error.2......</div>

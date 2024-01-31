@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Button, Grid, Input, Paper, Typography } from "@mui/material";
 import style from "./sample.module.css";
-import { Image } from '@material-ui/icons';
 import DataTable from './Table/DataTable';
 import RenderCellGrid from './Table/RenderCellGrid';
 import BasicExampleDataGrid from './Table/BasicExampleDataGrid';

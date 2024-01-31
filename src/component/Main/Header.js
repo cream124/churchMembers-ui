@@ -1,6 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import AppBar from '@mui/material/AppBar';
+import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
@@ -13,29 +13,11 @@ import AccountMenu from "./AccountMenu";
 import { logoutPersonST } from "../../util/Storage";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import MainMenu from "./Menu/MainMenu ";
+import HeaderMainMenu from "./Menu/HeaderMainMenu ";
 import TypographyComp from "../Common/TypographyComp";
 
 const fondo = "/images/ig1.png";
 
-
-
-// const AppBar = styled(MuiAppBar, {
-//   shouldForwardProp: (prop) => prop !== 'open',
-// })(({ theme, open }) => ({
-//   transition: theme.transitions.create(['margin', 'width'], {
-//     easing: theme.transitions.easing.sharp,
-//     duration: theme.transitions.duration.leavingScreen,
-//   }),
-//   ...(open && {
-//     width: `calc(100% - ${drawerWidth}px)`,
-//     marginLeft: `${drawerWidth}px`,
-//     transition: theme.transitions.create(['margin', 'width'], {
-//       easing: theme.transitions.easing.easeOut,
-//       duration: theme.transitions.duration.enteringScreen,
-//     }),
-//   }),
-// }));
 const theme = createTheme();
 
 theme.typography.h3 = {
@@ -44,14 +26,13 @@ theme.typography.h3 = {
     fontSize: "1.8rem",
   },
   [theme.breakpoints.up("md")]: {
-    fontSize: "4rem",
+    fontSize: "2.4rem",
   },
 };
 
 export default function Header(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const { open, handleDrawerOpen, menuDetail, updateMenuDetails } =
-    props;
+  const { open, handleDrawerOpen, menuDetail, updateMenuDetails } = props;
   const [openMenu, setOpenMenu] = React.useState(false);
   const [openLoger, setOpenloger] = React.useState(false);
   const [body, setBody] = React.useState([{ nickname: "abner", password: "" }]);
@@ -105,11 +86,11 @@ export default function Header(props) {
       style={{ backgroundImage: `url(${fondo})` }}
       className={classes.header}
     >
-      <ThemeProvider theme={theme}>
+      {/* <ThemeProvider theme={theme}>
         <Typography variant="h3" noWrap component="h5">
           Iglesia "Alto Pagador" UCE
         </Typography>
-      </ThemeProvider>
+      </ThemeProvider> */}
 
       <Toolbar>
         <IconButton
@@ -122,19 +103,26 @@ export default function Header(props) {
         >
           <MenuIcon />
         </IconButton>
-        <TypographyComp
+        <ThemeProvider theme={theme}>
+          <Typography variant="h3" noWrap component="h5"
+            sx={{ flexGrow: 1 }}
+          >
+            Iglesia "Alto Pagador" UCE
+          </Typography>
+        </ThemeProvider>
+        {/* <TypographyComp
           variant="h4"
           // fontWeight='bold'
           textAlign="center"
-          textColor="#229954"
+          textcolor="#229954"
           sx={{ flexGrow: 1 }}
         >
           Iglesia Alto Pagador
-        </TypographyComp>
+        </TypographyComp> */}
 
         <Box sx={{ display: { xs: "none", sm: "none", md: "block" } }}>
           {menuDetail.map((item) => (
-            <MainMenu key={item.name} data={item} />
+            <HeaderMainMenu key={item.name} data={item} />
           ))}
         </Box>
         <AccountMenu updateMenuDetails={updateMenuDetails} />

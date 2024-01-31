@@ -8,7 +8,7 @@ import { Box, Button, Divider, Grid, Paper, Typography } from '@mui/material';
 import { Link } from "react-router-dom";
 import PanelComp from '../../Common/Panel/PanelComp';
 
-export default function MainSubMenu(props) {
+export default function HeaderSubMenu(props) {
   const { data } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectedIndex, setSelectedIndex] = React.useState(1);
