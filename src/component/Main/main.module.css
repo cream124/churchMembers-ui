@@ -12,8 +12,9 @@
 
 .container {
   /* background-color: blueviolet; */
-  height: 80%;
-  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+  /* overflow-y: scroll; */
   margin-left: 0em;
   border-left: 0cm;
   padding: 1em;
