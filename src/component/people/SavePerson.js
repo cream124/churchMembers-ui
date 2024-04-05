@@ -16,6 +16,8 @@ import UploadImage from '../Common/UploadImage';
 import TextFieldPasswordComponent from '../Common/TextFieldPasswordComponent';
 import { useParams } from 'react-router-dom';
 import { textAsTitle } from '../../util/helper';
+import Checkout from '../../modules/example/checkout/Checkout';
+import PeopleForm from '../../modules/people/peopleForm/PeopleForm';
 
 function getPersonData(registeredUser, id){
   let person = {
@@ -206,6 +208,8 @@ export default function SavePerson() {
   
   return (
     <Paper  elevation={24} className={classes.container}>
+      <PeopleForm classes={classes}/>
+      {/* <Checkout/> */}
       <Typography variant="h4" component="h1">
         {title} {id}
       </Typography>
