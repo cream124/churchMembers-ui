@@ -16,6 +16,7 @@ import {
 import * as Yup from "yup";
 import { Formik } from "formik";
 import DoneIcon from "@mui/icons-material/Done";
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import PanelComp from "../../../component/Common/Panel/PanelComp";
@@ -52,7 +53,7 @@ export default function GeneralInfForm(props) {
               alert(JSON.stringify(values, null, 2));
               setSubmitting(false);
             }, 400);
-            console.log("--values-------", values);
+            // console.log("--values-------", values);
             if(values.saveValues === true){
               saveData(values);
             } else {
@@ -61,16 +62,18 @@ export default function GeneralInfForm(props) {
             
           }}
         >
-          {({ isSubmitting, handleChange, onBlur, values, handleSubmit }) => (
+          {({ isSubmitting, handleChange, onBlur, values, handleSubmit, resetForm }) => (
             <Paper elevation={6} className={classes.container}>
               <Grid container rowSpacing={2} columnSpacing={2}>
                 <Grid item xs={12} sm={6} md={6}>
                   <UploadImage
                     values={values}
                     name="foto"
-                    // label="Seleccione su foto"
+                    label="Seleccione su foto"
+                    width="100"
                   />
                 </Grid>
+                <Grid item xs={12} sm={6} md={6}></Grid>
                 <Grid item xs={12} sm={6} md={6}>
                   <TextfieldWrapper label={"Nombres"} name={"name"} />
                 </Grid>
@@ -80,7 +83,7 @@ export default function GeneralInfForm(props) {
                 <Grid item xs={12} sm={6} md={6}>
                   <TextfieldWrapper label={"Apellido Materno"} name={"lastName2"} />
                 </Grid>
-                <Grid item xs={12} sm={6} md={6}>
+                <Grid item xs={6} sm={4} md={4}>
                   <MobileDatePicker2
                     values={values}
                     name="birthDate"
@@ -88,9 +91,8 @@ export default function GeneralInfForm(props) {
                     age="age"
                   />
                 </Grid>
-                <Grid item xs={12} sm={6} md={6}>
-                  Edad: { values.age} Años
-                  {/* <TextfieldWrapper label={"Edad"} name={"age"} /> */}
+                <Grid item xs={6} sm={2} md={2}>
+                   { values.age} Años
                 </Grid>
                 <Grid item xs={12} sm={6} md={6}>
                   <TextfieldWrapper label={"CI"} name={"ci"} />
@@ -118,6 +120,7 @@ export default function GeneralInfForm(props) {
                       label="Siguiente"
                       variant=""
                       color="warning"
+                      // disabled={!isSubmitting}
                       icon={<NavigateNextIcon />}
                       // onClick={handleSubmit}
                       onClick={()=>{
@@ -128,7 +131,16 @@ export default function GeneralInfForm(props) {
                   </Stack>
                 </Grid>
                 <Grid item xs={3}>
-                  <Stack direction="row" justifyContent="end">
+                  <Stack direction="row" justifyContent="end" spacing={2}>
+                  <Chip
+                      label="Reset"
+                      variant="outlined"
+                      color="warning"
+                      icon={<RestartAltIcon/>}
+                      onClick={() => {
+                        resetForm();
+                      }}
+                    />
                     <Chip
                       label="Guardar"
                       variant=""

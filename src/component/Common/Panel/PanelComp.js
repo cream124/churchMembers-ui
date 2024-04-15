@@ -12,7 +12,9 @@ export default function PanelComp(props) {
     minHeight, 
     padding, 
     margin,
-    borderRadius, 
+    borderRadius,
+    textAlign,
+    elevation,
     onMouseLeave } = props;
 
 
@@ -34,13 +36,14 @@ export default function PanelComp(props) {
         }
         {!image &&
           <Paper
-            elevation={24}
+            elevation = {elevation ? elevation : 24}
             sx={{
               backgroundColor: `${color} !important`,
               minHeight: minHeight,
               padding: padding,
               borderRadius: borderRadius ? Number(borderRadius): 3,
-              margin: margin
+              margin: margin,
+              textAlign:textAlign
             }}
             className={classes.panelComp}
             onMouseLeave={onMouseLeave}

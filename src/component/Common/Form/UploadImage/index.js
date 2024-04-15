@@ -10,6 +10,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import FormHelperText from "@mui/material/FormHelperText";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 
 import { TextField } from "@mui/material";
@@ -27,6 +28,7 @@ const UploadImage = ({
   photo,
   disabled,
   label,
+  width,
   ...otherProps
 }) => {
   const [image, setImage] = React.useState();
@@ -64,41 +66,42 @@ const UploadImage = ({
 
   return (
     // <Grid  item xs={12} sm={12} md={6}  alignItems="flex-end">
-    <>
+    <Stack direction="column">
+      <FormHelperText>{label}</FormHelperText>
       <Stack direction="row" justifyContent="center" spacing={1}>
-        {label}
+
         {/* <div className={classes.rowContainer}> */}
-          <Avatar src={preview} sx={{ width: 45, height: 45 }}>
-            F
-          </Avatar>
-          <div className={classes.imageChooseFileContainer}>
-            <FormControl>
-              <IconButton
-                // color="primary"
-                aria-label="upload picture"
-                component="label"
-                disabled={disabled}
-              >
-                <input
-                  hidden
-                  accept="image/*"
-                  type="file"
-                  onChange={(event) => {
-                    const file = event.target.files[0];
-                    if (file) {
-                      setImage(file);
-                    } else {
-                      setImage(null);
-                    }
-                  }}
-                />
-                <PhotoCameraIcon />
-              </IconButton>
-            </FormControl>
-          </div>
+        <Avatar src={preview} sx={{ width: Number(width), height: Number(width) }}>
+          F
+        </Avatar>
+        <div className={classes.imageChooseFileContainer}>
+          <FormControl>
+            <IconButton
+              // color="primary"
+              aria-label="upload picture"
+              component="label"
+              disabled={disabled}
+            >
+              <input
+                hidden
+                accept="image/*"
+                type="file"
+                onChange={(event) => {
+                  const file = event.target.files[0];
+                  if (file) {
+                    setImage(file);
+                  } else {
+                    setImage(null);
+                  }
+                }}
+              />
+              <PhotoCameraIcon />
+            </IconButton>
+          </FormControl>
+        </div>
         {/* </div> */}
       </Stack>
-    </>
+    </Stack>
     // </Grid>
   );
 };

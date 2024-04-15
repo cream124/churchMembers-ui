@@ -17,13 +17,16 @@ import PaymentForm from "./PaymentForm";
 import Review from "./Review";
 import GeneralInfForm from "./GeneralInfForm";
 import SpiritualInfForm from "./SpiritualInfForm";
+import LegalInfForm from "./LegalInfForm";
 
 const peopleData1 = {
   id: "",
   name: "",
   lastName: "",
   lastName2: "",
-  birthDate: "04-12-2000",
+  birthDate: "",
+  isBaptized: false,
+  acceptChrist: false,
   age: "0",
   items: 0,
   ci: "0",
@@ -41,7 +44,7 @@ const peopleData1 = {
   ],
 };
 
-const steps = ["Informacion General", "Informacion Espiritual", "Review your order1"];
+const steps = ["Informacion General", "Informacion Espiritual", "Informacion Legal", "Review your order1"];
 
 export default function PeopleForm(props) {
   const { classes } = props;
@@ -69,15 +72,26 @@ export default function PeopleForm(props) {
             saveData={saveData}
           />
         );
-      case 2:
+        case 2:
+        return (
+          <LegalInfForm
+            classes={classes}
+            peopleData={peopleData}
+            handleNext={handleNextBack}
+            saveData={saveData}
+          />
+        );
+      case 3:
         return <Review />;
       default:
         throw new Error("Unknown step");
     }
   }
   const saveData = (values) => {
+    console.log('Saiving, data');
     // setActiveStep(activeStep + 1);
-    // setPeopleData(values);
+    values.saveValues = false;
+    setPeopleData(values);
   };
 
   const handleNext = (values) => {
