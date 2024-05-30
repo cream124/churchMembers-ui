@@ -28,6 +28,8 @@ import Contact from "../Extra/contacts/Contact";
 import { getMenuItems } from "./MenuItemsData";
 import PeopleFrom from "../../modules/people/PeopleForm";
 import { Toolbar } from "@mui/material";
+import SavePeople from "../../modules/people/SavePeople";
+import UpdatePeople from "../../modules/people/UpdatePeople";
 
 const drawerWidth = 240;
 
@@ -99,6 +101,8 @@ export default function TopBar() {
             <Route path="/Personas" element={<Persons />} />
             <Route path="/addPerson" element={<SavePerson />} />
             <Route path="/addPerson2" element={<PeopleFrom />} />
+            <Route path="/addPerson3" element={<SavePeople />} />
+            <Route path="/addPerson3/:id" element={<UpdatePeople />} />
 
             <Route path="/Sample" element={<Sample />} />
             <Route

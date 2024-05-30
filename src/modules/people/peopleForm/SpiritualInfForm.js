@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Chip,
-  Grid,
-  Typography,
-  Stack,
-} from "@mui/material";
+import { Chip, Grid, Typography, Stack } from "@mui/material";
 
 import * as Yup from "yup";
 import { Formik } from "formik";
@@ -22,13 +17,13 @@ import places from "../../../component/data/places.json";
 import denomination from "../../../component/data/denomination.json";
 
 const PEOPLE_VALIDATION_BILL = Yup.object().shape({
-  name: Yup.string()
-    .required("Se requiere El Nombre")
-    .min(3, "Debe tener al menos 3 caracteres"),
+  // name: Yup.string()
+  //   .required("Se requiere El Nombre")
+  //   .min(3, "Debe tener al menos 3 caracteres"),
 });
 
 export default function SpiritualInfForm(props) {
-  const { peopleData, saveData, handleNext } = props;
+  const { peopleData, handleNext } = props;
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -43,18 +38,10 @@ export default function SpiritualInfForm(props) {
               // alert(JSON.stringify(values, null, 2));
               setSubmitting(false);
             }, 400);
-            // console.log("--values-------", values);
-            if (values.saveValues === true) {
-              saveData(values);
-            } else {
-              handleNext(values, values.step);
-            }
+            handleNext(values, values.saveValues, values.step, 'spiritual');
           }}
         >
           {({
-            isSubmitting,
-            handleChange,
-            onBlur,
             values,
             handleSubmit,
             resetForm,
@@ -65,86 +52,148 @@ export default function SpiritualInfForm(props) {
               elevation="3"
               margin="0.8em"
             >
-              <PanelComp padding="1em" textAlign="left" margin="0.5em">
-                <Switch
-                  name="termsOfService"
-                  checked={values.termsOfService}
-                  label="Acepto a Cristo en su corazon"
-                />
-                {values.termsOfService && (
-                  <Grid container rowSpacing={2} columnSpacing={2}>
-                    <Grid item xs={12} sm={12} md={12}></Grid>
-                    <Grid item xs={12} sm={6} md={6}>
-                      <Select name="country" label="Lugar" options={places} />
-                    </Grid>
+              <Grid container rowSpacing={2} columnSpacing={2}>
+                <Grid item xs={12} sm={12} md={6}>
+                  <PanelComp padding="1em" textAlign="left" margin="0.5em">
+                    <Switch
+                      name="christian"
+                      checked={values.christian}
+                      label="Acepto a Cristo en su corazón"
+                    />
+                    {values.christian && (
+                      <Grid container rowSpacing={2} columnSpacing={2}>
+                        <Grid item xs={12} sm={12} md={12}></Grid>
+                        
+                        <Grid item xs={12} sm={6} md={6}>
+                          <TextfieldWrapper
+                            label={"*Nombre de la Iglesia"}
+                            name={"churchName"}
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6}>
+                          <TextfieldWrapper
+                            label={"*Departamento"}
+                            name={"department"}
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6}>
+                          <TextfieldWrapper
+                            label={"*Provincia"}
+                            name={"province"}
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6}>
+                          <TextfieldWrapper
+                            label={"*Localidad"}
+                            name={"locality"}
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6}>
+                          <Select
+                            name="placeAccept"
+                            label="Lugar"
+                            options={places}
+                          />
+                        </Grid>
 
-                    <Grid item xs={12} sm={6} md={6}>
-                      <TextfieldWrapper
-                        label={"Nombre del Lugar"}
-                        name={"name"}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={6}>
-                      <MobileDatePicker2
-                        values={values}
-                        name="birthDate"
-                        label="Fecha"
-                      />
-                    </Grid>
-                  </Grid>
-                )}
-              </PanelComp>
-
-              <PanelComp
-                padding="1em" textAlign="left" margin="0.5em"
-              >
-                <Switch
-                  name="isBaptized"
-                  checked={values.isBaptized}
-                  label="Esta Bautizado?"
-                />
-                {values.isBaptized && (
-                  <Grid container rowSpacing={2} columnSpacing={2}>
-                    <Grid item xs={12} sm={12} md={12}></Grid>
-                    <Grid item xs={12} sm={6} md={6}>
-                      <TextfieldWrapper
-                        label={"Nombre de Iglesia"}
-                        name={"age"}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={6}>
-                      <Select
-                        name="country"
-                        label="Denominación"
-                        options={denomination}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={6}>
-                      <MobileDatePicker2
-                        values={values}
-                        name="birthDate"
-                        label="Fecha"
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={6}>
-                      <TextfieldWrapper label={"Lugar"} name={"phone"} />
-                    </Grid>
-
-                    <Grid item xs={12} sm={6} md={6}>
-                      <UploadImage
-                        values={values}
-                        name="foto"
-                        label="Subir foto del Certificado"
-                        width="70"
-                      />
-                    </Grid>
-                  </Grid>
-                )}
-              </PanelComp>
+                        <Grid item xs={12} sm={6} md={6}>
+                          <TextfieldWrapper
+                            label={"Nombre del Lugar"}
+                            name={"namePlaceAccept"}
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6}>
+                          <MobileDatePicker2
+                            values={values}
+                            name="dateAccept"
+                            label="*Fecha"
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6}>
+                          <MobileDatePicker2
+                            values={values}
+                            name="timeAccept"
+                            label="Hora"
+                          />
+                        </Grid>
+                      </Grid>
+                    )}
+                  </PanelComp>
+                </Grid>
+                <Grid item xs={12} sm={12} md={6}>
+                  <PanelComp padding="1em" textAlign="left" margin="0.5em">
+                    <Switch
+                      name="baptized"
+                      checked={values.baptized}
+                      label="Esta Bautizado?"
+                    />
+                    {values.baptized && (
+                      <Grid container rowSpacing={2} columnSpacing={2}>
+                        <Grid item xs={12} sm={12} md={12}></Grid>
+                        <Grid item xs={12} sm={6} md={6}>
+                          <TextfieldWrapper
+                            label={"Nombre de Iglesia"}
+                            name={"nameBaptizedChurch"}
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6}>
+                          <Select
+                            name="denominationBaptizedChurch"
+                            label="Denominación"
+                            options={denomination}
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6}>
+                          <MobileDatePicker2
+                            values={values}
+                            name="dateBaptized"
+                            label="*Fecha"
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6}>
+                          <TextfieldWrapper label={"Lugar"} name={"palceBaptized"} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6}>
+                          <TextfieldWrapper label={"Se hizo miembro por"} name={"becameMemberFor"} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6}>
+                          <TextfieldWrapper label={"Membresía Libro No"} name={"libroN"} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6}>
+                          <TextfieldWrapper label={"Membresía Folio No"} name={"folioN"} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6}>
+                          <MobileDatePicker2
+                            values={values}
+                            name="membershipRegistrationDate"
+                            label="Fecha de Registro de Membresía"
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6}>
+                          <MobileDatePicker2
+                            values={values}
+                            name="membershipRegistrationTime"
+                            label="Membresía Hora de Registro"
+                          />
+                        </Grid>
+                        
+                        <Grid item xs={12} sm={6} md={6}>
+                          <UploadImage
+                            values={values}
+                            name="baptizedCertificatePhoto"
+                            label="Subir foto del Certificado"
+                            width="70"
+                          />
+                        </Grid>
+                      </Grid>
+                    )}
+                  </PanelComp>
+                </Grid>
+              </Grid>
 
               <Grid container rowSpacing={2} columnSpacing={2}>
                 <Grid item xs={12}></Grid>
-                <Grid item xs={9} sm={9} md={9}>
+                <Grid item xs={12} sm={9} md={9}>
                   <Stack direction="row" justifyContent="left" spacing={5}>
                     <Chip
                       label="Anterior"
@@ -161,7 +210,6 @@ export default function SpiritualInfForm(props) {
                       label="Siguiente"
                       variant=""
                       color="warning"
-                      disabled={isSubmitting}
                       icon={<NavigateNextIcon />}
                       // onClick={handleSubmit}
                       onClick={() => {
@@ -171,7 +219,7 @@ export default function SpiritualInfForm(props) {
                     />
                   </Stack>
                 </Grid>
-                <Grid item xs={3} sm={3} md={3}>
+                <Grid item xs={12} sm={3} md={3}>
                   <Stack direction="row" justifyContent="end" spacing={2}>
                     <Chip
                       label="Reset"
@@ -179,8 +227,6 @@ export default function SpiritualInfForm(props) {
                       color="warning"
                       icon={<RestartAltIcon />}
                       onClick={() => {
-                        //values.saveValues = true;
-                        //handleSubmit();
                         resetForm();
                       }}
                     />

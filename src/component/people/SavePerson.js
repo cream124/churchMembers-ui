@@ -208,8 +208,10 @@ export default function SavePerson() {
   
   return (
     <Paper  elevation={24} className={classes.container}>
-      <PeopleForm classes={classes}/>
-      {/* <Checkout/> */}
+      <PeopleForm
+        data={''}
+        classes={classes}
+      />
       <Typography variant="h4" component="h1">
         {title} {id}
       </Typography>

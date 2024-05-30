@@ -17,9 +17,9 @@ import places from "../../../component/data/places.json";
 import denomination from "../../../component/data/denomination.json";
 
 const PEOPLE_VALIDATION_BILL = Yup.object().shape({
-  name: Yup.string()
-    .required("Se requiere El Nombre")
-    .min(3, "Debe tener al menos 3 caracteres"),
+  // name: Yup.string()
+  //   .required("Se requiere El Nombre")
+  //   .min(3, "Debe tener al menos 3 caracteres"),
 });
 
 export default function LegalInfForm(props) {
@@ -27,7 +27,7 @@ export default function LegalInfForm(props) {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Informacion Legal
+        Información Legal
       </Typography>
       <Grid container spacing={3}>
         <Formik
@@ -38,18 +38,11 @@ export default function LegalInfForm(props) {
               // alert(JSON.stringify(values, null, 2));
               setSubmitting(false);
             }, 400);
-            // console.log("--values-------", values);
-            if (values.saveValues === true) {
-              saveData(values);
-            } else {
-              handleNext(values, values.step);
-            }
+            handleNext(values, values.saveValues, values.step, 'legal');
           }}
         >
           {({
             isSubmitting,
-            handleChange,
-            onBlur,
             values,
             handleSubmit,
             resetForm,
@@ -59,105 +52,104 @@ export default function LegalInfForm(props) {
               borderRadius="0"
               elevation="3"
               margin="0.8em"
+              textAlign="left"
             >
               <Switch
-                name="termsOfService"
-                checked={values.termsOfService}
+                name="legalInformation"
+                checked={values.legalInformation}
                 label="Certificado de nacimiento"
               />
-              {values.termsOfService && (
+              {values.legalInformation && (
                 <Grid container rowSpacing={2} columnSpacing={2}>
-                  <Grid item xs={12}>
+                  <Grid item xs={12} sm={6} md={6}>
                     <PanelComp padding="1em" textAlign="left" margin="0.5em">
-                      {/* zzxzxzx */}
+                      Oficialia de Registro Civil
                       <Grid container rowSpacing={2} columnSpacing={2}>
                         <Grid item xs={12} sm={12} md={12}></Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper
-                            label={"Oficialia No."}
-                            name={"name"}
+                            label={"*Oficialia de Regidtro Civil No."}
+                            name={"oficialiaN"}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
-                          <TextfieldWrapper
-                            label={"Libro No."}
-                            name={"name"}
-                          />
+                          <TextfieldWrapper label={"*Libro No."} name={"libroN"} />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper
-                            label={"Partida No."}
-                            name={"name"}
+                            label={"*Partida No."}
+                            name={"partidaN"}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
-                          <TextfieldWrapper
-                            label={"Folio No."}
-                            name={"name"}
-                          />
+                          <TextfieldWrapper label={"*Folio No."} name={"folioN"} />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper
                             label={"Detartamento"}
-                            name={"name"}
+                            name={"oficialiaDepartamento"}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
-                          <TextfieldWrapper
-                            label={"Provincia"}
-                            name={"name"}
-                          />
+                          <TextfieldWrapper label={"Provincia"} name={"oficialiaProvincia"} />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <MobileDatePicker2
                             values={values}
-                            name="birthDate"
-                            label="Fecha"
+                            name="oficialiaDate"
+                            label="*Fecha de Partida"
                           />
                         </Grid>
                       </Grid>
                     </PanelComp>
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid item xs={12} sm={6} md={6}>
                     <PanelComp padding="1em" textAlign="left" margin="0.5em">
                       Lugar de Nacimiento
                       <Grid container rowSpacing={2} columnSpacing={2}>
                         <Grid item xs={12} sm={12} md={12}></Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper
-                            label={"Departamento"}
-                            name={"name"}
+                            label={"*Departamento"}
+                            name={"departamentoNacimiento"}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper
-                            label={"Provincia"}
-                            name={"name1"}
+                            label={"*Provincia"}
+                            name={"provinciaNacimiento"}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper
-                            label={"Localidad"}
-                            name={"name2"}
+                            label={"*Localidad"}
+                            name={"localidadNacimiento"}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper
                             label={"Nacionalidad"}
-                            name={"name1"}
+                            name={"nacionalidadNacimiento"}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <MobileDatePicker2
                             values={values}
-                            name="birthDate"
-                            label="Fecha de Nacimiento"
+                            name="fechaNacimiento"
+                            label="*Fecha de Nacimiento"
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6}>
+                          <MobileDatePicker2
+                            values={values}
+                            name="horaNacimiento"
+                            label="*Hora de Nacimiento"
                           />
                         </Grid>
                       </Grid>
                     </PanelComp>
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid item xs={12} sm={6} md={6}>
                     <PanelComp padding="1em" textAlign="left" margin="0.5em">
                       Padres
                       <Grid container rowSpacing={2} columnSpacing={2}>
@@ -165,49 +157,49 @@ export default function LegalInfForm(props) {
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper
                             label={"Nombres Padre"}
-                            name={"name"}
+                            name={"nombresPadre"}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper
                             label={"Apellidos Padre"}
-                            name={"name1"}
+                            name={"apellidosPadre"}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper
                             label={"Nombres Madre"}
-                            name={"name2"}
+                            name={"nombresMadre"}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper
                             label={"Apellidos Madre"}
-                            name={"name1"}
+                            name={"apellidosMadre"}
                           />
                         </Grid>
                       </Grid>
                     </PanelComp>
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid item xs={12} sm={6} md={6}>
                     <PanelComp padding="1em" textAlign="left" margin="0.5em">
                       Fecha y Lugar de Emicion
                       <Grid container rowSpacing={2} columnSpacing={2}>
                         <Grid item xs={12} sm={12} md={12}></Grid>
                         <Grid item xs={12} sm={6} md={6}>
-                          <TextfieldWrapper label={"Localidad"} name={"name"} />
+                          <TextfieldWrapper label={"Localidad"} name={"localidadEmicion"} />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <MobileDatePicker2
                             values={values}
-                            name="birthDate"
+                            name="fechaEmicion"
                             label="Fecha"
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <UploadImage
                             values={values}
-                            name="foto"
+                            name="certificatePhoto"
                             label="Subir foto del Certificado"
                             width="70"
                           />

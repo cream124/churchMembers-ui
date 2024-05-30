@@ -18,65 +18,102 @@ import Review from "./Review";
 import GeneralInfForm from "./GeneralInfForm";
 import SpiritualInfForm from "./SpiritualInfForm";
 import LegalInfForm from "./LegalInfForm";
+import PanelComp from "../../../component/Common/Panel/PanelComp";
 
-const peopleData1 = {
-  id: "",
-  name: "",
-  lastName: "",
-  lastName2: "",
-  birthDate: "",
-  isBaptized: false,
-  acceptChrist: false,
-  age: "0",
-  items: 0,
-  ci: "0",
-  phone: "0",
-  email: "",
-  address: "0",
-  location: "",
-  foto: "",
-  registerDate: true,
-  saveValues: false,
-  options: [
-    "Valor no declarado",
-    "Contenido no declarado",
-    "Sin dinero no objetos de valor",
-  ],
-};
+// const peopleData1 = {
+//   id: "",
+//   name: "",
+//   lastName: "",
+//   mothersLastName: "",
+//   birthDate: "",
+//   ci: "0",
+//   phone: "0",
+//   email: "",
+//   address: "0",
+//   location: "",
+//   foto: "",
+//   user: false,
+//   password: "",
 
-const steps = ["Informacion General", "Informacion Espiritual", "Informacion Legal", "Review your order1"];
+//   spiritual: {
+//     acceptChrist: false,
+//     isBaptized: false,
+//     placeAccept: "",
+//     namePlaceAccept: "",
+//     dateAccept: "",
+//     nameBaptizedChurch: "",
+//     denominationBaptizedChurch: "",
+//     palceBaptized: "",
+//     dateBaptized: "",
+//     certificateBaptizedFoto: "",
+//   },
+//   legal: {
+//     haveLegalInformation: false,
+//     oficialiaN: "",
+//     libroN: "",
+//     partidaN: "",
+//     folioN: "",
+//     oficialiaDepartamento: "",
+//     oficialiaProvincia: "",
+//     oficialiaDate: "",
+//     departamentoNacimiento: "",
+//     provinciaNacimiento: "",
+//     localidadNacimiento: "",
+//     nacionalidadNacimiento: "",
+//     fechaNacimiento: "",
+//     nombresPadre: "",
+//     apellidosPadre: "",
+//     nombresMadre: "",
+//     apellidosMadre: "",
+//     localidadEmicion: "",
+//     fechaEmicion: "",
+//     certificadoFoto: "",
+//   },
+//   age: "0",
+//   items: 0,
+
+//   registerDate: true,
+//   saveValues: false,
+//   options: [
+//     "Valor no declarado",
+//     "Contenido no declarado",
+//     "Sin dinero no objetos de valor",
+//   ],
+// };
+
+const steps = [
+  "Información General",
+  "Información Espiritual",
+  "Información Legal",
+  "Review your order1",
+];
 
 export default function PeopleForm(props) {
-  const { classes } = props;
+  const { data, savePeople, classes } = props;
   // const classes = {}; //useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
-  const [peopleData, setPeopleData] = React.useState(peopleData1);
+  const [peopleData, setPeopleData] = React.useState(data);
 
   function getStepContent(step) {
     switch (step) {
       case 0:
         return (
           <GeneralInfForm
-            classes={classes}
             peopleData={peopleData}
             handleNext={handleNextBack}
-            saveData={saveData}
           />
         );
       case 1:
         return (
           <SpiritualInfForm
-            classes={classes}
-            peopleData={peopleData}
+            peopleData={peopleData.spiritual}
             handleNext={handleNextBack}
-            saveData={saveData}
           />
         );
-        case 2:
+      case 2:
         return (
           <LegalInfForm
-            classes={classes}
-            peopleData={peopleData}
+            peopleData={peopleData.legal}
             handleNext={handleNextBack}
             saveData={saveData}
           />
@@ -87,9 +124,9 @@ export default function PeopleForm(props) {
         throw new Error("Unknown step");
     }
   }
-  const saveData = (values) => {
-    console.log('Saiving, data');
-    // setActiveStep(activeStep + 1);
+  const saveData = async (values) => {
+    console.log("Saiving, data");
+    await savePeople(values);
     values.saveValues = false;
     setPeopleData(values);
   };
@@ -98,9 +135,63 @@ export default function PeopleForm(props) {
     setActiveStep(activeStep + 1);
     setPeopleData(values);
   };
-  const handleNextBack = (values, step) => {
-    setActiveStep(activeStep + step);
-    setPeopleData(values);
+  const spiritual = (values) =>{
+    const val = {...values};
+      delete val.step;
+      const newValue = {
+        ...peopleData,
+        "spiritual": val
+      }; 
+      setPeopleData(newValue);
+      return newValue;
+  }
+  const legal = (values) =>{
+    const val = {...values};
+      delete val.step;
+      const newValue = {
+        ...peopleData,
+        "legal": val
+      }; 
+      setPeopleData(newValue);
+      return newValue;
+  }
+  const general = (values) =>{
+    const val = {...values};
+      delete val.step;
+      setPeopleData(val);
+      return val;
+  }
+  const handleNextBack = async (values, saveValues, step, area) => {
+    const formOption = {
+      'spiritual':spiritual,
+      'legal': legal,
+      'general': general,
+    }
+    const newValues = await formOption[area](values);
+    
+    // if(area === 'spiritual'){
+    //   const val = {...values};
+    //   delete val.step;
+    //   // delete val.birthDate;
+    //   // delete val.name;
+    //   // delete val.phone;
+    //   // delete val.
+    //   setPeopleData({
+    //     ...peopleData,
+    //     "spiritual": val
+    //   });
+    // } else{
+    //   setPeopleData(values);
+    // }
+    if (saveValues) {
+      console.log("Saiving, data");
+      await savePeople(newValues);
+      // values.saveValues = false;
+      // setPeopleData(values);
+    } else {
+      console.log("Saiving, data", newValues);
+      setActiveStep(activeStep + step);
+    }
   };
 
   const handleBack = () => {
@@ -122,7 +213,7 @@ export default function PeopleForm(props) {
       <Grid container spacing={3} className={classes.containerGrid}>
         <Grid item xs={12}>
           <Grid container justifyContent="center" spacing={3}>
-            <Grid item xs={12} sm={12} md={6}>
+            <Grid item xs={12} sm={12} md={12}>
               {/* <Paper elevation={6} className={classes.container}> */}
               {/* <Grid container rowSpacing={2} columnSpacing={2}> */}
               <React.Fragment>

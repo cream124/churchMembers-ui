@@ -25,14 +25,19 @@ query Person($id: String) {
     password
     christian
     baptized
+    spiritual {
+      baptized
+      christian
+      namePlaceAccept
+    }
   }
 }
 `
 
 const ADD_PERSONS = gql`
-mutation CreatePerson($name: String!, $lastName: String, $motherLastName: String, $birthDate: String, $ci: String, $photo: String, $phone: String, $address: String, $location: String, $state: String, $email: String, $registerId: String, $registerDate: String, $approvalId: String, $user: Boolean, $userName: String, $password: String, $level: Int, $christian: Boolean, $baptized: Boolean) {
-  createPerson(name: $name, lastName: $lastName, motherLastName: $motherLastName, birthDate: $birthDate, ci: $ci, photo: $photo, phone: $phone, address: $address, location: $location, state: $state, email: $email, registerId: $registerId, registerDate: $registerDate, approvalId: $approvalId, user: $user, userName: $userName, password: $password, level: $level, christian: $christian, baptized: $baptized) {
-   _id
+mutation CreatePerson($name: String!, $ci: String, $level: Int, $userName: String, $email: String, $password: String, $user: Boolean, $state: String, $spiritual: Spiritual1, $legal: Legal1) {
+  createPerson(name: $name, ci: $ci, level: $level, userName: $userName, email: $email, password: $password, user: $user, state: $state, spiritual: $spiritual, legal: $legal) {
+    _id
    name
    lastName
    motherLastName
@@ -53,6 +58,14 @@ mutation CreatePerson($name: String!, $lastName: String, $motherLastName: String
    password
    christian
    baptized
+   spiritual {
+      baptized
+      christian
+      namePlaceAccept
+   }
+   legal {
+    legalInformation
+   }
   }
 }
 `
@@ -81,7 +94,12 @@ mutation UpdatePerson($_id: String!, $name: String, $lastName: String, $motherLa
     userName
     password
     christian
-    baptized  
+    baptized
+    spiritual {
+      baptized
+      christian
+      namePlaceAccept
+    }  
   }
 }
 `

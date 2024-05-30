@@ -66,7 +66,7 @@ const MobileDatePicker2 = ({ name, values, age, dateActtion, ...otherProps }) =>
           //     values.age ='12';
           //   }}
           onChange={(value) => {setupDate(value)}}
-          renderInput={(params) => <TextField {...params} />}
+          textField={(params) => <TextField {...params} />}
         ></MobileDatePicker>
       </LocalizationProvider>
     // </Grid>

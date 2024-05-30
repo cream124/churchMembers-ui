@@ -36,7 +36,7 @@ export default function PanelComp(props) {
         }
         {!image &&
           <Paper
-            elevation = {elevation ? elevation : 24}
+            elevation = {elevation ? parseInt(elevation) : 24}
             sx={{
               backgroundColor: `${color} !important`,
               minHeight: minHeight,

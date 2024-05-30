@@ -1,30 +1,18 @@
 import React from "react";
-import {
-  Chip,
-  Grid,
-  TextField,
-  FormControlLabel,
-  Step,
-  StepLabel,
-  Link,
-  Button,
-  Paper,
-  Typography,
-  Stack,
-} from "@mui/material";
-
+import { Chip, Grid, Typography, Stack } from "@mui/material";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import DoneIcon from "@mui/icons-material/Done";
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import PanelComp from "../../../component/Common/Panel/PanelComp";
 import TextfieldWrapper from "../../../component/Common/Form/TextField";
+import Switch from "../../../component/Common/Form/Switch";
+import Select from "../../../component/Common/Form/Select";
 import MobileDatePicker2 from "../../../component/Common/Form/MobileDatePicker2";
 import UploadImage from "../../../component/Common/Form/UploadImage";
-import Checkbox from "../../../component/Common/Form/Checkbox";
-
+import gender from "../../../component/data/gender.json";
+import civilStatus from "../../../component/data/civilStatus.json";
 
 const PEOPLE_VALIDATION_BILL = Yup.object().shape({
   name: Yup.string()
@@ -33,16 +21,12 @@ const PEOPLE_VALIDATION_BILL = Yup.object().shape({
 });
 
 export default function GeneralInfForm(props) {
-  const { classes, peopleData, saveData, handleNext } = props;
-  // const { setFieldValue } = useFormikContext();
-
-  
-  
+  const { peopleData, handleNext } = props;
 
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Informacion General
+        Información General
       </Typography>
       <Grid container spacing={3}>
         <Formik
@@ -50,93 +34,143 @@ export default function GeneralInfForm(props) {
           validationSchema={PEOPLE_VALIDATION_BILL}
           onSubmit={(values, { setSubmitting, resetForm }) => {
             setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
+              // alert(JSON.stringify(values, null, 2));
               setSubmitting(false);
             }, 400);
-            // console.log("--values-------", values);
-            if(values.saveValues === true){
-              saveData(values);
-            } else {
-              handleNext(values, values.step);
-            }
-            
+            handleNext(values, values.saveValues, values.step, "general");
           }}
         >
-          {({ isSubmitting, handleChange, onBlur, values, handleSubmit, resetForm }) => (
-            <Paper elevation={6} className={classes.container}>
+          {({ values, handleSubmit, resetForm }) => (
+            <PanelComp
+              padding="1.3em"
+              borderRadius="0"
+              elevation="3"
+              margin="0.8em"
+            >
               <Grid container rowSpacing={2} columnSpacing={2}>
-                <Grid item xs={12} sm={6} md={6}>
-                  <UploadImage
-                    values={values}
-                    name="foto"
-                    label="Seleccione su foto"
-                    width="100"
-                  />
+                <Grid item xs={12} sm={12} md={6}>
+                  <PanelComp padding="1em" textAlign="left" margin="0.5em">
+                    <Grid container rowSpacing={2} columnSpacing={2}>
+                      <Grid item xs={12} sm={12} md={12}>
+                        <UploadImage
+                          values={values}
+                          name="photo"
+                          label="Seleccione su foto"
+                          width="100"
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6} md={6}>
+                        <TextfieldWrapper label={"Nombres"} name={"name"} />
+                      </Grid>
+                      <Grid item xs={12} sm={6} md={6}>
+                        <TextfieldWrapper
+                          label={"Apellido Paterno"}
+                          name={"lastName"}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6} md={6}>
+                        <TextfieldWrapper
+                          label={"Apellido Materno"}
+                          name={"motherLastName"}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6} md={6}>
+                        <Select
+                          name="gender"
+                          label="Sexo"
+                          options={gender}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6} md={6}>
+                        <Select
+                          name="civilStatus"
+                          label="Esdado Civil"
+                          options={civilStatus}
+                        />
+                      </Grid>
+                      <Grid item xs={6} sm={4} md={4}>
+                        <MobileDatePicker2
+                          values={values}
+                          name="birthDate"
+                          label="Fecha de Nacimiento"
+                          age="age"
+                        />
+                      </Grid>
+                      <Grid item xs={6} sm={2} md={2}>
+                        {values.age} Años
+                      </Grid>
+                    </Grid>
+                  </PanelComp>
                 </Grid>
-                <Grid item xs={12} sm={6} md={6}></Grid>
-                <Grid item xs={12} sm={6} md={6}>
-                  <TextfieldWrapper label={"Nombres"} name={"name"} />
+                <Grid item xs={12} sm={12} md={6}>
+                  <PanelComp padding="1em" textAlign="left" margin="0.5em">
+                    <Grid container rowSpacing={2} columnSpacing={2}>
+                      <Grid item xs={12} sm={6} md={6}>
+                        <TextfieldWrapper label={"C.I."} name={"ci"} />
+                      </Grid>
+                      <Grid item xs={12} sm={6} md={6}>
+                        <TextfieldWrapper label={"Teléfono"} name={"phone"} />
+                      </Grid>
+                      <Grid item xs={12} sm={6} md={6}>
+                        <TextfieldWrapper label={"E-mail"} name={"email"} />
+                      </Grid>
+                      <Grid item xs={12} sm={6} md={6}>
+                        <TextfieldWrapper
+                          label={"Dirección"}
+                          name={"address"}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6} md={6}>
+                        <TextfieldWrapper
+                          label={"Ubicación"}
+                          name={"location"}
+                        />
+                      </Grid>
+                    </Grid>
+                    <Switch
+                      name="user"
+                      checked={values.user}
+                      label="Es Usuario"
+                    />
+                    {values.user && (
+                      <Grid container rowSpacing={2} columnSpacing={2}>
+                        <Grid item xs={12} sm={12} md={12}></Grid>
+                        <Grid item xs={12} sm={6} md={6}>
+                          <TextfieldWrapper label={"E-mail"} name={"email"} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6}>
+                          <TextfieldWrapper
+                            label={"Password"}
+                            name={"password"}
+                          />
+                        </Grid>
+                      </Grid>
+                    )}
+                  </PanelComp>
                 </Grid>
-                <Grid item xs={12} sm={6} md={6}>
-                  <TextfieldWrapper label={"Apellido Paterno"} name={"lastName"} />
-                </Grid>
-                <Grid item xs={12} sm={6} md={6}>
-                  <TextfieldWrapper label={"Apellido Materno"} name={"lastName2"} />
-                </Grid>
-                <Grid item xs={6} sm={4} md={4}>
-                  <MobileDatePicker2
-                    values={values}
-                    name="birthDate"
-                    label="Fecha de Nacimiento"
-                    age="age"
-                  />
-                </Grid>
-                <Grid item xs={6} sm={2} md={2}>
-                   { values.age} Años
-                </Grid>
-                <Grid item xs={12} sm={6} md={6}>
-                  <TextfieldWrapper label={"CI"} name={"ci"} />
-                </Grid>
-                <Grid item xs={12} sm={6} md={6}>
-                  <TextfieldWrapper label={"Telefono"} name={"phone"} />
-                </Grid>
-                <Grid item xs={12} sm={6} md={6}>
-                  <TextfieldWrapper label={"E-mail"} name={"email"} />
-                </Grid>
-                <Grid item xs={12} sm={6} md={6}>
-                  <TextfieldWrapper label={"Direccion"} name={"address"} />
-                </Grid>
-                {values.termsOfService && (
-                  <Grid item xs={12} sm={6} md={6}>
-                    <TextfieldWrapper label={"Ubicacion"} name={"Location"} />
-                  </Grid>
-                )}
-                <Grid item xs={12} sm={6} md={6}>
-                  <TextfieldWrapper label={"Ubicacion"} name={"location"} />
-                </Grid>
+              </Grid>
+              <Grid container rowSpacing={2} columnSpacing={2}>
                 <Grid item xs={9}>
                   <Stack direction="row" justifyContent="center" spacing={8}>
                     <Chip
                       label="Siguiente"
                       variant=""
                       color="warning"
-                      // disabled={!isSubmitting}
                       icon={<NavigateNextIcon />}
-                      // onClick={handleSubmit}
-                      onClick={()=>{
-                        values.step=1; 
-                        handleSubmit()
+                      onClick={() => {
+                        values.step = 1;
+                        handleSubmit();
                       }}
                     />
                   </Stack>
                 </Grid>
                 <Grid item xs={3}>
                   <Stack direction="row" justifyContent="end" spacing={2}>
-                  <Chip
+                    <Chip
                       label="Reset"
                       variant="outlined"
                       color="warning"
-                      icon={<RestartAltIcon/>}
+                      icon={<RestartAltIcon />}
                       onClick={() => {
                         resetForm();
                       }}
@@ -146,15 +180,15 @@ export default function GeneralInfForm(props) {
                       variant=""
                       color="success"
                       icon={<DoneIcon />}
-                      onClick={()=>{
-                        values.saveValues=true; 
-                        handleSubmit()
+                      onClick={() => {
+                        values.saveValues = true;
+                        handleSubmit();
                       }}
                     />
                   </Stack>
                 </Grid>
               </Grid>
-            </Paper>
+            </PanelComp>
           )}
         </Formik>
       </Grid>
