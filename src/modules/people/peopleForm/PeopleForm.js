@@ -89,7 +89,7 @@ const steps = [
 ];
 
 export default function PeopleForm(props) {
-  const { data, savePeople, classes } = props;
+  const { data, savePeople, title, classes } = props;
   // const classes = {}; //useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [peopleData, setPeopleData] = React.useState(data);
@@ -137,7 +137,8 @@ export default function PeopleForm(props) {
   };
   const spiritual = (values) =>{
     const val = {...values};
-      delete val.step;
+      // const valuesStep= val.step;
+      // delete val.step;
       const newValue = {
         ...peopleData,
         "spiritual": val
@@ -147,7 +148,9 @@ export default function PeopleForm(props) {
   }
   const legal = (values) =>{
     const val = {...values};
-      delete val.step;
+      // delete val.step;
+      // delete val.saveValues;
+
       const newValue = {
         ...peopleData,
         "legal": val
@@ -157,11 +160,13 @@ export default function PeopleForm(props) {
   }
   const general = (values) =>{
     const val = {...values};
-      delete val.step;
+      // delete val.step;
       setPeopleData(val);
       return val;
   }
-  const handleNextBack = async (values, saveValues, step, area) => {
+  const handleNextBack = async (values, step, area) => {
+    console.log("step..:", step);   
+    console.log("step.values.:", values);
     const formOption = {
       'spiritual':spiritual,
       'legal': legal,
@@ -169,22 +174,8 @@ export default function PeopleForm(props) {
     }
     const newValues = await formOption[area](values);
     
-    // if(area === 'spiritual'){
-    //   const val = {...values};
-    //   delete val.step;
-    //   // delete val.birthDate;
-    //   // delete val.name;
-    //   // delete val.phone;
-    //   // delete val.
-    //   setPeopleData({
-    //     ...peopleData,
-    //     "spiritual": val
-    //   });
-    // } else{
-    //   setPeopleData(values);
-    // }
-    if (saveValues) {
-      console.log("Saiving, data");
+    if (step === 0) {
+      console.log("Saiving, data newValues", newValues);
       await savePeople(newValues);
       // values.saveValues = false;
       // setPeopleData(values);
@@ -201,7 +192,7 @@ export default function PeopleForm(props) {
   return (
     <React.Fragment>
       <Typography variant="h4" component="h1" align="center">
-        Registro
+        {title}
       </Typography>
       <Stepper activeStep={activeStep} className={classes.stepper}>
         {steps.map((label) => (

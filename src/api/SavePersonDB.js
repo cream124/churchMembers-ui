@@ -8,6 +8,8 @@ query Person($id: String) {
     lastName
     motherLastName
     birthDate
+    gender
+    civilStatus
     ci
     photo
     phone
@@ -16,90 +18,80 @@ query Person($id: String) {
     state
     email
     registerId
+    registerName
     registerDate
     approvalId
     approvalDate
+    updateId
+    updateDate
     user
     level
     userName
-    password
-    christian
-    baptized
+    password  
     spiritual {
-      baptized
       christian
+      churchName
+      department
+      province
+      locality
+      placeAccept
       namePlaceAccept
+      dateAccept
+      timeAccept
+      baptized
+      nameBaptizedChurch
+      denominationBaptizedChurch
+      palceBaptized
+      dateBaptized
+      becameMemberFor
+      libroN
+      folioN
+      membershipRegistrationDate
+      membershipRegistrationTime
+      baptizedCertificatePhoto
+    }
+    legal {
+      legalInformation
+      oficialiaN
+      libroN
+      partidaN
+      folioN
+      oficialiaDepartamento
+      oficialiaProvincia
+      oficialiaDate
+      departamentoNacimiento
+      provinciaNacimiento
+      localidadNacimiento
+      nacionalidadNacimiento
+      fechaNacimiento
+      horaNacimiento
+      nombresPadre
+      apellidosPadre
+      nombresMadre
+      apellidosMadre
+      localidadEmicion
+      fechaEmicion
+      certificatePhoto
     }
   }
 }
 `
 
 const ADD_PERSONS = gql`
-mutation CreatePerson($name: String!, $ci: String, $level: Int, $userName: String, $email: String, $password: String, $user: Boolean, $state: String, $spiritual: Spiritual1, $legal: Legal1) {
-  createPerson(name: $name, ci: $ci, level: $level, userName: $userName, email: $email, password: $password, user: $user, state: $state, spiritual: $spiritual, legal: $legal) {
+mutation CreatePerson($name: String, $lastName: String, $motherLastName: String, $birthDate: String, $gender: String, $civilStatus: String, $ci: String, $photo: String, $phone: String, $address: String, $location: String, $state: String, $email: String, $registerId: String, $registerDate: String, $approvalId: String, $approvalDate: String, $user: Boolean, $level: Int, $userName: String, $password: String, $spiritual: Spiritual1, $legal: Legal1) {
+  createPerson(name: $name, lastName: $lastName, motherLastName: $motherLastName, birthDate: $birthDate, gender: $gender, civilStatus: $civilStatus, ci: $ci, photo: $photo, phone: $phone, address: $address, location: $location, state: $state, email: $email, registerId: $registerId, registerDate: $registerDate, approvalId: $approvalId, approvalDate: $approvalDate, user: $user, level: $level, userName: $userName, password: $password, spiritual: $spiritual, legal: $legal) {
     _id
-   name
-   lastName
-   motherLastName
-   birthDate
-   ci
-   photo
-   phone
-   address
-   location
-   state
-   email
-   registerId
-   registerDate
-   approvalId
-   user
-   level
-   userName
-   password
-   christian
-   baptized
-   spiritual {
-      baptized
-      christian
-      namePlaceAccept
-   }
-   legal {
-    legalInformation
-   }
+    name
+    lastName
   }
 }
 `
 
 const UPDATE_PERSON = gql`
-mutation UpdatePerson($_id: String!, $name: String, $lastName: String, $motherLastName: String, $birthDate: String, $ci: String, $photo: String, $phone: String, $address: String, $location: String, $state: String, $email: String, $registerId: String, $registerDate: String, $approvalId: String, $approvalDate: String, $user: Boolean, $level: Int, $userName: String, $password: String, $christian: Boolean, $baptized: Boolean) {
-  updatePerson(id: $_id, name: $name, lastName: $lastName, motherLastName: $motherLastName, birthDate: $birthDate, ci: $ci, photo: $photo, phone: $phone, address: $address, location: $location, state: $state, email: $email, registerId: $registerId, registerDate: $registerDate, approvalId: $approvalId, approvalDate: $approvalDate, user: $user, level: $level, userName: $userName, password: $password, christian: $christian, baptized: $baptized) {
+mutation UpdatePerson($_id: String!, $name: String, $lastName: String, $motherLastName: String, $birthDate: String, $gender: String, $civilStatus: String, $ci: String, $photo: String, $phone: String, $address: String, $location: String, $state: String, $email: String, $updateId: String, $updateDate: String, $user: Boolean, $userName: String, $password: String, $spiritual: Spiritual1, $legal: Legal1) {
+  updatePerson(id: $_id, name: $name, lastName: $lastName, motherLastName: $motherLastName, birthDate: $birthDate, gender: $gender, civilStatus: $civilStatus, ci: $ci, photo: $photo, phone: $phone, address: $address, location: $location, state: $state, email: $email, updateId: $updateId, updateDate: $updateDate, user: $user, userName: $userName, password: $password, spiritual: $spiritual, legal: $legal) {
     _id
     name
-    lastName
-    motherLastName
-    birthDate
-    ci
-    photo
-    phone
-    address
-    location
-    state
-    email
-    registerId
-    registerDate
-    approvalId
-    approvalDate
-    user
-    level
-    userName
-    password
-    christian
-    baptized
-    spiritual {
-      baptized
-      christian
-      namePlaceAccept
-    }  
   }
 }
 `

@@ -3,7 +3,7 @@ export function setUserCresentials(loginPerson) {
   const {token, userId, name, photo, lastName, level} = loginPerson;
 
   sessionStorage.setItem('token', token);
-  sessionStorage.setItem('userId', userId);
+  sessionStorage.setItem('userId', userId); //no tiene valor
   sessionStorage.setItem('name', `${name} ${lastName}`);
   sessionStorage.setItem('photo', photo);
   sessionStorage.setItem('level', level);

@@ -45,6 +45,7 @@ export default function LoginPerson(props) {
     try {
       response = await loginPerson({ variables: login }); 
       setUserCresentials(response.data?.loginPerson) 
+      console.log('-------------', response.data?.loginPerson);
       updateMenuDetails();
       handleClose();
       setErrorMessage('');

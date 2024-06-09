@@ -13,6 +13,7 @@ import MobileDatePicker2 from "../../../component/Common/Form/MobileDatePicker2"
 import UploadImage from "../../../component/Common/Form/UploadImage";
 import gender from "../../../component/data/gender.json";
 import civilStatus from "../../../component/data/civilStatus.json";
+import DatePickerCl from "../../../component/Common/Form/DatePickerCl";
 
 const PEOPLE_VALIDATION_BILL = Yup.object().shape({
   name: Yup.string()
@@ -22,6 +23,8 @@ const PEOPLE_VALIDATION_BILL = Yup.object().shape({
 
 export default function GeneralInfForm(props) {
   const { peopleData, handleNext } = props;
+  const [step, setStep] = React.useState(0);
+
 
   return (
     <React.Fragment>
@@ -37,7 +40,7 @@ export default function GeneralInfForm(props) {
               // alert(JSON.stringify(values, null, 2));
               setSubmitting(false);
             }, 400);
-            handleNext(values, values.saveValues, values.step, "general");
+            handleNext(values, step, "general");
           }}
         >
           {({ values, handleSubmit, resetForm }) => (
@@ -89,16 +92,16 @@ export default function GeneralInfForm(props) {
                         />
                       </Grid>
                       <Grid item xs={6} sm={4} md={4}>
-                        <MobileDatePicker2
+                        <DatePickerCl
                           values={values}
                           name="birthDate"
                           label="Fecha de Nacimiento"
                           age="age"
                         />
                       </Grid>
-                      <Grid item xs={6} sm={2} md={2}>
+                      {/* <Grid item xs={6} sm={2} md={2}>
                         {values.age} Años
-                      </Grid>
+                      </Grid> */}
                     </Grid>
                   </PanelComp>
                 </Grid>
@@ -159,6 +162,7 @@ export default function GeneralInfForm(props) {
                       icon={<NavigateNextIcon />}
                       onClick={() => {
                         values.step = 1;
+                        setStep(1);
                         handleSubmit();
                       }}
                     />
@@ -181,9 +185,19 @@ export default function GeneralInfForm(props) {
                       color="success"
                       icon={<DoneIcon />}
                       onClick={() => {
-                        values.saveValues = true;
+                        setStep(0);
                         handleSubmit();
                       }}
+                    />
+                    <Chip
+                      label="Terminar"
+                      variant="outlined"
+                      color="success"
+                      icon={<DoneIcon />}
+                      // onClick={() => {
+                      //   setStep(0);
+                      //   handleSubmit();
+                      // }}
                     />
                   </Stack>
                 </Grid>

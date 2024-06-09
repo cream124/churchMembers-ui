@@ -39,7 +39,9 @@ const MobileDatePicker2 = ({ name, values, age, dateActtion, ...otherProps }) =>
   const { setFieldValue } = useFormikContext();
   
   const setupDate = (value) => {
-    values[name] = value;
+    // values[name] = value;
+    // values[name] = value.format('DD-MM-YYYY');
+    setFieldValue(name, value);
     if (age) {
       setFieldValue(age, getAge(value));
     }
@@ -56,7 +58,7 @@ const MobileDatePicker2 = ({ name, values, age, dateActtion, ...otherProps }) =>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={"es"}>
         <MobileDatePicker
           size="small"
-          slotProps={{ textField: configTextfield }}
+          slotProps={{ textField: configTextfield , field: {clearable: true}}}
           {...configDateTimePicker}
           inputFormat="DD/MM/YYYY"
           value={dayjs(values[name], "DD-MM-YYYY")}

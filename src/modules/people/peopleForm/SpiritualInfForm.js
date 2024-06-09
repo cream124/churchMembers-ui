@@ -15,6 +15,7 @@ import Switch from "../../../component/Common/Form/Switch";
 import Select from "../../../component/Common/Form/Select";
 import places from "../../../component/data/places.json";
 import denomination from "../../../component/data/denomination.json";
+import MoTimePicker from "../../../component/Common/Form/MoTimePicker";
 
 const PEOPLE_VALIDATION_BILL = Yup.object().shape({
   // name: Yup.string()
@@ -24,6 +25,8 @@ const PEOPLE_VALIDATION_BILL = Yup.object().shape({
 
 export default function SpiritualInfForm(props) {
   const { peopleData, handleNext } = props;
+  const [step, setStep] = React.useState(0);
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -38,7 +41,7 @@ export default function SpiritualInfForm(props) {
               // alert(JSON.stringify(values, null, 2));
               setSubmitting(false);
             }, 400);
-            handleNext(values, values.saveValues, values.step, 'spiritual');
+            handleNext(values, step, 'spiritual');
           }}
         >
           {({
@@ -110,7 +113,7 @@ export default function SpiritualInfForm(props) {
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
-                          <MobileDatePicker2
+                          <MoTimePicker
                             values={values}
                             name="timeAccept"
                             label="Hora"
@@ -170,7 +173,7 @@ export default function SpiritualInfForm(props) {
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
-                          <MobileDatePicker2
+                          <MoTimePicker
                             values={values}
                             name="membershipRegistrationTime"
                             label="Membresía Hora de Registro"
@@ -202,7 +205,8 @@ export default function SpiritualInfForm(props) {
                       icon={<NavigateBeforeIcon />}
                       // onClick={handleSubmit}
                       onClick={() => {
-                        values.step = -1;
+                        // values.step = -1;
+                        setStep(-1);
                         handleSubmit();
                       }}
                     />
@@ -213,7 +217,8 @@ export default function SpiritualInfForm(props) {
                       icon={<NavigateNextIcon />}
                       // onClick={handleSubmit}
                       onClick={() => {
-                        values.step = 1;
+                        // values.step = 1;
+                        setStep(1);
                         handleSubmit();
                       }}
                     />
@@ -236,7 +241,7 @@ export default function SpiritualInfForm(props) {
                       color="success"
                       icon={<DoneIcon />}
                       onClick={() => {
-                        values.saveValues = true;
+                        setStep(0);
                         handleSubmit();
                       }}
                     />

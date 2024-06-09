@@ -456,7 +456,7 @@ export default function ActivesList() {
             checkboxSelection
             disableSelectionOnClick
 
-            onSelectionModelChange={(newSelectionModel) => {
+            onRowSelectionModelChange={(newSelectionModel) => {
               updateSelecteItems(newSelectionModel);
             }}
 

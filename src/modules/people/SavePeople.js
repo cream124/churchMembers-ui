@@ -56,6 +56,7 @@ function getPersonData(registeredUser, id) {
     registerId: "0",
     registerDate: dayjs().format("DD-MM-YYYY"),
     approvalId: "",
+    approvalDate: "",
     // user: !registeredUser,
     user: true,
     level: 500,
@@ -65,15 +66,15 @@ function getPersonData(registeredUser, id) {
     // passwordConfirmation: "hola",
     spiritual: {
       christian: false,
-      baptized: false,
       churchName: "",
       department: "",
       province: "",
       locality: "",
       placeAccept: "",
       namePlaceAccept: "",
-      dateAccept: "",
-      timeAccept: "",
+      dateAccept: "2024-05-31T04:00:00.000Z",
+      timeAccept: "2022-04-17T15:15",
+      baptized: false,
       nameBaptizedChurch: "",
       denominationBaptizedChurch: "",
       palceBaptized: "",
@@ -192,6 +193,7 @@ export default function SavePeople() {
   return (
     <Paper elevation={24} className={classes.container}>
       <PeopleForm 
+        title="Nuevo Reristro"
         data={body} 
         savePeople={savePeople} 
         classes={classes} 

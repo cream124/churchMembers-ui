@@ -41,6 +41,8 @@ function activePersonsColumns (){
       headerClassName: 'super-app-theme--header'
     },
     { field: 'birthDate', headerName: 'Nacimiento', type: 'date', width: 100,
+    valueGetter: (params) =>
+      new Date(params.row.birthDate),
       headerClassName: 'super-app-theme--header'
     },
     { field: 'phone', headerName: 'Teléfono', width: 100, 
@@ -129,18 +131,23 @@ function forActivePersonsColumns (){
         `${params.row.lastName || ''} ${params.row.motherLastName || ''}`,
       headerClassName: 'super-app-theme--header'
     },
-    {
-      field: 'age',
-      headerName: 'Edad',
-      type: 'number',
-      width: 50,
+    // {
+    //   field: 'age',
+    //   headerName: 'Edad',
+    //   type: 'number',
+    //   width: 50,
+    //   valueGetter: (params) =>
+    //     `${ parseInt(dayjs(new Date()).diff(dayjs(params.row.birthDate, 'DD-MM-YYYY'), 'year')) }`,
+    //   headerClassName: 'super-app-theme--header'
+    // },
+    { field: '', headerName: 'Nacimiento', type: 'date', width: 100,
+      headerClassName: 'super-app-theme--header',
       valueGetter: (params) =>
-        `${ parseInt(dayjs(new Date()).diff(dayjs(params.row.birthDate, 'DD-MM-YYYY'), 'year')) }`,
-      headerClassName: 'super-app-theme--header'
+        new Date(params.row.birthDate),
     },
-    { field: 'birthDate', headerName: 'Nacimiento', type: 'date', width: 100,
-      headerClassName: 'super-app-theme--header'
-    },
+    // { field: 'birthDate', headerName: 'Nacimiento1', type: 'date', width: 100,
+    //   headerClassName: 'super-app-theme--header'
+    // },
     { field: 'phone', headerName: 'Teléfono', width: 100,
       headerClassName: 'super-app-theme--header'
     },
@@ -164,9 +171,9 @@ function forActivePersonsColumns (){
     { field: 'registerName', headerName: 'Registrasdo por', width: 120,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'registerDate', headerName: 'Fecha de Registro', type: 'date', width: 100,
-      headerClassName: 'super-app-theme--header'
-    },
+    // { field: 'registerDate', headerName: 'Fecha de Registro', type: 'date', width: 100,
+    //   headerClassName: 'super-app-theme--header'
+    // },
     { field: 'address', headerName: 'Direccion', width: 130,
       headerClassName: 'super-app-theme--header'
     },

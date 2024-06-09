@@ -15,6 +15,7 @@ import Switch from "../../../component/Common/Form/Switch";
 import Select from "../../../component/Common/Form/Select";
 import places from "../../../component/data/places.json";
 import denomination from "../../../component/data/denomination.json";
+import MoTimePicker from "../../../component/Common/Form/MoTimePicker";
 
 const PEOPLE_VALIDATION_BILL = Yup.object().shape({
   // name: Yup.string()
@@ -24,6 +25,8 @@ const PEOPLE_VALIDATION_BILL = Yup.object().shape({
 
 export default function LegalInfForm(props) {
   const { peopleData, saveData, handleNext } = props;
+  const [step, setStep] = React.useState(0);
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -38,7 +41,7 @@ export default function LegalInfForm(props) {
               // alert(JSON.stringify(values, null, 2));
               setSubmitting(false);
             }, 400);
-            handleNext(values, values.saveValues, values.step, 'legal');
+            handleNext(values, step, 'legal');
           }}
         >
           {({
@@ -140,7 +143,7 @@ export default function LegalInfForm(props) {
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
-                          <MobileDatePicker2
+                          <MoTimePicker
                             values={values}
                             name="horaNacimiento"
                             label="*Hora de Nacimiento"
@@ -221,7 +224,8 @@ export default function LegalInfForm(props) {
                       icon={<NavigateBeforeIcon />}
                       // onClick={handleSubmit}
                       onClick={() => {
-                        values.step = -1;
+                        // values.step = -1;
+                        setStep(-1);
                         handleSubmit();
                       }}
                     />
@@ -233,7 +237,8 @@ export default function LegalInfForm(props) {
                       icon={<NavigateNextIcon />}
                       // onClick={handleSubmit}
                       onClick={() => {
-                        values.step = 1;
+                        // values.step = 1;
+                        setStep(1);
                         handleSubmit();
                       }}
                     />
@@ -247,8 +252,6 @@ export default function LegalInfForm(props) {
                       color="warning"
                       icon={<RestartAltIcon />}
                       onClick={() => {
-                        //values.saveValues = true;
-                        //handleSubmit();
                         resetForm();
                       }}
                     />
@@ -258,7 +261,7 @@ export default function LegalInfForm(props) {
                       color="success"
                       icon={<DoneIcon />}
                       onClick={() => {
-                        values.saveValues = true;
+                        setStep(0);
                         handleSubmit();
                       }}
                     />

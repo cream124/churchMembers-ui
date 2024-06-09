@@ -41,8 +41,7 @@ query FilterByStatePersons($state: String) {
     user
     userName
     level
-    christian
-    baptized
+    
   }
 }
 `
@@ -69,8 +68,6 @@ query FilterPersons($filter: Filter) {
     user
     userName
     level
-    christian
-    baptized
   }
 }
 `
