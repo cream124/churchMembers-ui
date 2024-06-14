@@ -82,10 +82,10 @@ import PanelComp from "../../../component/Common/Panel/PanelComp";
 // };
 
 const steps = [
-  "Información General",
-  "Información Espiritual",
-  "Información Legal",
-  "Review your order1",
+  "Inf. General",
+  "Inf. Espiritual",
+  "Inf. Legal",
+  // "Review your order1",
 ];
 
 export default function PeopleForm(props) {

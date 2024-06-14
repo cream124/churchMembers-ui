@@ -15,6 +15,7 @@ import Switch from "../../../component/Common/Form/Switch";
 import Select from "../../../component/Common/Form/Select";
 import places from "../../../component/data/places.json";
 import denomination from "../../../component/data/denomination.json";
+import memberFor from "../../../component/data/memberFor.json";
 import MoTimePicker from "../../../component/Common/Form/MoTimePicker";
 
 const PEOPLE_VALIDATION_BILL = Yup.object().shape({
@@ -32,7 +33,6 @@ export default function SpiritualInfForm(props) {
       <Typography variant="h6" gutterBottom>
         Informacion Epiritual
       </Typography>
-      <Grid container spacing={3}>
         <Formik
           initialValues={peopleData}
           validationSchema={PEOPLE_VALIDATION_BILL}
@@ -41,19 +41,15 @@ export default function SpiritualInfForm(props) {
               // alert(JSON.stringify(values, null, 2));
               setSubmitting(false);
             }, 400);
-            handleNext(values, step, 'spiritual');
+            handleNext(values, step, "spiritual");
           }}
         >
-          {({
-            values,
-            handleSubmit,
-            resetForm,
-          }) => (
+          {({ values, handleSubmit, resetForm }) => (
             <PanelComp
               padding="1.3em"
-              borderRadius="0"
-              elevation="3"
-              margin="0.8em"
+              // borderRadius="0"
+              // elevation="3"
+              // margin="0.8em"
             >
               <Grid container rowSpacing={2} columnSpacing={2}>
                 <Grid item xs={12} sm={12} md={6}>
@@ -66,7 +62,7 @@ export default function SpiritualInfForm(props) {
                     {values.christian && (
                       <Grid container rowSpacing={2} columnSpacing={2}>
                         <Grid item xs={12} sm={12} md={12}></Grid>
-                        
+
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper
                             label={"*Nombre de la Iglesia"}
@@ -123,75 +119,84 @@ export default function SpiritualInfForm(props) {
                     )}
                   </PanelComp>
                 </Grid>
-                <Grid item xs={12} sm={12} md={6}>
-                  <PanelComp padding="1em" textAlign="left" margin="0.5em">
-                    <Switch
-                      name="baptized"
-                      checked={values.baptized}
-                      label="Esta Bautizado?"
-                    />
-                    {values.baptized && (
-                      <Grid container rowSpacing={2} columnSpacing={2}>
-                        <Grid item xs={12} sm={12} md={12}></Grid>
-                        <Grid item xs={12} sm={6} md={6}>
-                          <TextfieldWrapper
-                            label={"Nombre de Iglesia"}
-                            name={"nameBaptizedChurch"}
-                          />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6}>
-                          <Select
-                            name="denominationBaptizedChurch"
-                            label="Denominación"
-                            options={denomination}
-                          />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6}>
-                          <MobileDatePicker2
-                            values={values}
-                            name="dateBaptized"
-                            label="*Fecha"
-                          />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6}>
-                          <TextfieldWrapper label={"Lugar"} name={"palceBaptized"} />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6}>
-                          <TextfieldWrapper label={"Se hizo miembro por"} name={"becameMemberFor"} />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6}>
+                {values.christian && (
+                  <Grid item xs={12} sm={12} md={6}>
+                    <PanelComp padding="1em" textAlign="left" margin="0.5em">
+                      <Switch
+                        name="baptized"
+                        checked={values.baptized}
+                        label="Esta Bautizado?"
+                      />
+                      {values.baptized && (
+                        <Grid container rowSpacing={2} columnSpacing={2}>
+                          <Grid item xs={12} sm={12} md={12}></Grid>
+                          <Grid item xs={12} sm={6} md={6}>
+                            <TextfieldWrapper
+                              label={"Nombre de Iglesia"}
+                              name={"nameBaptizedChurch"}
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={6} md={6}>
+                            <Select
+                              name="denominationBaptizedChurch"
+                              label="Denominación"
+                              options={denomination}
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={6} md={6}>
+                            <MobileDatePicker2
+                              values={values}
+                              name="dateBaptized"
+                              label="*Fecha"
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={6} md={6}>
+                            <TextfieldWrapper
+                              label={"Lugar"}
+                              name={"palceBaptized"}
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={6} md={6}>
+                            <Select
+                              name="becameMemberFor"
+                              label="Se hizo miembro por"
+                              options={memberFor}
+                            />
+                          </Grid>
+                          {/* <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper label={"Membresía Libro No"} name={"libroN"} />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper label={"Membresía Folio No"} name={"folioN"} />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6}>
+                        </Grid> */}
+                          {/* <Grid item xs={12} sm={6} md={6}>
                           <MobileDatePicker2
                             values={values}
                             name="membershipRegistrationDate"
                             label="Fecha de Registro de Membresía"
                           />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6}>
+                        </Grid> */}
+                          {/* <Grid item xs={12} sm={6} md={6}>
                           <MoTimePicker
                             values={values}
                             name="membershipRegistrationTime"
                             label="Membresía Hora de Registro"
                           />
+                        </Grid> */}
+
+                          <Grid item xs={12} sm={6} md={6}>
+                            <UploadImage
+                              values={values}
+                              name="baptizedCertificatePhoto"
+                              label="Subir foto del Certificado"
+                              width="70"
+                            />
+                          </Grid>
                         </Grid>
-                        
-                        <Grid item xs={12} sm={6} md={6}>
-                          <UploadImage
-                            values={values}
-                            name="baptizedCertificatePhoto"
-                            label="Subir foto del Certificado"
-                            width="70"
-                          />
-                        </Grid>
-                      </Grid>
-                    )}
-                  </PanelComp>
-                </Grid>
+                      )}
+                    </PanelComp>
+                  </Grid>
+                )}
               </Grid>
 
               <Grid container rowSpacing={2} columnSpacing={2}>
@@ -251,7 +256,6 @@ export default function SpiritualInfForm(props) {
             </PanelComp>
           )}
         </Formik>
-      </Grid>
     </React.Fragment>
   );
 }

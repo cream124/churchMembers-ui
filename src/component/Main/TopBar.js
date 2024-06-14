@@ -27,7 +27,7 @@ import Mission from "../Extra/mission/Mission";
 import Contact from "../Extra/contacts/Contact";
 import { getMenuItems } from "./MenuItemsData";
 import PeopleFrom from "../../modules/people/PeopleForm";
-import { Toolbar } from "@mui/material";
+import { Drawer, Toolbar } from "@mui/material";
 import SavePeople from "../../modules/people/SavePeople";
 import UpdatePeople from "../../modules/people/UpdatePeople";
 
@@ -56,8 +56,8 @@ export default function TopBar() {
   };
 
   const handleDrawerOpen = () => {
-    // setOpen(true);
-    setOpen((prevState) => !prevState);
+    setOpen(true);
+    // setOpen((prevState) => !prevState);
   };
 
   const handleDrawerClose = () => {
@@ -74,13 +74,13 @@ export default function TopBar() {
         updateMenuDetails={updateMenuDetails}
       />
 
-      {/* <DrawerMainMenu 
+      <DrawerMainMenu 
         theme={theme} 
         open={open} 
         handleDrawerClose={handleDrawerClose} 
         drawerWidth={drawerWidth}
         menuDetail={menuDetail}
-      /> */}
+      />
       <Box
         sx={{ p: 30 }}
         className={classes.container}
@@ -88,41 +88,42 @@ export default function TopBar() {
         open={open}
       >
         {/* <DrawerHeader /> */}
-        <Toolbar/>
+        
+        <Toolbar />
         {/* <div className={classes.container}> */}
-          <Routes>
-            <Route path="/" element={<Events />} />
-            <Route path="/Servicios2" element={<Events />} />
-            <Route path="/Contactos" element={<DefaultBody />} />
-            <Route path="/Login" element={<From1 />} />
-            <Route path="/Login2" element={<From2 />} />
-            <Route path="/newUser" element={<DataTable />} />
-            <Route path="/EventDB" element={<EventDB />} />
-            <Route path="/Personas" element={<Persons />} />
-            <Route path="/addPerson" element={<SavePerson />} />
-            <Route path="/addPerson2" element={<PeopleFrom />} />
-            <Route path="/addPerson3" element={<SavePeople />} />
-            <Route path="/addPerson3/:id" element={<UpdatePeople />} />
+        <Routes>
+          <Route path="/" element={<Events />} />
+          <Route path="/Servicios2" element={<Events />} />
+          <Route path="/Contactos" element={<DefaultBody />} />
+          <Route path="/Login" element={<From1 />} />
+          <Route path="/Login2" element={<From2 />} />
+          <Route path="/newUser" element={<DataTable />} />
+          <Route path="/EventDB" element={<EventDB />} />
+          <Route path="/Personas" element={<Persons />} />
+          <Route path="/addPerson" element={<SavePerson />} />
+          <Route path="/addPerson2" element={<PeopleFrom />} />
+          <Route path="/addPerson3" element={<SavePeople />} />
+          <Route path="/addPerson3/:id" element={<UpdatePeople />} />
 
-            <Route path="/Sample" element={<Sample />} />
-            <Route
-              path="/registrationRequest"
-              element={<RegistrationRequest />}
-            />
-            <Route path="/records" element={<ActivesList />} />
-            <Route path="/event" element={<ListEvents />} />
-            <Route path="/event2" element={<EditEvent />} />
-            <Route path="/editEvent/:id" element={<EditEvent />} />
-            <Route path="/editEvent/:id/:dayId" element={<EditDay />} />
-            <Route
-              path="/editEvent/:id/:dayId/:servId"
-              element={<EditService />}
-            />
-            <Route path="/updatePerson/:id" element={<UpdatePerson />} />
-            <Route path="/verse" element={<Verse />} />
-            <Route path="/mission" element={<Mission />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
+          <Route path="/Sample" element={<Sample />} />
+          <Route
+            path="/registrationRequest"
+            element={<RegistrationRequest />}
+          />
+          <Route path="/records" element={<ActivesList />} />
+          <Route path="/event" element={<ListEvents />} />
+          <Route path="/event2" element={<EditEvent />} />
+          <Route path="/editEvent/:id" element={<EditEvent />} />
+          <Route path="/editEvent/:id/:dayId" element={<EditDay />} />
+          <Route
+            path="/editEvent/:id/:dayId/:servId"
+            element={<EditService />}
+          />
+          <Route path="/updatePerson/:id" element={<UpdatePerson />} />
+          <Route path="/verse" element={<Verse />} />
+          <Route path="/mission" element={<Mission />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
         {/* </div> */}
       </Box>
       {/* <Box

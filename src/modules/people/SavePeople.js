@@ -32,33 +32,35 @@ import {
   UpdatePersonDB,
   GetPersonDB,
 } from "../../api/SavePersonDB";
-import { isRegisteredUserST } from "../../util/Storage";
+import { getUserIdST } from "../../util/Storage";
 import { useParams } from "react-router-dom";
 import { textAsTitle } from "../../util/helper";
 import PeopleForm from "./peopleForm/PeopleForm";
+import PanelComp from "../../component/Common/Panel/PanelComp";
 
-function getPersonData(registeredUser, id) {
+function getPersonData(idRegister) {
   let person = {
     name: "",
     lastName: "",
     motherLastName: "",
-    birthDate: "04-12-2000",
+    // birthDate: "04-12-2000",
+    birthDate: dayjs().format("DD-MM-YYYY"),
     gender: "",
     civilStatus: "",
-    age: "4",
+    age: "0",
     ci: "",
     photo: "",
     phone: "",
     address: "",
     location: "",
     state: "registered",
-    email: "hola2@gmail.com",
-    registerId: "0",
+    email: "hola@gmail.com",
+    registerId: idRegister,
     registerDate: dayjs().format("DD-MM-YYYY"),
     approvalId: "",
     approvalDate: "",
     // user: !registeredUser,
-    user: true,
+    user: false,
     level: 500,
     userName: "hola",
     password: "hola",
@@ -82,8 +84,8 @@ function getPersonData(registeredUser, id) {
       becameMemberFor: "",
       libroN: "",
       folioN: "",
-      membershipRegistrationDate:"",
-      membershipRegistrationTime:"",
+      membershipRegistrationDate: "",
+      membershipRegistrationTime: "",
       baptizedCertificatePhoto: "",
     },
     legal: {
@@ -120,25 +122,25 @@ function getPersonData(registeredUser, id) {
 }
 
 export default function SavePeople() {
-  const registeredUser = isRegisteredUserST();
+  const idRegister = getUserIdST();
   const { id } = useParams();
 
-  const [body, setBody] = React.useState(getPersonData(registeredUser, id));
+  const [body, setBody] = React.useState(getPersonData(idRegister));
 
   const [open, setOpen] = React.useState(false);
-  
+
   // const [showState, setShowState] = React.useState(body.christian);
   // const [showBaptized, setShowBaptized] = React.useState(body.christian);
   // const [showUserPanel, setShowUserPanel] = React.useState(body.user);
   // const [checkboxUserDisabled, setcheckboxUserDisabled] = React.useState(true);
-  const [errorMessage, setErrorMessage] = React.useState('')
+  const [errorMessage, setErrorMessage] = React.useState("");
   // // const [christian, setChristian] = React.useState(true);
   const { addPerson, error, loading, data } = SavePersonsDB();
   const updatePersonDB = UpdatePersonDB();
   // const getPersonDB = GetPersonDB({id});
   const history = useNavigate();
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -191,16 +193,20 @@ export default function SavePeople() {
   // if (loading) return <div> loading.......</div>
 
   return (
-    <Paper elevation={24} className={classes.container}>
-      <PeopleForm 
+    <PanelComp
+      margin="0.7em"
+      padding="0.7em"
+      color="#F7DC6F"
+    >
+      <PeopleForm
         title="Nuevo Reristro"
-        data={body} 
-        savePeople={savePeople} 
-        classes={classes} 
+        data={body}
+        savePeople={savePeople}
+        classes={classes}
       />
-      <Snackbar 
-        open={open} 
-        autoHideDuration={6000} 
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
         onClose={handleClose}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
@@ -213,6 +219,6 @@ export default function SavePeople() {
           {errorMessage}
         </Alert>
       </Snackbar>
-    </Paper>
+    </PanelComp>
   );
 }

@@ -1,9 +1,9 @@
 
 export function setUserCresentials(loginPerson) {
-  const {token, userId, name, photo, lastName, level} = loginPerson;
+  const {token, _id, name, photo, lastName, level} = loginPerson;
 
   sessionStorage.setItem('token', token);
-  sessionStorage.setItem('userId', userId); //no tiene valor
+  sessionStorage.setItem('userId', _id);
   sessionStorage.setItem('name', `${name} ${lastName}`);
   sessionStorage.setItem('photo', photo);
   sessionStorage.setItem('level', level);
@@ -43,6 +43,10 @@ export function getUserDataST() {
 export function isRegisteredUserST() {
   const userId = sessionStorage.getItem('userId');
   return userId && userId.length ? true: false;
+}
+
+export function getUserIdST() {
+  return sessionStorage.getItem('userId');
 }
 
 export function addNavigation(path, index) {

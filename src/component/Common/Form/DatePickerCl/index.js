@@ -20,7 +20,7 @@ const DatePickerCl = ({ name, values, age, dateActtion, ...otherProps }) => {
     size: "small",
     sx: {
       border: "1px solid yellow",
-      width: "120%",
+      width: "100%",
     },
   };
 
@@ -63,15 +63,11 @@ const DatePickerCl = ({ name, values, age, dateActtion, ...otherProps }) => {
         openTo="year"
         views={["year", "month", "day"]}
         size="small"
-        slotProps={{ textField: configTextfield, field: { clearable: true } }}
+        slotProps={{ textField: configTextfield }}
+        // slotProps={{ textField: configTextfield, field: { clearable: true } }}
         {...configDateTimePicker}
         inputFormat="DD/MM/YYYY"
         value={dayjs(values[name], "DD-MM-YYYY")}
-        //onChange={(value) => (values[name] = value)}
-        // onChange={(value) => {
-        //     values[name] = value;
-        //     values.age ='12';
-        //   }}
         onChange={(value) => {
           setupDate(value);
         }}

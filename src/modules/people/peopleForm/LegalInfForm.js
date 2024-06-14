@@ -32,7 +32,6 @@ export default function LegalInfForm(props) {
       <Typography variant="h6" gutterBottom>
         Información Legal
       </Typography>
-      <Grid container spacing={3}>
         <Formik
           initialValues={peopleData}
           validationSchema={PEOPLE_VALIDATION_BILL}
@@ -51,7 +50,7 @@ export default function LegalInfForm(props) {
             resetForm,
           }) => (
             <PanelComp
-              padding="1.3em"
+              padding="0.7em"
               borderRadius="0"
               elevation="3"
               margin="0.8em"
@@ -229,19 +228,17 @@ export default function LegalInfForm(props) {
                         handleSubmit();
                       }}
                     />
-                    <Chip
+                    {/* <Chip
                       label="Siguiente"
                       variant=""
                       color="warning"
                       disabled={isSubmitting}
                       icon={<NavigateNextIcon />}
-                      // onClick={handleSubmit}
                       onClick={() => {
-                        // values.step = 1;
                         setStep(1);
                         handleSubmit();
                       }}
-                    />
+                    /> */}
                   </Stack>
                 </Grid>
                 <Grid item xs={3} sm={3} md={3}>
@@ -271,7 +268,6 @@ export default function LegalInfForm(props) {
             </PanelComp>
           )}
         </Formik>
-      </Grid>
     </React.Fragment>
   );
 }
