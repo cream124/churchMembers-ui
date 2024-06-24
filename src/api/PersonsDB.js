@@ -18,6 +18,42 @@ query Persons {
 }
 `
 
+const GET_PERSON_TO_PRINT = gql`
+query Person($_id: String) {
+  person(id: $_id) {
+    _id
+    name
+    lastName
+    motherLastName
+    birthDate
+    gender
+    civilStatus
+    ci
+    photo
+    phone
+    address
+    location
+    state
+    email
+    registerId
+    registerDate
+    registerName
+    updateId
+    updateDate
+    approvalId
+    approvalDate
+    user
+    level
+    userName
+    password
+    membershipType
+    age  
+  }
+}
+`
+
+
+
 const FILTER_STATE_PERSONS = gql`
 query FilterByStatePersons($state: String) {
   filterByStatePersons(state: $state) {
@@ -97,6 +133,13 @@ mutation LoginPerson($login: Login) {
 export const PersonsDB = () => {
   const {error, loading, data} = useQuery(GET_PERSONS);
   return {error, loading, data,};
+}
+
+export const GetPersonToPrintDB = ({_id}) => {
+  const {error, loading, data } = useQuery(GET_PERSON_TO_PRINT, {
+    variables: {_id},
+  });
+  return {error, loading, data };
 }
 
 export const FilterByStatePersonsDB = ({state}) => {

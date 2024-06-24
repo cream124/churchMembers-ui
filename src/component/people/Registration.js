@@ -27,7 +27,6 @@ import classes from "./people.module.css";
 import ThemeProviderComponent from "../Common/ThemeProviderComponent";
 import { forApprovalPersonsColums } from "./Columns";
 import { randomCreatedDate, randomUpdatedDate } from '@mui/x-data-grid-generator';
-import { AnotherExample } from "../../modules/example/print/AnotherExample";
 
 const dialogMessage = {
   active: {
@@ -141,9 +140,7 @@ export default function RegistrationRequest() {
       </button>
       <div ref={contentToPrint}>
         <Paper elevation={24} className={classes.containerRegistration}>
-          <AnotherExample>
-            aa
-          </AnotherExample>
+       
           <Typography variant="h4" component="h1">
             Aprobación de Registros
           </Typography>

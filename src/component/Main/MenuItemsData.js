@@ -37,6 +37,10 @@ const menuListSuperUser = [
           name: 'Nuevo Registro3',
           uri: '/addPerson3',
         },
+        {
+          name: 'Imprimir Hermano',
+          uri: '/printPerson',
+        },
       ]
   },
   {
