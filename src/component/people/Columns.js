@@ -140,40 +140,51 @@ function forActivePersonsColumns (){
     //     `${ parseInt(dayjs(new Date()).diff(dayjs(params.row.birthDate, 'DD-MM-YYYY'), 'year')) }`,
     //   headerClassName: 'super-app-theme--header'
     // },
+    {
+      field: 'age',
+      headerName: 'Edad',
+      type: 'number',
+      width: 50,
+      headerClassName: 'super-app-theme--header'
+    },
     { field: '', headerName: 'Nacimiento', type: 'date', width: 100,
       headerClassName: 'super-app-theme--header',
       valueGetter: (params) =>
         new Date(params.row.birthDate),
     },
-    // { field: 'birthDate', headerName: 'Nacimiento1', type: 'date', width: 100,
-    //   headerClassName: 'super-app-theme--header'
-    // },
     { field: 'phone', headerName: 'Teléfono', width: 100,
       headerClassName: 'super-app-theme--header'
     },
     { field: 'christian', headerName: 'Cristiano', type: 'boolean', width: 80,
-      headerClassName: 'super-app-theme--header'
+      headerClassName: 'super-app-theme--header',
+      valueGetter: (params) => params.row.spiritual.christian
     },
     { field: 'baptized', headerName: 'Bautizado', type: 'boolean', width: 80,
+      headerClassName: 'super-app-theme--header',
+      valueGetter: (params) => params.row.spiritual.baptized
+    },
+    { field: 'membershipType', headerName: 'Miembro', width: 100,
       headerClassName: 'super-app-theme--header'
     },
     { field: 'user', headerName: 'Usuario', type: 'boolean', width: 80,
       headerClassName: 'super-app-theme--header'
     },
-    { 
-      field: 'state', 
-      headerName: 'Estado', 
-      type: 'string', 
-      width: 120, 
-      valueGetter: (params) => `${ params.row.state === 'active'? 'Activo': params.row.state === 'registered'? 'Registrado': params.row.state === 'registeredCancel'? 'Denegado': 'Inactivo' }`,
-      headerClassName: 'super-app-theme--header'
-    },
-    { field: 'registerName', headerName: 'Registrasdo por', width: 120,
-      headerClassName: 'super-app-theme--header'
-    },
-    // { field: 'registerDate', headerName: 'Fecha de Registro', type: 'date', width: 100,
+    // { 
+    //   field: 'state', 
+    //   headerName: 'Estado', 
+    //   type: 'string', 
+    //   width: 120, 
+    //   valueGetter: (params) => `${ params.row.state === 'active'? 'Activo': params.row.state === 'registered'? 'Registrado': params.row.state === 'registeredCancel'? 'Denegado': 'Inactivo' }`,
     //   headerClassName: 'super-app-theme--header'
     // },
+    { field: 'registerName', headerName: 'Registrado por', width: 120,
+      headerClassName: 'super-app-theme--header'
+    },
+    { field: 'registerDate', headerName: 'Fecha de Registro', type: 'date', width: 100,
+      headerClassName: 'super-app-theme--header',
+      valueGetter: (params) =>
+        new Date(params.row.registerDate),
+    },
     { field: 'address', headerName: 'Direccion', width: 130,
       headerClassName: 'super-app-theme--header'
     },

@@ -24,7 +24,7 @@ const PEOPLE_VALIDATION_BILL = Yup.object().shape({
 });
 
 export default function LegalInfForm(props) {
-  const { peopleData, saveData, handleNext } = props;
+  const { peopleData, colors, handleNext } = props;
   const [step, setStep] = React.useState(0);
 
   return (
@@ -51,10 +51,8 @@ export default function LegalInfForm(props) {
           }) => (
             <PanelComp
               padding="0.7em"
-              borderRadius="0"
-              elevation="3"
-              margin="0.8em"
               textAlign="left"
+              color={colors.infTabColor}
             >
               <Switch
                 name="legalInformation"
@@ -64,7 +62,12 @@ export default function LegalInfForm(props) {
               {values.legalInformation && (
                 <Grid container rowSpacing={2} columnSpacing={2}>
                   <Grid item xs={12} sm={6} md={6}>
-                    <PanelComp padding="1em" textAlign="left" margin="0.5em">
+                    <PanelComp 
+                      padding="1em" 
+                      textAlign="left" 
+                      margin="0.5em"
+                      color={colors.sectionColor}
+                    >
                       Oficialia de Registro Civil
                       <Grid container rowSpacing={2} columnSpacing={2}>
                         <Grid item xs={12} sm={12} md={12}></Grid>
@@ -106,7 +109,7 @@ export default function LegalInfForm(props) {
                     </PanelComp>
                   </Grid>
                   <Grid item xs={12} sm={6} md={6}>
-                    <PanelComp padding="1em" textAlign="left" margin="0.5em">
+                    <PanelComp padding="1em" textAlign="left" margin="0.5em" color={colors.sectionColor}>
                       Lugar de Nacimiento
                       <Grid container rowSpacing={2} columnSpacing={2}>
                         <Grid item xs={12} sm={12} md={12}></Grid>
@@ -152,7 +155,7 @@ export default function LegalInfForm(props) {
                     </PanelComp>
                   </Grid>
                   <Grid item xs={12} sm={6} md={6}>
-                    <PanelComp padding="1em" textAlign="left" margin="0.5em">
+                    <PanelComp padding="1em" textAlign="left" margin="0.5em" color={colors.sectionColor}>
                       Padres
                       <Grid container rowSpacing={2} columnSpacing={2}>
                         <Grid item xs={12} sm={12} md={12}></Grid>
@@ -184,7 +187,7 @@ export default function LegalInfForm(props) {
                     </PanelComp>
                   </Grid>
                   <Grid item xs={12} sm={6} md={6}>
-                    <PanelComp padding="1em" textAlign="left" margin="0.5em">
+                    <PanelComp padding="1em" textAlign="left" margin="0.5em" color={colors.sectionColor}>
                       Fecha y Lugar de Emicion
                       <Grid container rowSpacing={2} columnSpacing={2}>
                         <Grid item xs={12} sm={12} md={12}></Grid>
@@ -214,7 +217,7 @@ export default function LegalInfForm(props) {
 
               <Grid container rowSpacing={2} columnSpacing={2}>
                 <Grid item xs={12}></Grid>
-                <Grid item xs={9} sm={9} md={9}>
+                <Grid item xs={12} sm={9} md={9}>
                   <Stack direction="row" justifyContent="left" spacing={5}>
                     <Chip
                       label="Anterior"
@@ -241,7 +244,7 @@ export default function LegalInfForm(props) {
                     /> */}
                   </Stack>
                 </Grid>
-                <Grid item xs={3} sm={3} md={3}>
+                <Grid item xs={12} sm={3} md={3}>
                   <Stack direction="row" justifyContent="end" spacing={2}>
                     <Chip
                       label="Reset"

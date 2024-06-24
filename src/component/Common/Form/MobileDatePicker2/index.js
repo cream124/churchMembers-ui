@@ -61,7 +61,8 @@ const MobileDatePicker2 = ({ name, values, age, dateActtion, ...otherProps }) =>
           slotProps={{ textField: configTextfield , field: {clearable: true}}}
           {...configDateTimePicker}
           inputFormat="DD/MM/YYYY"
-          value={dayjs(values[name], "DD-MM-YYYY")}
+          // value={dayjs(values[name], "DD-MM-YYYY")}
+          value={dayjs(values[name])}
           //onChange={(value) => (values[name] = value)}
           // onChange={(value) => {
           //     values[name] = value;

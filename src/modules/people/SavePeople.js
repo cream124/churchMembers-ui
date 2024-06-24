@@ -39,12 +39,13 @@ import PeopleForm from "./peopleForm/PeopleForm";
 import PanelComp from "../../component/Common/Panel/PanelComp";
 
 function getPersonData(idRegister) {
+  console.log('****idRegister******', idRegister)
   let person = {
     name: "",
     lastName: "",
     motherLastName: "",
     // birthDate: "04-12-2000",
-    birthDate: dayjs().format("DD-MM-YYYY"),
+    birthDate: dayjs().format(),
     gender: "",
     civilStatus: "",
     age: "0",
@@ -56,7 +57,7 @@ function getPersonData(idRegister) {
     state: "registered",
     email: "hola@gmail.com",
     registerId: idRegister,
-    registerDate: dayjs().format("DD-MM-YYYY"),
+    registerDate: dayjs().format(),
     approvalId: "",
     approvalDate: "",
     // user: !registeredUser,
@@ -65,7 +66,6 @@ function getPersonData(idRegister) {
     userName: "hola",
     password: "hola",
     confirmPassword: "",
-    // passwordConfirmation: "hola",
     spiritual: {
       christian: false,
       churchName: "",
@@ -75,12 +75,13 @@ function getPersonData(idRegister) {
       placeAccept: "",
       namePlaceAccept: "",
       dateAccept: "2024-05-31T04:00:00.000Z",
-      timeAccept: "2022-04-17T15:15",
+      timeAccept: "2024-05-31T15:15:00.000Z",
+      // timeAccept: "2022-04-17T15:15",
       baptized: false,
       nameBaptizedChurch: "",
       denominationBaptizedChurch: "",
       palceBaptized: "",
-      dateBaptized: "",
+      dateBaptized: "2024-05-31T04:00:00.000Z",
       becameMemberFor: "",
       libroN: "",
       folioN: "",
@@ -96,7 +97,7 @@ function getPersonData(idRegister) {
       folioN: "",
       oficialiaDepartamento: "",
       oficialiaProvincia: "",
-      oficialiaDate: "",
+      oficialiaDate: "2024-05-31T04:00:00.000Z",
       departamentoNacimiento: "",
       provinciaNacimiento: "",
       localidadNacimiento: "",
@@ -120,6 +121,14 @@ function getPersonData(idRegister) {
   // }
   return person;
 }
+const colors ={
+  // mainColor:"#EC4D11",
+  // mainColor:"#F7DC6F",
+  mainColor:"#6BBA1B",
+  infTabColor: "#F8DAEF",
+  sectionColor: "#DFED55"
+  // sectionColor: "#ECD111"
+};
 
 export default function SavePeople() {
   const idRegister = getUserIdST();
@@ -159,8 +168,8 @@ export default function SavePeople() {
 
   const saveNewPeople = async (data) => {
     console.log("=data=00====", data);
-    const userId = localStorage.getItem("userId");
-    data.registerId = userId ? userId : "0";
+    // const userId = localStorage.getItem("userId");
+    // data.registerId = userId ? userId : "0";
 
     // udatePersonNames();
     try {
@@ -196,13 +205,14 @@ export default function SavePeople() {
     <PanelComp
       margin="0.7em"
       padding="0.7em"
-      color="#F7DC6F"
+      color={colors.mainColor}
     >
       <PeopleForm
         title="Nuevo Reristro"
         data={body}
         savePeople={savePeople}
         classes={classes}
+        colors={colors}
       />
       <Snackbar
         open={open}

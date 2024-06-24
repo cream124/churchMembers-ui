@@ -22,7 +22,7 @@ const PEOPLE_VALIDATION_BILL = Yup.object().shape({
 });
 
 export default function GeneralInfForm(props) {
-  const { peopleData, handleNext } = props;
+  const { peopleData, colors, handleNext } = props;
   const [step, setStep] = React.useState(0);
 
   return (
@@ -43,10 +43,15 @@ export default function GeneralInfForm(props) {
         }}
       >
         {({ values, handleSubmit, resetForm }) => (
-          <PanelComp padding="0.7em" color="#F7DC6F">
+          <PanelComp padding="0.7em" color={colors.infTabColor}>
             <Grid container rowSpacing={2} columnSpacing={2}>
               <Grid item xs={12} sm={12} md={6}>
-                <PanelComp padding="1em" textAlign="left" margin="0.5em">
+                <PanelComp 
+                  padding="1em" 
+                  textAlign="left" 
+                  margin="0.5em" 
+                  color={colors.sectionColor}
+                >
                   <Grid container rowSpacing={2} columnSpacing={2}>
                     <Grid item xs={12} sm={12} md={12}>
                       <UploadImage
@@ -96,7 +101,12 @@ export default function GeneralInfForm(props) {
                 </PanelComp>
               </Grid>
               <Grid item xs={12} sm={12} md={6}>
-                <PanelComp padding="1em" textAlign="left" margin="0.5em">
+                <PanelComp 
+                  padding="1em" 
+                  textAlign="left" 
+                  margin="0.5em"
+                  color={colors.sectionColor}
+                >
                   <Grid container rowSpacing={2} columnSpacing={2}>
                     <Grid item xs={12} sm={6} md={6}>
                       <TextfieldWrapper label={"C.I."} name={"ci"} />
@@ -152,7 +162,7 @@ export default function GeneralInfForm(props) {
                   />
                 </Stack>
               </Grid>
-              <Grid item item xs={12} sm={3} md={3}>
+              <Grid item xs={12} sm={3} md={3}>
                 <Stack direction="row" justifyContent="end" spacing={2}>
                   <Chip
                     label="Reset"

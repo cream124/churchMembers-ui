@@ -89,7 +89,7 @@ const steps = [
 ];
 
 export default function PeopleForm(props) {
-  const { data, savePeople, title, classes } = props;
+  const { data, savePeople, title, colors, classes } = props;
   // const classes = {}; //useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [peopleData, setPeopleData] = React.useState(data);
@@ -101,6 +101,7 @@ export default function PeopleForm(props) {
           <GeneralInfForm
             peopleData={peopleData}
             handleNext={handleNextBack}
+            colors={colors}
           />
         );
       case 1:
@@ -108,6 +109,7 @@ export default function PeopleForm(props) {
           <SpiritualInfForm
             peopleData={peopleData.spiritual}
             handleNext={handleNextBack}
+            colors={colors}
           />
         );
       case 2:
@@ -115,7 +117,8 @@ export default function PeopleForm(props) {
           <LegalInfForm
             peopleData={peopleData.legal}
             handleNext={handleNextBack}
-            saveData={saveData}
+            // saveData={saveData}
+            colors={colors}
           />
         );
       case 3:

@@ -1,9 +1,7 @@
-
 export function setUserCresentials(loginPerson) {
   const {token, _id, name, photo, lastName, level} = loginPerson;
-
   sessionStorage.setItem('token', token);
-  sessionStorage.setItem('userId', _id);
+  sessionStorage.setItem('userId', _id.toString());
   sessionStorage.setItem('name', `${name} ${lastName}`);
   sessionStorage.setItem('photo', photo);
   sessionStorage.setItem('level', level);
@@ -11,20 +9,11 @@ export function setUserCresentials(loginPerson) {
 
 export function logoutPersonST() {
   sessionStorage.clear()
-
 }
-
-// export function logoutPersonST() {
-//   sessionStorage.setItem('token', '');
-//   sessionStorage.setItem('userId', '');
-//   sessionStorage.setItem('name', '');
-//   sessionStorage.setItem('photo', '');
-//   sessionStorage.setItem('level', 0);
-// }
 
 export function getUserDataST() {
   const userId = sessionStorage.getItem('userId');
-  console.log('=userId==========', userId)
+  // console.log('=userId==========', userId)
   const data = {
     userId: false,
     photo: '',

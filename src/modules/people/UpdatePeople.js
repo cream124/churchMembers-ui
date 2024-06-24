@@ -89,6 +89,14 @@ export default function UpdatePeople() {
   const updatePersonDB = UpdatePersonDB();
   const getPersonDB = GetPersonDB({ id });
   const history = useNavigate();
+  const colors ={
+    // mainColor:"#EC4D11",
+    // mainColor:"#F7DC6F",
+    mainColor:"#6BBA1B",
+    infTabColor: "#F8DAEF",
+    sectionColor: "#DFED55"
+    // sectionColor: "#ECD111"
+  };
 
   const updatePeople = async (data) => {
     try {
@@ -154,6 +162,7 @@ export default function UpdatePeople() {
         title="Actualizar Reristro"
         data={{ ...getPersonDB.data?.person }}
         savePeople={savePeople}
+        colors={colors}
         classes={classes}
       />
     </Paper>

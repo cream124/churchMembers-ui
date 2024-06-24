@@ -41,7 +41,12 @@ query FilterByStatePersons($state: String) {
     user
     userName
     level
-    
+    membershipType
+    age
+    spiritual {
+      christian
+      baptized
+    }
   }
 }
 `

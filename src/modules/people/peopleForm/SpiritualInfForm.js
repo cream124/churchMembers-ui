@@ -25,7 +25,7 @@ const PEOPLE_VALIDATION_BILL = Yup.object().shape({
 });
 
 export default function SpiritualInfForm(props) {
-  const { peopleData, handleNext } = props;
+  const { peopleData, colors, handleNext } = props;
   const [step, setStep] = React.useState(0);
 
   return (
@@ -46,14 +46,20 @@ export default function SpiritualInfForm(props) {
         >
           {({ values, handleSubmit, resetForm }) => (
             <PanelComp
-              padding="1.3em"
+              padding="0.7em"
               // borderRadius="0"
               // elevation="3"
               // margin="0.8em"
+              color={colors.infTabColor}
             >
               <Grid container rowSpacing={2} columnSpacing={2}>
                 <Grid item xs={12} sm={12} md={6}>
-                  <PanelComp padding="1em" textAlign="left" margin="0.5em">
+                  <PanelComp 
+                    padding="1em" 
+                    textAlign="left" 
+                    margin="0.5em"
+                    color={colors.sectionColor}
+                  >
                     <Switch
                       name="christian"
                       checked={values.christian}
@@ -121,7 +127,12 @@ export default function SpiritualInfForm(props) {
                 </Grid>
                 {values.christian && (
                   <Grid item xs={12} sm={12} md={6}>
-                    <PanelComp padding="1em" textAlign="left" margin="0.5em">
+                    <PanelComp 
+                      padding="1em" 
+                      textAlign="left" 
+                      margin="0.5em"
+                      color={colors.sectionColor}
+                    >
                       <Switch
                         name="baptized"
                         checked={values.baptized}

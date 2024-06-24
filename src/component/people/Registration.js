@@ -1,4 +1,5 @@
 import * as React from "react";
+import  { useRef } from 'react';
 import {
   Box,
   Button,
@@ -13,6 +14,8 @@ import {
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SendIcon from "@mui/icons-material/Send";
+import { useReactToPrint } from 'react-to-print';
+
 import dayjs from "dayjs";
 
 import { FilterByStatePersonsDB } from "../../api/PersonsDB";
@@ -24,6 +27,7 @@ import classes from "./people.module.css";
 import ThemeProviderComponent from "../Common/ThemeProviderComponent";
 import { forApprovalPersonsColums } from "./Columns";
 import { randomCreatedDate, randomUpdatedDate } from '@mui/x-data-grid-generator';
+import { AnotherExample } from "../../modules/example/print/AnotherExample";
 
 const dialogMessage = {
   active: {
@@ -58,11 +62,11 @@ export default function RegistrationRequest() {
     name: "samuel111",
     lastName: "mamani",
     motherLastName: "choque",
-    // birthDate: "1997-05-01T04:00:00.000Z",
+    birthDate: '1981-11-20T04:00:00.000Z',
     birthDate2: "1999-05-01T04:00:00.000Z",
-    // birthDate: "01-05-1997",
-    // birthDate:()=> dayjs().format("DD-MM-YYYY"),
-    birthDate: new Date('2024-12-17T03:24:00'), // randomCreatedDate(),
+    // birthDate: "21-06-2024",
+    // birthDate:()=> dayjs().format("DD/MM/YYYY"),
+    // birthDate: new Date('2024-12-17T03:24:00'), // randomCreatedDate(),
     ci: "",
     photo: "",
     phone: "",
@@ -117,99 +121,120 @@ export default function RegistrationRequest() {
     }
   };
 
+  const contentToPrint = useRef(null);
+  const handlePrint = useReactToPrint({
+    documentTitle: "Print This Document",
+    onBeforePrint: () => console.log("before printing..."),
+    onAfterPrint: () => console.log("after printing..."),
+    removeAfterPrint: true,
+  });
+
+
   if (error) return <div> error1.......</div>;
   if (loading) return <div> loading.......</div>;
   return (
-    <Paper elevation={24} className={classes.containerRegistration}>
-      <Typography variant="h4" component="h1">
-        Aprobación de Registros
-      </Typography>
-      <Grid
-        container
-        spacing={1}
-        columns={{ xs: 4, sm: 8, md: 12 }}
-        justifyContent="space-between"
-      >
-        <Grid item>
-          <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Estado</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={state}
-                label="Estado"
-                sx={{ height: 30 }}
-                size="small"
-                onChange={handleChangeState}
-              >
-                <MenuItem value={"registered"}>Registrado</MenuItem>
-                <MenuItem value={"registeredCancel"}>
-                  Registro Denegado
-                </MenuItem>
-                <MenuItem value={"active"}>Activo</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-        </Grid>
-
-        <Grid item>
-          <Grid container component="h4" spacing={2} justifyContent="flex-end">
-            <Grid>
-              <Button
-                disabled={disabledButton}
-                variant="outlined"
-                size="small"
-                endIcon={<SendIcon />}
-                onClick={() => clickOnActiveItems(true)}
-              >
-                Activar
-              </Button>
+    <>
+    <button onClick={() => {
+        handlePrint(null, () => contentToPrint.current);
+      }}>
+        PRINT
+      </button>
+      <div ref={contentToPrint}>
+        <Paper elevation={24} className={classes.containerRegistration}>
+          <AnotherExample>
+            aa
+          </AnotherExample>
+          <Typography variant="h4" component="h1">
+            Aprobación de Registros
+          </Typography>
+          <Grid
+            container
+            spacing={1}
+            columns={{ xs: 4, sm: 8, md: 12 }}
+            justifyContent="space-between"
+          >
+            <Grid item>
+              <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Estado</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={state}
+                    label="Estado"
+                    sx={{ height: 30 }}
+                    size="small"
+                    onChange={handleChangeState}
+                  >
+                    <MenuItem value={"registered"}>Registrado</MenuItem>
+                    <MenuItem value={"registeredCancel"}>
+                      Registro Denegado
+                    </MenuItem>
+                    <MenuItem value={"active"}>Activo</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
             </Grid>
-            <Grid>
-              <Button
-                disabled={disabledButton}
-                variant="outlined"
-                size="small"
-                endIcon={<DeleteIcon />}
-                onClick={() => clickOnActiveItems(false)}
-              >
-                Denegar Activación
-              </Button>
+
+            <Grid item>
+              <Grid container component="h4" spacing={2} justifyContent="flex-end">
+                <Grid>
+                  <Button
+                    disabled={disabledButton}
+                    variant="outlined"
+                    size="small"
+                    endIcon={<SendIcon />}
+                    onClick={() => clickOnActiveItems(true)}
+                  >
+                    Activar
+                  </Button>
+                </Grid>
+                <Grid>
+                  <Button
+                    disabled={disabledButton}
+                    variant="outlined"
+                    size="small"
+                    endIcon={<DeleteIcon />}
+                    onClick={() => clickOnActiveItems(false)}
+                  >
+                    Denegar Activación
+                  </Button>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </Grid>
-      <AlertDialog
-        open={openDialog}
-        setOpen={setOpenDialog}
-        updateState={updateState}
-        title={stateDialogMessage.title}
-        content={stateDialogMessage.content}
-      />
-      <SnackbarComponent
-        open={openSnackbar}
-        setOpen={setOpenSnackbar}
-        messege="Las personas se actualizo correctamente."
-      />
-      <div style={{ height: 400, width: "100%" }}>
-        <ThemeProviderComponent name={"forApproval"}>
-          <DataGrid
-            rows={data.filterByStatePersons}
-            // rows={testData}
-            columns={columns}
-            getRowId={(row) => row._id}
-            pageSize={15}
-            rowsPerPageOptions={[15]}
-            checkboxSelection
-            // disableSelectionOnClick
-            onRowSelectionModelChange={(newSelectionModel) => {
-              console.log("77777777777777777777777777777")
-              updateSelecteItems(newSelectionModel);
-            }}
+          <AlertDialog
+            open={openDialog}
+            setOpen={setOpenDialog}
+            updateState={updateState}
+            title={stateDialogMessage.title}
+            content={stateDialogMessage.content}
           />
-        </ThemeProviderComponent>
+          <SnackbarComponent
+            open={openSnackbar}
+            setOpen={setOpenSnackbar}
+            messege="Las personas se actualizo correctamente."
+          />
+          <div style={{ height: 400, width: "100%" }}>
+            <ThemeProviderComponent name={"forApproval"}>
+              <DataGrid
+                rows={data.filterByStatePersons}
+                // rows={testData}
+                columns={columns}
+                getRowId={(row) => row._id}
+                pageSize={15}
+                rowsPerPageOptions={[15]}
+                checkboxSelection
+                // disableSelectionOnClick
+                onRowSelectionModelChange={(newSelectionModel) => {
+                  console.log("77777777777777777777777777777")
+                  updateSelecteItems(newSelectionModel);
+                }}
+              />
+            </ThemeProviderComponent>
+          </div>
+        </Paper>
       </div>
-    </Paper>
+    </>
   );
 }

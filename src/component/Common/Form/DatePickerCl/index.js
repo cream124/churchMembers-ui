@@ -40,12 +40,14 @@ const DatePickerCl = ({ name, values, age, dateActtion, ...otherProps }) => {
   const { setFieldValue } = useFormikContext();
 
   const setupDate = (value) => {
+    // console.log('-value----', value);
     // values[name] = value;
     if (value) {
       // values[name] = value.format("DD-MM-YYYY");
       setFieldValue(name, value);
 
       if (age) {
+        // setFieldValue(age, 0);
         setFieldValue(age, getAge(value));
       }
     }
@@ -67,7 +69,9 @@ const DatePickerCl = ({ name, values, age, dateActtion, ...otherProps }) => {
         // slotProps={{ textField: configTextfield, field: { clearable: true } }}
         {...configDateTimePicker}
         inputFormat="DD/MM/YYYY"
-        value={dayjs(values[name], "DD-MM-YYYY")}
+        value={dayjs(values[name])}
+        // value={dayjs(values[name], "DD-MM-YYYY")}
+
         onChange={(value) => {
           setupDate(value);
         }}
