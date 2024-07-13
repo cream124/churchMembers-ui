@@ -44,6 +44,7 @@ query Person($id: String) {
       palceBaptized
       dateBaptized
       becameMemberFor
+      becameMembreDate
       libroN
       folioN
       membershipRegistrationDate
@@ -72,6 +73,13 @@ query Person($id: String) {
       localidadEmicion
       fechaEmicion
       certificatePhoto
+    }
+    memberships {
+      _id
+      type
+      description
+      updateDate
+      state
     }
   }
 }

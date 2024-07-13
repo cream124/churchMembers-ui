@@ -174,6 +174,13 @@ export default function SpiritualInfForm(props) {
                               options={memberFor}
                             />
                           </Grid>
+                          <Grid item xs={12} sm={6} md={6}>
+                            <MobileDatePicker2
+                              values={values}
+                              name="becameMembreDate"
+                              label="*Fecha de Inicio de Membresia"
+                            />
+                          </Grid>
                           {/* <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper label={"Membresía Libro No"} name={"libroN"} />
                         </Grid>

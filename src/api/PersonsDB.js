@@ -48,6 +48,58 @@ query Person($_id: String) {
     password
     membershipType
     age  
+    spiritual {
+      christian
+      churchName
+      department
+      province
+      locality
+      placeAccept
+      namePlaceAccept
+      dateAccept
+      timeAccept
+      baptized
+      nameBaptizedChurch
+      denominationBaptizedChurch
+      palceBaptized
+      dateBaptized
+      becameMemberFor
+      becameMembreDate
+      libroN
+      folioN
+      membershipRegistrationDate
+      membershipRegistrationTime
+      baptizedCertificatePhoto
+    }
+    legal {
+      legalInformation
+      oficialiaN
+      libroN
+      partidaN
+      folioN
+      oficialiaDepartamento
+      oficialiaProvincia
+      oficialiaDate
+      departamentoNacimiento
+      provinciaNacimiento
+      localidadNacimiento
+      nacionalidadNacimiento
+      fechaNacimiento
+      horaNacimiento
+      nombresPadre
+      apellidosPadre
+      nombresMadre
+      apellidosMadre
+      localidadEmicion
+      fechaEmicion
+    }
+     memberships {
+      _id
+      type
+      description
+      updateDate
+      state
+    }
   }
 }
 `

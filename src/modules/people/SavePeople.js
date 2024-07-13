@@ -83,6 +83,7 @@ function getPersonData(idRegister) {
       palceBaptized: "",
       dateBaptized: "2024-05-31T04:00:00.000Z",
       becameMemberFor: "",
+      becameMembreDate: "2024-05-31T04:00:00.000Z",
       libroN: "",
       folioN: "",
       membershipRegistrationDate: "",

@@ -20,67 +20,6 @@ import SpiritualInfForm from "./SpiritualInfForm";
 import LegalInfForm from "./LegalInfForm";
 import PanelComp from "../../../component/Common/Panel/PanelComp";
 
-// const peopleData1 = {
-//   id: "",
-//   name: "",
-//   lastName: "",
-//   mothersLastName: "",
-//   birthDate: "",
-//   ci: "0",
-//   phone: "0",
-//   email: "",
-//   address: "0",
-//   location: "",
-//   foto: "",
-//   user: false,
-//   password: "",
-
-//   spiritual: {
-//     acceptChrist: false,
-//     isBaptized: false,
-//     placeAccept: "",
-//     namePlaceAccept: "",
-//     dateAccept: "",
-//     nameBaptizedChurch: "",
-//     denominationBaptizedChurch: "",
-//     palceBaptized: "",
-//     dateBaptized: "",
-//     certificateBaptizedFoto: "",
-//   },
-//   legal: {
-//     haveLegalInformation: false,
-//     oficialiaN: "",
-//     libroN: "",
-//     partidaN: "",
-//     folioN: "",
-//     oficialiaDepartamento: "",
-//     oficialiaProvincia: "",
-//     oficialiaDate: "",
-//     departamentoNacimiento: "",
-//     provinciaNacimiento: "",
-//     localidadNacimiento: "",
-//     nacionalidadNacimiento: "",
-//     fechaNacimiento: "",
-//     nombresPadre: "",
-//     apellidosPadre: "",
-//     nombresMadre: "",
-//     apellidosMadre: "",
-//     localidadEmicion: "",
-//     fechaEmicion: "",
-//     certificadoFoto: "",
-//   },
-//   age: "0",
-//   items: 0,
-
-//   registerDate: true,
-//   saveValues: false,
-//   options: [
-//     "Valor no declarado",
-//     "Contenido no declarado",
-//     "Sin dinero no objetos de valor",
-//   ],
-// };
-
 const steps = [
   "Inf. General",
   "Inf. Espiritual",
