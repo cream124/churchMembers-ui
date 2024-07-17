@@ -1,6 +1,6 @@
 {
-  "AF": "Iglesia",
-  "AL": "Campamento",
-  "DZ": "Campaña",
-  "AS": "Otros"
+  "Iglesia": "Iglesia",
+  "Campamento": "Campamento",
+  "Campaña": "Campaña",
+  "Otros": "Otros"
 }

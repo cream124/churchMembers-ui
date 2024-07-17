@@ -1,4 +1,4 @@
 {
-  "h": "HOMBRE",
-  "m": "MUJER"
+  "MASCULINO": "MASCULINO",
+  "FEMENINO": "FEMENINO"
 }

@@ -28,7 +28,7 @@ query Person($id: String) {
     level
     userName
     password  
-    spiritual {
+    spiritual { 
       christian
       churchName
       department
@@ -96,8 +96,8 @@ mutation CreatePerson($name: String, $lastName: String, $motherLastName: String,
 `
 
 const UPDATE_PERSON = gql`
-mutation UpdatePerson($_id: String!, $name: String, $lastName: String, $motherLastName: String, $birthDate: String, $gender: String, $civilStatus: String, $ci: String, $photo: String, $phone: String, $address: String, $location: String, $state: String, $email: String, $updateId: String, $updateDate: String, $user: Boolean, $userName: String, $password: String, $spiritual: Spiritual1, $legal: Legal1) {
-  updatePerson(id: $_id, name: $name, lastName: $lastName, motherLastName: $motherLastName, birthDate: $birthDate, gender: $gender, civilStatus: $civilStatus, ci: $ci, photo: $photo, phone: $phone, address: $address, location: $location, state: $state, email: $email, updateId: $updateId, updateDate: $updateDate, user: $user, userName: $userName, password: $password, spiritual: $spiritual, legal: $legal) {
+mutation UpdatePerson($_id: String!, $name: String, $lastName: String, $motherLastName: String, $birthDate: String, $gender: String, $civilStatus: String, $ci: String, $photo: String, $phone: String, $address: String, $location: String, $state: String, $email: String, $updateId: String, $updateDate: String, $user: Boolean, $userName: String, $password: String, $updatingUser: Boolean, $spiritual: Spiritual1, $legal: Legal1) {
+  updatePerson(id: $_id, name: $name, lastName: $lastName, motherLastName: $motherLastName, birthDate: $birthDate, gender: $gender, civilStatus: $civilStatus, ci: $ci, photo: $photo, phone: $phone, address: $address, location: $location, state: $state, email: $email, updateId: $updateId, updateDate: $updateDate, user: $user, userName: $userName, password: $password, updatingUser: $updatingUser, spiritual: $spiritual, legal: $legal) {
     _id
     name
   }

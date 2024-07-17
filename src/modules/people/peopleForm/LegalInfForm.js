@@ -28,10 +28,15 @@ export default function LegalInfForm(props) {
   const [step, setStep] = React.useState(0);
 
   return (
-    <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-        Información Legal
-      </Typography>
+    <PanelComp
+      padding="0.7em"
+      // textAlign="left"
+      color={colors.infTabColor}
+    >
+      <React.Fragment>
+        <Typography variant="h6" gutterBottom>
+          Información Legal
+        </Typography>
         <Formik
           initialValues={peopleData}
           validationSchema={PEOPLE_VALIDATION_BILL}
@@ -52,7 +57,9 @@ export default function LegalInfForm(props) {
             <PanelComp
               padding="0.7em"
               textAlign="left"
-              color={colors.infTabColor}
+              // color={colors.infTabColor}
+              elevation="0"
+              color={"transparent"}
             >
               <Switch
                 name="legalInformation"
@@ -62,9 +69,9 @@ export default function LegalInfForm(props) {
               {values.legalInformation && (
                 <Grid container rowSpacing={2} columnSpacing={2}>
                   <Grid item xs={12} sm={6} md={6}>
-                    <PanelComp 
-                      padding="1em" 
-                      textAlign="left" 
+                    <PanelComp
+                      padding="1em"
+                      textAlign="left"
                       margin="0.5em"
                       color={colors.sectionColor}
                     >
@@ -271,6 +278,7 @@ export default function LegalInfForm(props) {
             </PanelComp>
           )}
         </Formik>
-    </React.Fragment>
+      </React.Fragment>
+    </PanelComp>
   );
 }

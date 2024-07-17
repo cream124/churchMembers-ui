@@ -124,7 +124,7 @@ const characteristic = [
   },
 ];
 
-export default function PeopleCardPrint() {
+export default function PeopleUpdateMenu() {
   const { id } = useParams();
   const ii="66837d01b2f59963f3586c92";
   const { error, loading, data, refetch } = GetPersonToPrintDB({

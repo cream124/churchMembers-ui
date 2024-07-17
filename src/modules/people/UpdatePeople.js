@@ -32,7 +32,7 @@ import {
   UpdatePersonDB,
   GetPersonDB,
 } from "../../api/SavePersonDB";
-import { isRegisteredUserST } from "../../util/Storage";
+import { getUserIdST, isRegisteredUserST } from "../../util/Storage";
 import { useParams } from "react-router-dom";
 import { textAsTitle } from "../../util/helper";
 import PeopleForm from "./peopleForm/PeopleForm";
@@ -73,29 +73,21 @@ async function getPersonData(registeredUser, id) {
 }
 
 export default function UpdatePeople() {
-  const registeredUser = isRegisteredUserST();
+  const idRegister = getUserIdST();
   const { id } = useParams();
 
-  // const [body, setBody] = React.useState(getPersonData(registeredUser, id))
-
-  // const [open, setOpen] = React.useState(false);
-  // const [showState, setShowState] = React.useState(body.christian);
-  // const [showBaptized, setShowBaptized] = React.useState(body.christian);
-  // const [showUserPanel, setShowUserPanel] = React.useState(body.user);
-  // const [checkboxUserDisabled, setcheckboxUserDisabled] = React.useState(true);
-  // const [errorMessage, setErrorMessage] = React.useState('')
-  // // const [christian, setChristian] = React.useState(true);
   const { addPerson, error, loading, data } = SavePersonsDB();
   const updatePersonDB = UpdatePersonDB();
   const getPersonDB = GetPersonDB({ id });
   const history = useNavigate();
   const colors ={
-    // mainColor:"#EC4D11",
+    mainColor:"#EC4D11",
     // mainColor:"#F7DC6F",
-    mainColor:"#6BBA1B",
+    // mainColor:"#6BBA1B",
+    // infTabColor: "transparent", //"#F8DAEF",
     infTabColor: "#F8DAEF",
-    sectionColor: "#DFED55"
-    // sectionColor: "#ECD111"
+    // sectionColor: "#DFED55"
+    sectionColor: "#ECD111"
   };
 
   const updatePeople = async (data) => {
@@ -103,6 +95,8 @@ export default function UpdatePeople() {
       // console.log("-update data---", data);
       const newData = {
         ...data,
+        updateId: idRegister,
+        updateDate: dayjs().format(),
         spiritual: { ...data.spiritual },
         legal: { ...data.legal },
       };
@@ -110,7 +104,7 @@ export default function UpdatePeople() {
 
       delete newData.legal["__typename"];
       delete newData.spiritual.__typename;
-      // console.log("-update data-vaaa--", newData);
+      console.log("-update data-vaaa--", newData);
 
       const response = await updatePersonDB.updatePerson({ variables: newData });
       console.log("-update response---", response.data?.updatePerson);
@@ -157,14 +151,14 @@ export default function UpdatePeople() {
   if (getPersonDB.loading) return <div> loading.......</div>;
 
   return (
-    <Paper elevation={24} className={classes.container}>
       <PeopleForm
-        title="Actualizar Reristro"
-        data={{ ...getPersonDB.data?.person }}
+        title="Actualizar Registro"
+        updating={true}
+        // data={{ ...getPersonDB.data?.person, updatingUser: false }}
+        data={{ ...getPersonDB.data?.person}}
         savePeople={savePeople}
         colors={colors}
         classes={classes}
       />
-    </Paper>
   );
 }

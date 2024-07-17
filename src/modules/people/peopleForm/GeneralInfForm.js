@@ -22,15 +22,16 @@ const PEOPLE_VALIDATION_BILL = Yup.object().shape({
 });
 
 export default function GeneralInfForm(props) {
-  const { peopleData, colors, handleNext } = props;
+  const { peopleData, updating, colors, handleNext } = props;
   const [step, setStep] = React.useState(0);
+  // const [updating, setUptating] = React.useState(true);
+  // const [userUpdating, setUserUpdating] = React.useState(false);
 
   return (
-    <React.Fragment>
+    <PanelComp padding="0.7em" color={colors.infTabColor}>
       <Typography variant="h6" gutterBottom>
         Información General
       </Typography>
-      {/* <Grid container spacing={3}> */}
       <Formik
         initialValues={peopleData}
         validationSchema={PEOPLE_VALIDATION_BILL}
@@ -43,13 +44,13 @@ export default function GeneralInfForm(props) {
         }}
       >
         {({ values, handleSubmit, resetForm }) => (
-          <PanelComp padding="0.7em" color={colors.infTabColor}>
+          <>
             <Grid container rowSpacing={2} columnSpacing={2}>
               <Grid item xs={12} sm={12} md={6}>
-                <PanelComp 
-                  padding="1em" 
-                  textAlign="left" 
-                  margin="0.5em" 
+                <PanelComp
+                  padding="1em"
+                  textAlign="left"
+                  margin="0.5em"
                   color={colors.sectionColor}
                 >
                   <Grid container rowSpacing={2} columnSpacing={2}>
@@ -101,9 +102,9 @@ export default function GeneralInfForm(props) {
                 </PanelComp>
               </Grid>
               <Grid item xs={12} sm={12} md={6}>
-                <PanelComp 
-                  padding="1em" 
-                  textAlign="left" 
+                <PanelComp
+                  padding="1em"
+                  textAlign="left"
                   margin="0.5em"
                   color={colors.sectionColor}
                 >
@@ -124,25 +125,49 @@ export default function GeneralInfForm(props) {
                       <TextfieldWrapper label={"Ubicación"} name={"location"} />
                     </Grid>
                   </Grid>
-                  <Switch
-                    name="user"
-                    checked={values.user}
-                    label="Es Usuario"
-                  />
-                  {values.user && (
-                    <Grid container rowSpacing={2} columnSpacing={2}>
-                      <Grid item xs={12} sm={12} md={12}></Grid>
-                      <Grid item xs={12} sm={6} md={6}>
-                        <TextfieldWrapper label={"E-mail"} name={"email"} />
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={6}>
-                        <TextfieldWrapper
-                          label={"Password"}
-                          name={"password"}
-                        />
-                      </Grid>
-                    </Grid>
-                  )}
+                  <PanelComp
+                    padding="1em"
+                    textAlign="left"
+                    margin="0.5em"
+                    color={colors.sectionColor}
+                  >
+                    {updating && (
+                      <Switch
+                        name="updatingUser"
+                        checked={values.updatingUser}
+                        label="Actualizar Usuario"
+                      />
+                    )}
+                    <PanelComp
+                      padding="1em"
+                      textAlign="left"
+                      margin="0.5em"
+                      elevation="1"
+                      color={"transparent"}
+                    >
+                      <Switch
+                        name="user"
+                        checked={values.user}
+                        label="Es Usuario"
+                        disabled={(!values.updatingUser && updating)}
+                      />
+                      {(values.user && !(!values.updatingUser && updating)) && (
+                        <Grid container rowSpacing={2} columnSpacing={2}>
+                          <Grid item xs={12} sm={12} md={12}></Grid>
+                          <Grid item xs={12} sm={6} md={6}>
+                            <TextfieldWrapper label={"E-mail"} name={"email"} />
+                          </Grid>
+                          <Grid item xs={12} sm={6} md={6}>
+                            <TextfieldWrapper
+                              label={"Password"}
+                              name={"password"}
+                            />
+                          </Grid>
+
+                        </Grid>
+                      )}
+                    </PanelComp>
+                  </PanelComp>
                 </PanelComp>
               </Grid>
             </Grid>
@@ -188,18 +213,17 @@ export default function GeneralInfForm(props) {
                     variant="outlined"
                     color="success"
                     icon={<DoneIcon />}
-                    // onClick={() => {
-                    //   setStep(0);
-                    //   handleSubmit();
-                    // }}
+                  // onClick={() => {
+                  //   setStep(0);
+                  //   handleSubmit();
+                  // }}
                   />
                 </Stack>
               </Grid>
             </Grid>
-          </PanelComp>
+          </>
         )}
       </Formik>
-      {/* </Grid> */}
-    </React.Fragment>
+    </PanelComp>
   );
 }

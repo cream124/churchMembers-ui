@@ -1,8 +1,8 @@
 {
-  "so": "SOLTERO",
-  "ca": "CASADO",
-  "vi": "VIUDO",
-  "di": "DIVORCIADO",
-  "ot": "OTROS"
+  "SOLTERO": "SOLTERO",
+  "CASADO": "CASADO",
+  "VIUDO": "VIUDO",
+  "DIVORCIADO": "DIVORCIADO",
+  "OTROS": "OTROS"
 
 }

@@ -26,6 +26,7 @@ const SwitchWrapper = ({
 
   const configCheckbox = {
     ...field,
+    ...otherProps,
     onChange: handleChange
   };
 
