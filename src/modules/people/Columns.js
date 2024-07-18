@@ -7,13 +7,13 @@ import { red } from '@mui/material/colors';
 
 function activePersonsColumns (){ 
   return [
-    { field: 'ci', headerName: 'Estado', width: 90,
+    { field: 'type', headerName: 'Estado', width: 90,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'name', headerName: 'Fecha', width: 140, hideable: false,
+    { field: 'updateDate', headerName: 'Fecha', width: 140, hideable: false,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'phone', headerName: 'Detalle', width: 100, 
+    { field: 'description', headerName: 'Detalle', width: 100, 
       headerClassName: 'super-app-theme--header'
     },
     { field: 'christian', headerName: 'Registrado por: ', type: 'boolean', width: 80,

@@ -12,7 +12,6 @@ import { PrintablePanel } from "../../../component/Common/Panel/PrintablePanel";
 import { getAge, getPrintDate } from "../../../util/utilDate";
 import TextfieldWrapper from "../../../component/Common/Form/TextField";
 import MembershipForm from "./MembershipForm";
-import MemberSumary from "./MemberSumary";
 
 const width = '170';
 const colors = {
@@ -129,7 +128,7 @@ const characteristic = [
 
 export default function PeopleUpdateMembership() {
   const { id } = useParams();
-  const ii = "66837d01b2f59963f3586c92";
+  const ii = "669822978bbd737451503885";
   const { error, loading, data, refetch } = GetPersonToPrintDB({
     // _id: "6678d4fea250754a0060969e",
     _id: ii,
@@ -156,6 +155,9 @@ export default function PeopleUpdateMembership() {
     return memberData;
   };
 
+  const dataExtra = {
+    updating: true,
+  }
   if (error) return <div> error1.......</div>;
   if (loading) return <div> loading.......</div>;
   return (
@@ -166,17 +168,14 @@ export default function PeopleUpdateMembership() {
       color={"transparent"}
     >
       <TypographyComp
-        variant="h6"
+        variant="h5"
         // align="left"
         fontWeight='bold'
         textcolor="#C0392B"
         sx={{ margin: "0em", padding: "0em" }}
       >
-        {`Membrecia Actual1`}
+        {`Informacion de Membrecia`}
       </TypographyComp>
-      <MemberSumary
-        colors={{}}
-      />
       <Grid
         container
         direction="row"
@@ -186,79 +185,33 @@ export default function PeopleUpdateMembership() {
           <PanelComp
             margin="0.7em"
             padding="1em"
-            // elevation="0"
+            elevation="0"
             color={"transparent"}
           >
-            <TypographyComp
-              variant="h6"
-              align="left"
-              // fontWeight='bold'
-              textcolor="#C0392B"
-              sx={{ margin: "0em", padding: "0em" }}
-            >
-              {`Membrecia Actual`}
-            </TypographyComp>
-            <Grid
-              container
-              direction="row"
-              justifyContent="center"
-              spacing="5"
-              alignItems="center"
-            >
-              <Grid item xs={6} justifyContent="flex-end">
-                {/* <PanelComp
-                    margin="0.7em"
-                    padding="1em"
-                    // elevation="0"
-                    color={"transparent"}
-                  > */}
-                <TypographyComp
-                  variant="body2"
-                  align="right"
-                  fontWeight='bold'
-                  // textcolor="#C0392B"
-                  sx={{ margin: "0em", padding: "0em" }}
-                >
-                  {`Membrecia Actual`}
-                </TypographyComp>
-
-              </Grid>
-              <Grid item xs={6}>
-                <TypographyComp
-                  variant="body2"
-                  align="left"
-                  // fontWeight='bold'
-                  // textcolor="#C0392B"
-                  sx={{ margin: "0em", padding: "0em" }}
-                >
-                  {`Membrecia Actual`}
-                </TypographyComp>
-              </Grid>
-              <Grid item xs={6}>
-
-                <TypographyComp
-                  variant="body2"
-                  align="right"
-                  fontWeight='bold'
-                  // textcolor="#C0392B"
-                  sx={{ margin: "0em", padding: "0em" }}
-                >
-                  {`Detalle`}
-                </TypographyComp>
-              </Grid>
-              <Grid item xs={6}>
-                {/* <TextfieldWrapper label={"E-mail"} name={"email"} /> */}
-              </Grid>
-            </Grid>
+            <PrintNestedList
+              tytle="Informacion Personal"
+              labels={personInf}
+              data={data.person}
+              noIcon={true}
+            // collapsed={true}
+            />
+            <MembershipForm
+              data={{updating:false, memberships: data.person.memberships}}
+              // peopleData={{...dataExtra}}
+              // peopleData={{...peopleData}}
+              // updating={updating}
+              // handleNext={handleNextBack}
+              colors={{}}
+            />
           </PanelComp>
         </Grid>
         <Grid item md={5} ms={5} xs={12}>
-          <MembershipForm
+          {/* <MembershipForm
             // peopleData={{...peopleData}}
             // updating={updating}
             // handleNext={handleNextBack}
             colors={{}}
-          />
+          /> */}
 
         </Grid>
 
