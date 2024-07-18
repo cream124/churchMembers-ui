@@ -2,7 +2,7 @@ import * as React from "react";
 import { useParams } from "react-router-dom";
 import { GetPersonToPrintDB } from "../../../api/PersonsDB";
 import PanelComp from "../../../component/Common/Panel/PanelComp";
-import { Avatar, Chip, Grid, Paper, Stack } from "@mui/material";
+import { Avatar, Grid, Paper } from "@mui/material";
 import TypographyComp from "../../../component/Common/TypographyComp";
 import NestedList from "../../example/NestedList";
 import PrintNestedListOld from "../../../component/Common/List/PrintNestedListOld";
@@ -12,7 +12,7 @@ import { PrintablePanel } from "../../../component/Common/Panel/PrintablePanel";
 import { getAge, getPrintDate } from "../../../util/utilDate";
 import TextfieldWrapper from "../../../component/Common/Form/TextField";
 import MembershipForm from "./MembershipForm";
-import PeopleUpdateMembership from "./PeopleUpdateMembership";
+import MemberSumary from "./MemberSumary";
 
 const width = '170';
 const colors = {
@@ -127,7 +127,7 @@ const characteristic = [
   },
 ];
 
-export default function PeopleUpdateMenu() {
+export default function PeopleUpdateMembership() {
   const { id } = useParams();
   const ii = "66837d01b2f59963f3586c92";
   const { error, loading, data, refetch } = GetPersonToPrintDB({
@@ -159,173 +159,111 @@ export default function PeopleUpdateMenu() {
   if (error) return <div> error1.......</div>;
   if (loading) return <div> loading.......</div>;
   return (
-    <div>
-      <PanelComp
-        margin="0.7em"
-        padding="0.7em"
-        elevation="0"
-        color={"transparent"}
+    <PanelComp
+      margin="0.7em"
+      padding="0.7em"
+      // elevation="0"
+      color={"transparent"}
+    >
+      <TypographyComp
+        variant="h6"
+        // align="left"
+        fontWeight='bold'
+        textcolor="#C0392B"
+        sx={{ margin: "0em", padding: "0em" }}
       >
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-        >
-          <Grid item xs={12} sm={12} md={12}>
-            <Stack direction="row" justifyContent="center" spacing={5}>
-              <Chip
-                label="Membrecia"
-                variant=""
-                color="success"
-                // icon={<DoneIcon />}
-                onClick={() => {
-                  // setStep(0);
-                  // handleSubmit();
-                }}
-              />
-              <Chip
-                label="Cancelar"
-                variant="outlined"
-                color="warning"
-                // icon={<RestartAltIcon />}
-                onClick={() => {
-                  // resetForm();
-                }}
-              />
-
-              <Chip
-                label="Terminar"
-                variant="outlined"
-                color="success"
-                // icon={<DoneIcon />}
-              // onClick={() => {
-              //   setStep(0);
-              //   handleSubmit();
-              // }}
-              />
-            </Stack>
-          </Grid>
-        </Grid>
-        <PeopleUpdateMembership />
-
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-        >
-
-
-
-
-
-          <Grid item md={10} ms={6} xs={6}
+        {`Membrecia Actual1`}
+      </TypographyComp>
+      <MemberSumary
+        colors={{}}
+      />
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+      >
+        <Grid item md={7} ms={7} xs={12}>
+          <PanelComp
+            margin="0.7em"
+            padding="1em"
+            // elevation="0"
+            color={"transparent"}
           >
-            <PrintablePanel>
-              <PanelComp
-                margin="0.7em"
-                padding="0.7em"
-                elevation="0"
-                color={"transparent"}
-              >
-                <Grid
-                  container
-                  direction="row"
-                  justifyContent="center"
-                  sx={{
-                    backgroundColor: `${colors.backgroundLeftColor} !important`,
-                    borderRadius: 3,
-                  }}
+            <TypographyComp
+              variant="h6"
+              align="left"
+              // fontWeight='bold'
+              textcolor="#C0392B"
+              sx={{ margin: "0em", padding: "0em" }}
+            >
+              {`Membrecia Actual`}
+            </TypographyComp>
+            <Grid
+              container
+              direction="row"
+              justifyContent="center"
+              spacing="5"
+              alignItems="center"
+            >
+              <Grid item xs={6} justifyContent="flex-end">
+                {/* <PanelComp
+                    margin="0.7em"
+                    padding="1em"
+                    // elevation="0"
+                    color={"transparent"}
+                  > */}
+                <TypographyComp
+                  variant="body2"
+                  align="right"
+                  fontWeight='bold'
+                  // textcolor="#C0392B"
+                  sx={{ margin: "0em", padding: "0em" }}
                 >
-                  <Grid item md={4} ms={6} xs={6}>
-                    <PanelComp
-                      margin="1.7em"
-                      padding="0.7em"
-                      elevation="0"
-                      color={"transparent"}
-                    >
-                      <Avatar
-                        src={data.person.photo}
-                        sx={{ width: Number(width), height: Number(width), margin: "auto" }}
-                      >
-                        A
-                      </Avatar>
-                    </PanelComp>
+                  {`Membrecia Actual`}
+                </TypographyComp>
 
-                    <PrintNestedList
-                      tytle="Caracteristicas"
-                      labels={characteristic}
-                      data={getMemberData(data.person)}
-                      noIcon={true}
-                    />
-                  </Grid>
-                  <Grid item md={8} ms={8} xs={6}>
-                    <PanelComp
-                      borderRadius="0"
-                      elevation="24"
-                      padding="2em"
-                    >
-                      <PanelComp
-                        elevation="0"
-                        padding="0em"
-                        textAlign="right"
-                        color={"transparent"}
-                      >
-                        <TypographyComp
-                          variant="h6"
-                          align="right"
-                          fontWeight='bold'
-                          textcolor="#C0392B"
-                          sx={{ margin: "0em", padding: "0em" }}
-                        >
-                          {`Iglesia "Alto Pagador"`}
-                        </TypographyComp>
-                      </PanelComp>
+              </Grid>
+              <Grid item xs={6}>
+                <TypographyComp
+                  variant="body2"
+                  align="left"
+                  // fontWeight='bold'
+                  // textcolor="#C0392B"
+                  sx={{ margin: "0em", padding: "0em" }}
+                >
+                  {`Membrecia Actual`}
+                </TypographyComp>
+              </Grid>
+              <Grid item xs={6}>
 
-                      <TypographyComp
-                        variant="h4"
-                        fontWeight='bold'
-                        align="left"
-                        // textcolor="#229954"
-                        sx={{ flexGrow: 1, margin: "1em", padding: "0em" }}
-                      >
-                        {`${data.person.name} ${data.person.lastName} ${data.person.motherLastName}`}
-                      </TypographyComp>
-
-                      <PrintNestedList
-                        tytle="Informacion Personal"
-                        labels={personInf}
-                        data={data.person}
-                      // collapsed={true}
-                      />
-                      <PrintNestedList
-                        tytle="Informacion Espiritual"
-                        labels={spiritualInf}
-                        data={data.person.spiritual}
-                      // collapsed={true}
-                      />
-
-                      <PrintNestedList
-                        tytle="Membresia"
-                        labels={membershipInf}
-                        data={getMemberData(data.person)}
-                        collapsed={false}
-                      />
-
-                      <PrintNestedList
-                        tytle="Informacion Legal"
-                        labels={legalInf}
-                        data={data.person.legal}
-                        collapsed={true}
-                      />
-                    </PanelComp>
-                  </Grid>
-                </Grid>
-              </PanelComp>
-            </PrintablePanel>
-          </Grid>
+                <TypographyComp
+                  variant="body2"
+                  align="right"
+                  fontWeight='bold'
+                  // textcolor="#C0392B"
+                  sx={{ margin: "0em", padding: "0em" }}
+                >
+                  {`Detalle`}
+                </TypographyComp>
+              </Grid>
+              <Grid item xs={6}>
+                {/* <TextfieldWrapper label={"E-mail"} name={"email"} /> */}
+              </Grid>
+            </Grid>
+          </PanelComp>
         </Grid>
-      </PanelComp>
-    </div>
+        <Grid item md={5} ms={5} xs={12}>
+          <MembershipForm
+            // peopleData={{...peopleData}}
+            // updating={updating}
+            // handleNext={handleNextBack}
+            colors={{}}
+          />
+
+        </Grid>
+
+      </Grid>
+    </PanelComp>
   );
 
 

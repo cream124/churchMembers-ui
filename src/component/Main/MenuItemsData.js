@@ -41,6 +41,10 @@ const menuListSuperUser = [
           name: 'Imprimir Hermano',
           uri: '/printPerson',
         },
+        {
+          name: 'Modificar Hermano',
+          uri: '/updatePerson',
+        },
       ]
   },
   {

@@ -31,6 +31,7 @@ import { Drawer, Toolbar } from "@mui/material";
 import SavePeople from "../../modules/people/SavePeople";
 import UpdatePeople from "../../modules/people/UpdatePeople";
 import PeopleCardPrint from "../../modules/people/poplePrint/PeopleCardPrint";
+import PeopleUpdateMenu from "../../modules/people/updatePeople/PeopleUpdateMenu";
 
 const drawerWidth = 240;
 
@@ -106,6 +107,7 @@ export default function TopBar() {
           <Route path="/addPerson3" element={<SavePeople />} />
           <Route path="/addPerson3/:id" element={<UpdatePeople />} />
           <Route path="/printPerson" element={<PeopleCardPrint />} />
+          <Route path="/updatePerson" element={<PeopleUpdateMenu />} />
 
           <Route path="/Sample" element={<Sample />} />
           <Route
