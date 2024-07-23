@@ -12,6 +12,7 @@ import { useField, useFormikContext } from 'formik';
 const SwitchWrapper = ({
   name,
   label,
+  actionTrue,
   legend,
   checked,
   ...otherProps
@@ -22,6 +23,9 @@ const SwitchWrapper = ({
   const handleChange = evt => {
     const { checked } = evt.target;
     setFieldValue(name, checked);
+    if(!checked && actionTrue){
+      actionTrue();
+    }
   };
 
   const configCheckbox = {

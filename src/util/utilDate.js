@@ -22,3 +22,8 @@ export function getPrintTime(date) {
     const newDate = dayjs(date).format(timeFormat);
     return newDate;
 }
+
+export function getCurrentDateISO() {
+    const newDate = dayjs().format();
+    return newDate;
+}

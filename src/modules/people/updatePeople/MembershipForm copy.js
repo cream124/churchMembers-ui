@@ -19,8 +19,7 @@ import ThemeProviderComponent from "../../../component/Common/ThemeProviderCompo
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { activePersonsColums } from "../Columns";
 import membershipType from "../../../component/data/membershipType.json";
-import { getCurrentDateISO, getPrintDate } from "../../../util/utilDate";
-import { UpdateMembershipDB, GetMembershipsDB } from "../../../api/MembershipsDB"
+import { getPrintDate } from "../../../util/utilDate";
 
 const personsColums = activePersonsColums();
 const columns = personsColums.columns;
@@ -31,53 +30,11 @@ const PEOPLE_VALIDATION_BILL = Yup.object().shape({
     .min(3, "Debe tener al menos 3 caracteres"),
 });
 
-const ii = "66837d01b2f59963f3586c92";
 export default function MembershipForm(props) {
-  const { data2, colors, save, handleNext } = props;
-  const [data1, setData1] = React.useState(data2);
-  const [updating, setUpdating] = React.useState(false);
-  const { error, loading, data, refetch } = GetMembershipsDB({
-    // _id: "6678d4fea250754a0060969e",
-    idPerson: ii,
-  });
-  const updateMembershipDB = UpdateMembershipDB();
-
-  
-  const save1 = async (savingData) => {
-    console.log('--saiving membership----------', savingData)
-    try {
-      // console.log("-update data---", data);
-      const newData = {
-        ...savingData,
-        idPerson: ii,
-        // idRegister: idRegister,
-        registerDate: getCurrentDateISO(),
-      };
-      // console.log("-update data-vaaa-00-", newData);
-  
-      // delete newData.legal["__typename"];
-      // delete newData.spiritual.__typename;
-      // console.log("-update data-vaaa--", newData);
-  
-      const response = await updateMembershipDB.updateMembership({ variables: newData });
-      console.log("-update response---", response.data);
-      await refetch({ idPerson: ii });
-      console.log("-update response-22--", data);
-      setUpdating(false);
-  
-      // setOpenSnackbar(true);
-  
-      // setOpen(true);
-      // setErrorMessage('');
-    } catch (error) {
-      // setErrorMessage(error.graphQLErrors[0].message);
-    }
-  }
-
+  const { data, colors, save, handleNext } = props;
+  const [data1, setData1] = React.useState(data);
   // const [updating, setUptating] = React.useState(true);
   // const [userUpdating, setUserUpdating] = React.useState(false);
-  if (error) return <div> error1.......</div>;
-  if (loading) return <div> loading.......</div>;
   console.log('=====peopleData==========', data1)
   return (
     <PanelComp padding="0.7em" color={colors.infTabColor}>
@@ -91,15 +48,14 @@ export default function MembershipForm(props) {
         {`Membrecia Actual`}
       </TypographyComp>
       <Formik
-        initialValues={{ ...data.getMemberships[0] }}
-        // initialValues={{ updating: false, ...data1.memberships[0] }}
+        initialValues={{ updating: false, ...data1.memberships[0] }}
         validationSchema={PEOPLE_VALIDATION_BILL}
         onSubmit={(values, { setSubmitting, resetForm }) => {
           setTimeout(() => {
             // alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
           }, 400);
-          save1(values);
+          save(values);
         }}
       >
         {
@@ -273,8 +229,7 @@ export default function MembershipForm(props) {
                     <div style={{ height: 410, width: '100%' }} className='{}'>
                       <ThemeProviderComponent name={'actives'}>
                         <DataGrid
-                          rows={data.getMemberships}
-                          // rows={data1.memberships}
+                          rows={data1.memberships}
                           columns={columns}
                           // columnVisibilityModel={columnVisibilityModel}
                           // onColumnVisibilityModelChange={(newModel) =>

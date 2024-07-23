@@ -103,6 +103,39 @@ query Person($_id: String) {
   }
 }
 `
+const GET_PERSON_FOR_MEMBERSHIP = gql`
+query Person($_id: String) {
+  person(id: $_id) {
+    _id
+    name
+    lastName
+    motherLastName
+    gender
+    civilStatus
+    state
+    membershipType
+    age  
+    spiritual {
+      becameMemberFor
+      becameMembreDate
+      libroN
+      folioN
+      membershipRegistrationDate
+      membershipRegistrationTime
+      
+    }
+     memberships {
+      _id
+      type
+      description
+      updateDate
+      registerName
+      registerDate
+      state
+    }
+  }
+}
+`
 
 
 
@@ -192,6 +225,13 @@ export const GetPersonToPrintDB = ({_id}) => {
     variables: {_id},
   });
   return {error, loading, data };
+}
+
+export const GetPersonFoMembershipDB = ({_id}) => {
+  const {error, loading, data, refetch } = useQuery(GET_PERSON_FOR_MEMBERSHIP, {
+    variables: {_id},
+  });
+  return {error, loading, data, refetch };
 }
 
 export const FilterByStatePersonsDB = ({state}) => {
