@@ -15,59 +15,60 @@ import { DataGrid } from "@mui/x-data-grid";
 import { activePersonsColums } from "../Columns";
 import membershipType from "../../../component/data/membershipType.json";
 import { getCurrentDateISO, getPrintDate } from "../../../util/utilDate";
-import { UpdateMembershipDB, GetMembershipsDB } from "../../../api/MembershipsDB"
+// import { UpdateMembershipDB, GetMembershipsDB } from "../../../api/MembershipsDB"
 
 const personsColums = activePersonsColums();
 const columns = personsColums.columns;
 
 const PEOPLE_VALIDATION_BILL = Yup.object().shape({
-  type: Yup.string()
+  libroN: Yup.string()
     .required("Se requiere El Nombre")
-    .min(3, "Debe tener al menos 3 caracteres"),
+    .min(1, "Debe tener al menos 3 caracteres"),
 });
 
-export default function MembershipForm(props) {
-  const { id, data2, colors } = props;
+export default function RecordInBooksForm(props) {
+  const { id, save, data2, colors } = props;
   // const [data1, setData1] = React.useState(data2);
   const [updating, setUpdating] = React.useState(false);
-  const { error, loading, data, refetch } = GetMembershipsDB({
-    idPerson: id,
-  });
-  const updateMembershipDB = UpdateMembershipDB();
+  // const { error, loading, data, refetch } = GetMembershipsDB({
+  //   idPerson: id,
+  // });
+  // const updateMembershipDB = UpdateMembershipDB();
 
 
   const save1 = async (savingData) => {
     console.log('--saiving membership----------', savingData)
-    try {
-      // console.log("-update data---", data);
-      const newData = {
-        ...savingData,
-        idPerson: id,
-        // idRegister: idRegister,
-        registerDate: getCurrentDateISO(),
-      };
+    // try {
+    //   // console.log("-update data---", data);
+    //   const newData = {
+    //     ...savingData,
+    //     idPerson: id,
+    //     // idRegister: idRegister,
+    //     registerDate: getCurrentDateISO(),
+    //   };
 
-      const response = await updateMembershipDB.updateMembership({ variables: newData });
-      console.log("-update response---", response.data);
-      await refetch({ idPerson: id });
-      console.log("-update response-22--", data);
-      setUpdating(false);
+    //   const response = await updateMembershipDB.updateMembership({ variables: newData });
+    //   console.log("-update response---", response.data);
+    //   await refetch({ idPerson: id });
+    //   console.log("-update response-22--", data);
+    //   setUpdating(false);
 
-      // setOpenSnackbar(true);
+    //   // setOpenSnackbar(true);
 
-      // setOpen(true);
-      // setErrorMessage('');
-    } catch (error) {
-      // setErrorMessage(error.graphQLErrors[0].message);
-    }
+    //   // setOpen(true);
+    //   // setErrorMessage('');
+    // } catch (error) {
+    //   // setErrorMessage(error.graphQLErrors[0].message);
+    // }
   }
 
-  if (error) return <div> error1.......</div>;
-  if (loading) return <div> loading.......</div>;
+  // if (error) return <div> error1.......</div>;
+  // if (loading) return <div> loading.......</div>;
   return (
     <PanelComp padding="0.7em" color={colors.infTabColor}>
       <Formik
-        initialValues={{ ...data.getMemberships[0] }}
+        initialValues={{ ...data2.spiritual }}
+        // initialValues={{ ...data.getMemberships[0] }}
         // initialValues={{ updating: false, ...data1.memberships[0] }}
         validationSchema={PEOPLE_VALIDATION_BILL}
         onSubmit={(values, { setSubmitting, resetForm }) => {
@@ -75,7 +76,7 @@ export default function MembershipForm(props) {
             // alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
           }, 400);
-          save1(values);
+          save(values);
           resetForm({ values: { ...values, updating: false } });
         }}
       >
@@ -90,7 +91,7 @@ export default function MembershipForm(props) {
                   textcolor="#C0392B"
                   sx={{ margin: "0em", padding: "1em" }}
                 >
-                  {`Membrecia Actual`}
+                  {`Registro en libros de la Iglesia`}
                 </TypographyComp>
                 <Switch
                   name="updating"
@@ -100,7 +101,7 @@ export default function MembershipForm(props) {
                 />
               </Stack>
               <Grid container rowSpacing={2} justifyContent="center" columnSpacing={2}>
-                <Grid item xs={12} sm={12} md={7}>
+                <Grid item md={10}>
                   <PanelComp
                     padding="1em"
                     textAlign="left"
@@ -108,7 +109,7 @@ export default function MembershipForm(props) {
                     color={colors.sectionColor}
                   >
                     <Grid container rowSpacing={1} columnSpacing={0}>
-                      <Grid item xs={4} sm={4} md={4}>
+                      <Grid item xs={5} >
                         <TypographyComp
                           variant="body1"
                           align="right"
@@ -116,17 +117,17 @@ export default function MembershipForm(props) {
                           // textcolor="#C0392B"
                           sx={{ margin: "0.5em", padding: "0em" }}
                         >
-                          {`Estado:`}
+                          {`Num. Libro:`}
                         </TypographyComp>
                       </Grid>
-                      <Grid item xs={8} sm={8} md={8}>
+                      <Grid item xs={6} >
                         {values.updating && (
-                          // <TextfieldWrapper label={"Nombres"} name={"name"} />
-                          <Select
-                            name="type"
-                            label=""
-                            options={membershipType}
-                          />
+                          <TextfieldWrapper label={""} name={"libroN"} />
+                          // <Select
+                          //   name="type"
+                          //   label=""
+                          //   options={membershipType}
+                          // />
                         )}
                         {!values.updating && (
                           <TypographyComp
@@ -136,11 +137,11 @@ export default function MembershipForm(props) {
                             // textcolor="#C0392B"
                             sx={{ margin: "0.5em", padding: "0em" }}
                           >
-                            {`${values.type}`}
+                            {`${values.libroN}`}
                           </TypographyComp>
                         )}
                       </Grid>
-                      <Grid item xs={4} sm={4} md={4}>
+                      <Grid item xs={5}>
                         <TypographyComp
                           variant="body1"
                           align="right"
@@ -148,12 +149,12 @@ export default function MembershipForm(props) {
                           // textcolor="#C0392B"
                           sx={{ margin: "0.5em", padding: "0em" }}
                         >
-                          {`Detalle:`}
+                          {`Num. Folio:`}
                         </TypographyComp>
                       </Grid>
-                      <Grid item xs={8} sm={8} md={8}>
+                      <Grid item xs={6} >
                         {values.updating && (
-                          <TextfieldWrapper label={""} name={"description"} />
+                          <TextfieldWrapper label={""} name={"folioN"} />
                         )}
                         {!values.updating && (
                           <TypographyComp
@@ -163,11 +164,11 @@ export default function MembershipForm(props) {
                             // textcolor="#C0392B"
                             sx={{ margin: "0.5em", padding: "0em" }}
                           >
-                            {`${values.description}`}
+                            {`${values.folioN}`}
                           </TypographyComp>
                         )}
                       </Grid>
-                      <Grid item xs={4} sm={4} md={4}>
+                      <Grid item xs={5}>
                         <TypographyComp
                           variant="body1"
                           align="right"
@@ -175,14 +176,14 @@ export default function MembershipForm(props) {
                           // textcolor="#C0392B"
                           sx={{ margin: "0.5em", padding: "0em" }}
                         >
-                          {`Fecha:`}
+                          {`Fecha de registro:`}
                         </TypographyComp>
                       </Grid>
-                      <Grid item xs={8} sm={8} md={8}>
+                      <Grid item xs={6} >
                         {values.updating && (
                           <MobileDatePicker2
                             values={values}
-                            name="updateDate"
+                            name="membershipRegistrationDate"
                             label="*Fecha"
                           />
                         )}
@@ -194,11 +195,41 @@ export default function MembershipForm(props) {
                             // textcolor="#C0392B"
                             sx={{ margin: "0.5em", padding: "0em" }}
                           >
-                            {`${getPrintDate(values.updateDate)}`}
+                            {`${getPrintDate(values.membershipRegistrationDate)}`}
                           </TypographyComp>
                         )}
                       </Grid>
-
+                      <Grid item xs={5} >
+                        <TypographyComp
+                          variant="body1"
+                          align="right"
+                          fontWeight='bold'
+                          // textcolor="#C0392B"
+                          sx={{ margin: "0.5em", padding: "0em" }}
+                        >
+                          {`Hora de registro:`}
+                        </TypographyComp>
+                      </Grid>
+                      <Grid item xs={6} >
+                        {values.updating && (
+                          <MobileDatePicker2
+                            values={values}
+                            name="membershipRegistrationTime"
+                            label="*Fecha"
+                          />
+                        )}
+                        {!values.updating && (
+                          <TypographyComp
+                            variant="body1"
+                            align="left"
+                            // fontWeight='bold'
+                            // textcolor="#C0392B"
+                            sx={{ margin: "0.5em", padding: "0em" }}
+                          >
+                            {`${getPrintDate(values.membershipRegistrationTime)}`}
+                          </TypographyComp>
+                        )}
+                      </Grid>
                       {values.updating && (
                         <Grid item xs={12} sm={12} md={12}>
                           <Stack direction="row" justifyContent="center" spacing={2}>
@@ -240,61 +271,7 @@ export default function MembershipForm(props) {
                     </Grid>
                   </PanelComp>
                 </Grid>
-                <Grid item xs={12} sm={12} md={12}>
-                  <PanelComp
-                    padding="1em"
-                    textAlign="left"
-                    margin="0.5em"
-                    color={colors.sectionColor}
-                  >
-                    <TypographyComp
-                      variant="body1"
-                      // align="right"
-                      fontWeight='bold'
-                      // textcolor="#C0392B"
-                      sx={{ margin: "0.5em", padding: "0em" }}
-                    >
-                      {`Lista de Estados de Membrecia`}
-                    </TypographyComp>
-                    <div style={{ height: 410, width: '100%' }} className='{}'>
-                      <ThemeProviderComponent name={'actives'}>
-                        <DataGrid
-                          rows={data.getMemberships}
-                          // rows={data1.memberships}
-                          columns={columns}
-                          // columnVisibilityModel={columnVisibilityModel}
-                          // onColumnVisibilityModelChange={(newModel) =>
-                          //   setColumnVisibilityModel(newModel)
-                          // }
-                          getRowId={(row) => row._id}
-                          pageSize={10}
-                          rowsPerPageOptions={[10]}
-                          // checkboxSelection
-                          // disableSelectionOnClick
-
-                          // onRowSelectionModelChange={(newSelectionModel) => {
-                          //   updateSelecteItems(newSelectionModel);
-                          // }}
-
-                          // components={{
-                          //   Toolbar: GridToolbar
-                          // }}
-
-                          componentsProps={{
-                            toolbar: {
-                              showQuickFilter: true,
-                              quickFilterProps: { debounceMs: 500 },
-                            },
-                          }}
-
-                        // filterModel={filterModel}
-                        // onFilterModelChange={(model) => setFilterModel(model)}
-                        />
-                      </ThemeProviderComponent>
-                    </div>
-
-                  </PanelComp>
-                </Grid>
+                
               </Grid>
             </>
           )}

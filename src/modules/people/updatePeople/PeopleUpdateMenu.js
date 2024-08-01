@@ -2,16 +2,18 @@ import * as React from "react";
 import PanelComp from "../../../component/Common/Panel/PanelComp";
 import { Chip, Stack } from "@mui/material";
 import PeopleUpdateMembership from "./PeopleUpdateMembership";
+import { useParams } from "react-router-dom";
 
 const colors = {
   mainColor: "#6BBA1B",
   backgroundLeftColor: "#E5E7E9",
   subtileColor: "#F8DAEF",
 };
-
-
+const iid="66837d01b2f59963f3586c92";
+    // _id: "6678d4fea250754a0060969e",
 
 export default function PeopleUpdateMenu() {
+  const { id } = useParams();
 
   return (
     <PanelComp
@@ -22,7 +24,17 @@ export default function PeopleUpdateMenu() {
     >
       <Stack direction="row" justifyContent="center" spacing={5}>
         <Chip
-          label="Membrecia"
+          label="Modificar Inf General"
+          variant="outlined"
+          color="success"
+          // icon={<DoneIcon />}
+          onClick={() => {
+            // setStep(0);
+            // handleSubmit();
+          }}
+        />
+        <Chip
+          label="Modificar Membrecia"
           variant=""
           color="success"
           // icon={<DoneIcon />}
@@ -32,7 +44,7 @@ export default function PeopleUpdateMenu() {
           }}
         />
         <Chip
-          label="Cancelar"
+          label="Modificar Usuario"
           variant="outlined"
           color="warning"
           // icon={<RestartAltIcon />}
@@ -40,20 +52,11 @@ export default function PeopleUpdateMenu() {
             // resetForm();
           }}
         />
-
-        <Chip
-          label="Terminar"
-          variant="outlined"
-          color="success"
-        // icon={<DoneIcon />}
-        // onClick={() => {
-        //   setStep(0);
-        //   handleSubmit();
-        // }}
-        />
       </Stack>
       
-      <PeopleUpdateMembership />
+      <PeopleUpdateMembership
+        id={iid}
+      />
 
 
     </PanelComp>

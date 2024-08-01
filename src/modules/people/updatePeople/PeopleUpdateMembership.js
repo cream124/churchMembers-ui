@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useParams } from "react-router-dom";
 import { GetPersonFoMembershipDB } from "../../../api/PersonsDB";
-import {UpdateMembershipDB} from "../../../api/MembershipsDB"
+import { UpdateMembershipDB } from "../../../api/MembershipsDB"
 import PanelComp from "../../../component/Common/Panel/PanelComp";
 import { Avatar, Grid, Paper } from "@mui/material";
 import TypographyComp from "../../../component/Common/TypographyComp";
@@ -14,6 +14,7 @@ import { getAge, getCurrentDateISO, getPrintDate } from "../../../util/utilDate"
 import TextfieldWrapper from "../../../component/Common/Form/TextField";
 import MembershipForm from "./MembershipForm";
 import { getUserIdST } from "../../../util/Storage";
+import RecordInBooksForm from "./RecordInBooksForm";
 
 const width = '170';
 const colors = {
@@ -27,15 +28,17 @@ const personInf = [
   { name: "Estado Civil", value: "civilStatus" },
   { name: "Edad", value: "age" },
 ];
-const iid= "66837d01b2f59963f3586c92";
+// const iid= "66837d01b2f59963f3586c92";
 
-export default function PeopleUpdateMembership() {
-  const { id } = useParams();
+export default function PeopleUpdateMembership(props) {
+  // const { id } = useParams();
+  const { id } = props;
+
   const idRegister = getUserIdST();
-  const ii = "66837d01b2f59963f3586c92";
+  // const ii = "66837d01b2f59963f3586c92";
   const { error, loading, data, refetch } = GetPersonFoMembershipDB({
     // _id: "6678d4fea250754a0060969e",
-    _id: ii,
+    _id: id,
   });
   const updateMembershipDB = UpdateMembershipDB();
 
@@ -45,7 +48,7 @@ export default function PeopleUpdateMembership() {
       // console.log("-update data---", data);
       const newData = {
         ...savingData,
-        idPerson: ii,
+        idPerson: id,
         idRegister: idRegister,
         registerDate: getCurrentDateISO(),
       };
@@ -57,17 +60,63 @@ export default function PeopleUpdateMembership() {
 
       const response = await updateMembershipDB.updateMembership({ variables: newData });
       console.log("-update response---", response.data);
-      await refetch({ _id: iid });
+      await refetch({ _id: id });
       console.log("-update response-22--", data);
 
-    // setOpenSnackbar(true);
+      // setOpenSnackbar(true);
 
       // setOpen(true);
       // setErrorMessage('');
     } catch (error) {
       // setErrorMessage(error.graphQLErrors[0].message);
     }
-    }
+  }
+
+  const saveRecordInBook = async (savingData) => {
+    console.log('--saiving membership----------', savingData)
+    // 
+    // mutation UpdateSpiritualPerson($_id: String!, $becameMemberFor: String, $becameMembreDate: String, $libroN: String, $folioN: String, $membershipRegistrationDate: String, $membershipRegistrationTime: String) {
+    //   updateSpiritualPerson(id: $_id, becameMemberFor: $becameMemberFor, becameMembreDate: $becameMembreDate, libroN: $libroN, folioN: $folioN, membershipRegistrationDate: $membershipRegistrationDate, membershipRegistrationTime: $membershipRegistrationTime) {
+    //     _id
+    //     name
+    //   }
+    // }
+
+    // {
+    //   "_id": "66837d01b2f59963f3586c92",
+    //   "libroN": "1",
+    //   "folioN": "2",
+    //   "membershipRegistrationDate": "2024-05-30T04:00:00.000Z",
+    //   "membershipRegistrationTime": "2024-05-30T04:00:00.000Z"
+    // }
+
+    // try {
+    //   // console.log("-update data---", data);
+    //   const newData = {
+    //     ...savingData,
+    //     idPerson: id,
+    //     idRegister: idRegister,
+    //     registerDate: getCurrentDateISO(),
+    //   };
+    //   // console.log("-update data-vaaa-00-", newData);
+
+    //   // delete newData.legal["__typename"];
+    //   // delete newData.spiritual.__typename;
+    //   // console.log("-update data-vaaa--", newData);
+
+    //   const response = await updateMembershipDB.updateMembership({ variables: newData });
+    //   console.log("-update response---", response.data);
+    //   await refetch({ _id: id });
+    //   console.log("-update response-22--", data);
+
+    //   // setOpenSnackbar(true);
+
+    //   // setOpen(true);
+    //   // setErrorMessage('');
+    // } catch (error) {
+    //   // setErrorMessage(error.graphQLErrors[0].message);
+    // }
+  }
 
   const getMemberData = (data) => {
     const memberData = {
@@ -128,19 +177,23 @@ export default function PeopleUpdateMembership() {
             <MembershipForm
               // data={{updating:false, memberships: data.person.memberships}}
               data2={getStatusData(data.person)}
-              save={saveMembership}
+              id={id}
+              // save={saveMembership}
               // handleNext={handleNextBack}
               colors={{}}
             />
           </PanelComp>
         </Grid>
         <Grid item md={5} ms={5} xs={12}>
-          {/* <MembershipForm
-            // peopleData={{...peopleData}}
-            // updating={updating}
+          <RecordInBooksForm
+            // data={{updating:false, memberships: data.person.memberships}}
+            // data2={getStatusData(data.person)}
+            data2={data.person}
+            id={id}
+            save={saveRecordInBook}
             // handleNext={handleNextBack}
             colors={{}}
-          /> */}
+          />
 
         </Grid>
 
