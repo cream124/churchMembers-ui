@@ -124,20 +124,9 @@ query Person($_id: String) {
       membershipRegistrationTime
       
     }
-     memberships {
-      _id
-      type
-      description
-      updateDate
-      registerName
-      registerDate
-      state
-    }
   }
 }
 `
-
-
 
 const FILTER_STATE_PERSONS = gql`
 query FilterByStatePersons($state: String) {

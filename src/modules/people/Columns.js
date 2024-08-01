@@ -8,11 +8,16 @@ import { red } from '@mui/material/colors';
 function activePersonsColumns() {
   return [
     {
+      field: 'state', headerName: 'Activo', type: 'boolean', width: 60,
+      headerClassName: 'super-app-theme--header',
+      valueGetter: (params) => params.row.state === "active" ? true : false
+    },
+    {
       field: 'type', headerName: 'Estado', width: 90,
       headerClassName: 'super-app-theme--header'
     },
     {
-      field: 'updateDate', headerName: 'Fecha', type: 'date', width: 100, hideable: false,
+      field: 'updateDate', headerName: 'Fecha', type: 'date', width: 90, hideable: false,
       valueGetter: (params) =>
         new Date(params.row.updateDate),
       headerClassName: 'super-app-theme--header'
@@ -32,11 +37,6 @@ function activePersonsColumns() {
         new Date(params.row.registerDate),
       headerClassName: 'super-app-theme--header'
     },
-    {
-      field: 'state', headerName: 'Activo', type: 'boolean', width: 80,
-      headerClassName: 'super-app-theme--header',
-      valueGetter: (params) => params.row.state === "active" ? true : false
-    }
   ]
 }
 

@@ -108,6 +108,7 @@ export default function TopBar() {
           <Route path="/addPerson3/:id" element={<UpdatePeople />} />
           <Route path="/printPerson" element={<PeopleCardPrint />} />
           <Route path="/updatePerson" element={<PeopleUpdateMenu />} />
+          <Route path="/updatePerson/:id" element={<PeopleUpdateMenu />} />
 
           <Route path="/Sample" element={<Sample />} />
           <Route
@@ -123,7 +124,7 @@ export default function TopBar() {
             path="/editEvent/:id/:dayId/:servId"
             element={<EditService />}
           />
-          <Route path="/updatePerson/:id" element={<UpdatePerson />} />
+          <Route path="/updatePerson1/:id" element={<UpdatePerson />} />
           <Route path="/verse" element={<Verse />} />
           <Route path="/mission" element={<Mission />} />
           <Route path="/contact" element={<Contact />} />

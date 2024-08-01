@@ -96,6 +96,13 @@ function activePersonsColumns (){
           icon={<EditIcon sx={{ color: red[500] }} />}
           label="Toggle Admin"
           component={Link}
+          to={`/updatePerson1/${params.row._id}`}
+          // onClick={toggleAdmin(params.id)}
+        />, 
+        <GridActionsCellItem
+          icon={<EditIcon sx={{ color: red[200] }} />}
+          label="Toggle Admin"
+          component={Link}
           to={`/updatePerson/${params.row._id}`}
           // onClick={toggleAdmin(params.id)}
         />

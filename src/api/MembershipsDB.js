@@ -26,6 +26,7 @@ query GetMemberships($idPerson: String) {
     description
     idPerson
     idRegister
+    registerName
     state
     type
     updateDate

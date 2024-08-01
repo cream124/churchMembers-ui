@@ -16,6 +16,8 @@ import { activePersonsColums } from "../Columns";
 import membershipType from "../../../component/data/membershipType.json";
 import { getCurrentDateISO, getPrintDate } from "../../../util/utilDate";
 import { UpdateMembershipDB, GetMembershipsDB } from "../../../api/MembershipsDB"
+import SnackbarComponent from "../../../component/Common/SnackbarComponent";
+import { getUserIdST } from "../../../util/Storage";
 
 const personsColums = activePersonsColums();
 const columns = personsColums.columns;
@@ -27,13 +29,14 @@ const PEOPLE_VALIDATION_BILL = Yup.object().shape({
 });
 
 export default function MembershipForm(props) {
-  const { id, data2, colors } = props;
-  // const [data1, setData1] = React.useState(data2);
-  const [updating, setUpdating] = React.useState(false);
+  const { id, colors } = props;
+  const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const { error, loading, data, refetch } = GetMembershipsDB({
     idPerson: id,
   });
   const updateMembershipDB = UpdateMembershipDB();
+  const idRegister = getUserIdST();
+
 
 
   const save1 = async (savingData) => {
@@ -43,7 +46,7 @@ export default function MembershipForm(props) {
       const newData = {
         ...savingData,
         idPerson: id,
-        // idRegister: idRegister,
+        idRegister: idRegister,
         registerDate: getCurrentDateISO(),
       };
 
@@ -51,11 +54,7 @@ export default function MembershipForm(props) {
       console.log("-update response---", response.data);
       await refetch({ idPerson: id });
       console.log("-update response-22--", data);
-      setUpdating(false);
-
-      // setOpenSnackbar(true);
-
-      // setOpen(true);
+      setOpenSnackbar(true);
       // setErrorMessage('');
     } catch (error) {
       // setErrorMessage(error.graphQLErrors[0].message);
@@ -67,8 +66,7 @@ export default function MembershipForm(props) {
   return (
     <PanelComp padding="0.7em" color={colors.infTabColor}>
       <Formik
-        initialValues={{ ...data.getMemberships[0] }}
-        // initialValues={{ updating: false, ...data1.memberships[0] }}
+        initialValues={{ ...data.getMemberships[0], updating: false }}
         validationSchema={PEOPLE_VALIDATION_BILL}
         onSubmit={(values, { setSubmitting, resetForm }) => {
           setTimeout(() => {
@@ -221,22 +219,9 @@ export default function MembershipForm(props) {
                                 resetForm();
                               }}
                             />
-
-                            {/* <Chip
-                          label="Terminar"
-                          variant="outlined"
-                          color="success"
-                          icon={<DoneIcon />}
-                        // onClick={() => {
-                        //   setStep(0);
-                        //   handleSubmit();
-                        // }}
-                        /> */}
                           </Stack>
                         </Grid>
                       )}
-
-
                     </Grid>
                   </PanelComp>
                 </Grid>
@@ -299,6 +284,11 @@ export default function MembershipForm(props) {
             </>
           )}
       </Formik>
+      <SnackbarComponent
+        open={openSnackbar}
+        setOpen={setOpenSnackbar}
+        messege='La Membrecia: Se actualizo correctamente.'
+      />
     </PanelComp>
   );
 }
