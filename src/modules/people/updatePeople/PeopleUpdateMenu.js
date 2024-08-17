@@ -4,6 +4,7 @@ import { Button, Chip, Stack } from "@mui/material";
 import PeopleUpdateMembership from "./PeopleUpdateMembership";
 import { Link, useParams } from "react-router-dom";
 import UpdatePeople from "../UpdatePeople";
+import UpdateUser from "./UpdateUser";
 
 const colors = {
   mainColor: "#6BBA1B",
@@ -15,7 +16,7 @@ const iid = "669822978bbd737451503885";
 
 export default function PeopleUpdateMenu() {
   const { id } = useParams();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(3);
 
   function getStepContent(step) {
     switch (step) {
@@ -33,6 +34,12 @@ export default function PeopleUpdateMenu() {
             id={id}
           />
         );
+      case 3:
+        return (
+          <UpdateUser
+            id={id}
+          />
+        );
     }
   }
 
@@ -46,7 +53,7 @@ export default function PeopleUpdateMenu() {
       <Stack direction="row" justifyContent="center" spacing={5}>
         <Chip
           label="Modificar Inf General"
-          variant= {activeStep === 1 ? "": "outlined"}
+          variant={activeStep === 1 ? "" : "outlined"}
           color="success"
           // icon={<DoneIcon />}
           onClick={() => {
@@ -57,7 +64,7 @@ export default function PeopleUpdateMenu() {
         />
         <Chip
           label="Modificar Membrecia"
-          variant={activeStep === 2 ? "": "outlined"}
+          variant={activeStep === 2 ? "" : "outlined"}
           color="success"
           // icon={<DoneIcon />}
           onClick={() => {
@@ -72,6 +79,7 @@ export default function PeopleUpdateMenu() {
           color="warning"
           // icon={<RestartAltIcon />}
           onClick={() => {
+            setActiveStep(3)
             // resetForm();
           }}
         />
@@ -88,9 +96,9 @@ export default function PeopleUpdateMenu() {
       <Button
         component={Link}
         to={`/records`}
-      
+
         variant="outlined"
-        // color="success"
+      // color="success"
       >
         Cancelar
       </Button>
