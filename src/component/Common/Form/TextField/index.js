@@ -20,7 +20,8 @@ const TextfieldWrapper = ({
     size: "small",
     sx: {
       border: '1px solid yellow',
-    }
+    },
+    // type:"password"
   };
 
   if (mata && mata.touched && mata.error) {

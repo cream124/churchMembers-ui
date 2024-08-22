@@ -32,12 +32,35 @@ const personInf = [
   { name: "Estado Civil", value: "civilStatus" },
   { name: "Edad", value: "age" },
 ];
+const states = {
+  editingEmail: false,
+  editingPassword: false,
+  editingRol: false,
+};
 
 export default function UpdateUser(props) {
   // const { id } = useParams();
   const { id } = props;
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState('')
+  const [showState, setShowState] = React.useState(states);
 
+  const handleChange = (name, value) => {
+    setShowState({
+      ...showState,
+      [name]: value
+    });
+    setErrorMessage('');
+  };
+
+  const disabledEditingStaus = () => {
+    setShowState({
+      editingEmail: false,
+      editingPassword: false,
+      editingRol: false,
+    });
+    setErrorMessage('');
+  };
 
   const idRegister = getUserIdST();
   const { error, loading, data } = GetPersonForUserDB({
@@ -46,24 +69,29 @@ export default function UpdateUser(props) {
   const updateUserDB = UpdateUserDB();
 
 
-  const updateUser = async (savingData) => {
-    // console.log('--saiving book----------', savingData)
+  const updateUser = async (savingData, saveValues) => {
+    console.log('--saiving DATA----------', savingData);
+    console.log('--saiving VALUES----------', saveValues);
     try {
       const newData = {
-        ...savingData,
-        level: parseInt(savingData.level),
-       _id: id
+        _id: id
       };
+      if (saveValues.editingEmail){ newData.email = savingData.email}
+      if (saveValues.editingPassword){ newData.password = savingData.password}
+      if (saveValues.editingRol){ newData.level = parseInt(savingData.level)}
+
+      console.log('--saiving data----------', newData)
+
       const response = await updateUserDB.updateUser(
         { 
           variables: newData 
         });
+        setErrorMessage('');
+        disabledEditingStaus();
         setOpenSnackbar(true);
-      // console.log("-update book---", response.data);
-      // await refetch({ _id: id });
-      // console.log("-update response-22--", data);
-    } catch {
-      // setErrorMessage(error.graphQLErrors[0].message);
+    } catch (error) {
+      setErrorMessage(error.graphQLErrors[0].message);
+      console.log('------error---------', error.graphQLErrors[0].message)
     }
   }
 
@@ -106,6 +134,10 @@ export default function UpdateUser(props) {
             id={id}
             save={updateUser}
             colors={{}}
+            errorMessage={errorMessage}
+            showState= {showState}
+            handleChange ={handleChange} 
+            disabledEditingStaus={disabledEditingStaus}
           />
         </Grid>
         <Grid item md={5} ms={5} xs={12}>
@@ -124,12 +156,12 @@ export default function UpdateUser(props) {
             />
           </PanelComp>
         </Grid>
-        
+
       </Grid>
-      <SnackbarComponent 
-        open = {openSnackbar} 
-        setOpen = {setOpenSnackbar}
-        messege = 'El Registrro de libros: Se actualizo correctamente.'
+      <SnackbarComponent
+        open={openSnackbar}
+        setOpen={setOpenSnackbar}
+        messege='El Usuario: Se actualizo correctamente.'
       />
     </PanelComp>
   );

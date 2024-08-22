@@ -1,5 +1,5 @@
 import React from "react";
-import { Chip, Grid, IconButton, Stack } from "@mui/material";
+import { Chip, Grid, IconButton, Stack, Typography } from "@mui/material";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import DoneIcon from "@mui/icons-material/Done";
@@ -20,50 +20,41 @@ import SelectWrapper from "../../../component/Common/Form/Select";
 import { getUserRolName } from "../../../util/utilData";
 
 
-const PEOPLE_VALIDATION_BILL = Yup.object().shape({
+const VALIDATION_EMAIL_PASSWORD = Yup.object().shape({
   email: Yup.string()
-    .required("Se requiere El Nombre")
-    .min(1, "Debe tener al menos 3 caracteres"),
+    .required("Se requiere El E-mail")
+    .min(3, "Debe tener al menos 3 caracteres"),
+  password: Yup.string()
+    .required("Se requiere El Password")
+    .min(3, "Debe tener al menos 3 caracteres"),
 });
-const states = {
-  editingEmail: false,
-  editingPassword: false,
-  editingRol: false,
-};
+const VALIDATION_EMAIL = Yup.object().shape({
+  email: Yup.string()
+    .required("Se requiere El E-mail").email("Debe ser un Email Valido.")
+    .min(3, "Debe tener al menos 3 caracteres"),
+});
+
+const VALIDATION_PASSWORD = Yup.object().shape({
+  password: Yup.string()
+    .required("Se requiere El Password")
+    .min(3, "Debe tener al menos 3 caracteres"),
+});
+
 const color = {
   red: { color: "#FF0000" },
   green: { color: "#008000" },
 };
 export default function UpdateUserForm(props) {
-  const { save, data, colors } = props;
-  const [showState, setShowState] = React.useState(states);
-
-  const handleChange = (name, value) => {
-    setShowState({
-      ...showState,
-      [name]: value
-    })
-  };
-
-  const disabledEditingStaus = () => {
-    setShowState({
-      editingEmail: false,
-      editingPassword: false,
-      editingRol: false,
-    })
+  const { save, data, colors, errorMessage, showState, handleChange, disabledEditingStaus } = props;
+  const getValidationRule = () => {
+    if (showState.editingEmail && showState.editingPassword) { return VALIDATION_EMAIL_PASSWORD }
+    if (showState.editingEmail) { return VALIDATION_EMAIL }
+    if (showState.editingPassword) { return VALIDATION_PASSWORD }
   };
 
   const isUpdate = (user) => {
-    // console.log('--------user-----', user);
-    // console.log('--------data-----', data.user );
-    // return showState.editingEmail || showState.editingPassword || showState.editingRol;
     const use = data.user ? true : false;
     const use2 = user ? true : false;
-
-    // console.log('--------data-2----', use );
-
-    // return user;
-    // return use2 !== use;
     return showState.editingEmail || showState.editingPassword || showState.editingRol || use2 !== use;
   };
 
@@ -71,15 +62,15 @@ export default function UpdateUserForm(props) {
     <PanelComp padding="0.7em" color={colors.infTabColor}>
       <Formik
         initialValues={{ ...data, updating: false }}
-        validationSchema={PEOPLE_VALIDATION_BILL}
+        validationSchema={getValidationRule()}
         onSubmit={(values, { setSubmitting, resetForm }) => {
           setTimeout(() => {
             // alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
           }, 400);
-          save(values);
-          disabledEditingStaus();
-          resetForm({ values: { ...values} });
+          save(values, showState);
+          // disabledEditingStaus();
+          resetForm({ values: { ...values, password: '' } });
         }}
       >
         {
@@ -102,7 +93,7 @@ export default function UpdateUserForm(props) {
                 name="user"
                 checked={values.user}
                 label="Es Usuario"
-                // actionTrue={resetForm}
+              // actionTrue={resetForm}
               />
               <Grid container rowSpacing={2} justifyContent="center" columnSpacing={2}>
                 <Grid item md={10}>
@@ -179,7 +170,9 @@ export default function UpdateUserForm(props) {
                         </Grid>
                         <Grid item xs={5} >
                           {showState.editingPassword && (
-                            <TextfieldWrapper label={""} name={"password"} />
+                            <>
+                              <TextfieldWrapper label={""} name={"password"} type="password" />
+                            </>
                           )}
                           {!showState.editingPassword && (
                             <TypographyComp
@@ -229,12 +222,11 @@ export default function UpdateUserForm(props) {
                         </Grid>
                         <Grid item xs={5} >
                           {showState.editingRol && (
-                            // <TextfieldWrapper label={""} name={"level"} />
                             <SelectWrapper
-                            name="level"
-                            label=""
-                            options={userRol}
-                          />
+                              name="level"
+                              label=""
+                              options={userRol}
+                            />
                           )}
                           {!showState.editingRol && (
                             <TypographyComp
@@ -271,9 +263,15 @@ export default function UpdateUserForm(props) {
                         </Grid>
                       </Grid>
                     )}
-
-
-                    <Grid container rowSpacing={1} columnSpacing={0}>
+                    <TypographyComp
+                      variant="body2"
+                      align="center"
+                      textcolor="red"
+                    >
+                      {errorMessage}
+                    </TypographyComp>
+                    <Grid container rowSpacing={1} columnSpacing={2}>
+                      <Grid item xs={12} sm={12} md={12}></Grid>
                       {isUpdate(values.user) && (
                         <Grid item xs={12} sm={12} md={12}>
                           <Stack direction="row" justifyContent="center" spacing={2}>

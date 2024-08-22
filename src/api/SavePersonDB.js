@@ -104,6 +104,13 @@ mutation UpdatePerson($_id: String!, $name: String, $lastName: String, $motherLa
 }
 `
 
+const UPDATE_PWS_PERSON = gql`
+mutation UpdatePassword($_id: String!, $password: String, $newPassword: String) {
+  updatePassword(id: $_id, password: $password, newPassword: $newPassword) {
+    _id
+  }
+}
+`
 const UPDATE_RECORD_IN_BOOK_PERSON = gql`
 mutation UpdateSpiritualPerson($_id: String!, $becameMemberFor: String, $becameMembreDate: String, $libroN: String, $folioN: String, $membershipRegistrationDate: String, $membershipRegistrationTime: String) {
   updateSpiritualPerson(id: $_id, becameMemberFor: $becameMemberFor, becameMembreDate: $becameMembreDate, libroN: $libroN, folioN: $folioN, membershipRegistrationDate: $membershipRegistrationDate, membershipRegistrationTime: $membershipRegistrationTime) {
@@ -171,4 +178,9 @@ export const UpdateUserDB = () => {
 export const UpdateStatePersonsDB = () => {
   const [updateStatePerson, { data, loading, error }] = useMutation(UPTATE_STATE_PERSONS);
   return {updateStatePerson, errorUp: error, loadingUp: loading, dataUp: data,};
+}
+
+export const UpdatePwsPersonDB = () => {
+  const [updatePwsPerson, { data, loading, error }] = useMutation(UPDATE_PWS_PERSON);
+  return {updatePwsPerson, error, loading, data,};
 }

@@ -14,12 +14,14 @@ import Logout from '@mui/icons-material/Logout';
 import { getUserDataST, logoutPersonST } from '../../util/Storage';
 import LoginPerson from '../Login/LoginPerson';
 import { Link } from 'react-router-dom';
+import ChangePassword from '../Login/ChangePassword';
 
 
 
 export default function AccountMenu(props) {
-  const {updateMenuDetails} = props;
+  const { updateMenuDetails } = props;
   const [openLoger, setOpenloger] = React.useState(false);
+  const [openChangePassword, setOpenChangePassword] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -28,135 +30,149 @@ export default function AccountMenu(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  
+
   const logoutPerson = () => {
     logoutPersonST();
     updateMenuDetails();
   };
-  
-  const {userId, photo, name} = getUserDataST(); // localStorage.getItem('userId');
+
+  const { userId, photo, name } = getUserDataST(); // localStorage.getItem('userId');
   const UserTypeItemMenu = function () {
-   
-    if(userId.length) {
-      return ( 
+
+    if (userId.length) {
+      return (
         <React.Fragment>
-              <MenuItem>
-                <Avatar src={photo}>U</Avatar>
-                {name}
-              </MenuItem>
-              <Divider />
-              <MenuItem
-                component={Link}
-                to="/addPerson"
-              >
-                <ListItemIcon>
-                  <PersonAdd fontSize="small" />
-                </ListItemIcon>
-                Nuevo Registro
-              </MenuItem>
-              <MenuItem>
-                <ListItemIcon>
-                  <Settings fontSize="small" />
-                </ListItemIcon>
-                Ajustes
-              </MenuItem>
-              <MenuItem
-                onClick={logoutPerson}
-                component={Link}
-                to="/"
-              >
-                <ListItemIcon>
-                  <Logout fontSize="small" />
-                </ListItemIcon>
-                Cerrar sesión
-              </MenuItem>
+          <MenuItem>
+            <Avatar src={photo}>U</Avatar>
+            {name}
+          </MenuItem>
+          <Divider />
+          <MenuItem
+            component={Link}
+            to="/addPerson"
+          >
+            <ListItemIcon>
+              <PersonAdd fontSize="small" />
+            </ListItemIcon>
+            Nuevo Registro
+          </MenuItem>
+          <MenuItem>
+            <ListItemIcon>
+              <Settings fontSize="small" />
+            </ListItemIcon>
+            Ajustes
+          </MenuItem>
+          <MenuItem
+            onClick={() => setOpenChangePassword(true)}
+            // component={Link}
+            // to="/"
+          >
+            <ListItemIcon>
+              <PersonAdd fontSize="small" />
+            </ListItemIcon>
+            Cambiar Contraceña
+          </MenuItem>
+          <MenuItem
+            onClick={logoutPerson}
+            component={Link}
+            to="/"
+          >
+            <ListItemIcon>
+              <Logout fontSize="small" />
+            </ListItemIcon>
+            Cerrar sesión
+          </MenuItem>
         </React.Fragment>
       );
     } else {
-      return ( 
+      return (
         <React.Fragment>
-              <MenuItem
-                onClick={() => setOpenloger(true)}
-                component={Link}
-                to="/"
-              >
-                <Avatar /> Acceder
-              </MenuItem>
-              <Divider />
-              <MenuItem
-                 component={Link}
-                 to="/addPerson"
-              >
-                <ListItemIcon>
-                  <PersonAdd fontSize="small" />
-                </ListItemIcon>
-                Solicitar Registro
-              </MenuItem>
+          <MenuItem
+            onClick={() => setOpenloger(true)}
+            component={Link}
+            to="/"
+          >
+            <Avatar /> Acceder
+          </MenuItem>
+          <Divider />
+          <MenuItem
+            component={Link}
+            to="/addPerson"
+          >
+            <ListItemIcon>
+              <PersonAdd fontSize="small" />
+            </ListItemIcon>
+            Solicitar Registro
+          </MenuItem>
         </React.Fragment>
       );
     }
-    
+
   };
 
   return (
-      <React.Fragment>
-        <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-          <Tooltip title="Cuenta personal">
-            <IconButton
-              onClick={handleClick}
-              size="small"
-              sx={{ ml: 2 }}
-              aria-controls={open ? 'account-menu' : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
-            >
-              <Avatar src={photo}>U</Avatar>
-            </IconButton>
-          </Tooltip>
-        </Box>
-        <Menu
-          anchorEl={anchorEl}
-          id="account-menu"
-          open={open}
-          onClose={handleClose}
-          onClick={handleClose}
-          PaperProps={{
-            elevation: 0,
-            sx: {
-              overflow: 'visible',
-              filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-              mt: 1.5,
-              '& .MuiAvatar-root': {
-                width: 32,
-                height: 32,
-                ml: -0.5,
-                mr: 1,
-              },
-              '&:before': {
-                content: '""',
-                display: 'block',
-                position: 'absolute',
-                top: 0,
-                right: 14,
-                width: 10,
-                height: 10,
-                bgcolor: 'background.paper',
-                transform: 'translateY(-50%) rotate(45deg)',
-                zIndex: 0,
-              },
+    <React.Fragment>
+      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+        <Tooltip title="Cuenta personal">
+          <IconButton
+            onClick={handleClick}
+            size="small"
+            sx={{ ml: 2 }}
+            aria-controls={open ? 'account-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+          >
+            <Avatar src={photo}>U</Avatar>
+          </IconButton>
+        </Tooltip>
+      </Box>
+      <Menu
+        anchorEl={anchorEl}
+        id="account-menu"
+        open={open}
+        onClose={handleClose}
+        onClick={handleClose}
+        PaperProps={{
+          elevation: 0,
+          sx: {
+            overflow: 'visible',
+            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+            mt: 1.5,
+            '& .MuiAvatar-root': {
+              width: 32,
+              height: 32,
+              ml: -0.5,
+              mr: 1,
             },
-          }}
-          transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-          anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-        >
-          <UserTypeItemMenu/>
-        </Menu>
-        <LoginPerson
-              open={openLoger}
-              handleClose={() => setOpenloger(false)}
-              updateMenuDetails={updateMenuDetails}
-        />
-      </React.Fragment>
+            '&:before': {
+              content: '""',
+              display: 'block',
+              position: 'absolute',
+              top: 0,
+              right: 14,
+              width: 10,
+              height: 10,
+              bgcolor: 'background.paper',
+              transform: 'translateY(-50%) rotate(45deg)',
+              zIndex: 0,
+            },
+          },
+        }}
+        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+      >
+        <UserTypeItemMenu />
+      </Menu>
+      <LoginPerson
+        open={openLoger}
+        handleClose={() => setOpenloger(false)}
+        updateMenuDetails={updateMenuDetails}
+      />
+      <ChangePassword
+      open={openChangePassword}
+      handleClose={() => setOpenChangePassword(false)}
+      />
+    </React.Fragment>
   );
-  
+
 }
