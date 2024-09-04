@@ -152,7 +152,7 @@ export default function UpdatePeople() {
 
   return (
       <PeopleForm
-        title="Actualizar Registro"
+        title="Actualizar Hermano"
         updating={true}
         // data={{ ...getPersonDB.data?.person, updatingUser: false }}
         data={{ ...getPersonDB.data?.person}}

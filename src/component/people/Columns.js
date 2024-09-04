@@ -3,6 +3,7 @@ import { Avatar } from "@mui/material";
 import { GridActionsCellItem } from '@mui/x-data-grid';
 import { Link } from "react-router-dom";
 import EditIcon from '@mui/icons-material/Edit';
+import PrintIcon from '@mui/icons-material/LocalPrintshop';
 import { red } from '@mui/material/colors';
 
 function activePersonsColumns (){ 
@@ -93,7 +94,7 @@ function activePersonsColumns (){
       width: 100,
       getActions: (params) => [
         <GridActionsCellItem
-          icon={<EditIcon sx={{ color: red[500] }} />}
+          icon={<PrintIcon sx={{ color: red[500] }} />}
           label="Toggle Admin"
           component={Link}
           to={`/updatePerson1/${params.row._id}`}
@@ -151,7 +152,7 @@ function forActivePersonsColumns (){
       field: 'age',
       headerName: 'Edad',
       type: 'number',
-      width: 50,
+      width: 60,
       headerClassName: 'super-app-theme--header'
     },
     { field: '', headerName: 'Nacimiento', type: 'date', width: 100,
@@ -195,8 +196,40 @@ function forActivePersonsColumns (){
     { field: 'address', headerName: 'Direccion', width: 130,
       headerClassName: 'super-app-theme--header'
     },
+    {
+      field: 'actions',
+      headerName: 'Acciones',
+      type: 'actions',
+      width: 100,
+      getActions: (params) => [
+        <GridActionsCellItem
+          icon={<PrintIcon sx={{ color: red[500] }} />}
+          label="Toggle Admin"
+          component={Link}
+          to={`/printPerson/${params.row._id}`}
+          // onClick={toggleAdmin(params.id)}
+        />, 
+        <GridActionsCellItem
+          icon={<EditIcon sx={{ color: red[200] }} />}
+          label="Toggle Admin"
+          component={Link}
+          to={`/updatePerson/${params.row._id}/registrationRequest`}
+          // onClick={toggleAdmin(params.id)}
+        />
+      ],
+      headerClassName: 'super-app-theme--header'
+    }
   ]
 }
+
+const forActivePersonsColumnsVisible ={
+  name: false,
+  registerDate: false,
+  approvalId: false,
+  approvalDate: false,
+  level: false,
+};
+
 
 const activePersonsColumnsVisible ={
   state: false,
@@ -216,6 +249,6 @@ export function activePersonsColums(action) {
 export function forApprovalPersonsColums(action = '') {
   return {
     columns: forActivePersonsColumns(),
-    columnsVisible: {}
+    columnsVisible: forActivePersonsColumnsVisible,
   }
 };

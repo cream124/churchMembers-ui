@@ -128,8 +128,8 @@ export default function PeopleCardPrint() {
   const { id } = useParams();
   const ii="66837d01b2f59963f3586c92";
   const { error, loading, data, refetch } = GetPersonToPrintDB({
-    // _id: "6678d4fea250754a0060969e",
-    _id: ii,
+    _id: id,
+    // _id: ii,
   });
 
   const getMemberData = (data) => {

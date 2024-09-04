@@ -172,21 +172,12 @@ export default function PeopleForm(props) {
                     <React.Fragment>
                       {getStepContent(activeStep)}
                       <div className={classes.buttons}>
-                        {activeStep !== 0 && (
+                        {/* {activeStep !== 0 && (
                           <Button onClick={handleBack} className={classes.button}>
                             Back
                           </Button>
-                        )}
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          onClick={handleNext}
-                          className={classes.button}
-                        >
-                          {activeStep === steps.length - 1
-                            ? "Place order"
-                            : "Next"}
-                        </Button>
+                        )} */}
+                        
                       </div>
                     </React.Fragment>
                   )}

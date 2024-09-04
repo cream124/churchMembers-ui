@@ -15,7 +15,7 @@ const iid = "669822978bbd737451503885";
 // _id: "6678d4fea250754a0060969e",
 
 export default function PeopleUpdateMenu() {
-  const { id } = useParams();
+  const { id, ur } = useParams();
   const [activeStep, setActiveStep] = React.useState(3);
 
   function getStepContent(step) {
@@ -95,8 +95,8 @@ export default function PeopleUpdateMenu() {
       </React.Fragment>
       <Button
         component={Link}
-        to={`/records`}
-
+        to={`/${ur}`}
+        // to={`/records`}
         variant="outlined"
       // color="success"
       >

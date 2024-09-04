@@ -209,7 +209,7 @@ export default function SavePeople() {
       color={colors.mainColor}
     >
       <PeopleForm
-        title="Nuevo Reristro"
+        title="Nuevo Hermano"
         data={body}
         savePeople={savePeople}
         classes={classes}

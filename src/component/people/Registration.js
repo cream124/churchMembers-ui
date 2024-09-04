@@ -1,5 +1,5 @@
 import * as React from "react";
-import  { useRef } from 'react';
+import { useRef } from 'react';
 import {
   Box,
   Button,
@@ -11,7 +11,7 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SendIcon from "@mui/icons-material/Send";
 import { useReactToPrint } from 'react-to-print';
@@ -27,6 +27,8 @@ import classes from "./people.module.css";
 import ThemeProviderComponent from "../Common/ThemeProviderComponent";
 import { forApprovalPersonsColums } from "./Columns";
 import { randomCreatedDate, randomUpdatedDate } from '@mui/x-data-grid-generator';
+import PanelComp from "../Common/Panel/PanelComp";
+import ReportDataGrid from "../Common/DataGrid/ReportDataGrid";
 
 const dialogMessage = {
   active: {
@@ -39,6 +41,9 @@ const dialogMessage = {
       "Las personas seleccionadas se les negará la solicitud de activación.",
   },
 };
+
+const columns = forApprovalPersonsColums().columns;
+const columnsVisible = forApprovalPersonsColums().columnsVisible;
 
 export default function RegistrationRequest() {
   const [state, setState] = React.useState("registered");
@@ -53,9 +58,12 @@ export default function RegistrationRequest() {
   const { error, loading, data, refetch } = FilterByStatePersonsDB({
     state: "registered",
   });
+  const [columnVisibilityModel, setColumnVisibilityModel] = React.useState(columnsVisible);
+
+
   const { updateStatePerson } = UpdateStatePersonsDB();
 
-  const columns = forApprovalPersonsColums().columns;
+
   const testData = [{
     _id: "662324518eafe688a653ea23",
     name: "samuel111",
@@ -133,17 +141,13 @@ export default function RegistrationRequest() {
   if (loading) return <div> loading.......</div>;
   return (
     <>
-    <button onClick={() => {
-        handlePrint(null, () => contentToPrint.current);
-      }}>
-        PRINT
-      </button>
-      <div ref={contentToPrint}>
-        <Paper elevation={24} className={classes.containerRegistration}>
-       
-          <Typography variant="h4" component="h1">
-            Aprobación de Registros
-          </Typography>
+
+      <Paper elevation={24} className={classes.containerRegistration}>
+
+        {/* <Typography variant="h4" component="h1">
+            Aprobación de Hermanos
+          </Typography> */}
+        <PanelComp padding={'1em'} margin={'1.2em'}>
           <Grid
             container
             spacing={1}
@@ -175,7 +179,7 @@ export default function RegistrationRequest() {
 
             <Grid item>
               <Grid container component="h4" spacing={2} justifyContent="flex-end">
-                <Grid>
+                <Grid item>
                   <Button
                     disabled={disabledButton}
                     variant="outlined"
@@ -186,7 +190,7 @@ export default function RegistrationRequest() {
                     Activar
                   </Button>
                 </Grid>
-                <Grid>
+                <Grid item>
                   <Button
                     disabled={disabledButton}
                     variant="outlined"
@@ -200,38 +204,53 @@ export default function RegistrationRequest() {
               </Grid>
             </Grid>
           </Grid>
-          <AlertDialog
-            open={openDialog}
-            setOpen={setOpenDialog}
-            updateState={updateState}
-            title={stateDialogMessage.title}
-            content={stateDialogMessage.content}
+        </PanelComp>
+
+        <AlertDialog
+          open={openDialog}
+          setOpen={setOpenDialog}
+          updateState={updateState}
+          title={stateDialogMessage.title}
+          content={stateDialogMessage.content}
+        />
+        <SnackbarComponent
+          open={openSnackbar}
+          setOpen={setOpenSnackbar}
+          messege="Las personas se actualizo correctamente."
+        />
+        <PanelComp padding={'1em'} margin={'1.2em'}>
+          <ReportDataGrid
+            title={'Aprobación de Hermanos'}
+            columns={columns}
+            rows={data.filterByStatePersons}
+            columnVisibilityModel={columnVisibilityModel}
+            setColumnVisibilityModel={setColumnVisibilityModel}
+            updateSelecteItems={updateSelecteItems}
           />
-          <SnackbarComponent
-            open={openSnackbar}
-            setOpen={setOpenSnackbar}
-            messege="Las personas se actualizo correctamente."
-          />
-          <div style={{ height: 400, width: "100%" }}>
-            <ThemeProviderComponent name={"forApproval"}>
-              <DataGrid
-                rows={data.filterByStatePersons}
-                // rows={testData}
-                columns={columns}
-                getRowId={(row) => row._id}
-                pageSize={15}
-                rowsPerPageOptions={[15]}
-                checkboxSelection
-                // disableSelectionOnClick
-                onRowSelectionModelChange={(newSelectionModel) => {
-                  console.log("77777777777777777777777777777")
-                  updateSelecteItems(newSelectionModel);
-                }}
-              />
-            </ThemeProviderComponent>
-          </div>
-        </Paper>
-      </div>
+        </PanelComp>
+        {/* <div style={{ height: 400, width: "100%" }}>
+          <ThemeProviderComponent name={"forApproval"}>
+            <DataGrid
+              rows={data.filterByStatePersons}
+              // rows={testData}
+              columns={columns}
+              getRowId={(row) => row._id}
+              pageSize={15}
+              rowsPerPageOptions={[15]}
+              checkboxSelection
+              // disableSelectionOnClick
+              onRowSelectionModelChange={(newSelectionModel) => {
+                // console.log("77777777777777777777777777777")
+                updateSelecteItems(newSelectionModel);
+              }}
+              components={{
+                Toolbar: GridToolbar
+              }}
+            />
+          </ThemeProviderComponent>
+        </div> */}
+      </Paper>
+
     </>
   );
 }
