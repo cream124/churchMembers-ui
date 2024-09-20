@@ -86,6 +86,7 @@ export default function CustomDay(props) {
         value={value}
         name={name}
         inputFormat="DD/MM/YYYY"
+        slotProps={{ textField: {size: "small",} , field: {clearable: false}}}
         size={'small'}  //"small"
         disabled={disabled}
         onChange={(newValue) => {

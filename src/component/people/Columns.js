@@ -37,8 +37,6 @@ function activePersonsColumns (){
       headerName: 'Edad',
       type: 'number',
       width: 50,
-      valueGetter: (params) =>
-        `${ parseInt(dayjs(new Date()).diff(dayjs(params.row.birthDate, 'DD-MM-YYYY'), 'year')) }`,
       headerClassName: 'super-app-theme--header'
     },
     { field: 'birthDate', headerName: 'Nacimiento', type: 'date', width: 100,
@@ -50,10 +48,12 @@ function activePersonsColumns (){
       headerClassName: 'super-app-theme--header'
     },
     { field: 'christian', headerName: 'Cristiano', type: 'boolean', width: 80,
-      headerClassName: 'super-app-theme--header'
+      headerClassName: 'super-app-theme--header',
+      valueGetter: (params) => params.row.spiritual.christian
     },
     { field: 'baptized', headerName: 'Bautizado', type: 'boolean', width: 80,
-      headerClassName: 'super-app-theme--header'
+      headerClassName: 'super-app-theme--header',
+      valueGetter: (params) => params.row.spiritual.baptized
     },
     { field: 'user', headerName: 'Usuario', type: 'boolean', width: 80,
       headerClassName: 'super-app-theme--header'
@@ -75,7 +75,7 @@ function activePersonsColumns (){
     { field: 'registerName', headerName: 'Registrasdo por', width: 120,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'registerDate', headerName: 'Fecha de Registro', type: 'date', width: 100, 
+    { field: 'registerDate', headerName: 'Fecha de Registro', type: '', width: 100, 
       headerClassName: 'super-app-theme--header'
     },
     { field: 'approvalId', headerName: 'Aprobado por', width: 120,
@@ -124,10 +124,10 @@ function forActivePersonsColumns (){
       sortable: false,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'ci', headerName: 'C.I.', width: 90,
+    { field: 'ci', headerName: 'C.I.', width: 85,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'name', headerName: 'Nombres', width: 140,
+    { field: 'name', headerName: 'Nombres', width: 130,
       headerClassName: 'super-app-theme--header'
     },
     { 
@@ -139,15 +139,6 @@ function forActivePersonsColumns (){
         `${params.row.lastName || ''} ${params.row.motherLastName || ''}`,
       headerClassName: 'super-app-theme--header'
     },
-    // {
-    //   field: 'age',
-    //   headerName: 'Edad',
-    //   type: 'number',
-    //   width: 50,
-    //   valueGetter: (params) =>
-    //     `${ parseInt(dayjs(new Date()).diff(dayjs(params.row.birthDate, 'DD-MM-YYYY'), 'year')) }`,
-    //   headerClassName: 'super-app-theme--header'
-    // },
     {
       field: 'age',
       headerName: 'Edad',
@@ -155,7 +146,7 @@ function forActivePersonsColumns (){
       width: 60,
       headerClassName: 'super-app-theme--header'
     },
-    { field: '', headerName: 'Nacimiento', type: 'date', width: 100,
+    { field: 'birthDate', headerName: 'Nacimiento', type: 'date', width: 105,
       headerClassName: 'super-app-theme--header',
       valueGetter: (params) =>
         new Date(params.row.birthDate),
@@ -163,37 +154,37 @@ function forActivePersonsColumns (){
     { field: 'phone', headerName: 'Teléfono', width: 100,
       headerClassName: 'super-app-theme--header'
     },
+    { field: 'address', headerName: 'Direccion', width: 130,
+      headerClassName: 'super-app-theme--header'
+    },
     { field: 'christian', headerName: 'Cristiano', type: 'boolean', width: 80,
       headerClassName: 'super-app-theme--header',
       valueGetter: (params) => params.row.spiritual.christian
     },
-    { field: 'baptized', headerName: 'Bautizado', type: 'boolean', width: 80,
+    { field: 'baptized', headerName: 'Bautizado', type: 'boolean', width: 85,
       headerClassName: 'super-app-theme--header',
       valueGetter: (params) => params.row.spiritual.baptized
     },
-    { field: 'membershipType', headerName: 'Miembro', width: 100,
+    { field: 'membershipType', headerName: 'Miembro', width: 80,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'user', headerName: 'Usuario', type: 'boolean', width: 80,
+    { field: 'user', headerName: 'Usuario', type: 'boolean', width: 70,
       headerClassName: 'super-app-theme--header'
     },
-    // { 
-    //   field: 'state', 
-    //   headerName: 'Estado', 
-    //   type: 'string', 
-    //   width: 120, 
-    //   valueGetter: (params) => `${ params.row.state === 'active'? 'Activo': params.row.state === 'registered'? 'Registrado': params.row.state === 'registeredCancel'? 'Denegado': 'Inactivo' }`,
-    //   headerClassName: 'super-app-theme--header'
-    // },
-    { field: 'registerName', headerName: 'Registrado por', width: 120,
+    { field: 'registerName', headerName: 'Registrado Por', width: 120,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'registerDate', headerName: 'Fecha de Registro', type: 'date', width: 100,
+    { field: 'registerDate', headerName: 'Fecha de Reg.', type: 'date', width: 110,
       headerClassName: 'super-app-theme--header',
       valueGetter: (params) =>
         new Date(params.row.registerDate),
     },
-    { field: 'address', headerName: 'Direccion', width: 130,
+    { 
+      field: 'state', 
+      headerName: 'Estado', 
+      type: 'string', 
+      width: 100, 
+      valueGetter: (params) => `${ params.row.state === 'active'? 'Activo': params.row.state === 'registered'? 'Registrado': params.row.state === 'registeredCancel'? 'Denegado': 'Inactivo' }`,
       headerClassName: 'super-app-theme--header'
     },
     {
@@ -204,7 +195,7 @@ function forActivePersonsColumns (){
       getActions: (params) => [
         <GridActionsCellItem
           icon={<PrintIcon sx={{ color: red[500] }} />}
-          label="Toggle Admin"
+          label="Toggle Admin1"
           component={Link}
           to={`/printPerson/${params.row._id}`}
           // onClick={toggleAdmin(params.id)}
@@ -223,10 +214,10 @@ function forActivePersonsColumns (){
 }
 
 const forActivePersonsColumnsVisible ={
-  name: false,
+  birthDate: false,
   registerDate: false,
-  approvalId: false,
-  approvalDate: false,
+  state: false,
+  phone: false,
   level: false,
 };
 

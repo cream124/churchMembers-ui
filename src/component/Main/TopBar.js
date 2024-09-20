@@ -32,6 +32,8 @@ import SavePeople from "../../modules/people/SavePeople";
 import UpdatePeople from "../../modules/people/UpdatePeople";
 import PeopleCardPrint from "../../modules/people/poplePrint/PeopleCardPrint";
 import PeopleUpdateMenu from "../../modules/people/updatePeople/PeopleUpdateMenu";
+import EditBroder from "../people/EditBrother";
+import EditBrother from "../people/EditBrother";
 
 const drawerWidth = 240;
 
@@ -116,6 +118,7 @@ export default function TopBar() {
             element={<RegistrationRequest />}
           />
           <Route path="/records" element={<ActivesList />} />
+          <Route path="/brother" element={<EditBrother />} />
           <Route path="/event" element={<ListEvents />} />
           <Route path="/event2" element={<EditEvent />} />
           <Route path="/editEvent/:id" element={<EditEvent />} />

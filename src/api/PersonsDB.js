@@ -202,6 +202,11 @@ query FilterPersons($filter: Filter) {
     user
     userName
     level
+    age
+    spiritual {
+      christian
+      baptized
+    }
   }
 }
 `

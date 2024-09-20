@@ -32,7 +32,8 @@ export default function DatePicherBasic(props) {
         value={value}
         name={name}
         inputFormat="DD/MM/YYYY"
-        size={size ? size: 'medium'}  //"small"
+        slotProps={{ textField: {size: "small",} , field: {clearable: false}}}
+        size={size ? size: 'small'}  //"small"
         onChange={handleChange}
         disabled={disabled}
         // onChange={(newValue) => {

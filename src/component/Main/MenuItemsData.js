@@ -40,7 +40,7 @@ const menuListSuperUser = [
       },
       {
         name: 'Editar Hermano',
-        uri: '/registrationRequest',
+        uri: '/brother',
       },
       {
         name: 'Editar Mis Registros',
