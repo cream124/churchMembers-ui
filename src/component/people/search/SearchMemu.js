@@ -8,14 +8,20 @@ import DatePicherBasic from '../../Common/DatePickerBasic';
 import CustomDay from '../../Common/CustomDay';
 import SearchBirthdate from './SearchBirthdate';
 import SearchNameLastName from './SearchNameLastName';
+import SearchByText from './SearchByText';
+import SearchBetweenDates from './SearchBetweenDates';
+import SearchBetweenAge from './SearchBetweenAge';
 
 export default function SearchMenu(props) {
   const {
+    searchType, handleChangeSearchType,
     startDate, setStartDate,
     endDate, setEndDate,
+    field, handleChangeField,
+    value, handleChangeValue,
     filterPersons,
   } = props;
-  const [searchType, setSearchType] = React.useState('birthdate');
+  // const [searchType, setSearchType] = React.useState('birthdate');
 
   function getSearchForm(type) {
     switch (type) {
@@ -28,13 +34,62 @@ export default function SearchMenu(props) {
             setEndDate={setEndDate}
           />
         )
-      case 'nameLastname':
+      case 'names':
         return (
           <SearchNameLastName
+            value={value}
+            handleChangeValue={handleChangeValue}
+          />
+        )
+      case 'emailText':
+        handleChangeField('email')
+        return (
+          <SearchByText
+            value={value}
+            handleChangeValue={handleChangeValue}
+            label='Email'
+          />
+        )
+      case 'addressText':
+        handleChangeField('address')
+        return (
+          <SearchByText
+            value={value}
+            handleChangeValue={handleChangeValue}
+            label='Direccion'
+          />
+        )
+      case 'betweenDatesBirthdate':
+        handleChangeField('birthDate')
+        return (
+          <SearchBetweenDates
             startDate={startDate}
             setStartDate={setStartDate}
             endDate={endDate}
             setEndDate={setEndDate}
+            label='Nacimiento'
+          />
+        )
+      case 'betweenDatesChristianDate':
+        handleChangeField('spiritual.dateAccept')
+        return (
+          <SearchBetweenDates
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+            label='Cristiano'
+          />
+        )
+        case 'betweenAge':
+        handleChangeField('spiritual.dateAccept')
+        return (
+          <SearchBetweenAge
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+            label='aaaaaaaaaa'
           />
         )
     }
@@ -42,7 +97,8 @@ export default function SearchMenu(props) {
   }
 
   const handleSearchType = (event) => {
-    setSearchType(event.target.value);
+    handleChangeSearchType(event.target.value)
+    // setSearchType(event.target.value);
     // filterJson.filter.state = event.target.value;
     // refetch(filterJson);
     // refetch({ state: event.target.value });
@@ -70,15 +126,15 @@ export default function SearchMenu(props) {
                   onChange={handleSearchType}
                 >
                   <MenuItem value={'birthdate'}>Cumpleaños</MenuItem>
-                  <MenuItem value={'nameLastname'}>Nombre o Apellido</MenuItem>
-                  <MenuItem value={'age'}>Edad</MenuItem>
-                  <MenuItem value={'birthDate'}>Fecha de Nacimiento</MenuItem>
-                  <MenuItem value={'christianDate'}>Fecha de Cristiano</MenuItem>
+                  <MenuItem value={'names'}>Nombre o Apellido</MenuItem>
+                  <MenuItem value={'betweenAge'}>Edad</MenuItem>
+                  <MenuItem value={'betweenDatesBirthdate'}>Fecha de Nacimiento</MenuItem>
+                  <MenuItem value={'betweenDatesChristianDate'}>Fecha de Cristiano</MenuItem>
                   <MenuItem value={'baptizedDate'}>Fecha de Bautizo</MenuItem>
                   <MenuItem value={'christians'}>Cristianos</MenuItem>
                   <MenuItem value={'baptizeds'}>Bautizados</MenuItem>
-                  <MenuItem value={'email'}>Email</MenuItem>
-                  <MenuItem value={'addresss'}>Direccion</MenuItem>
+                  <MenuItem value={'emailText'}>Email</MenuItem>
+                  <MenuItem value={'addressText'}>Direccion</MenuItem>
                   <MenuItem value={'registered'}>Registrado</MenuItem>
                 </Select>
               </FormControl>

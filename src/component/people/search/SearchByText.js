@@ -3,9 +3,10 @@ import { Box, Grid } from "@mui/material";
 
 import TextfieldCommon from '../../Common/Form/Common/TextfieldCommons.js';
 
-export default function SearchNameLastName(props) {
+export default function SearchByText(props) {
   const {
     value, handleChangeValue,
+    label,
   } = props;
 
   const handleChange = e => {
@@ -22,7 +23,7 @@ export default function SearchNameLastName(props) {
               handleChange={handleChange}
               value={value} 
               // body={body}
-              margin="normal" label={"Nombres / Apellidos"} 
+              margin="normal" label={label} 
               />
           </Box>
         </Grid>

@@ -24,14 +24,14 @@ export default function TextfieldCommon(props) {
       {...otherProps}
       fullWidth
       autoFocus
-      size={size ? size : 'medium'}  //"small"
+      size={size ? size : 'small'}  //"medium"
       label={label}
       name={name}
       required={required}
       // {...register(name)}
       // error={errors[name] ? true : false}
       // helperText={errors[name]?.message}
-      value={body[name]}
+      // value={body[name]}
       onChange={handleChange}
 
       disabled={disabled2}

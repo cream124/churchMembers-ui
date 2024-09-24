@@ -28,17 +28,20 @@ import SearchMenu from './search/SearchMemu';
 
 export default function SearchBrother(props) {
   const { state, handleChangeState,
+    searchType, handleChangeSearchType,
     searchStatus, changeSearchStatus,
+    field, handleChangeField,
+    value, handleChangeValue,
     startDate, setStartDate,
     endDate, setEndDate,
     filterPersons,
     clickOnActiveItems,
     disabledButton,
   } = props;
-  const [searchType, setSearchType] = React.useState('birthdate');
+  // const [searchType, setSearchType] = React.useState('birthdate');
 
   const handleSearchType = (event) => {
-    setSearchType(event.target.value);
+    // setSearchType(event.target.value);
     // filterJson.filter.state = event.target.value;
     // refetch(filterJson);
     // refetch({ state: event.target.value });
@@ -83,10 +86,16 @@ export default function SearchBrother(props) {
             />
             {searchStatus &&
               <SearchMenu
+                searchType={searchType}
+                handleChangeSearchType={handleChangeSearchType}
                 startDate={startDate}
                 setStartDate={setStartDate}
                 endDate={endDate}
                 setEndDate={setEndDate}
+                field={field}
+                handleChangeField={handleChangeField}
+                value={value}
+                handleChangeValue={handleChangeValue}
                 filterPersons={filterPersons}
               />
               // <Paper elevation={12} className={classes.searchMainPanel}>

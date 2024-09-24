@@ -33,21 +33,27 @@ const columnsVisible = personsColums.columnsVisible;
 let filterJson =
 {
   filter:
-    { state: "active" }
+    { 
+      searchType: "",
+      state: "active" 
+    }
 }
 
 
 
 export default function EditBrother() {
+  const [searchType, setSearchType] = React.useState('birthdate');
+  const [startDate, setStartDate] = React.useState(dayjs().format('DD-MM-YYYY'));
+  const [endDate, setEndDate] = React.useState(startDate);
   const [state, setState] = React.useState('active');
+  const [field, setField] = React.useState('');
+  const [value, setValue] = React.useState('hola');
+
   const [selectedItems, setSelectedItems] = React.useState([]);
   const [disabledButton, setdisabledButton] = React.useState(true);
   const [openDialog, setOpenDialog] = React.useState(false);
   const [deleteItem, setDeleteItem] = React.useState(false);
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
-  const [startDate, setStartDate] = React.useState(dayjs().format('DD-MM-YYYY'));
-  // const [startDate, setStartDate] = React.useState('09-12-2022');
-  const [endDate, setEndDate] = React.useState(startDate);
   const [searchStatus, setSearchStatus] = React.useState(false);
 
   const { error, loading, data, refetch } = FilterPersonsDB(filterJson);
@@ -67,6 +73,23 @@ export default function EditBrother() {
     filterJson.filter.state = event.target.value;
     refetch(filterJson);
     // refetch({ state: event.target.value });
+  };
+
+  const handleChangeSearchType = (value) => {
+    setSearchType(value);
+    filterJson.filter.searchType = value;
+    // refetch(filterJson);
+  };
+
+  const handleChangeField = (value) => {
+    setField(value);
+    filterJson.filter.field = value;
+    // refetch(filterJson);
+  };
+  const handleChangeValue = (value) => {
+    setValue(value);
+    filterJson.filter.value = value;
+    // refetch(filterJson);
   };
 
   const updateSelecteItems = (item) => {
@@ -108,11 +131,18 @@ export default function EditBrother() {
 
   }
 
-  const selctState = () => {
+  const searchPeople = () => {
     return (
       <SearchBrother
         state={state}
         handleChangeState={handleChangeState}
+        searchType={searchType}
+        handleChangeSearchType={handleChangeSearchType}
+        field={field}
+        handleChangeField={handleChangeField}
+        value={value}
+        handleChangeValue={handleChangeValue}
+
         searchStatus={searchStatus}
         changeSearchStatus={changeSearchStatus}
         startDate={startDate}
@@ -165,7 +195,7 @@ export default function EditBrother() {
       <PanelComp padding={'1em'} margin={'1.2em'}>
         <ReportDataGrid
           title={'Editar Hermanos'}
-          moreMenuComp={selctState()}
+          moreMenuComp={searchPeople()}
           columns={columns2}
           rows={data.filterPersons}
           columnVisibilityModel={columnVisibilityModel}
