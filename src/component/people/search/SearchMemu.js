@@ -11,21 +11,38 @@ import SearchNameLastName from './SearchNameLastName';
 import SearchByText from './SearchByText';
 import SearchBetweenDates from './SearchBetweenDates';
 import SearchBetweenAge from './SearchBetweenAge';
+import { getCurrentDate } from '../../../util/utilDate';
 
 export default function SearchMenu(props) {
   const {
     searchType, handleChangeSearchType,
     startDate, setStartDate,
     endDate, setEndDate,
+    toDate, handleChangeToDate,
     field, handleChangeField,
     value, handleChangeValue,
     filterPersons,
   } = props;
   // const [searchType, setSearchType] = React.useState('birthdate');
 
+  const isDate = () => {
+    if( startDate.length < 8){
+      setStartDate(getCurrentDate());
+      setEndDate(getCurrentDate());
+    }
+  };
+
+  const isNumber = () => {
+    if( startDate.length > 8){
+      setStartDate('0');
+      setEndDate('10');
+    }
+  };
+
   function getSearchForm(type) {
     switch (type) {
       case 'birthdate':
+        isDate();   
         return (
           <SearchBirthdate
             startDate={startDate}
@@ -60,7 +77,8 @@ export default function SearchMenu(props) {
           />
         )
       case 'betweenDatesBirthdate':
-        handleChangeField('birthDate')
+        handleChangeField('birthDate');
+        isDate();
         return (
           <SearchBetweenDates
             startDate={startDate}
@@ -68,10 +86,14 @@ export default function SearchMenu(props) {
             endDate={endDate}
             setEndDate={setEndDate}
             label='Nacimiento'
+            toDate={toDate}
+            handleChangeToDate={handleChangeToDate}
+
           />
         )
       case 'betweenDatesChristianDate':
         handleChangeField('spiritual.dateAccept')
+        isDate();
         return (
           <SearchBetweenDates
             startDate={startDate}
@@ -79,17 +101,36 @@ export default function SearchMenu(props) {
             endDate={endDate}
             setEndDate={setEndDate}
             label='Cristiano'
+            toDate={toDate}
+            handleChangeToDate={handleChangeToDate}
           />
         )
-        case 'betweenAge':
-        handleChangeField('spiritual.dateAccept')
+        case 'betweenDatesBaptizedDate':
+        handleChangeField('spiritual.dateBaptized')
+        isDate();
+        return (
+          <SearchBetweenDates
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+            label='Bautizmo'
+            toDate={toDate}
+            handleChangeToDate={handleChangeToDate}
+          />
+        )
+      case 'betweenAge':
+        handleChangeField('birthDate');
+        isNumber();
         return (
           <SearchBetweenAge
             startDate={startDate}
             setStartDate={setStartDate}
             endDate={endDate}
             setEndDate={setEndDate}
-            label='aaaaaaaaaa'
+            label='Edad'
+            toDate={toDate}
+            handleChangeToDate={handleChangeToDate}
           />
         )
     }
@@ -98,17 +139,13 @@ export default function SearchMenu(props) {
 
   const handleSearchType = (event) => {
     handleChangeSearchType(event.target.value)
-    // setSearchType(event.target.value);
-    // filterJson.filter.state = event.target.value;
-    // refetch(filterJson);
-    // refetch({ state: event.target.value });
   };
 
   const selctState = () => {
     return (
       <Paper >
-        <Grid container spacing={2} alignItems="center">
-          <Grid item xs={0.7}>
+        <Grid container spacing={1} alignItems="center">
+          <Grid item xs={0.6}>
             <Typography variant="h8" component="h4">
               Por:
             </Typography>
@@ -122,6 +159,7 @@ export default function SearchMenu(props) {
                   id="demo-simple-selec1t"
                   value={searchType}
                   label="Tipo de búsqueda"
+                  // sx={{ height: 30 }}
                   size="small"
                   onChange={handleSearchType}
                 >
@@ -130,49 +168,17 @@ export default function SearchMenu(props) {
                   <MenuItem value={'betweenAge'}>Edad</MenuItem>
                   <MenuItem value={'betweenDatesBirthdate'}>Fecha de Nacimiento</MenuItem>
                   <MenuItem value={'betweenDatesChristianDate'}>Fecha de Cristiano</MenuItem>
-                  <MenuItem value={'baptizedDate'}>Fecha de Bautizo</MenuItem>
-                  <MenuItem value={'christians'}>Cristianos</MenuItem>
-                  <MenuItem value={'baptizeds'}>Bautizados</MenuItem>
+                  <MenuItem value={'betweenDatesBaptizedDate'}>Fecha de Bautizo</MenuItem>
+                  {/* <MenuItem value={'christians'}>Cristianos</MenuItem>
+                  <MenuItem value={'baptizeds'}>Bautizados</MenuItem> */}
                   <MenuItem value={'emailText'}>Email</MenuItem>
                   <MenuItem value={'addressText'}>Direccion</MenuItem>
-                  <MenuItem value={'registered'}>Registrado</MenuItem>
+                  {/* <MenuItem value={'registered'}>Registrado</MenuItem> */}
                 </Select>
               </FormControl>
             </Box>
           </Grid>
-
           {getSearchForm(searchType)}
-          {/* <Grid item xs={2.8}>
-            <Box sx={{ minWidth: 300 }}>
-              <DatePicherBasic
-                date={startDate}
-                dateChange={(newValue) => {
-                  setStartDate(newValue);
-                  console.log('-newValue------------', newValue)
-                }}
-                label='Fecha Inicio'
-                name="date"
-                size="small"
-              />
-            </Box>
-          </Grid>
-          <Grid item xs={0.9}>
-            <Typography variant="h8" component="h4">
-              Hasta
-            </Typography>
-          </Grid>
-          <Grid item xs={2.5}>
-            <Box sx={{ minWidth: 220 }}>
-              <CustomDay
-                label='Fecha Fin'
-                startDate={dayjs(endDate, 'DD-MM-YYYY')}
-                dateChange={(newValue) => {
-                  setEndDate(newValue);
-                  console.log('-newValue-2-----------', newValue)
-                }}
-              />
-            </Box>
-          </Grid> */}
           <Grid item xs={1.2}>
             <Button
               variant="outlined"

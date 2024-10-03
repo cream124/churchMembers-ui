@@ -25,6 +25,7 @@ import ThemeProviderComponent from '../Common/ThemeProviderComponent';
 import PanelComp from '../Common/Panel/PanelComp';
 import ReportDataGrid from '../Common/DataGrid/ReportDataGrid';
 import SearchBrother from './searchBrother';
+import { getCurrentDate } from '../../util/utilDate';
 
 const personsColums = activePersonsColums();
 const columns2 = personsColums.columns;
@@ -33,21 +34,22 @@ const columnsVisible = personsColums.columnsVisible;
 let filterJson =
 {
   filter:
-    { 
-      searchType: "",
-      state: "active" 
-    }
+  {
+    searchType: "",
+    state: "active"
+  }
 }
 
 
 
 export default function EditBrother() {
   const [searchType, setSearchType] = React.useState('birthdate');
-  const [startDate, setStartDate] = React.useState(dayjs().format('DD-MM-YYYY'));
+  const [startDate, setStartDate] = React.useState(getCurrentDate());
   const [endDate, setEndDate] = React.useState(startDate);
   const [state, setState] = React.useState('active');
   const [field, setField] = React.useState('');
-  const [value, setValue] = React.useState('hola');
+  const [value, setValue] = React.useState('');
+  const [toDate, setToDate] = React.useState(false);
 
   const [selectedItems, setSelectedItems] = React.useState([]);
   const [disabledButton, setdisabledButton] = React.useState(true);
@@ -62,10 +64,10 @@ export default function EditBrother() {
   const { updateStatePerson, errorUp, loadingUp, dataUp } = UpdateStatePersonsDB();
   const [columnVisibilityModel, setColumnVisibilityModel] = React.useState(columnsVisible);
 
-  
- 
+  const handleChangeToDate = () => {
+    setToDate(!toDate);
+  }
 
- 
 
   const handleChangeState = (event) => {
     setState(event.target.value);
@@ -94,7 +96,7 @@ export default function EditBrother() {
 
   const updateSelecteItems = (item) => {
     setSelectedItems(item);
-    console.log('----', item.length);
+    // console.log('----', item.length);
     if (item.length > 0) {
       setdisabledButton(false);
     } else {
@@ -118,7 +120,10 @@ export default function EditBrother() {
       setSearchStatus(false);
       filterJson = {
         filter:
-          { state: filterJson.filter.state }
+        {
+          searchType: "",
+          state: filterJson.filter.state
+        }
       }
       refetch(filterJson);
     } else {
@@ -142,19 +147,21 @@ export default function EditBrother() {
         handleChangeField={handleChangeField}
         value={value}
         handleChangeValue={handleChangeValue}
+        toDate={toDate}
+        handleChangeToDate={handleChangeToDate}
 
         searchStatus={searchStatus}
         changeSearchStatus={changeSearchStatus}
         startDate={startDate}
         setStartDate={setStartDate}
-        endDate={endDate} 
+        endDate={endDate}
         setEndDate={setEndDate}
         filterPersons={filterPersons}
         clickOnActiveItems={clickOnActiveItems}
         disabledButton={disabledButton}
       />
     )
-    
+
   }
   const updateState = async (isUpdate) => {
     if (isUpdate) {
@@ -215,7 +222,7 @@ export default function EditBrother() {
         setOpen={setOpenSnackbar}
         messege='Las personas se actualizo correctamente.'
       />
-      
+
 
     </Paper>
   );

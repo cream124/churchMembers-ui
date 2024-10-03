@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Box, Button, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Paper, Select, Switch, TextField, Typography } from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search';
+import { Grid, Typography } from "@mui/material";
 
 import dayjs from 'dayjs';
 
@@ -11,33 +10,32 @@ export default function SearchBirthdate(props) {
   const {
     startDate, setStartDate,
     endDate, setEndDate,
-    filterPersons,
   } = props;
  
   const selctState = () => {
     return (
       <>
-        <Grid item xs={2.8}>
-          <Box sx={{ minWidth: 300 }}>
+        <Grid item xs={2.7}>
+          {/* <Box sx={{ minWidth: 70 }}> */}
             <DatePicherBasic
               date={startDate}
               dateChange={(newValue) => {
                 setStartDate(newValue);
-                console.log('-newValue------------', newValue)
+                // console.log('-newValue------------', newValue)
               }}
               label='Fecha Inicio'
               name="date"
-              size="small"
+              // size="small"
             />
-          </Box>
+          {/* </Box> */}
         </Grid>
-        <Grid item xs={0.9}>
+        <Grid item xs={0.8}>
           <Typography variant="h8" component="h4">
             Hasta
           </Typography>
         </Grid>
-        <Grid item xs={2.5}>
-          <Box sx={{ minWidth: 220 }}>
+        <Grid item xs={2.7}>
+          {/* <Box sx={{ minWidth: 220 }}> */}
             <CustomDay
               label='Fecha Fin'
               startDate={dayjs(endDate, 'DD-MM-YYYY')}
@@ -46,7 +44,7 @@ export default function SearchBirthdate(props) {
                 console.log('-newValue-2-----------', newValue)
               }}
             />
-          </Box>
+          {/* </Box> */}
         </Grid>
       </>
     )

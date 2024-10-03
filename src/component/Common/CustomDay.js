@@ -68,7 +68,7 @@ export default function CustomDay(props) {
   };
 
   return (
-    <Grid  item xs={12} md={7.3}>
+    // <Grid  item xs={12} md={7.3}>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'es'}>
         {/* <StaticDatePicker
           displayStaticWrapperAs="desktop"
@@ -97,7 +97,7 @@ export default function CustomDay(props) {
         renderInput={(params) => <TextField {...params} />}
         />
       </LocalizationProvider>
-    </Grid>
+    // </Grid>
     
   );
 }

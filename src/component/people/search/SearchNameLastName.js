@@ -21,8 +21,8 @@ export default function SearchNameLastName(props) {
               name="name"
               handleChange={handleChange}
               value={value} 
-              // body={body}
-              margin="normal" label={"Nombres / Apellidos"} 
+              margin="normal" 
+              label={"Nombres / Apellidos"} 
               />
           </Box>
         </Grid>

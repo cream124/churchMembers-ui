@@ -34,18 +34,11 @@ export default function SearchBrother(props) {
     value, handleChangeValue,
     startDate, setStartDate,
     endDate, setEndDate,
+    toDate, handleChangeToDate,
     filterPersons,
     clickOnActiveItems,
     disabledButton,
   } = props;
-  // const [searchType, setSearchType] = React.useState('birthdate');
-
-  const handleSearchType = (event) => {
-    // setSearchType(event.target.value);
-    // filterJson.filter.state = event.target.value;
-    // refetch(filterJson);
-    // refetch({ state: event.target.value });
-  };
 
   const selctState = () => {
     return (
@@ -61,7 +54,7 @@ export default function SearchBrother(props) {
                 value={state}
                 label="Estado"
                 sx={{ height: 30 }}
-                size="small"
+                // size="small"
                 onChange={handleChangeState}
               >
                 <MenuItem value={'registered'}>Registrado</MenuItem>
@@ -92,6 +85,10 @@ export default function SearchBrother(props) {
                 setStartDate={setStartDate}
                 endDate={endDate}
                 setEndDate={setEndDate}
+
+                toDate={toDate}
+                handleChangeToDate={handleChangeToDate}
+
                 field={field}
                 handleChangeField={handleChangeField}
                 value={value}

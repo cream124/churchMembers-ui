@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 const format = 'DD/MM/YYYY';
+const systemFormat = 'DD-MM-YYYY';
 const timeFormat = 'HH:mm';
 
 // get a string and convert it to camelCase
@@ -16,6 +17,11 @@ export function getAge(birthDate) {
 export function getPrintDate(date) {
     const newDate = dayjs(date).format(format);
     return newDate;
+}
+
+export function getCurrentDate() {
+    return  dayjs().format(systemFormat);
+    // return newDate;
 }
 
 export function getPrintTime(date) {

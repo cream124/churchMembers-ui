@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Grid, TextField } from '@mui/material';
+import { Grid, InputAdornment, TextField } from '@mui/material';
 
 
 
@@ -16,12 +16,26 @@ export default function TextfieldCommon(props) {
     size,
     focus,
     required,
+    inputAdornmentStart,
+    inputAdornmentEnd,
     ...otherProps
   } = props;
+
+  const configTextfield = {}
+
+  if (inputAdornmentStart || inputAdornmentEnd) {
+    // if (true){
+    configTextfield.InputProps = {
+      startAdornment: <InputAdornment position="start">{inputAdornmentStart}</InputAdornment>,
+      endAdornment: <InputAdornment position="end">{inputAdornmentEnd}</InputAdornment>,
+      ...otherProps.InputProps
+    }
+  }
 
   return (
     <TextField
       {...otherProps}
+      
       fullWidth
       autoFocus
       size={size ? size : 'small'}  //"medium"
@@ -37,9 +51,11 @@ export default function TextfieldCommon(props) {
       disabled={disabled2}
       InputProps={{
         readOnly: disabled,
+        // sx: { height: 30 }
       }}
       inputRef={focus ? (input) => input?.focus() : {}}
     // inputRef={(input) => input?.focus()}
+    {...configTextfield}
     >
     </TextField>
   );

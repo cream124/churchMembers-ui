@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Box, Button, FormControl, FormControlLabel, FormLabel, Grid, InputLabel, MenuItem, Paper, Select, Switch, TextField, Typography } from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search';
+import { FormControlLabel, Grid, Switch } from "@mui/material";
 
 import dayjs from 'dayjs';
 
@@ -11,19 +10,14 @@ export default function SearchBetweenDates(props) {
   const {
     startDate, setStartDate,
     endDate, setEndDate,
+    toDate, handleChangeToDate,
     label,
   } = props;
-  const [toDate, setToDate] = React.useState(false);
-
-  const handleChangeToDate = () => {
-    setToDate(!toDate);
-  }
 
   const selctState = () => {
     return (
       <>
-        <Grid item xs={2.6}>
-          <Box sx={{ minWidth: 300 }}>
+        <Grid item xs={2.7}>
             <DatePicherBasic
               date={startDate}
               dateChange={(newValue) => {
@@ -34,14 +28,8 @@ export default function SearchBetweenDates(props) {
               name="date"
               size="small"
             />
-          </Box>
         </Grid>
-        <Grid item xs={1.2}>
-          {/* <FormLabel component="">
-            <Typography variant="h8" component="h4">
-              Hasta
-            </Typography>
-          </FormLabel> */}
+        <Grid item xs={1.1}>
           <FormControlLabel
             labelPlacement="top"
             control={
@@ -55,12 +43,8 @@ export default function SearchBetweenDates(props) {
           label="Hasta"
 
           />
-          {/* <Typography variant="h8" component="h4">
-            Hasta
-          </Typography> */}
         </Grid>
-        <Grid item xs={2.6}>
-          <Box sx={{ minWidth: 245 }}>
+        <Grid item xs={2.7}>
             {toDate && (
               <CustomDay
                 label={`${label} Fin `}
@@ -71,8 +55,6 @@ export default function SearchBetweenDates(props) {
               />
             )
             }
-
-          </Box>
         </Grid>
       </>
     )

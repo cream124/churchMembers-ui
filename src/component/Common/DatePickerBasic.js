@@ -12,11 +12,11 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 
 export default function DatePicherBasic(props) {
-  let {date, dateChange, label, name, size, disabled} = props;
+  let { date, dateChange, label, name, size, disabled } = props;
   const [value, setValue] = React.useState(dayjs(date, 'DD-MM-YYYY'));
 
   const handleChange = (newValue) => {
-    const currentDate =  newValue != null
+    const currentDate = newValue != null
       ? newValue.format('DD-MM-YYYY')
       : '';
     dateChange(currentDate);
@@ -25,15 +25,16 @@ export default function DatePicherBasic(props) {
 
 
   return (
-    <Grid  item xs={12} md={6}>
-      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'es'}>
+    // <Grid  item xs={12} md={6}>
+    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'es'}>
       <DatePicker
         label={label}
         value={value}
         name={name}
         inputFormat="DD/MM/YYYY"
-        slotProps={{ textField: {size: "small",} , field: {clearable: false}}}
-        size={size ? size: 'small'}  //"small"
+        slotProps={{ textField: { size: "small", }, field: { clearable: false } }}
+        // size={size ? size: 'small'}  
+
         onChange={handleChange}
         disabled={disabled}
         // onChange={(newValue) => {
@@ -43,7 +44,7 @@ export default function DatePicherBasic(props) {
         renderInput={(params) => <TextField {...params} />}
       />
     </LocalizationProvider>
-    
-      </Grid> 
+
+    // </Grid> 
   );
 }
