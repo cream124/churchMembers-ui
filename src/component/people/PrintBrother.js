@@ -212,9 +212,9 @@ export default function PrintBrother() {
   }
   const updateState = async (isUpdate) => {
     if (isUpdate) {
-      const activationState = deleteItem
-        ? "inactive"
-        : "deleted";
+      const activationState = deleteItem;
+        // ? "inactive"
+        // : "deleted";
       const bo = {
         ids: selectedItems,
         approvalDate: dayjs().format('DD-MM-YYYY'),

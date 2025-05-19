@@ -25,6 +25,7 @@ import ThemeProviderComponent from '../Common/ThemeProviderComponent';
 import PanelComp from '../Common/Panel/PanelComp';
 import ReportDataGrid from '../Common/DataGrid/ReportDataGrid';
 import SearchMenu from './search/SearchMemu';
+import { getPersonState } from '../../util/utilData';
 
 export default function SearchBrother(props) {
   const { state, handleChangeState,
@@ -40,6 +41,8 @@ export default function SearchBrother(props) {
     disabledButton,
     hideButton,
   } = props;
+
+  const personState = getPersonState();
 
   const selctState = () => {
     return (
@@ -109,9 +112,10 @@ export default function SearchBrother(props) {
                   variant="outlined"
                   size="small"
                   endIcon={<SendIcon />}
-                  onClick={() => clickOnActiveItems(true)}
+                  onClick={() => clickOnActiveItems(personState[state].actions[0].action)}
                 >
-                  Inactivar
+                  {personState[state].actions[0].name}
+                  {/* Inactivar */}
                 </Button>
               </Grid>
               <Grid item xs>
@@ -120,9 +124,9 @@ export default function SearchBrother(props) {
                   variant="outlined"
                   size="small"
                   endIcon={<DeleteIcon />}
-                  onClick={() => clickOnActiveItems(false)}
+                  onClick={() => clickOnActiveItems(personState[state].actions[1].value)}
                 >
-                  Eliminar
+                  {personState[state].actions[1].name}
                 </Button>
               </Grid>
 
