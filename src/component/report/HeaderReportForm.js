@@ -32,7 +32,7 @@ export default function HeaderReportForm(props) {
                 fontWeight="bold"
                 textcolor={titleTextColor}
               >
-                {`Campo Santo "Llauquequiri"`}
+                {`Iglesia "Alto Pagador" U.C.E.`}
               </TypographyComp>
             </Stack>
           </Grid>

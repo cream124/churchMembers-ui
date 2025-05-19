@@ -124,7 +124,7 @@ export default function SearchBrother(props) {
                   variant="outlined"
                   size="small"
                   endIcon={<DeleteIcon />}
-                  onClick={() => clickOnActiveItems(personState[state].actions[1].value)}
+                  onClick={() => clickOnActiveItems(personState[state].actions[1].action)}
                 >
                   {personState[state].actions[1].name}
                 </Button>

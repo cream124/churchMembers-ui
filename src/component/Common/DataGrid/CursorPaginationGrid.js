@@ -118,7 +118,7 @@ export default function CursorPaginationGrid(props) {
   return (
     <div style={{ width: '100%' }}>
 
-      <div style={{ height: 400 }}>
+      <div style={{ height: 700 }}>
         <DataGrid
           columns={columns}
           rows={partnerPerson.data ? partnerPerson.data[dataName].data : []}
@@ -132,7 +132,6 @@ export default function CursorPaginationGrid(props) {
           paginationModel={paginationModel}
           loading={partnerPerson.loading}
           pageSizeOptions={[10, 25, 50, 100]}
-          // pageSizeOptions={[10, 25, 50, 100, 200, { value: -1, label: 'All'}]}
           checkboxSelection={checkboxSelection}
           rowSelectionModel={selectedItems}
           // disableMultipleRowSelection={true}
@@ -141,14 +140,9 @@ export default function CursorPaginationGrid(props) {
               updateSelecteItems(newSelectionModel);
             }
           }}
-          keepNonExistentRowsSelected
+          // keepNonExistentRowsSelected
           slots={{ toolbar: () => displayCustomToolbar ? CustomToolbar(title, moreMenuComp) : '' }}
           {...otherProps}
-          sx={{
-            [`& .${gridClasses.cell}`]: {
-              py: 1,
-            },
-          }}
         />
       </div>
     </div>

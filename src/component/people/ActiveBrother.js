@@ -202,9 +202,9 @@ export default function ActiveBrother() {
   }
   const updateState = async (isUpdate) => {
     if (isUpdate) {
-      const activationState = deleteItem
-        ? "inactive"
-        : "deleted";
+      const activationState = deleteItem;
+        // ? "inactive"
+        // : "deleted";
       const bo = {
         ids: selectedItems,
         approvalDate: dayjs().format('DD-MM-YYYY'),
@@ -212,7 +212,10 @@ export default function ActiveBrother() {
         state: activationState
       };
       const response = await updateStatePerson({ variables: bo });
-
+      setFilterJson2({
+      ...filterJson2,
+      filter: { day: filterJson2.filter.day + 1 }
+    });
       console.log("=resp=2====", response);
       if (response.data?.updateStatePerson._id) {
         console.log("=resp=====", state);
@@ -221,11 +224,6 @@ export default function ActiveBrother() {
       }
     }
   }
-
-
-
-
-
 
   // if (error) return (
   //   <div>
