@@ -56,7 +56,7 @@ let filterJson22 =
 
 
 
-export default function EditBrother() {
+export default function ActiveBrother() {
   const [searchType, setSearchType] = React.useState('birthdate');
   const [startDate, setStartDate] = React.useState(getCurrentDate());
   const [endDate, setEndDate] = React.useState(startDate);
@@ -103,7 +103,7 @@ export default function EditBrother() {
     filterJson.filter.state = event.target.value;
     setFilterJson2({
       ...filterJson2,
-      filter: {state: event.target.value}
+      filter: { state: event.target.value }
     });
     // refetch(filterJson);
     // refetch({ state: event.target.value });
@@ -147,7 +147,7 @@ export default function EditBrother() {
     filterJson.filter.endDate = endDate;
     setFilterJson2({
       ...filterJson,
-      filter: {day: filterJson2.filter.day + 1}
+      filter: { day: filterJson2.filter.day + 1 }
     });
   }
 
@@ -236,11 +236,14 @@ export default function EditBrother() {
   // if (loading) return <div> loading.......</div>
   return (
     <Paper elevation={24} className={classes.containerRegistration}>
-      {searchPeople()}
+      <PanelComp padding={'1em'} margin={'1.2em'}>
+        {searchPeople()}
+      </PanelComp>
+
       {setLastPath()}
       <PanelComp padding={'1em'} margin={'1.2em'}>
         <CursorPaginationGrid
-        title={'Editar Hermanos'}
+          title={'Activacion de Hermanos'}
           filter={filterJson2}
           runQuery={runQuery}
           columns={columns2}

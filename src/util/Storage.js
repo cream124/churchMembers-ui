@@ -29,6 +29,14 @@ export function getUserDataST() {
   return data;
 }
 
+export function setLastPathSS(path) {
+  sessionStorage.setItem('lastPath', path);
+}
+
+export function getLastPathSS() {
+  return sessionStorage.getItem('lastPath');
+}
+
 export function isRegisteredUserST() {
   const userId = sessionStorage.getItem('userId');
   return userId && userId.length ? true: false;

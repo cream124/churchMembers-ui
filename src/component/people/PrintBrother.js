@@ -9,7 +9,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import dayjs from 'dayjs';
 
 
-import { FilterByStatePersonsDB, GetPersonsDB, FilterPersonsDB } from '../../api/PersonsDB';
+import { FilterByStatePersonsDB, FilterPersonsDB } from '../../api/PersonsDB';
 import { UpdateStatePersonsDB } from '../../api/SavePersonDB';
 import AlertDialog from '../Common/AlertDialog';
 import SnackbarComponent from '../Common/SnackbarComponent';
@@ -25,12 +25,11 @@ import ThemeProviderComponent from '../Common/ThemeProviderComponent';
 import PanelComp from '../Common/Panel/PanelComp';
 import ReportDataGrid from '../Common/DataGrid/ReportDataGrid';
 import SearchBrother from './searchBrother';
-import { getCurrentDate } from '../../util/utilDate';
-import CursorPaginationGrid from '../Common/DataGrid/CursorPaginationGrid';
-import { setLastPathSS } from '../../util/Storage';
+import { getCurrentDate, getCurrentDateISO, getPrintDate } from '../../util/utilDate';
+import HeaderReportForm from '../report/HeaderReportForm';
 
 const personsColums = activePersonsColums();
-const columns2 = personsColums.columns;
+const columns2 = personsColums.columnsOnAction;
 const columnsVisible = personsColums.columnsVisible;
 
 let filterJson =
@@ -38,29 +37,19 @@ let filterJson =
   filter:
   {
     searchType: "",
-    state: "registered"
+    state: "active"
   }
 }
 
-let filterJson22 =
-{
-  filter:
-  {
-    searchType: "",
-    state: "registered",
-    day: 1,
-    page: 0,
-    pageSize: 50
-  }
-}
+const dateToPrint = getPrintDate(getCurrentDateISO());
+const headerD = (state) => { return { title: "Hernamos", subTitle: `${state}`, subTitle2: "" } }
 
-
-
-export default function EditBrother() {
+export default function PrintBrother() {
   const [searchType, setSearchType] = React.useState('birthdate');
   const [startDate, setStartDate] = React.useState(getCurrentDate());
   const [endDate, setEndDate] = React.useState(startDate);
-  const [state, setState] = React.useState('registered');
+  const [state, setState] = React.useState('active');
+  const [headerData, setHeaderData] = React.useState(headerD(state));
   const [field, setField] = React.useState('');
   const [value, setValue] = React.useState('');
   const [toDate, setToDate] = React.useState(false);
@@ -71,26 +60,39 @@ export default function EditBrother() {
   const [deleteItem, setDeleteItem] = React.useState(false);
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const [searchStatus, setSearchStatus] = React.useState(false);
-  const [filterJson2, setFilterJson2] = React.useState(filterJson22);
 
-  // const { error, loading, data, refetch } = FilterPersonsDB(filterJson);
+  const { error, loading, data, refetch } = FilterPersonsDB(filterJson);
   // const {error, loading, data, refetch } = FilterByStatePersonsDB({state: "active"});
   //FilterPersonsDB
   const { updateStatePerson, errorUp, loadingUp, dataUp } = UpdateStatePersonsDB();
   const [columnVisibilityModel, setColumnVisibilityModel] = React.useState(columnsVisible);
-  const currentPath = "/brother";
 
-  const setLastPath = () => {
-    setLastPathSS(currentPath);
+
+  React.useEffect(() => {
+    setingHeaderData(filterJson);
+  }, [state]);
+
+  const setingHeaderData = (filter) => {
+    const states = { registered: "Registrados", active: "Activos", inactive: "Inactivos", deleted: "Eliminados", registeredCancel: "Registros Denegados" }
+    const searchLabel = {
+      names: `Busqueda por nombres con "${filter.filter.value}"`,
+      birthdate: `Con fecha de Cumpleaños entre: "${filter.filter.startDate} - ${filter.filter.endDate}"`,
+      betweenAge: `Por edad entre: "${filter.filter.startDate} - ${filter.filter.endDate}"`,
+      betweenDatesBirthdate: `Con fecha de nacimiento entre: "${filter.filter.startDate} - ${filter.filter.endDate}"`,
+      betweenDatesChristianDate: `Con fecha de combercion entre: "${filter.filter.startDate} - ${filter.filter.endDate}"`,
+      betweenDatesBaptizedDate: `Con fecha de BAUTIZMO entre: "${filter.filter.startDate} - ${filter.filter.endDate}"`,
+      emailText: `Busqueda por nombres con "${filter.filter.value}"`,
+      addressText: `Busqueda por DIRECCION con "${filter.filter.value}"`,
+    };
+    const subTitle2 = filter.filter.searchType.length > 1
+      ? searchLabel[filter.filter.searchType]
+      : "";
+    setHeaderData({
+      ...headerData,
+      subTitle: `${states[state]}`,
+      subTitle2
+    });
   }
-
-
-  const runQuery = (filter) => {
-    const partnerPerson = GetPersonsDB(filter);
-    return partnerPerson;
-  }
-
-
 
   const handleChangeToDate = () => {
     setToDate(!toDate);
@@ -101,11 +103,7 @@ export default function EditBrother() {
     setState(event.target.value);
     // localStorage.setItem('token', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
     filterJson.filter.state = event.target.value;
-    setFilterJson2({
-      ...filterJson2,
-      filter: {state: event.target.value}
-    });
-    // refetch(filterJson);
+    refetch(filterJson);
     // refetch({ state: event.target.value });
   };
 
@@ -142,13 +140,10 @@ export default function EditBrother() {
   }
 
   const filterPersons = () => {
-    filterJson.filter.searchType = searchType;
     filterJson.filter.startDate = startDate;
     filterJson.filter.endDate = endDate;
-    setFilterJson2({
-      ...filterJson,
-      filter: {day: filterJson2.filter.day + 1}
-    });
+    setingHeaderData(filterJson);
+    refetch(filterJson);
   }
 
   const changeSearchStatus = () => {
@@ -161,10 +156,13 @@ export default function EditBrother() {
           state: filterJson.filter.state
         }
       }
-      // refetch(filterJson);
-      setFilterJson2(filterJson);
+      setingHeaderData(filterJson);
+      refetch(filterJson);
     } else {
       setSearchStatus(true);
+      // setSearchType(value);
+      filterJson.filter.searchType = searchType;
+      filterJson.filter.startDate = startDate;
       filterJson.filter.startDate = startDate;
       filterJson.filter.endDate = startDate; // endDate;
       setEndDate(startDate);
@@ -172,6 +170,17 @@ export default function EditBrother() {
 
 
   }
+  const renderHeader = (title, subTitle, subTitle2) => {
+    return (
+      <HeaderReportForm
+        title={title}
+        subTitle={subTitle}
+        subTitle2={subTitle2}
+        date={dateToPrint}
+      />
+    );
+  }
+
 
   const searchPeople = () => {
     return (
@@ -196,6 +205,7 @@ export default function EditBrother() {
         filterPersons={filterPersons}
         clickOnActiveItems={clickOnActiveItems}
         disabledButton={disabledButton}
+        hideButton={true}
       />
     )
 
@@ -217,7 +227,7 @@ export default function EditBrother() {
       if (response.data?.updateStatePerson._id) {
         console.log("=resp=====", state);
         setOpenSnackbar(true);
-        // refetch({ state: state });
+        refetch({ state: state });
       }
     }
   }
@@ -227,47 +237,33 @@ export default function EditBrother() {
 
 
 
-  // if (error) return (
-  //   <div>
-  //     <ButtonLogout />
-  //   </div>
-  // )
+  if (error) return (
+    <div>
+      <ButtonLogout />
+    </div>
+  )
 
-  // if (loading) return <div> loading.......</div>
+  if (loading) return <div> loading.......</div>
   return (
     <Paper elevation={24} className={classes.containerRegistration}>
-      {searchPeople()}
-      {setLastPath()}
       <PanelComp padding={'1em'} margin={'1.2em'}>
-        <CursorPaginationGrid
-        title={'Editar Hermanos'}
-          filter={filterJson2}
-          runQuery={runQuery}
-          columns={columns2}
-          dataName={'getPersons'}
-          displayCustomToolbar={true}
-          columnVisibilityModel={columnVisibilityModel}
-          onColumnVisibilityModelChange={(newModel) =>
-            setColumnVisibilityModel(newModel)
-          }
-          checkboxSelection
-          onRowSelectionModelChange={(newSelectionModel) => {
-            updateSelecteItems(newSelectionModel);
-          }}
-
-        />
-
-        {/* <ReportDataGrid
-          title={'Editar Hermanos'}
+        {searchPeople()}
+      </PanelComp>
+      <PanelComp padding={'1em'} margin={'1.2em'}>
+        <ReportDataGrid
+          // title={'Lista Hermanos'}
           // moreMenuComp={searchPeople()}
+          moreMenuComp={renderHeader(headerData.title, headerData.subTitle, headerData.subTitle2)}
           columns={columns2}
           rows={data.filterPersons}
           columnVisibilityModel={columnVisibilityModel}
           setColumnVisibilityModel={setColumnVisibilityModel}
-          updateSelecteItems={updateSelecteItems}
+          // updateSelecteItems={updateSelecteItems}
+          checkboxSelection={false}
           sortable={true}
           columnMenu={true}
-        /> */}
+          getRowHeight={() => 'auto'}
+        />
       </PanelComp>
 
 

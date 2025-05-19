@@ -211,6 +211,46 @@ query FilterPersons($filter: Filter) {
 }
 `
 
+const GET_PERSON = gql`
+query GetPersons($filter: PersonFilter) {
+  getPersons(filter: $filter) {
+    metadata {
+      page
+      pageSize
+      totalCount
+    }
+    data {
+       _id
+    name
+    lastName
+    motherLastName
+    birthDate
+    ci
+    photo
+    phone
+    address
+    location
+    state
+    email
+    registerId
+    registerName
+    registerDate
+    approvalId
+    approvalDate
+    user
+    userName
+    level
+    age
+    spiritual {
+      christian
+      baptized
+    }
+    }
+    
+  }
+}
+`
+
 
 const LOGIN_PERSON = gql`
 mutation LoginPerson($login: Login) {
@@ -263,6 +303,13 @@ export const FilterByStatePersonsDB = ({state}) => {
 
 export const FilterPersonsDB = ({filter}) => {
   const {error, loading, data, refetch } = useQuery(FILTER_PERSONS, {
+    variables: {filter},
+  });
+  return {error, loading, data, refetch };
+}
+
+export const GetPersonsDB = ({filter}) => {
+  const {error, loading, data, refetch } = useQuery(GET_PERSON, {
     variables: {filter},
   });
   return {error, loading, data, refetch };

@@ -13,9 +13,9 @@ const titleTextColor = '#022B5D';
 const headerTextColor = '#646903';
 const totalTextColor = '#651004';
 
-function getNameValue(value, id, ) {
+function getNameValue(value, id,) {
   if (id !== "0") {
-    return undefined;  
+    return undefined;
   }
   return (
     <TypographyComp
@@ -34,13 +34,13 @@ function CustomToolbar(title, moreMenuComp) {
       <GridToolbarExport />
       <GridToolbarContainer />
       <GridToolbarDensitySelector />
-      <GridToolbarColumnsButton/>
+      <GridToolbarColumnsButton />
       {/* <GridToolbar /> */}
       <Box style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
         <TypographyComp variant="h4" textColor={titleTextColor} fontWeight={'600'}>
           {title}
         </TypographyComp>
-       
+
       </Box>
       {moreMenuComp}
     </GridToolbarContainer>
@@ -48,11 +48,11 @@ function CustomToolbar(title, moreMenuComp) {
 }
 
 function getRenderHeader(name) {
-  return  () => ( 
+  return () => (
     <TypographyComp
-      variant="body2"
+      variant="caption"
       fontWeight={'600'}
-      textColor={headerTextColor}
+      textcolor={headerTextColor}
     >
       {name}
     </TypographyComp>
@@ -61,7 +61,7 @@ function getRenderHeader(name) {
 
 function getRenderCell(name) {
   // (params) => getNameValue(params.row.firstName, params.row.id)
-  return  (params) => getNameValue(params.row[name], params.row._id)
+  return (params) => getNameValue(params.row[name], params.row._id)
 }
 
 function getColumns(column, sortable) {
@@ -79,16 +79,18 @@ function getColumns(column, sortable) {
 }
 
 export default function ReportDataGrid(props) {
-  const { 
-    title, 
-    columns, 
-    rows, 
-    columnVisibilityModel, 
-    setColumnVisibilityModel, 
-    updateSelecteItems, 
+  const {
+    title,
+    columns,
+    rows,
+    columnVisibilityModel,
+    setColumnVisibilityModel,
+    updateSelecteItems,
     moreMenuComp,
     sortable,
-    columnMenu
+    columnMenu,
+    checkboxSelection,
+    ...otherProps
   } = props;
 
 
@@ -111,7 +113,7 @@ export default function ReportDataGrid(props) {
         onColumnVisibilityModelChange={(newModel) =>
           setColumnVisibilityModel(newModel)
         }
-        disableColumnMenu = {!columnMenu}
+        disableColumnMenu={!columnMenu}
         // hideFooter
         autoHeight
         getRowId={(row) => row._id}
@@ -119,19 +121,22 @@ export default function ReportDataGrid(props) {
         getRowClassName={(params) =>
           params.id === 0 ? 'total' : 'odd'
         }
-      // initialState={{
-      //   pagination: {
-      //     paginationModel: {
-      //       pageSize: 5,
-      //     },
-      //   },
-      // }}
-      // pageSizeOptions={[5]}
-      checkboxSelection
-      onRowSelectionModelChange={(newSelectionModel) => {
-        updateSelecteItems(newSelectionModel);
-      }}
-      // disableRowSelectionOnClick
+        initialState={{
+          pagination: {
+            paginationModel: {
+              page: 0,
+              pageSize: 50,
+            },
+          },
+        }}
+        // pageSizeOptions={[5]}
+        pageSizeOptions={[10, 25, 50, 100]}
+        checkboxSelection={checkboxSelection}
+        onRowSelectionModelChange={(newSelectionModel) => {
+          updateSelecteItems(newSelectionModel);
+        }}
+        // disableRowSelectionOnClick
+        {...otherProps}
       />
     </ThemeProvider>
   );

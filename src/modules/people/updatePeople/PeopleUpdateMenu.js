@@ -2,9 +2,11 @@ import * as React from "react";
 import PanelComp from "../../../component/Common/Panel/PanelComp";
 import { Button, Chip, Stack } from "@mui/material";
 import PeopleUpdateMembership from "./PeopleUpdateMembership";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import UpdatePeople from "../UpdatePeople";
 import UpdateUser from "./UpdateUser";
+import { getLastPathSS } from "../../../util/Storage";
+
 
 const colors = {
   mainColor: "#6BBA1B",
@@ -17,6 +19,8 @@ const iid = "669822978bbd737451503885";
 export default function PeopleUpdateMenu() {
   const { id, ur } = useParams();
   const [activeStep, setActiveStep] = React.useState(3);
+  const history = useNavigate();
+  const lastPath = getLastPathSS();
 
   function getStepContent(step) {
     switch (step) {
@@ -94,8 +98,11 @@ export default function PeopleUpdateMenu() {
 
       </React.Fragment>
       <Button
-        component={Link}
-        to={`/${ur}`}
+        onClick={() => {
+          history(`${lastPath}`);
+        }}
+        // component={Link}
+        // to={`/${ur}`}
         // to={`/records`}
         variant="outlined"
       // color="success"

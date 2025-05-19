@@ -34,6 +34,8 @@ import PeopleCardPrint from "../../modules/people/poplePrint/PeopleCardPrint";
 import PeopleUpdateMenu from "../../modules/people/updatePeople/PeopleUpdateMenu";
 import EditBroder from "../people/EditBrother";
 import EditBrother from "../people/EditBrother";
+import PrintBrother from "../people/PrintBrother";
+import ActiveBrother from "../people/ActiveBrother";
 
 const drawerWidth = 240;
 
@@ -111,12 +113,11 @@ export default function TopBar() {
           <Route path="/printPerson/:id" element={<PeopleCardPrint />} />
           <Route path="/updatePerson" element={<PeopleUpdateMenu />} />
           <Route path="/updatePerson/:id/:ur" element={<PeopleUpdateMenu />} />
+          <Route path="/updatePerson/:id/" element={<PeopleUpdateMenu />} />
 
           <Route path="/Sample" element={<Sample />} />
-          <Route
-            path="/registrationRequest"
-            element={<RegistrationRequest />}
-          />
+          <Route path="/registrationRequest" element={<RegistrationRequest />}/>
+          <Route path="/active" element={<ActiveBrother />}/>
           <Route path="/records" element={<ActivesList />} />
           <Route path="/brother" element={<EditBrother />} />
           <Route path="/event" element={<ListEvents />} />
@@ -127,6 +128,7 @@ export default function TopBar() {
             path="/editEvent/:id/:dayId/:servId"
             element={<EditService />}
           />
+          <Route path="/personprint" element={<PrintBrother />} />
           <Route path="/updatePerson1/:id" element={<UpdatePerson />} />
           <Route path="/verse" element={<Verse />} />
           <Route path="/mission" element={<Mission />} />

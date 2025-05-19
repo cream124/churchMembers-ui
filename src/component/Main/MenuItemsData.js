@@ -15,7 +15,7 @@ const menuListSuperUser = [
     options: [
       {
         name: 'Lista de Hermano',
-        uri: '/addPerson3',
+        uri: '/personprint',
       },
       {
         name: 'Lista de Miembros',
@@ -48,7 +48,7 @@ const menuListSuperUser = [
       },
       {
         name: 'Aprobación de Hermano',
-        uri: '/registrationRequest',
+        uri: '/active',
       },
     ]
   },

@@ -38,6 +38,7 @@ export default function SearchBrother(props) {
     filterPersons,
     clickOnActiveItems,
     disabledButton,
+    hideButton,
   } = props;
 
   const selctState = () => {
@@ -95,115 +96,39 @@ export default function SearchBrother(props) {
                 handleChangeValue={handleChangeValue}
                 filterPersons={filterPersons}
               />
-              // <Paper elevation={12} className={classes.searchMainPanel}>
-              //   <Grid container spacing={2} alignItems="center">
-              //     <Grid item xs={0.7}>
-              //       <Typography variant="h8" component="h4">
-              //         Por:
-              //       </Typography>
-              //     </Grid>
-              //     <Grid item xs={3.2}>
-              //       <Box sx={{ minWidth: 150 }}>
-              //         <FormControl fullWidth>
-              //           <InputLabel id="demo-simple-select1">Tipo de búsqueda</InputLabel>
-              //           <Select
-              //             labelId="demo-simple-select1"
-              //             id="demo-simple-selec1t"
-              //             value={searchType}
-              //             label="Tipo de búsqueda"
-              //             size="small"
-              //           onChange={handleSearchType}
-              //           >
-              //             <MenuItem value={'birthdate'}>Cumpleaños</MenuItem>
-              //             <MenuItem value={'nameLastname'}>Nombre o Apellido</MenuItem>
-              //             <MenuItem value={'age'}>Edad</MenuItem>
-              //             <MenuItem value={'birthDate'}>Fecha de Nacimiento</MenuItem>
-              //             <MenuItem value={'christianDate'}>Fecha de Cristiano</MenuItem>
-              //             <MenuItem value={'baptizedDate'}>Fecha de Bautizo</MenuItem>
-              //             <MenuItem value={'christians'}>Cristianos</MenuItem>
-              //             <MenuItem value={'baptizeds'}>Bautizados</MenuItem>
-              //             <MenuItem value={'email'}>Email</MenuItem>
-              //             <MenuItem value={'addresss'}>Direccion</MenuItem>
-              //             <MenuItem value={'registered'}>Registrado</MenuItem>
-              //           </Select>
-              //         </FormControl>
-              //       </Box>
-              //     </Grid>
-              //     <Grid item xs={2.8}>
-              //       <Box sx={{ minWidth: 300 }}>
-              //         <DatePicherBasic
-              //           date={startDate}
-              //           dateChange={(newValue) => {
-              //             setStartDate(newValue);
-              //             console.log('-newValue------------', newValue)
-              //           }}
-              //           label='Fecha Inicio'
-              //           name="date"
-              //           size="small"
-              //         />
-              //       </Box>
-              //     </Grid>
-              //     <Grid item xs={0.9}>
-              //       <Typography variant="h8" component="h4">
-              //         Hasta
-              //       </Typography>
-              //     </Grid>
-              //     <Grid item xs={2.5}>
-              //       <Box sx={{ minWidth: 220 }}>
-              //         <CustomDay
-              //           label='Fecha Fin'
-              //           startDate={dayjs(endDate, 'DD-MM-YYYY')}
-              //           dateChange={(newValue) => {
-              //             setEndDate(newValue);
-              //             console.log('-newValue-2-----------', newValue)
-              //           }}
-              //         />
-              //       </Box>
-              //     </Grid>
-              //     <Grid item xs={1.2}>
-              //       <Button
-              //         variant="outlined"
-              //         size="small"
-              //         endIcon={<SearchIcon />}
-              //         onClick={() => filterPersons()}
-              //       >
-              //         Buscar
-              //       </Button>
-              //     </Grid>
-              //   </Grid>
-              // </Paper>
-
             }
           </Paper>
         </Grid>
         <Grid item xs={2.5}>
           {/* <Paper elevation={24}> */}
-          <Grid container spacing={2}>
-            <Grid item xs>
-              <Button
-                disabled={disabledButton}
-                variant="outlined"
-                size="small"
-                endIcon={<SendIcon />}
-                onClick={() => clickOnActiveItems(true)}
-              >
-                Inactivar
-              </Button>
-            </Grid>
-            <Grid item xs>
-              <Button
-                disabled={disabledButton}
-                variant="outlined"
-                size="small"
-                endIcon={<DeleteIcon />}
-                onClick={() => clickOnActiveItems(false)}
-              >
-                Eliminar
-              </Button>
-            </Grid>
+          { !hideButton &&
+            <Grid container spacing={2}>
+              <Grid item xs>
+                <Button
+                  disabled={disabledButton}
+                  variant="outlined"
+                  size="small"
+                  endIcon={<SendIcon />}
+                  onClick={() => clickOnActiveItems(true)}
+                >
+                  Inactivar
+                </Button>
+              </Grid>
+              <Grid item xs>
+                <Button
+                  disabled={disabledButton}
+                  variant="outlined"
+                  size="small"
+                  endIcon={<DeleteIcon />}
+                  onClick={() => clickOnActiveItems(false)}
+                >
+                  Eliminar
+                </Button>
+              </Grid>
 
 
-          </Grid>
+            </Grid>
+          }
           {/* </Paper>   */}
         </Grid>
       </Grid>

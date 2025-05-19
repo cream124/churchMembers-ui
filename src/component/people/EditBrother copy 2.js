@@ -9,7 +9,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import dayjs from 'dayjs';
 
 
-import { FilterByStatePersonsDB, GetPersonsDB, FilterPersonsDB } from '../../api/PersonsDB';
+import { FilterByStatePersonsDB, FilterPersonsDB } from '../../api/PersonsDB';
 import { UpdateStatePersonsDB } from '../../api/SavePersonDB';
 import AlertDialog from '../Common/AlertDialog';
 import SnackbarComponent from '../Common/SnackbarComponent';
@@ -26,8 +26,6 @@ import PanelComp from '../Common/Panel/PanelComp';
 import ReportDataGrid from '../Common/DataGrid/ReportDataGrid';
 import SearchBrother from './searchBrother';
 import { getCurrentDate } from '../../util/utilDate';
-import CursorPaginationGrid from '../Common/DataGrid/CursorPaginationGrid';
-import { setLastPathSS } from '../../util/Storage';
 
 const personsColums = activePersonsColums();
 const columns2 = personsColums.columns;
@@ -38,19 +36,7 @@ let filterJson =
   filter:
   {
     searchType: "",
-    state: "registered"
-  }
-}
-
-let filterJson22 =
-{
-  filter:
-  {
-    searchType: "",
-    state: "registered",
-    day: 1,
-    page: 0,
-    pageSize: 50
+    state: "active"
   }
 }
 
@@ -60,7 +46,7 @@ export default function EditBrother() {
   const [searchType, setSearchType] = React.useState('birthdate');
   const [startDate, setStartDate] = React.useState(getCurrentDate());
   const [endDate, setEndDate] = React.useState(startDate);
-  const [state, setState] = React.useState('registered');
+  const [state, setState] = React.useState('active');
   const [field, setField] = React.useState('');
   const [value, setValue] = React.useState('');
   const [toDate, setToDate] = React.useState(false);
@@ -71,26 +57,12 @@ export default function EditBrother() {
   const [deleteItem, setDeleteItem] = React.useState(false);
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const [searchStatus, setSearchStatus] = React.useState(false);
-  const [filterJson2, setFilterJson2] = React.useState(filterJson22);
 
-  // const { error, loading, data, refetch } = FilterPersonsDB(filterJson);
+  const { error, loading, data, refetch } = FilterPersonsDB(filterJson);
   // const {error, loading, data, refetch } = FilterByStatePersonsDB({state: "active"});
   //FilterPersonsDB
   const { updateStatePerson, errorUp, loadingUp, dataUp } = UpdateStatePersonsDB();
   const [columnVisibilityModel, setColumnVisibilityModel] = React.useState(columnsVisible);
-  const currentPath = "/brother";
-
-  const setLastPath = () => {
-    setLastPathSS(currentPath);
-  }
-
-
-  const runQuery = (filter) => {
-    const partnerPerson = GetPersonsDB(filter);
-    return partnerPerson;
-  }
-
-
 
   const handleChangeToDate = () => {
     setToDate(!toDate);
@@ -101,11 +73,7 @@ export default function EditBrother() {
     setState(event.target.value);
     // localStorage.setItem('token', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
     filterJson.filter.state = event.target.value;
-    setFilterJson2({
-      ...filterJson2,
-      filter: {state: event.target.value}
-    });
-    // refetch(filterJson);
+    refetch(filterJson);
     // refetch({ state: event.target.value });
   };
 
@@ -142,13 +110,9 @@ export default function EditBrother() {
   }
 
   const filterPersons = () => {
-    filterJson.filter.searchType = searchType;
     filterJson.filter.startDate = startDate;
     filterJson.filter.endDate = endDate;
-    setFilterJson2({
-      ...filterJson,
-      filter: {day: filterJson2.filter.day + 1}
-    });
+    refetch(filterJson);
   }
 
   const changeSearchStatus = () => {
@@ -161,8 +125,7 @@ export default function EditBrother() {
           state: filterJson.filter.state
         }
       }
-      // refetch(filterJson);
-      setFilterJson2(filterJson);
+      refetch(filterJson);
     } else {
       setSearchStatus(true);
       filterJson.filter.startDate = startDate;
@@ -217,7 +180,7 @@ export default function EditBrother() {
       if (response.data?.updateStatePerson._id) {
         console.log("=resp=====", state);
         setOpenSnackbar(true);
-        // refetch({ state: state });
+        refetch({ state: state });
       }
     }
   }
@@ -227,39 +190,19 @@ export default function EditBrother() {
 
 
 
-  // if (error) return (
-  //   <div>
-  //     <ButtonLogout />
-  //   </div>
-  // )
+  if (error) return (
+    <div>
+      <ButtonLogout />
+    </div>
+  )
 
-  // if (loading) return <div> loading.......</div>
+  if (loading) return <div> loading.......</div>
   return (
     <Paper elevation={24} className={classes.containerRegistration}>
-      {searchPeople()}
-      {setLastPath()}
       <PanelComp padding={'1em'} margin={'1.2em'}>
-        <CursorPaginationGrid
-        title={'Editar Hermanos'}
-          filter={filterJson2}
-          runQuery={runQuery}
-          columns={columns2}
-          dataName={'getPersons'}
-          displayCustomToolbar={true}
-          columnVisibilityModel={columnVisibilityModel}
-          onColumnVisibilityModelChange={(newModel) =>
-            setColumnVisibilityModel(newModel)
-          }
-          checkboxSelection
-          onRowSelectionModelChange={(newSelectionModel) => {
-            updateSelecteItems(newSelectionModel);
-          }}
-
-        />
-
-        {/* <ReportDataGrid
+        <ReportDataGrid
           title={'Editar Hermanos'}
-          // moreMenuComp={searchPeople()}
+          moreMenuComp={searchPeople()}
           columns={columns2}
           rows={data.filterPersons}
           columnVisibilityModel={columnVisibilityModel}
@@ -267,7 +210,7 @@ export default function EditBrother() {
           updateSelecteItems={updateSelecteItems}
           sortable={true}
           columnMenu={true}
-        /> */}
+        />
       </PanelComp>
 
 
