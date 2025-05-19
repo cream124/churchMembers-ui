@@ -142,12 +142,20 @@ export default function ActiveBrother() {
   }
 
   const filterPersons = () => {
-    filterJson.filter.searchType = searchType;
-    filterJson.filter.startDate = startDate;
-    filterJson.filter.endDate = endDate;
+    // filterJson.filter.searchType = searchType;
+    // filterJson.filter.startDate = startDate;
+    // filterJson.filter.endDate = endDate;
+
     setFilterJson2({
-      ...filterJson,
-      filter: { day: filterJson2.filter.day + 1 }
+      // ...filterJson2,
+      filter: { 
+        ...filterJson2.filter,
+        day: filterJson2.filter.day + 1,
+        value,
+        searchType,
+        startDate,
+        endDate 
+      }
     });
   }
 
