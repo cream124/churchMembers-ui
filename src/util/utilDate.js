@@ -30,6 +30,9 @@ export function getPrintTime(date) {
 }
 
 export function getCurrentDateISO() {
+    // const d = '2025-01-18T23:07:05-04:00';
+    // const d = '2024-09-01T20:50:04-04:00';
+    // const newDate = dayjs(d).format();
     const newDate = dayjs().format();
     return newDate;
 }

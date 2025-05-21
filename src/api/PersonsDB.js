@@ -236,7 +236,10 @@ query GetPersons($filter: PersonFilter) {
     registerName
     registerDate
     approvalId
+    approvalName
     approvalDate
+    updateName
+    updateDate
     user
     userName
     level

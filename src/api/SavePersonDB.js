@@ -128,10 +128,10 @@ mutation UpdateUserPerson($_id: String!, $user: Boolean, $email: String, $level:
 `
 
 const UPTATE_STATE_PERSONS = gql`
-mutation UpdateStatePerson($ids: [String], $approvalDate: String, $approvalId: String, $state: String) {
-  updateStatePerson(ids: $ids, approvalDate: $approvalDate, approvalId: $approvalId, state: $state) {
-   _id
-   photo
+mutation UpdateStatePerson($ids: [String], $state: String, $approvalId: String, $approvalDate: String, $updateId: String, $updateDate: String) {
+  updateStatePerson(ids: $ids, state: $state, approvalId: $approvalId, approvalDate: $approvalDate, updateId: $updateId, updateDate: $updateDate) {
+    _id
+    photo
    address
    location
    state

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import EditIcon from '@mui/icons-material/Edit';
 import PrintIcon from '@mui/icons-material/LocalPrintshop';
 import { red } from '@mui/material/colors';
+import { getPrintDate, getPrintTime } from '../../util/utilDate';
 
 function activePersonsColumns (){ 
   return [
@@ -40,8 +41,7 @@ function activePersonsColumns (){
       headerClassName: 'super-app-theme--header'
     },
     { field: 'birthDate', headerName: 'Nacimiento', type: 'date', width: 100,
-    valueGetter: (params) =>
-      new Date(params.row.birthDate),
+      valueGetter: (params) => new Date(params.row.birthDate),
       headerClassName: 'super-app-theme--header'
     },
     { field: 'phone', headerName: 'Teléfono', width: 100, 
@@ -72,16 +72,29 @@ function activePersonsColumns (){
     { field: 'address', headerName: 'Direccion', width: 130,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'registerName', headerName: 'Registrasdo por', width: 120,
+    { field: 'registerName', headerName: 'Registrado por', width: 120,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'registerDate', headerName: 'Fecha de Registro', type: '', width: 100, 
+    { field: 'registerDate', headerName: 'Fecha de Registro', type: 'date', width: 100, 
+      valueGetter: (params) => new Date(params.row.registerDate),
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'approvalId', headerName: 'Aprobado por', width: 120,
+    { field: 'approvalName', headerName: 'Aprobado por', width: 120,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'approvalDate', headerName: 'Fecha de Aprobacion', type: 'date', width: 100,
+    { field: 'approvalDate', headerName: 'Fecha de Aprobacion', type: '', width: 100,
+      valueGetter: (params) => params.row.approvalDate.length > 2 
+        ? getPrintDate(params.row.approvalDate) //new Date(params.row.approvalDate)
+        : '-',
+      headerClassName: 'super-app-theme--header'
+    },
+    { field: 'updateName', headerName: 'Actualizado por', width: 120,
+      headerClassName: 'super-app-theme--header'
+    },
+    { field: 'updateDate', headerName: 'Fecha de Actualizacion', type: '', width: 100,
+      valueGetter: (params) => params.row.updateDate 
+        ? getPrintDate(params.row.updateDate) //new Date(params.row.approvalDate)
+        : '-',
       headerClassName: 'super-app-theme--header'
     },
     { field: 'level', headerName: 'Nivel', width: 120,
@@ -313,8 +326,10 @@ const forActivePersonsColumnsVisible ={
 const activePersonsColumnsVisible ={
   state: false,
   registerDate: false,
-  approvalId: false,
+  approvalName: false,
   approvalDate: false,
+  updateName: false,
+  updateDate: false,
   level: false,
 };
 
