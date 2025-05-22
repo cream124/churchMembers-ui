@@ -1,11 +1,10 @@
-import dayjs from 'dayjs';
 import { Avatar } from "@mui/material";
 import { GridActionsCellItem } from '@mui/x-data-grid';
 import { Link } from "react-router-dom";
 import EditIcon from '@mui/icons-material/Edit';
 import PrintIcon from '@mui/icons-material/LocalPrintshop';
 import { red } from '@mui/material/colors';
-import { getPrintDate, getPrintTime } from '../../util/utilDate';
+import { getPersonStatenName } from '../../util/utilData';
 
 function activePersonsColumns (){ 
   return [
@@ -18,9 +17,6 @@ function activePersonsColumns (){
       sortable: false,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'ci', headerName: 'C.I.', width: 90,
-      headerClassName: 'super-app-theme--header'
-    },
     { field: 'name', headerName: 'Nombres', width: 140, hideable: false,
       headerClassName: 'super-app-theme--header'
     },
@@ -31,6 +27,9 @@ function activePersonsColumns (){
       width: 140,
       valueGetter: (params) =>
         `${params.row.lastName || ''} ${params.row.motherLastName || ''}`,
+      headerClassName: 'super-app-theme--header'
+    },
+    { field: 'ci', headerName: 'C.I.', width: 90,
       headerClassName: 'super-app-theme--header'
     },
     {
@@ -58,7 +57,10 @@ function activePersonsColumns (){
     { field: 'user', headerName: 'Usuario', type: 'boolean', width: 80,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'email', headerName: 'Email', width: 120,
+    { field: 'email', headerName: 'Email', width: 150,
+      headerClassName: 'super-app-theme--header'
+    },
+    { field: 'address', headerName: 'Direccion', width: 130,
       headerClassName: 'super-app-theme--header'
     },
     { 
@@ -66,38 +68,35 @@ function activePersonsColumns (){
       headerName: 'Estado', 
       type: 'string', 
       width: 120, 
-      valueGetter: (params) => `${ params.row.state === 'active'? 'Activo': params.row.state === 'registered'? 'Registrado': params.row.state === 'registeredCancel'? 'Denegado': params.row.state === 'deleted'? 'Eliminado': 'Inactivo' }`,
-      headerClassName: 'super-app-theme--header'
-    },
-    { field: 'address', headerName: 'Direccion', width: 130,
+      valueGetter: (params) => `${ getPersonStatenName(params.row.state)}`,
       headerClassName: 'super-app-theme--header'
     },
     { field: 'registerName', headerName: 'Registrado por', width: 120,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'registerDate', headerName: 'Fecha de Registro', type: 'date', width: 100, 
+    { field: 'registerDate', headerName: 'Fecha de Registro', type: 'date', width: 120, 
       valueGetter: (params) => new Date(params.row.registerDate),
       headerClassName: 'super-app-theme--header'
     },
     { field: 'approvalName', headerName: 'Aprobado por', width: 120,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'approvalDate', headerName: 'Fecha de Aprobacion', type: '', width: 100,
+    { field: 'approvalDate', headerName: 'Fecha de Aprobación', type: 'date', width: 120,
       valueGetter: (params) => params.row.approvalDate.length > 2 
-        ? getPrintDate(params.row.approvalDate) //new Date(params.row.approvalDate)
-        : '-',
+        ? new Date(params.row.approvalDate) //getPrintDate(params.row.approvalDate) //new Date(params.row.approvalDate)
+        : '',
       headerClassName: 'super-app-theme--header'
     },
     { field: 'updateName', headerName: 'Actualizado por', width: 120,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'updateDate', headerName: 'Fecha de Actualizacion', type: '', width: 100,
+    { field: 'updateDate', headerName: 'Fecha de Actualizacion', type: 'date', width: 120,
       valueGetter: (params) => params.row.updateDate 
-        ? getPrintDate(params.row.updateDate) //new Date(params.row.approvalDate)
-        : '-',
+        ? new Date(params.row.updateDate) //new Date(params.row.approvalDate)
+        : '',
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'level', headerName: 'Nivel', width: 120,
+    { field: 'level', headerName: 'Nivel', width: 80,
       headerClassName: 'super-app-theme--header'
     },
     {
@@ -107,14 +106,14 @@ function activePersonsColumns (){
       width: 100,
       getActions: (params) => [
         <GridActionsCellItem
-          icon={<PrintIcon sx={{ color: red[500] }} />}
+          icon={<PrintIcon sx={{ color: "#0000FF" }} />}
           label="Toggle Admin"
           component={Link}
           to={`/printPerson/${params.row._id}`}
           // onClick={toggleAdmin(params.id)}
         />, 
         <GridActionsCellItem
-          icon={<EditIcon sx={{ color: red[200] }} />}
+          icon={<EditIcon sx={{ color: "#FFFF00" }} />}
           label="Toggle Admin"
           component={Link}
           to={`/updatePerson/${params.row._id}`}

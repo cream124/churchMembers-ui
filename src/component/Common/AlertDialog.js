@@ -29,6 +29,8 @@ export default function AlertDialog(props) {
         keepMounted
         onClose={() => handleClose(false)}
         aria-describedby="alert-dialog-slide-description"
+        fullWidth={true}
+        maxWidth={'xs'}
       >
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>

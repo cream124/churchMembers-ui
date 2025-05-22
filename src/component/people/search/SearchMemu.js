@@ -11,7 +11,7 @@ import SearchNameLastName from './SearchNameLastName';
 import SearchByText from './SearchByText';
 import SearchBetweenDates from './SearchBetweenDates';
 import SearchBetweenAge from './SearchBetweenAge';
-import { getCurrentDate } from '../../../util/utilDate';
+import { getCurrentDate, getCurrentDateISO } from '../../../util/utilDate';
 
 export default function SearchMenu(props) {
   const {
@@ -26,10 +26,10 @@ export default function SearchMenu(props) {
   // const [searchType, setSearchType] = React.useState('birthdate');
 
   const isDate = () => {
-    if( startDate.length < 8){
+    // if( startDate.length < 3){
       setStartDate(getCurrentDate());
       setEndDate(getCurrentDate());
-    }
+    // }
   };
 
   const isNumber = () => {
@@ -42,8 +42,8 @@ export default function SearchMenu(props) {
   function getSearchForm(type) {
     switch (type) {
       case 'birthdate':
-        isDate();   
-        return (
+      // isDate();   
+      return (
           <SearchBirthdate
             startDate={startDate}
             setStartDate={setStartDate}
@@ -78,7 +78,7 @@ export default function SearchMenu(props) {
         )
       case 'betweenDatesBirthdate':
         handleChangeField('birthDate');
-        isDate();
+        // isDate();
         return (
           <SearchBetweenDates
             startDate={startDate}
@@ -92,8 +92,8 @@ export default function SearchMenu(props) {
           />
         )
       case 'betweenDatesChristianDate':
-        handleChangeField('spiritual.dateAccept')
-        isDate();
+        handleChangeField('spiritual.dateAccept');
+        // isDate();
         return (
           <SearchBetweenDates
             startDate={startDate}
@@ -107,7 +107,7 @@ export default function SearchMenu(props) {
         )
         case 'betweenDatesBaptizedDate':
         handleChangeField('spiritual.dateBaptized')
-        isDate();
+        // isDate();
         return (
           <SearchBetweenDates
             startDate={startDate}
@@ -138,6 +138,7 @@ export default function SearchMenu(props) {
   }
 
   const handleSearchType = (event) => {
+    isDate();   
     handleChangeSearchType(event.target.value)
   };
 

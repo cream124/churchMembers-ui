@@ -1,29 +1,15 @@
 import * as React from 'react';
-import { Box, Button, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Paper, Select, Switch, TextField, Typography } from "@mui/material";
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import SyncIcon from '@mui/icons-material/Sync';
-import DeleteIcon from '@mui/icons-material/Delete';
-import SendIcon from '@mui/icons-material/Send';
-import SearchIcon from '@mui/icons-material/Search';
+import { Paper } from "@mui/material";
 
-import dayjs from 'dayjs';
-
-
-import { FilterByStatePersonsDB, GetPersonsDB, FilterPersonsDB } from '../../api/PersonsDB';
+import { GetPersonsDB } from '../../api/PersonsDB';
 import { UpdateStatePersonsDB } from '../../api/SavePersonDB';
 import AlertDialog from '../Common/AlertDialog';
 import SnackbarComponent from '../Common/SnackbarComponent';
-import { styled } from '@mui/material/styles';
 
 import classes from "./people.module.css";
 import ButtonLogout from '../Common/ButtonLogout';
 import { activePersonsColums } from "./Columns";
-import DatePicherBasic from '../Common/DatePickerBasic';
-import CustomDay from '../Common/CustomDay';
-import FormControlComponent from '../Common/FormControlComponent';
-import ThemeProviderComponent from '../Common/ThemeProviderComponent';
 import PanelComp from '../Common/Panel/PanelComp';
-import ReportDataGrid from '../Common/DataGrid/ReportDataGrid';
 import SearchBrother from './searchBrother';
 import { getCurrentDate, getCurrentDateISO } from '../../util/utilDate';
 import CursorPaginationGrid from '../Common/DataGrid/CursorPaginationGrid';
@@ -47,7 +33,6 @@ let filterJ =
 }
 
 
-
 export default function ActiveBrother() {
   const [searchType, setSearchType] = React.useState('birthdate');
   const [startDate, setStartDate] = React.useState(getCurrentDate());
@@ -60,6 +45,7 @@ export default function ActiveBrother() {
   const [selectedItems, setSelectedItems] = React.useState([]);
   const [disabledButton, setdisabledButton] = React.useState(true);
   const [openDialog, setOpenDialog] = React.useState(false);
+  const [updateActionName, setUpdateActionName] = React.useState('');
   const [deleteItem, setDeleteItem] = React.useState(false);
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const [searchStatus, setSearchStatus] = React.useState(false);
@@ -113,7 +99,8 @@ export default function ActiveBrother() {
   };
 
   const clickOnActiveItems = (active) => {
-    setDeleteItem(active);
+    setDeleteItem(active.action);
+    setUpdateActionName(active.name);
     setOpenDialog(true);
   }
 
@@ -126,7 +113,9 @@ export default function ActiveBrother() {
         value,
         searchType,
         startDate,
-        endDate
+        endDate,
+        field,
+        toDate
       }
     });
   }
@@ -178,10 +167,10 @@ export default function ActiveBrother() {
   const updateState = async (isUpdate) => {
     if (isUpdate) {
       const activationState = deleteItem;
-      const approval= {};
+      const approval = {};
       const currentDate = getCurrentDateISO();
       const userId = getUserIdST();
-      if(activationState === 'active'){
+      if (activationState === 'active') {
         approval.approvalDate = currentDate;
         approval.approvalId = userId;
       }
@@ -194,8 +183,10 @@ export default function ActiveBrother() {
       };
       const response = await updateStatePerson({ variables: bo });
       setFilterJson({
-        ...filterJson,
-        filter: { day: filterJson.filter.day + 1 }
+        filter: { 
+          ...filterJson.filter,
+          day: filterJson.filter.day + 1 
+        }
       });
       if (response.data?.updateStatePerson._id) {
         setOpenSnackbar(true);
@@ -237,7 +228,13 @@ export default function ActiveBrother() {
         />
       </PanelComp>
 
-      <AlertDialog open={openDialog} setOpen={setOpenDialog} updateState={updateState} />
+      <AlertDialog
+        open={openDialog}
+        setOpen={setOpenDialog}
+        updateState={updateState}
+        title={updateActionName}
+        content={`Esta seguro de "${updateActionName}" los items seleccionados.`}
+      />
       <SnackbarComponent
         open={openSnackbar}
         setOpen={setOpenSnackbar}

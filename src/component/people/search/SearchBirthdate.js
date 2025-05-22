@@ -41,7 +41,7 @@ export default function SearchBirthdate(props) {
               startDate={dayjs(endDate, 'DD-MM-YYYY')}
               dateChange={(newValue) => {
                 setEndDate(newValue);
-                console.log('-newValue-2-----------', newValue)
+                // console.log('-newValue-2-----------', newValue)
               }}
             />
           {/* </Box> */}

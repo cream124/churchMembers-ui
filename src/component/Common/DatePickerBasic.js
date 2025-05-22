@@ -22,8 +22,6 @@ export default function DatePicherBasic(props) {
     dateChange(currentDate);
     setValue(newValue);
   };
-
-
   return (
     // <Grid  item xs={12} md={6}>
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'es'}>

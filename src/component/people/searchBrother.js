@@ -111,8 +111,9 @@ export default function SearchBrother(props) {
                   disabled={disabledButton}
                   variant="outlined"
                   size="small"
+                  color='warning'
                   endIcon={<SendIcon />}
-                  onClick={() => clickOnActiveItems(personState[state].actions[0].action)}
+                  onClick={() => clickOnActiveItems(personState[state].actions[0])}
                 >
                   {personState[state].actions[0].name}
                   {/* Inactivar */}
@@ -122,9 +123,10 @@ export default function SearchBrother(props) {
                 <Button
                   disabled={disabledButton}
                   variant="outlined"
+                  color='error'
                   size="small"
                   endIcon={<DeleteIcon />}
-                  onClick={() => clickOnActiveItems(personState[state].actions[1].action)}
+                  onClick={() => clickOnActiveItems(personState[state].actions[1])}
                 >
                   {personState[state].actions[1].name}
                 </Button>

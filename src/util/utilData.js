@@ -4,11 +4,14 @@ import userRol from "../component/data/userRol.json";
 export function getUserRolName(userRolValue) {
     return userRol[userRolValue];
 }
-
+export function getPersonStatenName(state) {
+    const states = getPersonState();
+    return states[state].name;
+}
 export function getPersonState() {
     const states = {
         registered: {
-            name: "Registrados",
+            name: "Registrado",
             actions:
                 [{ name: "Activar", action: "active" }, { name: "Denegar Registro", action: "registeredCancel" }]
         },
