@@ -6,58 +6,58 @@ import PrintIcon from '@mui/icons-material/LocalPrintshop';
 import { red } from '@mui/material/colors';
 import { getPersonStatenName } from '../../util/utilData';
 
-function activePersonsColumns (){ 
+function activePersonsColumns (action){ 
   return [
     {
       field: 'photo',
       headerName: 'Foto',
-      width: 60,
-      renderCell: (params) => <Avatar src={params.row.photo}/>,
+      width: 30,
+      renderCell: (params) => <Avatar src={params.row.photo} sx={{ width: 30, height: 30 }}/>,
       editable: false,
       sortable: false,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'name', headerName: 'Nombres', width: 140, hideable: false,
+    { field: 'name', headerName: 'Nombres', width: 100, hideable: false,
       headerClassName: 'super-app-theme--header'
     },
     { 
       field: 'lastName', 
       headerName: 'Apellidos', 
       description: 'This column has a value getter and is not sortable.',
-      width: 140,
+      width: 100,
       valueGetter: (params) =>
         `${params.row.lastName || ''} ${params.row.motherLastName || ''}`,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'ci', headerName: 'C.I.', width: 90,
+    { field: 'ci', headerName: 'C.I.', width: 80,
       headerClassName: 'super-app-theme--header'
     },
     {
       field: 'age',
       headerName: 'Edad',
       type: 'number',
-      width: 50,
+      width: 30,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'birthDate', headerName: 'Nacimiento', type: 'date', width: 100,
+    { field: 'birthDate', headerName: 'Nacimiento', type: 'date', width: 75,
       valueGetter: (params) => new Date(params.row.birthDate),
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'phone', headerName: 'Teléfono', width: 100, 
+    { field: 'phone', headerName: 'Teléfono', width: 75, 
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'christian', headerName: 'Cristiano', type: 'boolean', width: 80,
+    { field: 'christian', headerName: 'Cristiano', type: 'boolean', width: 60,
       headerClassName: 'super-app-theme--header',
       valueGetter: (params) => params.row.spiritual.christian
     },
-    { field: 'baptized', headerName: 'Bautizado', type: 'boolean', width: 80,
+    { field: 'baptized', headerName: 'Bautizado', type: 'boolean', width: 65,
       headerClassName: 'super-app-theme--header',
       valueGetter: (params) => params.row.spiritual.baptized
     },
-    { field: 'user', headerName: 'Usuario', type: 'boolean', width: 80,
+    { field: 'user', headerName: 'Usuario', type: 'boolean', width: 60,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'email', headerName: 'Email', width: 150,
+    { field: 'email', headerName: 'Email', width: 130,
       headerClassName: 'super-app-theme--header'
     },
     { field: 'address', headerName: 'Direccion', width: 130,
@@ -129,54 +129,56 @@ function activePersonsNoActionColumns (){
     {
       field: 'photo',
       headerName: 'Foto',
-      width: 60,
-      renderCell: (params) => <Avatar src={params.row.photo}/>,
+      width: 30,
+      renderCell: (params) => <Avatar src={params.row.photo} sx={{ width: 25, height: 25 }}/>,
       editable: false,
       sortable: false,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'ci', headerName: 'C.I.', width: 80,
+    { field: 'name', headerName: 'Nombres', width: 100, hideable: false,
       headerClassName: 'super-app-theme--header'
-    },
-    { field: 'name', headerName: 'Nombres', width: 120, hideable: false, type: 'text',
-      // headerClassName: 'super-app-theme--header'
     },
     { 
       field: 'lastName', 
       headerName: 'Apellidos', 
       description: 'This column has a value getter and is not sortable.',
-      width: 120,
+      width: 100,
       valueGetter: (params) =>
         `${params.row.lastName || ''} ${params.row.motherLastName || ''}`,
+      headerClassName: 'super-app-theme--header'
+    },
+    { field: 'ci', headerName: 'C.I.', width: 80,
       headerClassName: 'super-app-theme--header'
     },
     {
       field: 'age',
       headerName: 'Edad',
       type: 'number',
-      width: 40,
+      width: 30,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'birthDate', headerName: 'Nacimiento', type: 'date', width: 90,
-    valueGetter: (params) =>
-      new Date(params.row.birthDate),
+    { field: 'birthDate', headerName: 'Nacimiento', type: 'date', width: 75,
+      valueGetter: (params) => new Date(params.row.birthDate),
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'phone', headerName: 'Teléfono', width: 90, 
+    { field: 'phone', headerName: 'Teléfono', width: 75, 
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'christian', headerName: 'Cristiano', type: 'boolean', width: 68,
+    { field: 'christian', headerName: 'Cristiano', type: 'boolean', width: 60,
       headerClassName: 'super-app-theme--header',
       valueGetter: (params) => params.row.spiritual.christian
     },
-    { field: 'baptized', headerName: 'Bautizado', type: 'boolean', width: 75,
+    { field: 'baptized', headerName: 'Bautizado', type: 'boolean', width: 65,
       headerClassName: 'super-app-theme--header',
       valueGetter: (params) => params.row.spiritual.baptized
     },
-    { field: 'user', headerName: 'Usuario', type: 'boolean', width: 50,
+    { field: 'user', headerName: 'Usuario', type: 'boolean', width: 60,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'email', headerName: 'Email', width: 120,
+    { field: 'email', headerName: 'Email', width: 130,
+      headerClassName: 'super-app-theme--header'
+    },
+    { field: 'address', headerName: 'Direccion', width: 130,
       headerClassName: 'super-app-theme--header'
     },
     { 
@@ -184,32 +186,38 @@ function activePersonsNoActionColumns (){
       headerName: 'Estado', 
       type: 'string', 
       width: 120, 
-      valueGetter: (params) => `${ params.row.state === 'active'? 'Activo': params.row.state === 'registered'? 'Registrado': params.row.state === 'registeredCancel'? 'Denegado': params.row.state === 'deleted'? 'Eliminado': 'Inactivo' }`,
+      valueGetter: (params) => `${ getPersonStatenName(params.row.state)}`,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'address', headerName: 'Direccion', width: 130,
+    { field: 'registerName', headerName: 'Registrado por', width: 120,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'registerName', headerName: 'Registrasdo por', width: 120,
+    { field: 'registerDate', headerName: 'Fecha de Registro', type: 'date', width: 120, 
+      valueGetter: (params) => new Date(params.row.registerDate),
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'registerDate', headerName: 'Fecha de Registro', type: 'date', width: 110, 
-      valueGetter: (params) =>
-        new Date(params.row.registerDate),
+    { field: 'approvalName', headerName: 'Aprobado por', width: 120,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'approvalId', headerName: 'Aprobado por', width: 120,
+    { field: 'approvalDate', headerName: 'Fecha de Aprobación', type: 'date', width: 120,
+      valueGetter: (params) => params.row.approvalDate.length > 2 
+        ? new Date(params.row.approvalDate) //getPrintDate(params.row.approvalDate) //new Date(params.row.approvalDate)
+        : '',
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'approvalDate', headerName: 'Fecha de Aprobacion', type: 'date', width: 130,
-      valueGetter: (params) =>
-        new Date(params.row.approvalDate), 
+    { field: 'updateName', headerName: 'Actualizado por', width: 120,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'level', headerName: 'Nivel', width: 120,
+    { field: 'updateDate', headerName: 'Fecha de Actualizacion', type: 'date', width: 120,
+      valueGetter: (params) => params.row.updateDate 
+        ? new Date(params.row.updateDate) //new Date(params.row.approvalDate)
+        : '',
       headerClassName: 'super-app-theme--header'
     },
-    
+    { field: 'level', headerName: 'Nivel', width: 80,
+      headerClassName: 'super-app-theme--header'
+    },
+   
   ]
 }
 
@@ -334,7 +342,7 @@ const activePersonsColumnsVisible ={
 
 export function activePersonsColums(action) {
   return {
-    columns: activePersonsColumns(),
+    columns: activePersonsColumns(action),
     columnsOnAction: activePersonsNoActionColumns(),
     columnsVisible: activePersonsColumnsVisible
   }

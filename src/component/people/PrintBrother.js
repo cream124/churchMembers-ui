@@ -29,9 +29,9 @@ import { getCurrentDate, getCurrentDateISO, getPrintDate } from '../../util/util
 import HeaderReportForm from '../report/HeaderReportForm';
 // import HeaderReportForm from '../report/HeaderReportForm';
 
-const personsColums = activePersonsColums();
-const columns2 = personsColums.columnsOnAction;
-const columnsVisible = personsColums.columnsVisible;
+// const personsColums = activePersonsColums();
+// const columns2 = personsColums.columnsOnAction;
+// const columnsVisible = personsColums.columnsVisible;
 
 let filterJson =
 {
@@ -45,7 +45,8 @@ let filterJson =
 const dateToPrint = getPrintDate(getCurrentDateISO());
 const headerD = (state) => { return { title: "Hernamos", subTitle: `${state}`, subTitle2: "" } }
 
-export default function PrintBrother() {
+export default function PrintBrother(props) {
+  const {columns, columnsVisible} = props;
   const [searchType, setSearchType] = React.useState('birthdate');
   const [startDate, setStartDate] = React.useState(getCurrentDate());
   const [endDate, setEndDate] = React.useState(startDate);
@@ -255,7 +256,7 @@ export default function PrintBrother() {
           // title={'Lista Hermanos'}
           // moreMenuComp={searchPeople()}
           moreMenuComp={renderHeader(headerData.title, headerData.subTitle, headerData.subTitle2)}
-          columns={columns2}
+          columns={columns}
           rows={data.filterPersons}
           columnVisibilityModel={columnVisibilityModel}
           setColumnVisibilityModel={setColumnVisibilityModel}
@@ -263,7 +264,7 @@ export default function PrintBrother() {
           checkboxSelection={false}
           sortable={true}
           columnMenu={true}
-          getRowHeight={() => 'auto'}
+          // getRowHeight={() => 'auto'}
         />
       </PanelComp>
 

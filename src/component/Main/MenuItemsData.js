@@ -17,13 +17,10 @@ const menuListSuperUser = [
         name: 'Lista de Hermano',
         uri: '/personprint',
       },
-      {
-        name: 'Lista de Miembros',
-        uri: '/registrationRequest',
-      },
+      
       {
         name: 'Buscar Hermanos',
-        uri: '/records',
+        uri: '/search',
       },
     ]
   },

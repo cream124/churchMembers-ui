@@ -36,6 +36,8 @@ import EditBroder from "../people/EditBrother";
 import EditBrother from "../people/EditBrother";
 import PrintBrother from "../people/PrintBrother";
 import ActiveBrother from "../people/ActiveBrother";
+import ListBrother from "../people/ListBrother";
+import SearchBrothers from "../people/SearchBrothers";
 
 const drawerWidth = 240;
 
@@ -128,7 +130,8 @@ export default function TopBar() {
             path="/editEvent/:id/:dayId/:servId"
             element={<EditService />}
           />
-          <Route path="/personprint" element={<PrintBrother />} />
+          <Route path="/personprint" element={<ListBrother />} />
+          <Route path="/search" element={<SearchBrothers />} />
           <Route path="/updatePerson1/:id" element={<UpdatePerson />} />
           <Route path="/verse" element={<Verse />} />
           <Route path="/mission" element={<Mission />} />

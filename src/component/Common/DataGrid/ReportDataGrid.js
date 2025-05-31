@@ -85,7 +85,6 @@ export default function ReportDataGrid(props) {
     rows,
     columnVisibilityModel,
     setColumnVisibilityModel,
-    updateSelecteItems,
     moreMenuComp,
     sortable,
     columnMenu,
@@ -103,9 +102,11 @@ export default function ReportDataGrid(props) {
   return (
     <ThemeProvider theme={getESDataGridTheme()}>
       <DataGrid
-        sx={
-          totalStyles
-        }
+        sx={{
+          totalStyles,
+          fontSize: '11px',
+        }}
+        rowHeight={30}
         rows={rows}
         columns={getColumns(columns, sortable)}
         // columns={columns}
@@ -115,7 +116,7 @@ export default function ReportDataGrid(props) {
         }
         disableColumnMenu={!columnMenu}
         // hideFooter
-        autoHeight
+        // autoHeight
         getRowId={(row) => row._id}
         slots={{ toolbar: () => CustomToolbar(title, moreMenuComp) }}
         getRowClassName={(params) =>
@@ -132,9 +133,9 @@ export default function ReportDataGrid(props) {
         // pageSizeOptions={[5]}
         pageSizeOptions={[10, 25, 50, 100]}
         checkboxSelection={checkboxSelection}
-        onRowSelectionModelChange={(newSelectionModel) => {
-          updateSelecteItems(newSelectionModel);
-        }}
+        // onRowSelectionModelChange={(newSelectionModel) => {
+        //   updateSelecteItems(newSelectionModel);
+        // }}
         // disableRowSelectionOnClick
         {...otherProps}
       />

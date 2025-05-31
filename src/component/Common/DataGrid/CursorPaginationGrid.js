@@ -120,6 +120,7 @@ export default function CursorPaginationGrid(props) {
 
       <div style={{ height: 700 }}>
         <DataGrid
+          rowHeight={35}
           columns={columns}
           rows={partnerPerson.data ? partnerPerson.data[dataName].data : []}
           getRowId={(row) => row._id}
@@ -143,6 +144,16 @@ export default function CursorPaginationGrid(props) {
           // keepNonExistentRowsSelected
           slots={{ toolbar: () => displayCustomToolbar ? CustomToolbar(title, moreMenuComp) : '' }}
           {...otherProps}
+          sx={{ 
+            // m: 2,
+            boxShadow: 2,
+            border: 2,
+            fontSize: '11px',
+            borderColor: 'primary.light',
+            '& .MuiDataGrid-cell:hover': {
+              color: 'primary.main',
+            },
+           }}
         />
       </div>
     </div>
