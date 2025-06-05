@@ -38,9 +38,9 @@ query Person($_id: String) {
     registerId
     registerDate
     registerName
-    updateId
+    updateName
     updateDate
-    approvalId
+    approvalName
     approvalDate
     user
     level

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import ListItemText from '@mui/material/ListItemText';
-import { ListItem, ListItemAvatar } from '@mui/material';
+import { Link, ListItem, ListItemAvatar } from '@mui/material';
 import TypographyComp from '../TypographyComp';
 import { getPrintDate, getPrintTime } from '../../../util/utilDate';
-
+import userRol from "../../../component/data/userRol.json";
 
 export default function PrintMenuList(props) {
   const { label, data, submenu } = props;
@@ -17,6 +17,20 @@ export default function PrintMenuList(props) {
     }
     if (type === "time") {
       return getPrintTime(data)
+    }
+   
+    if (type === "rol") {
+      return userRol[data]
+    }
+    if (type === "link") {
+      return (
+        <Link color="inherit" href={data}>
+          Mapa
+        </Link>
+      )
+    }
+    if (type === "boolean") {
+      return data? 'Si': 'No'
     }
     return data;
   };

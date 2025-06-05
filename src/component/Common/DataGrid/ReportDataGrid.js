@@ -30,20 +30,28 @@ function getNameValue(value, id,) {
 
 function CustomToolbar(title, moreMenuComp) {
   return (
-    <GridToolbarContainer>
-      <GridToolbarExport />
-      <GridToolbarContainer />
-      <GridToolbarDensitySelector />
-      <GridToolbarColumnsButton />
-      {/* <GridToolbar /> */}
-      <Box style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <TypographyComp variant="h4" textColor={titleTextColor} fontWeight={'600'}>
-          {title}
-        </TypographyComp>
+    <>
+      <GridToolbarContainer>
+        <GridToolbarExport
+          printOptions={{
+            hideFooter: true,
+            hideToolbar: true,
+          }}
+        />
+        <GridToolbarContainer />
+        <GridToolbarDensitySelector />
+        <GridToolbarColumnsButton />
+        {/* <GridToolbar /> */}
+        <Box style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <TypographyComp variant="h4" textColor={titleTextColor} fontWeight={'600'}>
+            {title}
+          </TypographyComp>
 
-      </Box>
+        </Box>
+      </GridToolbarContainer>
       {moreMenuComp}
-    </GridToolbarContainer>
+    </>
+
   );
 }
 
@@ -104,7 +112,7 @@ export default function ReportDataGrid(props) {
       <DataGrid
         sx={{
           totalStyles,
-          fontSize: '11px',
+          fontSize: '12px',
         }}
         rowHeight={30}
         rows={rows}

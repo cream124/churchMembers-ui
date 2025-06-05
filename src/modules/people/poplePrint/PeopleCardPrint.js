@@ -24,7 +24,7 @@ const personInf = [
   { name: "Telefono", value: "phone" },
   { name: "Email", value: "email" },
   { name: "Direccion", value: "address" },
-  { name: "Ubicacion", value: "location" },
+  { name: "Ubicacion", value: "location", dataType: "link" },
 
 ];
 
@@ -43,7 +43,7 @@ const spiritualInf = [
     ]
   },
   {
-    name: "Bautizado", value: "baptized", type: "menu", dataType: "boolean",
+    name: "Bautizado", value: "baptized", type: "menu", dataType: "boolean", collapsed: true,
     data: [
       { name: "Nombre De la Iglesia", value: "nameBaptizedChurch" },
       { name: "Denominacion", value: "denominationBaptizedChurch" },
@@ -99,13 +99,12 @@ const membershipInf = [
   { name: "Numero de Folio de Membrecia", value: "folioN" },
   { name: "Fecha de Membresia", value: "becameMembreDate", dataType: "date" },
   {
-    name: "Detalle de Membresia", value: "", type: "menu", noIcon: true,
+    name: "Detalle de Membresia", value: "", type: "menu", noIcon: true, collapsed: true,
     data: [ // memberships
       { name: "Tipo", value: "type" },
-      { name: "Fecha", value: "updateDate", dataType: "date" },
+      { name: "Fecha de Actualizacion", value: "updateDate", dataType: "date" },
       { name: "Descripcion", value: "description" },
-      { name: "Estado", value: "state" },
-
+      // { name: "Estado", value: "state" },
     ]
   },
 ];
@@ -116,10 +115,41 @@ const characteristic = [
   { name: "Miembro", value: "membershipType" },
   { name: "Antiguedad Membrecia", value: "memberAge" },
   {
-    name: "Ministerial", value: "phone", type: "menu", noIcon: true,
+    name: "Ministerial", value: "phone", type: "menu", noIcon: true, collapsed: true,
     data: [
       { name: "Anciano", value: "anciano" },
       { name: "Maestro", value: "maestro" }
+    ]
+  },
+];
+
+const userInf = [
+  {
+    name: "Registro", value: "legalInformation", type: "menu", dataType: "", collapsed: true,
+    data: [
+      { name: "Registrado Por", value: "registerName" },
+      { name: "Fecha", value: "registerDate", dataType: "date" },
+    ]
+  },
+  {
+    name: "Aprobacion", value: "", type: "menu", dataType: "", collapsed: true,
+    data: [
+      { name: "Aprobado por", value: "approvalName" },
+      { name: "Fecha ", value: "approvalDate", dataType: "date" },
+    ]
+  },
+  {
+    name: "Actualizacion", value: "", type: "menu", dataType: "", collapsed: true,
+    data: [
+      { name: "Actualizado por", value: "updateName" },
+      { name: "Fecha ", value: "updateDate", dataType: "date" },
+    ]
+  },
+  {
+    name: "Usuario del sistema", value: "user", type: "menu", dataType: "boolean", collapsed: true,
+    data: [
+      { name: "Es usuario", value: "user", dataType: "boolean"  },
+      { name: "Rol ", value: "level", dataType: "rol" },
     ]
   },
 ];
@@ -145,10 +175,10 @@ export default function PeopleCardPrint() {
       libroN: data.spiritual.libroN,
       folioN: data.spiritual.folioN,
       becameMembreDate: data.spiritual.becameMembreDate,
-      type: data.memberships[0].type,
-      updateDate: data.memberships[0].updateDate,
-      description: data.memberships[0].description,
-      state: data.memberships[0].state,
+      type: data.memberships[0]?.type,
+      updateDate: data.memberships[0]?.updateDate,
+      description: data.memberships[0]?.description,
+      state: data.memberships[0]?.state,
     }
     return memberData;
   };
@@ -186,7 +216,7 @@ export default function PeopleCardPrint() {
                     borderRadius: 3,
                   }}
                 >
-                  <Grid item md={4} ms={6} xs={6}>
+                  <Grid item xs={3}>
                     <PanelComp
                       margin="1.7em"
                       padding="0.7em"
@@ -208,7 +238,7 @@ export default function PeopleCardPrint() {
                       noIcon={true}
                     />
                   </Grid>
-                  <Grid item md={8} ms={8} xs={6}>
+                  <Grid item xs={9}>
                     <PanelComp
                       borderRadius="0"
                       elevation="24"
@@ -258,13 +288,19 @@ export default function PeopleCardPrint() {
                         tytle="Membresia"
                         labels={membershipInf}
                         data={getMemberData(data.person)}
-                        collapsed={false}
+                        collapsed={true}
                       />
 
                       <PrintNestedList
                         tytle="Informacion Legal"
                         labels={legalInf}
                         data={data.person.legal}
+                        collapsed={true}
+                      />
+                      <PrintNestedList
+                        tytle="Informacion de Usuario"
+                        labels={userInf}
+                        data={data.person}
                         collapsed={true}
                       />
                     </PanelComp>

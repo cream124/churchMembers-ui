@@ -74,7 +74,8 @@ export default function UpdateUser(props) {
     console.log('--saiving VALUES----------', saveValues);
     try {
       const newData = {
-        _id: id
+        _id: id,
+        user: savingData.user
       };
       if (saveValues.editingEmail){ newData.email = savingData.email}
       if (saveValues.editingPassword){ newData.password = savingData.password}
