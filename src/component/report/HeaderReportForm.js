@@ -4,39 +4,113 @@ import TypographyComp from "../Common/TypographyComp";
 // import TypographyComp from "../../../common/TypographyComp";
 
 const titleTextColor = '#213b2d';
+const logoTextColor = '#213b2d';
 
 export default function HeaderReportForm(props) {
   const { title, subTitle, subTitle2, date } = props;
-  const logo = '/images/cemetery.png';
+  const logo = '/images/logo.png';
   const searchForm = () => {
     return (
       <>
-        <Grid container spacing={2} alignItems="center" >
+        <Grid
+          container
+          direction="row"
+          spacing={0.1}
+          sx={{
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+          }}
+        >
+          <Grid item xs={1.5}>
+            <Avatar src={logo} sx={{ width: 80, height: 80, margin: "auto" }}>
+              A
+            </Avatar>
+          </Grid>
           <Grid item xs={6}>
             <Stack
-              direction="row"
+              direction="column"
+              spacing={0.1}
+              sx={{
+                justifyContent: "flex-start",
+                alignItems: "flex-start",
+              }}
+            >
+              <TypographyComp
+                variant="subtitle1"
+                fontWeight="bold"
+                textcolor={titleTextColor}
+              >
+                {`Iglesia Cristiana Evangélica`}
+              </TypographyComp>
+              <TypographyComp
+                variant="h6"
+                fontWeight="bold"
+                textcolor={titleTextColor}
+              >
+                {`"ALTO PAGADOR"`}
+              </TypographyComp>
+            </Stack>
+          </Grid>
+          <Grid item xs={2} >
+            .
+          </Grid>
+          <Grid item xs={2.5} >
+            {date &&
+
+              <TypographyComp
+                variant="caption"
+                // fontWeight="bold"
+                textcolor={titleTextColor}
+              >
+                {`Fecha : `}
+              </TypographyComp>}
+            <TypographyComp
+              variant="caption"
+              fontWeight="bold"
+              textcolor={titleTextColor}
+            >
+              {date}
+            </TypographyComp>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={0} alignItems="center" direction="row" >
+          <Grid item xs={5}
+            direction="row" sx={{
+              justifyContent: "center",
+              alignItems: "end",
+            }}
+            display="flex"
+          >
+            <Avatar src={logo} sx={{ width: 80, height: 80, margin: "auto" }}>
+              A
+            </Avatar>
+            <Stack
+              direction="column"
               spacing={0.5}
               sx={{
                 justifyContent: "flex-start",
                 alignItems: "center",
               }}
             >
-              <Avatar
-                src={logo}
-                sx={{ width: 80, height: 80, margin: "auto" }}
-              >
-                A
-              </Avatar>
+
               <TypographyComp
                 variant="h6"
                 fontWeight="bold"
                 textcolor={titleTextColor}
               >
-                {`Iglesia "Alto Pagador" U.C.E.`}
+                {`Iglesia Cristiana Evangélica`}
+              </TypographyComp>
+              <TypographyComp
+                variant="h6"
+                fontWeight="bold"
+                textcolor={titleTextColor}
+              >
+                {`"ALTO PAGADOR"`}
               </TypographyComp>
             </Stack>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={7}>
             <Stack
               direction="row"
               spacing={0.5}
