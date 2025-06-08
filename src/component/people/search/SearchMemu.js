@@ -12,6 +12,7 @@ import SearchByText from './SearchByText';
 import SearchBetweenDates from './SearchBetweenDates';
 import SearchBetweenAge from './SearchBetweenAge';
 import { getCurrentDate, getCurrentDateISO } from '../../../util/utilDate';
+import PanelComp from '../../Common/Panel/PanelComp';
 
 export default function SearchMenu(props) {
   const {
@@ -144,7 +145,7 @@ export default function SearchMenu(props) {
 
   const selctState = () => {
     return (
-      <Paper >
+      // <PanelComp>
         <Grid container spacing={1} alignItems="center">
           <Grid item xs={0.6}>
             <Typography variant="h8" component="h4">
@@ -191,7 +192,7 @@ export default function SearchMenu(props) {
             </Button>
           </Grid>
         </Grid>
-      </Paper>
+      // </PanelComp>
     )
   }
 

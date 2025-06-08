@@ -129,19 +129,7 @@ export default function UpdateUser(props) {
         direction="row"
         justifyContent="center"
       >
-        <Grid item md={7} ms={7} xs={12}>
-          <UpdateUserForm
-            data={data.person}
-            id={id}
-            save={updateUser}
-            colors={{}}
-            errorMessage={errorMessage}
-            showState= {showState}
-            handleChange ={handleChange} 
-            disabledEditingStaus={disabledEditingStaus}
-          />
-        </Grid>
-        <Grid item md={5} ms={5} xs={12}>
+        <Grid item md={4} ms={4} xs={12}>
           <PanelComp
             margin="0.7em"
             padding="1em"
@@ -158,6 +146,18 @@ export default function UpdateUser(props) {
           </PanelComp>
         </Grid>
 
+        <Grid item md={5} ms={5} xs={12}>
+          <UpdateUserForm
+            data={data.person}
+            id={id}
+            save={updateUser}
+            colors={{}}
+            errorMessage={errorMessage}
+            showState= {showState}
+            handleChange ={handleChange} 
+            disabledEditingStaus={disabledEditingStaus}
+          />
+        </Grid>
       </Grid>
       <SnackbarComponent
         open={openSnackbar}

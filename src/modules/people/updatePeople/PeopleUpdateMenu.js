@@ -87,6 +87,15 @@ export default function PeopleUpdateMenu() {
             // resetForm();
           }}
         />
+        <Button
+          onClick={() => {
+            history(`${lastPath}`);
+          }}
+          // variant="outlined"
+          color="warning"
+        >
+          Cancelar
+        </Button>
       </Stack>
 
       {/* <PeopleUpdateMembership
@@ -101,11 +110,8 @@ export default function PeopleUpdateMenu() {
         onClick={() => {
           history(`${lastPath}`);
         }}
-        // component={Link}
-        // to={`/${ur}`}
-        // to={`/records`}
-        variant="outlined"
-      // color="success"
+        // variant="outlined"
+        color="warning"
       >
         Cancelar
       </Button>

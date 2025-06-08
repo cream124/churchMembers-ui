@@ -52,6 +52,7 @@ export default function GeneralInfForm(props) {
                   textAlign="left"
                   margin="0.5em"
                   color={colors.sectionColor}
+                  opacity={colors.sectionOpacity}
                 >
                   <Grid container rowSpacing={2} columnSpacing={2}>
                     <Grid item xs={12} sm={12} md={12}>
@@ -107,6 +108,7 @@ export default function GeneralInfForm(props) {
                   textAlign="left"
                   margin="0.5em"
                   color={colors.sectionColor}
+                  opacity={colors.sectionOpacity}
                 >
                   <Grid container rowSpacing={2} columnSpacing={2}>
                     <Grid item xs={12} sm={6} md={6}>

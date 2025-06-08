@@ -27,8 +27,6 @@ import ReportDataGrid from '../Common/DataGrid/ReportDataGrid';
 import SearchBrother from './searchBrother';
 import { getCurrentDate, getCurrentDateISO, getPrintDate } from '../../util/utilDate';
 import HeaderReportForm from '../report/HeaderReportForm';
-import MainPanel from '../Common/Panel/MainPanel';
-import TypographyComp from '../Common/TypographyComp';
 // import HeaderReportForm from '../report/HeaderReportForm';
 
 // const personsColums = activePersonsColums();
@@ -48,7 +46,7 @@ const dateToPrint = getPrintDate(getCurrentDateISO());
 const headerD = (state) => { return { title: "Hernamos", subTitle: `${state}`, subTitle2: "" } }
 
 export default function PrintBrother(props) {
-  const { title, styleValues, columns, columnsVisible } = props;
+  const {columns, columnsVisible} = props;
   const [searchType, setSearchType] = React.useState('birthdate');
   const [startDate, setStartDate] = React.useState(getCurrentDate());
   const [endDate, setEndDate] = React.useState(startDate);
@@ -217,8 +215,8 @@ export default function PrintBrother(props) {
   const updateState = async (isUpdate) => {
     if (isUpdate) {
       const activationState = deleteItem;
-      // ? "inactive"
-      // : "deleted";
+        // ? "inactive"
+        // : "deleted";
       const bo = {
         ids: selectedItems,
         approvalDate: dayjs().format('DD-MM-YYYY'),
@@ -249,55 +247,38 @@ export default function PrintBrother(props) {
 
   if (loading) return <div> loading.......</div>
   return (
-    <>
-      <PanelComp
-        elevation={24}
-        padding={'2em'}
-        image={true}
-        urlImage={styleValues.backgroundImage}
-        minHeight={'40em'}
-      >
-        <TypographyComp
-          variant="h3"
-          fontWeight='bold'
-          textcolor={styleValues.titleColor}
-          align="right"
-        >
-          {title}
-        </TypographyComp>
-        {/* <PanelComp padding={'1em'} margin={'1.2em'}> */}
-          {searchPeople()}
-        {/* </PanelComp> */}
-        <PanelComp padding={'1em'} margin={'1.2em'} color={styleValues.backgroundColorList}>
-          <ReportDataGrid
-            // title={'Lista Hermanos'}
-            // moreMenuComp={searchPeople()}
-            moreMenuComp={renderHeader(headerData.title, headerData.subTitle, headerData.subTitle2)}
-            columns={columns}
-            rows={data.filterPersons}
-            columnVisibilityModel={columnVisibilityModel}
-            setColumnVisibilityModel={setColumnVisibilityModel}
-            // updateSelecteItems={updateSelecteItems}
-            checkboxSelection={false}
-            sortable={true}
-            columnMenu={true}
-          // getRowHeight={() => 'auto'}
-          />
-        </PanelComp>
-
-
-
-
-        <AlertDialog open={openDialog} setOpen={setOpenDialog} updateState={updateState} />
-        <SnackbarComponent
-          open={openSnackbar}
-          setOpen={setOpenSnackbar}
-          messege='Las personas se actualizo correctamente.'
-        />
-
-
+    <Paper elevation={24} className={classes.containerRegistration}>
+      <PanelComp padding={'1em'} margin={'1.2em'}>
+        {searchPeople()}
       </PanelComp>
-    </>
+      <PanelComp padding={'1em'} margin={'1.2em'}>
+        <ReportDataGrid
+          // title={'Lista Hermanos'}
+          // moreMenuComp={searchPeople()}
+          moreMenuComp={renderHeader(headerData.title, headerData.subTitle, headerData.subTitle2)}
+          columns={columns}
+          rows={data.filterPersons}
+          columnVisibilityModel={columnVisibilityModel}
+          setColumnVisibilityModel={setColumnVisibilityModel}
+          // updateSelecteItems={updateSelecteItems}
+          checkboxSelection={false}
+          sortable={true}
+          columnMenu={true}
+          // getRowHeight={() => 'auto'}
+        />
+      </PanelComp>
 
+
+
+
+      <AlertDialog open={openDialog} setOpen={setOpenDialog} updateState={updateState} />
+      <SnackbarComponent
+        open={openSnackbar}
+        setOpen={setOpenSnackbar}
+        messege='Las personas se actualizo correctamente.'
+      />
+
+
+    </Paper>
   );
 }

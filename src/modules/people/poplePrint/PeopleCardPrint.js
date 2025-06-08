@@ -186,12 +186,12 @@ export default function PeopleCardPrint() {
   if (error) return <div> error1.......</div>;
   if (loading) return <div> loading.......</div>;
   return (
-    <div>
+    // <div>
       <PanelComp
-        margin="0.7em"
+        // margin="0.7em"
         padding="0.7em"
         elevation="0"
-        color={"transparent"}
+        color={"#f7dc6f"}
       >
         <Grid
           container
@@ -311,7 +311,7 @@ export default function PeopleCardPrint() {
           </Grid>
         </Grid>
       </PanelComp>
-    </div>
+    // </div>
   );
 
 

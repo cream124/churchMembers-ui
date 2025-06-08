@@ -122,12 +122,20 @@ function getPersonData(idRegister) {
   // }
   return person;
 }
-const colors ={
-  // mainColor:"#EC4D11",
-  // mainColor:"#F7DC6F",
-  mainColor:"#6BBA1B",
+/**
+ * mainColor:"#6BBA1B",
   infTabColor: "#F8DAEF",
   sectionColor: "#DFED55"
+ */
+const colors = {
+  // mainColor:"#EC4D11",
+  // mainColor:"#F7DC6F",
+  backgroundColor: '#F7DC6F',
+  mainColor: "",
+  infTabColor: "",
+  sectionColor: "#DFED55",
+  sectionOpacity: "0.9",
+  backgroundImage: '/images/conocenos.jpg',
   // sectionColor: "#ECD111"
 };
 
@@ -204,9 +212,11 @@ export default function SavePeople() {
 
   return (
     <PanelComp
-      margin="0.7em"
+      // margin="0.7em"
       padding="0.7em"
-      color={colors.mainColor}
+      color={colors.backgroundColor}
+      image={true}
+      urlImage={colors.backgroundImage}
     >
       <PeopleForm
         title="Nuevo Hermano"

@@ -59,7 +59,7 @@ export default function UpdateUserForm(props) {
   };
 
   return (
-    <PanelComp padding="0.7em" color={colors.infTabColor}>
+    <PanelComp padding="0.1em" margin="1.5em" color={colors.infTabColor}>
       <Formik
         initialValues={{ ...data, updating: false }}
         validationSchema={getValidationRule()}
@@ -102,7 +102,8 @@ export default function UpdateUserForm(props) {
                     padding="1em"
                     textAlign="left"
                     margin="0.5em"
-                    color={colors.sectionColor}
+                    // color={colors.sectionColor}
+                    elevation={1}
                   >
                     {values.user && (
                       <Grid container rowSpacing={1} columnSpacing={0}>

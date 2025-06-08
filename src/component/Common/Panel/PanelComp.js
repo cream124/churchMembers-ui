@@ -15,8 +15,9 @@ export default function PanelComp(props) {
     borderRadius,
     textAlign,
     elevation,
+    opacity,
     onMouseLeave } = props;
-
+    const backgroundColor = color ? color: 'transparent';
 
   return (
     <Grid container spacing={6} justifyContent="left">
@@ -38,12 +39,14 @@ export default function PanelComp(props) {
           <Paper
             elevation = {elevation ? parseInt(elevation) : 24}
             sx={{
-              backgroundColor: `${color} !important`,
+              backgroundColor: `${backgroundColor} !important`,
+              opacity: opacity,
               minHeight: minHeight,
               padding: padding,
               borderRadius: borderRadius ? Number(borderRadius): 3,
               margin: margin,
-              textAlign:textAlign
+              textAlign:textAlign,
+              // minHeight: minHeight
             }}
             className={classes.panelComp}
             onMouseLeave={onMouseLeave}
