@@ -112,7 +112,7 @@ export default function ReportDataGrid(props) {
       <DataGrid
         sx={{
           totalStyles,
-          fontSize: '12px',
+          fontSize: '11px',
         }}
         rowHeight={30}
         rows={rows}

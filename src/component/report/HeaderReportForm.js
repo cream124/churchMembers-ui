@@ -51,122 +51,62 @@ export default function HeaderReportForm(props) {
               </TypographyComp>
             </Stack>
           </Grid>
-          <Grid item xs={2} >
+          {/* <Grid item xs={1} >
             .
-          </Grid>
-          <Grid item xs={2.5} >
+          </Grid> */}
+          <Grid item xs={4} >
             {date &&
-
-              <TypographyComp
-                variant="caption"
-                // fontWeight="bold"
-                textcolor={titleTextColor}
+              <Stack
+                direction={"row"}
+                sx={{
+                  justifyContent: "flex-end",
+                  alignItems: "center",
+                }}
               >
-                {`Fecha : `}
-              </TypographyComp>}
-            <TypographyComp
-              variant="caption"
-              fontWeight="bold"
-              textcolor={titleTextColor}
-            >
-              {date}
-            </TypographyComp>
-          </Grid>
-        </Grid>
+                <TypographyComp
+                  variant="body2"
+                  // fontWeight="bold"
+                  textcolor={titleTextColor}
+                >
+                  {`Fecha : `}
+                </TypographyComp>
+                <TypographyComp
+                  variant="body2"
+                  fontWeight="bold"
+                  textcolor={titleTextColor}
+                >
+                  {date}
+                </TypographyComp>
+              </Stack>
+            }
 
-        <Grid container spacing={0} alignItems="center" direction="row" >
-          <Grid item xs={5}
-            direction="row" sx={{
-              justifyContent: "center",
-              alignItems: "end",
-            }}
-            display="flex"
-          >
-            <Avatar src={logo} sx={{ width: 80, height: 80, margin: "auto" }}>
-              A
-            </Avatar>
-            <Stack
-              direction="column"
-              spacing={0.5}
-              sx={{
-                justifyContent: "flex-start",
-                alignItems: "center",
-              }}
-            >
-
-              <TypographyComp
-                variant="h6"
-                fontWeight="bold"
-                textcolor={titleTextColor}
-              >
-                {`Iglesia Cristiana Evangélica`}
-              </TypographyComp>
-              <TypographyComp
-                variant="h6"
-                fontWeight="bold"
-                textcolor={titleTextColor}
-              >
-                {`"ALTO PAGADOR"`}
-              </TypographyComp>
-            </Stack>
           </Grid>
-          <Grid item xs={7}>
-            <Stack
-              direction="row"
-              spacing={0.5}
-              sx={{
-                justifyContent: "flex-end",
-                alignItems: "center",
-              }}
-            >
-              {date &&
-                <>
-                  <TypographyComp
-                    variant="h8"
-                    // fontWeight="bold"
-                    textcolor={titleTextColor}
-                  >
-                    {`Fecha:`}
-                  </TypographyComp>
-                  <TypographyComp
-                    variant="h8"
-                    fontWeight="bold"
-                    textcolor={titleTextColor}
-                  >
-                    {date}
-                  </TypographyComp>
-                </>
-              }
-            </Stack>
-          </Grid>
-          <Grid item xs={12}></Grid>
-          {/* <Grid item xs={12}></Grid> */}
         </Grid>
         {title &&
           <Box style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <Stack direction="column" justifyContent="center" spacing={1}>
+            <Stack direction="column" justifyContent="center" spacing={0.1}>
               <TypographyComp
-                variant="h6"
+                variant="h5"
                 fontWeight="bold"
                 textcolor={titleTextColor}
               >
                 {title}
               </TypographyComp>
               <TypographyComp
-                variant="h8"
+                variant="h6"
                 fontWeight="bold"
                 textcolor={titleTextColor}
               >
                 {subTitle}
               </TypographyComp>
               <TypographyComp
-                variant="h8"
+                variant="body2"
                 fontWeight="bold"
                 textcolor={titleTextColor}
               >
                 {subTitle2}
               </TypographyComp>
-              <div> .</div>
+              {/* <div> .</div> */}
             </Stack>
           </Box>
         }

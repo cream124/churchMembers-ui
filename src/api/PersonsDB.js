@@ -197,8 +197,10 @@ query FilterPersons($filter: Filter) {
     registerId
     registerName
     registerDate
-    approvalId
+    approvalName
     approvalDate
+    updateName
+    updateDate
     user
     userName
     level

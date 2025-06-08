@@ -5,6 +5,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import PrintIcon from '@mui/icons-material/LocalPrintshop';
 import { red } from '@mui/material/colors';
 import { getPersonStatenName } from '../../util/utilData';
+import userRol from "../data/userRol.json";
+// import userRol from "../../../component/data/userRol.json";
 
 function activePersonsColumns (action){ 
   return [
@@ -150,15 +152,15 @@ function activePersonsNoActionColumns (){
     { field: 'ci', headerName: 'C.I.', width: 80,
       headerClassName: 'super-app-theme--header'
     },
+    { field: 'birthDate', headerName: 'Nacimiento', type: 'date', width: 75,
+      valueGetter: (params) => new Date(params.row.birthDate),
+      headerClassName: 'super-app-theme--header'
+    },
     {
       field: 'age',
       headerName: 'Edad',
       type: 'number',
       width: 30,
-      headerClassName: 'super-app-theme--header'
-    },
-    { field: 'birthDate', headerName: 'Nacimiento', type: 'date', width: 75,
-      valueGetter: (params) => new Date(params.row.birthDate),
       headerClassName: 'super-app-theme--header'
     },
     { field: 'phone', headerName: 'Teléfono', width: 75, 
@@ -185,23 +187,23 @@ function activePersonsNoActionColumns (){
       field: 'state', 
       headerName: 'Estado', 
       type: 'string', 
-      width: 120, 
+      width: 60, 
       valueGetter: (params) => `${ getPersonStatenName(params.row.state)}`,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'registerName', headerName: 'Registrado por', width: 120,
+    { field: 'registerName', headerName: 'Registrado por', width: 100,
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'registerDate', headerName: 'Fecha de Registro', type: 'date', width: 120, 
+    { field: 'registerDate', headerName: 'Fecha de Registro', type: 'date', width: 100, 
       valueGetter: (params) => new Date(params.row.registerDate),
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'approvalName', headerName: 'Aprobado por', width: 120,
+    { field: 'approvalName', headerName: 'Aprobado por', width: 100,
       headerClassName: 'super-app-theme--header'
     },
     { field: 'approvalDate', headerName: 'Fecha de Aprobación', type: 'date', width: 120,
       valueGetter: (params) => params.row.approvalDate.length > 2 
-        ? new Date(params.row.approvalDate) //getPrintDate(params.row.approvalDate) //new Date(params.row.approvalDate)
+        ? new Date(params.row.approvalDate) 
         : '',
       headerClassName: 'super-app-theme--header'
     },
@@ -210,12 +212,13 @@ function activePersonsNoActionColumns (){
     },
     { field: 'updateDate', headerName: 'Fecha de Actualizacion', type: 'date', width: 120,
       valueGetter: (params) => params.row.updateDate 
-        ? new Date(params.row.updateDate) //new Date(params.row.approvalDate)
+        ? new Date(params.row.updateDate)
         : '',
       headerClassName: 'super-app-theme--header'
     },
-    { field: 'level', headerName: 'Nivel', width: 80,
-      headerClassName: 'super-app-theme--header'
+    { field: 'level', headerName: 'Nivel', width: 100,
+      headerClassName: 'super-app-theme--header',
+      valueGetter: (params) => userRol[params.row.level], 
     },
    
   ]
