@@ -14,6 +14,7 @@ import UploadImage from "../../../component/Common/Form/UploadImage";
 import gender from "../../../component/data/gender.json";
 import civilStatus from "../../../component/data/civilStatus.json";
 import DatePickerCl from "../../../component/Common/Form/DatePickerCl";
+import TypographyComp from "../../../component/Common/TypographyComp";
 
 const PEOPLE_VALIDATION_BILL = Yup.object().shape({
   name: Yup.string()
@@ -29,9 +30,9 @@ export default function GeneralInfForm(props) {
 
   return (
     <PanelComp padding="0.7em" color={colors.infTabColor}>
-      <Typography variant="h6" gutterBottom>
+      <TypographyComp variant="h5" textcolor={colors.subTitleColor}>
         Información General
-      </Typography>
+      </TypographyComp>
       <Formik
         initialValues={peopleData}
         validationSchema={PEOPLE_VALIDATION_BILL}

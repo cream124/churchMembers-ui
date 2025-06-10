@@ -59,7 +59,12 @@ export default function UpdateUserForm(props) {
   };
 
   return (
-    <PanelComp padding="0.1em" margin="1.5em" color={colors.infTabColor}>
+    <PanelComp 
+      padding="0.1em" 
+      margin="1.5em" 
+      color={" #e8e8e6"}
+      // color={colors.infTabColor}
+    >
       <Formik
         initialValues={{ ...data, updating: false }}
         validationSchema={getValidationRule()}
@@ -80,8 +85,8 @@ export default function UpdateUserForm(props) {
                 <TypographyComp
                   variant="h6"
                   align="left"
-                  // fontWeight='bold'
-                  textcolor="#C0392B"
+                  fontWeight='bold'
+                  textcolor="#d35400"
                   sx={{ margin: "0em", padding: "1em" }}
                 >
                   {`Usuario`}
@@ -96,7 +101,7 @@ export default function UpdateUserForm(props) {
               // actionTrue={resetForm}
               />
               <Grid container rowSpacing={2} justifyContent="center" columnSpacing={2}>
-                <Grid item md={10}>
+                <Grid item md={12}>
 
                   <PanelComp
                     padding="1em"
@@ -117,7 +122,7 @@ export default function UpdateUserForm(props) {
                             {`Email:`}
                           </TypographyComp>
                         </Grid>
-                        <Grid item xs={5} >
+                        <Grid item xs={6} >
                           {showState.editingEmail && (
                             <TextfieldWrapper label={""} name={"email"} />
                           )}
@@ -169,7 +174,7 @@ export default function UpdateUserForm(props) {
                             {`Password:`}
                           </TypographyComp>
                         </Grid>
-                        <Grid item xs={5} >
+                        <Grid item xs={6} >
                           {showState.editingPassword && (
                             <>
                               <TextfieldWrapper label={""} name={"password"} type="password" />
@@ -221,7 +226,7 @@ export default function UpdateUserForm(props) {
                             {`Rol de Usuario:`}
                           </TypographyComp>
                         </Grid>
-                        <Grid item xs={5} >
+                        <Grid item xs={6} >
                           {showState.editingRol && (
                             <SelectWrapper
                               name="level"

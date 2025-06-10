@@ -40,10 +40,10 @@ export default function RecordInBooksForm(props) {
             <>
               <Stack direction="row" justifyContent="space-between" spacing={2}>
                 <TypographyComp
-                  variant="h6"
+                  variant="h5"
                   align="left"
-                  // fontWeight='bold'
-                  textcolor="#C0392B"
+                  fontWeight='bold'
+                  textcolor={colors.subtileColor}
                   sx={{ margin: "0em", padding: "1em" }}
                 >
                   {`Registro en libros de la Iglesia`}
@@ -61,6 +61,7 @@ export default function RecordInBooksForm(props) {
                     padding="1em"
                     textAlign="left"
                     margin="0.5em"
+                    elevation="2"
                     color={colors.sectionColor}
                   >
                     <Grid container rowSpacing={1} columnSpacing={0}>

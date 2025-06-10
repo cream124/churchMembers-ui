@@ -17,6 +17,7 @@ import places from "../../../component/data/places.json";
 import denomination from "../../../component/data/denomination.json";
 import memberFor from "../../../component/data/memberFor.json";
 import MoTimePicker from "../../../component/Common/Form/MoTimePicker";
+import TypographyComp from "../../../component/Common/TypographyComp";
 
 const PEOPLE_VALIDATION_BILL = Yup.object().shape({
   // name: Yup.string()
@@ -30,9 +31,9 @@ export default function SpiritualInfForm(props) {
 
   return (
     <PanelComp padding="0.7em" color={colors.infTabColor}>
-      <Typography variant="h6" gutterBottom>
+      <TypographyComp variant="h5" textcolor={colors.subTitleColor}>
         Informacion Epiritual
-      </Typography>
+      </TypographyComp>
       <Formik
         initialValues={peopleData}
         validationSchema={PEOPLE_VALIDATION_BILL}

@@ -51,7 +51,7 @@ export default function PeopleUpdateMenu() {
     <PanelComp
       margin="0.7em"
       padding="0.7em"
-      elevation="0"
+      // elevation="0"
       color={"transparent"}
     >
       <Stack direction="row" justifyContent="center" spacing={5}>
@@ -69,7 +69,7 @@ export default function PeopleUpdateMenu() {
         <Chip
           label="Modificar Membrecia"
           variant={activeStep === 2 ? "" : "outlined"}
-          color="success"
+          color="warning"
           // icon={<DoneIcon />}
           onClick={() => {
             setActiveStep(2)
@@ -79,7 +79,7 @@ export default function PeopleUpdateMenu() {
         />
         <Chip
           label="Modificar Usuario"
-          variant="outlined"
+          variant={activeStep === 3 ? "" : "outlined"}
           color="warning"
           // icon={<RestartAltIcon />}
           onClick={() => {

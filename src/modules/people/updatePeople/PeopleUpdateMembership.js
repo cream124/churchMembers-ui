@@ -21,9 +21,10 @@ import SnackbarComponent from "../../../component/Common/SnackbarComponent";
 
 const width = '170';
 const colors = {
+  infTabColor: " #e8e8e6",
   mainColor: "#6BBA1B",
   backgroundLeftColor: "#E5E7E9",
-  subtileColor: "#F8DAEF",
+  subtileColor: " #d35400",
 };
 const personInf = [
   { name: "Nombre", value: "fullName" },
@@ -50,13 +51,13 @@ export default function PeopleUpdateMembership(props) {
     try {
       const newData = {
         ...savingData,
-       _id: id
+        _id: id
       };
       const response = await updateRecordInBookPersonaDB.updateRecordInBookPerson(
-        { 
-          variables: newData 
+        {
+          variables: newData
         });
-        setOpenSnackbar(true);
+      setOpenSnackbar(true);
       // console.log("-update book---", response.data);
       // await refetch({ _id: id });
       // console.log("-update response-22--", data);
@@ -80,16 +81,16 @@ export default function PeopleUpdateMembership(props) {
   return (
     <PanelComp
       margin="0.7em"
-      padding="0.7em"
+      padding="1.7em"
       // elevation="0"
-      color={"transparent"}
+      color={" #c6c4c7"}
     >
       <TypographyComp
-        variant="h5"
+        variant="h4"
         // align="left"
         fontWeight='bold'
-        textcolor="#C0392B"
-        sx={{ margin: "0em", padding: "0em" }}
+        textcolor="#d35400"
+      // sx={{ margin: "0em", padding: "0em" }}
       >
         {`Informacion de Membrecia`}
       </TypographyComp>
@@ -97,8 +98,9 @@ export default function PeopleUpdateMembership(props) {
         container
         direction="row"
         justifyContent="center"
+        spacing={4}
       >
-        <Grid item md={7} ms={7} xs={12}>
+        <Grid item md={6} ms={6} xs={12}>
           <PanelComp
             margin="0.7em"
             padding="1em"
@@ -112,25 +114,25 @@ export default function PeopleUpdateMembership(props) {
               noIcon={true}
             // collapsed={true}
             />
-            <MembershipForm
+            <RecordInBooksForm
+              data={data.person}
               id={id}
-              colors={{}}
+              save={saveRecordInBook}
+              colors={colors}
             />
           </PanelComp>
         </Grid>
-        <Grid item md={5} ms={5} xs={12}>
-          <RecordInBooksForm
-            data={data.person}
+        <Grid item md={6} ms={6} xs={12}>
+          <MembershipForm
             id={id}
-            save={saveRecordInBook}
-            colors={{}}
+            colors={colors}
           />
         </Grid>
       </Grid>
-      <SnackbarComponent 
-        open = {openSnackbar} 
-        setOpen = {setOpenSnackbar}
-        messege = 'El Registrro de libros: Se actualizo correctamente.'
+      <SnackbarComponent
+        open={openSnackbar}
+        setOpen={setOpenSnackbar}
+        messege='El Registrro de libros: Se actualizo correctamente.'
       />
     </PanelComp>
   );

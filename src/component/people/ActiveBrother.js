@@ -31,7 +31,12 @@ let filterJ =
     pageSize: 50
   }
 }
-
+const styleValues = {
+  titleColor: '#FFFFFF',
+  // backgroundImage: '',
+  backgroundImage: '/images/camel.jpg',
+  backgroundColorList: '#f2f3f4'
+}
 
 export default function ActiveBrother() {
   const [searchType, setSearchType] = React.useState('birthdate');
@@ -183,9 +188,9 @@ export default function ActiveBrother() {
       };
       const response = await updateStatePerson({ variables: bo });
       setFilterJson({
-        filter: { 
+        filter: {
           ...filterJson.filter,
-          day: filterJson.filter.day + 1 
+          day: filterJson.filter.day + 1
         }
       });
       if (response.data?.updateStatePerson._id) {
@@ -202,13 +207,17 @@ export default function ActiveBrother() {
 
   // if (loading) return <div> loading.......</div>
   return (
-    <Paper elevation={24} className={classes.containerRegistration}>
-      <PanelComp padding={'1em'} margin={'1.2em'}>
+    <PanelComp
+      elevation={24}
+      image={true}
+      urlImage={styleValues.backgroundImage}
+    >
+      <PanelComp padding={'1em'} margin={'1.2em'} elevation='0' >
         {searchPeople()}
       </PanelComp>
 
       {setLastPath()}
-      <PanelComp padding={'1em'} margin={'1.2em'}>
+      <PanelComp padding={'1em'} margin={'1.2em'} color={styleValues.backgroundColorList}>
         <CursorPaginationGrid
           title={'Activacion de Hermanos'}
           filter={filterJson}
@@ -240,6 +249,6 @@ export default function ActiveBrother() {
         setOpen={setOpenSnackbar}
         messege='Las personas se actualizo correctamente.'
       />
-    </Paper>
+    </PanelComp>
   );
 }

@@ -77,19 +77,19 @@ export default function UpdateUser(props) {
         _id: id,
         user: savingData.user
       };
-      if (saveValues.editingEmail){ newData.email = savingData.email}
-      if (saveValues.editingPassword){ newData.password = savingData.password}
-      if (saveValues.editingRol){ newData.level = parseInt(savingData.level)}
+      if (saveValues.editingEmail) { newData.email = savingData.email }
+      if (saveValues.editingPassword) { newData.password = savingData.password }
+      if (saveValues.editingRol) { newData.level = parseInt(savingData.level) }
 
       console.log('--saiving data----------', newData)
 
       const response = await updateUserDB.updateUser(
-        { 
-          variables: newData 
+        {
+          variables: newData
         });
-        setErrorMessage('');
-        disabledEditingStaus();
-        setOpenSnackbar(true);
+      setErrorMessage('');
+      disabledEditingStaus();
+      setOpenSnackbar(true);
     } catch (error) {
       setErrorMessage(error.graphQLErrors[0].message);
       console.log('------error---------', error.graphQLErrors[0].message)
@@ -109,62 +109,76 @@ export default function UpdateUser(props) {
   if (error) return <div> error1.......</div>;
   if (loading) return <div> loading.......</div>;
   return (
-    <PanelComp
-      margin="0.7em"
-      padding="0.7em"
-      // elevation="0"
-      color={"transparent"}
+    <Grid
+      container
+      direction="row"
+      sx={{
+        justifyContent: "center",
+        alignItems: "center",
+      }}
     >
-      <TypographyComp
-        variant="h5"
-        // align="left"
-        fontWeight='bold'
-        textcolor="#C0392B"
-        sx={{ margin: "0em", padding: "0em" }}
-      >
-        {`Informacion de Usuario`}
-      </TypographyComp>
-      <Grid
-        container
-        direction="row"
-        justifyContent="center"
-      >
-        <Grid item md={4} ms={4} xs={12}>
-          <PanelComp
-            margin="0.7em"
-            padding="1em"
-            elevation="0"
-            color={"transparent"}
+      <Grid item md={8} ms={8} xs={12}>
+        <PanelComp
+          margin="0.7em"
+          padding="0.7em"
+          // elevation="0"
+          color={" #c6c4c7"}
+        // color={"transparent"}
+        >
+          <TypographyComp
+            variant="h4"
+            // align="left" #c6c4c7
+            fontWeight='bold'
+            textcolor="#d35400"
+            sx={{ margin: "0em", padding: "0em" }}
           >
-            <PrintNestedList
-              tytle="Informacion Personal"
-              labels={personInf}
-              data={getMemberData(data.person)}
-              noIcon={true}
-            // collapsed={true}
-            />
-          </PanelComp>
-        </Grid>
+            {`Informacion de Usuario`}
+          </TypographyComp>
+          <Grid
+            container
+            direction="row"
+            justifyContent="center"
+          >
+            <Grid item md={4} ms={4} xs={12}>
+              <PanelComp
+                margin="0.7em"
+                padding="1em"
+                elevation="0"
+                color={"transparent"}
+              >
+                <PrintNestedList
+                  tytle="Informacion Personal"
+                  labels={personInf}
+                  data={getMemberData(data.person)}
+                  noIcon={true}
+                // collapsed={true}
+                />
+              </PanelComp>
+            </Grid>
 
-        <Grid item md={5} ms={5} xs={12}>
-          <UpdateUserForm
-            data={data.person}
-            id={id}
-            save={updateUser}
-            colors={{}}
-            errorMessage={errorMessage}
-            showState= {showState}
-            handleChange ={handleChange} 
-            disabledEditingStaus={disabledEditingStaus}
+            <Grid item md={7} ms={5} xs={12}>
+              <UpdateUserForm
+                data={data.person}
+                id={id}
+                save={updateUser}
+                colors={{}}
+                errorMessage={errorMessage}
+                showState={showState}
+                handleChange={handleChange}
+                disabledEditingStaus={disabledEditingStaus}
+              />
+            </Grid>
+          </Grid>
+          <SnackbarComponent
+            open={openSnackbar}
+            setOpen={setOpenSnackbar}
+            messege='El Usuario: Se actualizo correctamente.'
           />
-        </Grid>
+        </PanelComp>
       </Grid>
-      <SnackbarComponent
-        open={openSnackbar}
-        setOpen={setOpenSnackbar}
-        messege='El Usuario: Se actualizo correctamente.'
-      />
-    </PanelComp>
+
+    </Grid>
+
   );
 
 

@@ -81,13 +81,15 @@ export default function UpdatePeople() {
   const getPersonDB = GetPersonDB({ id });
   const history = useNavigate();
   const colors ={
-    mainColor:"#EC4D11",
-    // mainColor:"#F7DC6F",
+    // mainColor:"#EC4D11",
+    mainColor:" #d35400",
     // mainColor:"#6BBA1B",
-    // infTabColor: "transparent", //"#F8DAEF",
-    infTabColor: "#F8DAEF",
-    // sectionColor: "#DFED55"
-    sectionColor: "#ECD111"
+    infTabColor: "transparent", //"#F8DAEF",
+    // infTabColor: "#F8DAEF",
+    sectionColor: " #e8e8e6",
+    // sectionColor: "#ECD111",
+    titleColor: " #e8e8e6",
+    subTitleColor: " #e8e8e6",
   };
 
   const updatePeople = async (data) => {

@@ -64,7 +64,7 @@ export default function MembershipForm(props) {
   if (error) return <div> error1.......</div>;
   if (loading) return <div> loading.......</div>;
   return (
-    <PanelComp padding="0.7em" color={colors.infTabColor}>
+    <PanelComp padding="1.7em" color={colors.infTabColor}>
       <Formik
         initialValues={{ ...data.getMemberships[0], updating: false }}
         validationSchema={PEOPLE_VALIDATION_BILL}
@@ -82,11 +82,11 @@ export default function MembershipForm(props) {
             <>
               <Stack direction="row" justifyContent="space-between" spacing={2}>
                 <TypographyComp
-                  variant="h6"
+                  variant="h5"
                   align="left"
-                  // fontWeight='bold'
-                  textcolor="#C0392B"
-                  sx={{ margin: "0em", padding: "1em" }}
+                  fontWeight='bold'
+                  textcolor={colors.subtileColor}
+                  // sx={{ margin: "0em", padding: "1em" }}
                 >
                   {`Membrecia Actual`}
                 </TypographyComp>
@@ -236,7 +236,7 @@ export default function MembershipForm(props) {
                       variant="body1"
                       // align="right"
                       fontWeight='bold'
-                      // textcolor="#C0392B"
+                      textcolor="#C0392B"
                       sx={{ margin: "0.5em", padding: "0em" }}
                     >
                       {`Lista de Estados de Membrecia`}
@@ -245,25 +245,10 @@ export default function MembershipForm(props) {
                       <ThemeProviderComponent name={'actives'}>
                         <DataGrid
                           rows={data.getMemberships}
-                          // rows={data1.memberships}
                           columns={columns}
-                          // columnVisibilityModel={columnVisibilityModel}
-                          // onColumnVisibilityModelChange={(newModel) =>
-                          //   setColumnVisibilityModel(newModel)
-                          // }
                           getRowId={(row) => row._id}
                           pageSize={10}
-                          rowsPerPageOptions={[10]}
-                          // checkboxSelection
-                          // disableSelectionOnClick
-
-                          // onRowSelectionModelChange={(newSelectionModel) => {
-                          //   updateSelecteItems(newSelectionModel);
-                          // }}
-
-                          // components={{
-                          //   Toolbar: GridToolbar
-                          // }}
+                          rowsPerPageOptions={[5]}
 
                           componentsProps={{
                             toolbar: {
@@ -271,9 +256,6 @@ export default function MembershipForm(props) {
                               quickFilterProps: { debounceMs: 500 },
                             },
                           }}
-
-                        // filterModel={filterModel}
-                        // onFilterModelChange={(model) => setFilterModel(model)}
                         />
                       </ThemeProviderComponent>
                     </div>

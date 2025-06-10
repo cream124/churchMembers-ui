@@ -19,6 +19,7 @@ import GeneralInfForm from "./GeneralInfForm";
 import SpiritualInfForm from "./SpiritualInfForm";
 import LegalInfForm from "./LegalInfForm";
 import PanelComp from "../../../component/Common/Panel/PanelComp";
+import TypographyComp from "../../../component/Common/TypographyComp";
 
 const steps = [
   "Inf. General",
@@ -141,9 +142,9 @@ export default function PeopleForm(props) {
       color={colors.mainColor}
     >
       {/* <React.Fragment> */}
-        <Typography variant="h4" component="h1" align="center">
+        <TypographyComp variant="h3" textcolor={colors.titleColor} align="center">
           {title}
-        </Typography>
+        </TypographyComp>
         <Stepper activeStep={activeStep} className={classes.stepper}>
           {steps.map((label) => (
             <Step key={label}>

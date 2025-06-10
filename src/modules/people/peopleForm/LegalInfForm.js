@@ -16,6 +16,7 @@ import Select from "../../../component/Common/Form/Select";
 import places from "../../../component/data/places.json";
 import denomination from "../../../component/data/denomination.json";
 import MoTimePicker from "../../../component/Common/Form/MoTimePicker";
+import TypographyComp from "../../../component/Common/TypographyComp";
 
 const PEOPLE_VALIDATION_BILL = Yup.object().shape({
   // name: Yup.string()
@@ -34,9 +35,9 @@ export default function LegalInfForm(props) {
       color={colors.infTabColor}
     >
       <React.Fragment>
-        <Typography variant="h6" gutterBottom>
+        <TypographyComp variant="h5" textcolor={colors.subTitleColor}>
           Información Legal
-        </Typography>
+        </TypographyComp>
         <Formik
           initialValues={peopleData}
           validationSchema={PEOPLE_VALIDATION_BILL}
