@@ -1,0 +1,22 @@
+[
+    {
+        "id":1,
+        "image": "/images/conocenos.jpg",
+        "title": ".......smart"
+    },
+    {
+        "id":2,
+        "image": "/images/camel.jpg",
+        "title": ".......otro"
+    },
+    {
+        "id":3,
+        "image": "/images/oracion.jpg",
+        "title": ".......otro"
+    },
+    {
+        "id":4,
+        "image": "/images/logo.png",
+        "title": ".......otro"
+    }
+]

@@ -8,6 +8,7 @@ const TextfieldWrapper = ({
   textColor,
   inputAdornmentStart,
   inputAdornmentEnd,
+  readOnly,
   ...otherProps
 }) => {
   const [field, mata] = useField(name);
@@ -36,11 +37,15 @@ const TextfieldWrapper = ({
     }
   }
   if (textColor) {
-    configTextfield.sx.input= { color: textColor, fontSize: 29, fontWeight: "bold" }
+    configTextfield.sx.input = { color: textColor, fontSize: 29, fontWeight: "bold" }
   }
 
   return (
-    <TextField {...configTextfield} />
+    <TextField {...configTextfield}
+      InputProps={{
+        readOnly: readOnly,
+      }}
+    />
   );
 };
 

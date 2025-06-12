@@ -40,7 +40,7 @@ const states = {
 
 export default function UpdateUser(props) {
   // const { id } = useParams();
-  const { id } = props;
+  const { id, disabledEditing } = props;
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState('')
   const [showState, setShowState] = React.useState(states);
@@ -166,6 +166,7 @@ export default function UpdateUser(props) {
                 showState={showState}
                 handleChange={handleChange}
                 disabledEditingStaus={disabledEditingStaus}
+                disabledEditing={disabledEditing}
               />
             </Grid>
           </Grid>

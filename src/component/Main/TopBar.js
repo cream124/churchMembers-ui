@@ -38,6 +38,7 @@ import PrintBrother from "../people/PrintBrother";
 import ActiveBrother from "../people/ActiveBrother";
 import ListBrother from "../people/ListBrother";
 import SearchBrothers from "../people/SearchBrothers";
+import Home from "./Home";
 
 const drawerWidth = 240;
 
@@ -100,7 +101,8 @@ export default function TopBar() {
         <Toolbar />
         {/* <div className={classes.container}> */}
         <Routes>
-          <Route path="/" element={<Events />} />
+          {/* <Route path="/" element={<Events />} /> */}
+          <Route path="/" element={<Home />} />
           <Route path="/Servicios2" element={<Events />} />
           <Route path="/Contactos" element={<DefaultBody />} />
           <Route path="/Login" element={<From1 />} />

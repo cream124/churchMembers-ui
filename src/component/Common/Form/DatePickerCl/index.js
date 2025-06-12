@@ -9,7 +9,7 @@ import { getAge } from "../../../../util/utilDate";
 import dayjs from "dayjs";
 import "dayjs/locale/es";
 
-const DatePickerCl = ({ name, values, age, dateActtion, ...otherProps }) => {
+const DatePickerCl = ({ name, values, age, dateActtion, readOnly, ...otherProps }) => {
   const [field, meta] = useField(name);
 
   const configTextfield = {
@@ -75,6 +75,7 @@ const DatePickerCl = ({ name, values, age, dateActtion, ...otherProps }) => {
         onChange={(value) => {
           setupDate(value);
         }}
+        readOnly={readOnly}
         textField={(params) => <TextField {...params} />}
       ></DatePicker>
     </LocalizationProvider>

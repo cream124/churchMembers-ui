@@ -20,7 +20,7 @@ const PEOPLE_VALIDATION_BILL = Yup.object().shape({
 });
 
 export default function RecordInBooksForm(props) {
-  const { save, data, colors } = props;
+  const { save, data, colors, disabledEditing } = props;
   return (
     <PanelComp padding="0.7em" color={colors.infTabColor}>
       <Formik
@@ -53,6 +53,7 @@ export default function RecordInBooksForm(props) {
                   checked={values.updating}
                   label="Modificar"
                   actionTrue={resetForm}
+                  disabled={disabledEditing}
                 />
               </Stack>
               <Grid container rowSpacing={2} justifyContent="center" columnSpacing={2}>

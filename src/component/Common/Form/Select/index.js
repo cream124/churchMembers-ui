@@ -2,7 +2,7 @@ import React from "react";
 import { TextField, MenuItem } from "@mui/material";
 import { useField, useFormikContext } from "formik";
 
-const SelectWrapper = ({ name, options, ...otherProps }) => {
+const SelectWrapper = ({ name, options, readOnly, ...otherProps }) => {
   const { setFieldValue } = useFormikContext();
   const [field, meta] = useField(name);
 
@@ -30,7 +30,12 @@ const SelectWrapper = ({ name, options, ...otherProps }) => {
   }
 
   return (
-    <TextField {...configSelect}>
+    <TextField 
+      {...configSelect}
+      InputProps={{
+        readOnly: readOnly,
+      }}
+    >
       {Object.keys(options).map((item, pos) => {
         return (
           <MenuItem key={pos} value={item}>

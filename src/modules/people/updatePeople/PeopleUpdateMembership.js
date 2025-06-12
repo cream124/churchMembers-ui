@@ -35,7 +35,7 @@ const personInf = [
 
 export default function PeopleUpdateMembership(props) {
   // const { id } = useParams();
-  const { id } = props;
+  const { id, disabledEditing } = props;
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
 
 
@@ -119,6 +119,7 @@ export default function PeopleUpdateMembership(props) {
               id={id}
               save={saveRecordInBook}
               colors={colors}
+              disabledEditing={disabledEditing}
             />
           </PanelComp>
         </Grid>
@@ -126,6 +127,7 @@ export default function PeopleUpdateMembership(props) {
           <MembershipForm
             id={id}
             colors={colors}
+            disabledEditing={disabledEditing}
           />
         </Grid>
       </Grid>

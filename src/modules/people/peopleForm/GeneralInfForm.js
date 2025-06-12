@@ -65,28 +65,31 @@ export default function GeneralInfForm(props) {
                       />
                     </Grid>
                     <Grid item xs={12} sm={6} md={6}>
-                      <TextfieldWrapper label={"Nombres"} name={"name"} />
+                      <TextfieldWrapper label={"Nombres"} name={"name"} readOnly={!updating} />
                     </Grid>
                     <Grid item xs={12} sm={6} md={6}>
                       <TextfieldWrapper
                         label={"Apellido Paterno"}
                         name={"lastName"}
+                        readOnly={!updating}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6} md={6}>
                       <TextfieldWrapper
                         label={"Apellido Materno"}
                         name={"motherLastName"}
+                        readOnly={!updating}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6} md={6}>
-                      <Select name="gender" label="Sexo" options={gender} />
+                      <Select name="gender" label="Sexo" options={gender} readOnly={!updating} />
                     </Grid>
                     <Grid item xs={12} sm={6} md={6}>
                       <Select
                         name="civilStatus"
                         label="Esdado Civil"
                         options={civilStatus}
+                        readOnly={!updating}
                       />
                     </Grid>
                     <Grid item xs={6} sm={4} md={4}>
@@ -95,6 +98,7 @@ export default function GeneralInfForm(props) {
                         name="birthDate"
                         label="Fecha de Nacimiento"
                         age="age"
+                        readOnly={!updating}
                       />
                     </Grid>
                     <Grid item xs={6} sm={2} md={2}>
@@ -113,19 +117,19 @@ export default function GeneralInfForm(props) {
                 >
                   <Grid container rowSpacing={2} columnSpacing={2}>
                     <Grid item xs={12} sm={6} md={6}>
-                      <TextfieldWrapper label={"C.I."} name={"ci"} />
+                      <TextfieldWrapper label={"C.I."} name={"ci"} readOnly={!updating} />
                     </Grid>
                     <Grid item xs={12} sm={6} md={6}>
-                      <TextfieldWrapper label={"Teléfono"} name={"phone"} />
+                      <TextfieldWrapper label={"Teléfono"} name={"phone"} readOnly={!updating} />
                     </Grid>
                     <Grid item xs={12} sm={6} md={6}>
-                      <TextfieldWrapper label={"E-mail"} name={"email"} />
+                      <TextfieldWrapper label={"E-mail"} name={"email"} readOnly={!updating} />
                     </Grid>
                     <Grid item xs={12} sm={6} md={6}>
-                      <TextfieldWrapper label={"Dirección"} name={"address"} />
+                      <TextfieldWrapper label={"Dirección"} name={"address"} readOnly={!updating} />
                     </Grid>
                     <Grid item xs={12} sm={6} md={6}>
-                      <TextfieldWrapper label={"Ubicación"} name={"location"} />
+                      <TextfieldWrapper label={"Ubicación"} name={"location"} readOnly={!updating} />
                     </Grid>
                   </Grid>
                   <PanelComp
@@ -139,6 +143,7 @@ export default function GeneralInfForm(props) {
                         name="updatingUser"
                         checked={values.updatingUser}
                         label="Actualizar Usuario"
+                        readOnly={!updating}
                       />
                     )}
                     <PanelComp
@@ -152,7 +157,8 @@ export default function GeneralInfForm(props) {
                         name="user"
                         checked={values.user}
                         label="Es Usuario"
-                        disabled={(!values.updatingUser && updating)}
+                        // disabled={(!values.updatingUser && updating)}
+                        disabled={!updating}
                       />
                       {(values.user && !(!values.updatingUser && updating)) && (
                         <Grid container rowSpacing={2} columnSpacing={2}>
@@ -164,6 +170,7 @@ export default function GeneralInfForm(props) {
                             <TextfieldWrapper
                               label={"Password"}
                               name={"password"}
+                              readOnly={!updating}
                             />
                           </Grid>
 

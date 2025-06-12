@@ -72,7 +72,8 @@ async function getPersonData(registeredUser, id) {
   return person;
 }
 
-export default function UpdatePeople() {
+export default function UpdatePeople(props) {
+  const {disabledEditing} = props;
   const idRegister = getUserIdST();
   const { id } = useParams();
 
@@ -158,7 +159,7 @@ export default function UpdatePeople() {
   return (
       <PeopleForm
         title="Actualizar Hermano"
-        updating={true}
+        updating={!disabledEditing}
         // data={{ ...getPersonDB.data?.person, updatingUser: false }}
         data={{ ...getPersonDB.data?.person}}
         savePeople={savePeople}

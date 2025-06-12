@@ -29,7 +29,7 @@ const PEOPLE_VALIDATION_BILL = Yup.object().shape({
 });
 
 export default function MembershipForm(props) {
-  const { id, colors } = props;
+  const { id, colors, disabledEditing } = props;
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const { error, loading, data, refetch } = GetMembershipsDB({
     idPerson: id,
@@ -95,6 +95,7 @@ export default function MembershipForm(props) {
                   checked={values.updating}
                   label="Modificar"
                   actionTrue={resetForm}
+                  disabled={disabledEditing}
                 />
               </Stack>
               <Grid container rowSpacing={2} justifyContent="center" columnSpacing={2}>

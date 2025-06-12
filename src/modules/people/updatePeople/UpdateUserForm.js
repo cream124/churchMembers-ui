@@ -45,7 +45,7 @@ const color = {
   green: { color: "#008000" },
 };
 export default function UpdateUserForm(props) {
-  const { save, data, colors, errorMessage, showState, handleChange, disabledEditingStaus } = props;
+  const { save, data, colors, errorMessage, showState, handleChange, disabledEditingStaus, disabledEditing } = props;
   const getValidationRule = () => {
     if (showState.editingEmail && showState.editingPassword) { return VALIDATION_EMAIL_PASSWORD }
     if (showState.editingEmail) { return VALIDATION_EMAIL }
@@ -98,6 +98,7 @@ export default function UpdateUserForm(props) {
                 name="user"
                 checked={values.user}
                 label="Es Usuario"
+                disabled={disabledEditing}
               // actionTrue={resetForm}
               />
               <Grid container rowSpacing={2} justifyContent="center" columnSpacing={2}>

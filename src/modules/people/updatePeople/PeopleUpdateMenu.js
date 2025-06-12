@@ -17,6 +17,7 @@ const iid = "669822978bbd737451503885";
 // _id: "6678d4fea250754a0060969e",
 
 export default function PeopleUpdateMenu() {
+  const disabledEditing =true
   const { id, ur } = useParams();
   const [activeStep, setActiveStep] = React.useState(3);
   const history = useNavigate();
@@ -30,18 +31,22 @@ export default function PeopleUpdateMenu() {
         );
       case 1:
         return (
-          <UpdatePeople />
+          <UpdatePeople
+            disabledEditing={disabledEditing}
+          />
         );
       case 2:
         return (
           <PeopleUpdateMembership
             id={id}
+            disabledEditing={disabledEditing}
           />
         );
       case 3:
         return (
           <UpdateUser
             id={id}
+            disabledEditing={disabledEditing}
           />
         );
     }
