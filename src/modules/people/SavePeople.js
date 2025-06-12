@@ -133,9 +133,14 @@ const colors = {
   backgroundColor: '#F7DC6F',
   mainColor: "",
   infTabColor: "",
-  sectionColor: "#DFED55",
+  sectionColor: "rgb(247, 185, 14)",
+  // sectionColor: " #DFED55",
   sectionOpacity: "0.9",
   backgroundImage: '/images/conocenos.jpg',
+  mainFormAttrubutes: {
+    image: true,
+    urlImage: '/images/conocenos.jpg'
+  }
   // sectionColor: "#ECD111"
 };
 
@@ -213,10 +218,8 @@ export default function SavePeople() {
   return (
     <PanelComp
       // margin="0.7em"
-      padding="0.7em"
-      color={colors.backgroundColor}
-      image={true}
-      urlImage={colors.backgroundImage}
+      padding="1.7em"
+      elevation='0'
     >
       <PeopleForm
         title="Nuevo Hermano"

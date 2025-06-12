@@ -138,8 +138,7 @@ export default function PeopleForm(props) {
       margin="0.7em"
       padding="0.7em"
       // elevation="0"
-      // color={"transparent"}
-      color={colors.mainColor}
+      {...colors.mainFormAttrubutes}
     >
       {/* <React.Fragment> */}
         <TypographyComp variant="h3" textcolor={colors.titleColor} align="center">

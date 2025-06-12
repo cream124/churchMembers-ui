@@ -90,6 +90,9 @@ export default function UpdatePeople() {
     // sectionColor: "#ECD111",
     titleColor: " #e8e8e6",
     subTitleColor: " #e8e8e6",
+    mainFormAttrubutes: {
+      color: " #d35400"
+    }
   };
 
   const updatePeople = async (data) => {
