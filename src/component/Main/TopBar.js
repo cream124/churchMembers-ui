@@ -39,6 +39,7 @@ import ActiveBrother from "../people/ActiveBrother";
 import ListBrother from "../people/ListBrother";
 import SearchBrothers from "../people/SearchBrothers";
 import Home from "./Home";
+import SeePeopleDetails from "../../modules/people/updatePeople/SeePeopleDetails";
 
 const drawerWidth = 240;
 
@@ -118,6 +119,7 @@ export default function TopBar() {
           <Route path="/updatePerson" element={<PeopleUpdateMenu />} />
           <Route path="/updatePerson/:id/:ur" element={<PeopleUpdateMenu />} />
           <Route path="/updatePerson/:id/" element={<PeopleUpdateMenu />} />
+          <Route path="/persondetail/:id/" element={<SeePeopleDetails />} />
 
           <Route path="/Sample" element={<Sample />} />
           <Route path="/registrationRequest" element={<RegistrationRequest />}/>

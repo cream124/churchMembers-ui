@@ -46,8 +46,8 @@ export default function SearchBrother(props) {
 
   const selctState = () => {
     return (
-      <Grid container spacing={2} alignItems="center" className={classes.containerRegistrationButtons}>
-        <Grid item xs={1.5}>
+      <Grid container spacing={1} alignItems="center" className={classes.containerRegistrationButtons}>
+        <Grid item xs={4} md={1.5}>
           {/* <Paper elevation={24}> */}
           <Box sx={{ minWidth: 80 }}>
             <FormControl fullWidth>

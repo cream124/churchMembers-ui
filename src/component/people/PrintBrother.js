@@ -252,7 +252,7 @@ export default function PrintBrother(props) {
     <>
       <PanelComp
         elevation={24}
-        padding={'2em'}
+        padding={'0.1em'}
         image={true}
         urlImage={styleValues.backgroundImage}
         minHeight={'40em'}
@@ -262,6 +262,8 @@ export default function PrintBrother(props) {
           fontWeight='bold'
           textcolor={styleValues.titleColor}
           align="right"
+          padding={'0.5em'}
+          paddingRight ={'1.5em'}
         >
           {title}
         </TypographyComp>

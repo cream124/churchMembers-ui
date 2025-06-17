@@ -51,6 +51,7 @@ const MoTimePicker = ({ name, values, dateActtion, ...otherProps }) => {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <MobileTimePicker
         // defaultValue={dayjs("2022-04-17T15:30")}
+        {...configDateTimePicker}
         value={dayjs(values[name])}
         slotProps={{ textField: configTextfield }}
         onChange={(value) => {setupDate(value)}}

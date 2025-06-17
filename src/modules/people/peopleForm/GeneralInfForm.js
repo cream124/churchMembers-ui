@@ -62,6 +62,7 @@ export default function GeneralInfForm(props) {
                         name="photo"
                         label="Seleccione su foto"
                         width="100"
+                        disabled={!updating}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6} md={6}>
@@ -164,7 +165,7 @@ export default function GeneralInfForm(props) {
                         <Grid container rowSpacing={2} columnSpacing={2}>
                           <Grid item xs={12} sm={12} md={12}></Grid>
                           <Grid item xs={12} sm={6} md={6}>
-                            <TextfieldWrapper label={"E-mail"} name={"email"} />
+                            <TextfieldWrapper label={"E-mail"} name={"email"} readOnly={!updating} />
                           </Grid>
                           <Grid item xs={12} sm={6} md={6}>
                             <TextfieldWrapper
@@ -213,6 +214,7 @@ export default function GeneralInfForm(props) {
                     variant=""
                     color="success"
                     icon={<DoneIcon />}
+                    disabled={!updating}
                     onClick={() => {
                       setStep(0);
                       handleSubmit();

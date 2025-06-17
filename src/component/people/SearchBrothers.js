@@ -3,7 +3,7 @@ import { activePersonsColums } from "./Columns";
 import PrintBrother from './PrintBrother';
 import { setLastPathSS } from '../../util/Storage';
 
-const personsColums = activePersonsColums("print");
+const personsColums = activePersonsColums("see");
 const columns = personsColums.columns;
 const columnsVisible = personsColums.columnsVisible;
 const styleValues = {

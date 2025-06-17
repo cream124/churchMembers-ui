@@ -59,11 +59,11 @@ export default function UpdateUserForm(props) {
   };
 
   return (
-    <PanelComp 
-      padding="0.1em" 
-      margin="1.5em" 
+    <PanelComp
+      padding="0.1em"
+      margin="1.5em"
       color={" #e8e8e6"}
-      // color={colors.infTabColor}
+    // color={colors.infTabColor}
     >
       <Formik
         initialValues={{ ...data, updating: false }}
@@ -141,6 +141,7 @@ export default function UpdateUserForm(props) {
                           {showState.editingEmail && (
                             <IconButton
                               onClick={() => {
+
                                 handleChange('editingEmail', false);
                                 resetForm({ values: { ...values, email: data.email } });
                               }}
@@ -151,7 +152,7 @@ export default function UpdateUserForm(props) {
                           {!showState.editingEmail && (
                             <IconButton
                               onClick={() => {
-                                handleChange('editingEmail', true);
+                                  handleChange('editingEmail', true, disabledEditing);
                               }}
                             >
                               <EditIcon sx={color.green} />
@@ -205,7 +206,7 @@ export default function UpdateUserForm(props) {
                           {!showState.editingPassword && (
                             <IconButton
                               onClick={() => {
-                                handleChange('editingPassword', true);
+                                handleChange('editingPassword', true, disabledEditing);
                               }}
                             >
                               <EditIcon sx={color.green} />
@@ -259,7 +260,7 @@ export default function UpdateUserForm(props) {
                           {!showState.editingRol && (
                             <IconButton
                               onClick={() => {
-                                handleChange('editingRol', true);
+                                handleChange('editingRol', true, disabledEditing);
                               }}
                             >
                               <EditIcon sx={color.green} />

@@ -26,7 +26,7 @@ const PEOPLE_VALIDATION_BILL = Yup.object().shape({
 });
 
 export default function SpiritualInfForm(props) {
-  const { peopleData, colors, handleNext } = props;
+  const { peopleData, colors, handleNext, updating } = props;
   const [step, setStep] = React.useState(0);
 
   return (
@@ -59,6 +59,7 @@ export default function SpiritualInfForm(props) {
                     name="christian"
                     checked={values.christian}
                     label="Acepto a Cristo en su corazón"
+                    disabled={!updating}
                   />
                   {values.christian && (
                     <Grid container rowSpacing={2} columnSpacing={2}>
@@ -68,24 +69,28 @@ export default function SpiritualInfForm(props) {
                         <TextfieldWrapper
                           label={"*Nombre de la Iglesia"}
                           name={"churchName"}
+                          readOnly={!updating}
                         />
                       </Grid>
                       <Grid item xs={12} sm={6} md={6}>
                         <TextfieldWrapper
                           label={"*Departamento"}
                           name={"department"}
+                          readOnly={!updating}
                         />
                       </Grid>
                       <Grid item xs={12} sm={6} md={6}>
                         <TextfieldWrapper
                           label={"*Provincia"}
                           name={"province"}
+                          readOnly={!updating}
                         />
                       </Grid>
                       <Grid item xs={12} sm={6} md={6}>
                         <TextfieldWrapper
                           label={"*Localidad"}
                           name={"locality"}
+                          readOnly={!updating}
                         />
                       </Grid>
                       <Grid item xs={12} sm={6} md={6}>
@@ -93,6 +98,7 @@ export default function SpiritualInfForm(props) {
                           name="placeAccept"
                           label="Lugar"
                           options={places}
+                          readOnly={!updating}
                         />
                       </Grid>
 
@@ -100,6 +106,7 @@ export default function SpiritualInfForm(props) {
                         <TextfieldWrapper
                           label={"Nombre del Lugar"}
                           name={"namePlaceAccept"}
+                          readOnly={!updating}
                         />
                       </Grid>
                       <Grid item xs={12} sm={6} md={6}>
@@ -107,6 +114,7 @@ export default function SpiritualInfForm(props) {
                           values={values}
                           name="dateAccept"
                           label="*Fecha"
+                          readOnly={!updating}
                         />
                       </Grid>
                       <Grid item xs={12} sm={6} md={6}>
@@ -114,6 +122,7 @@ export default function SpiritualInfForm(props) {
                           values={values}
                           name="timeAccept"
                           label="Hora"
+                          readOnly={!updating}
                         />
                       </Grid>
                     </Grid>
@@ -132,6 +141,7 @@ export default function SpiritualInfForm(props) {
                       name="baptized"
                       checked={values.baptized}
                       label="Esta Bautizado?"
+                      disabled={!updating}
                     />
                     {values.baptized && (
                       <Grid container rowSpacing={2} columnSpacing={2}>
@@ -140,6 +150,7 @@ export default function SpiritualInfForm(props) {
                           <TextfieldWrapper
                             label={"Nombre de Iglesia"}
                             name={"nameBaptizedChurch"}
+                            readOnly={!updating}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
@@ -147,6 +158,7 @@ export default function SpiritualInfForm(props) {
                             name="denominationBaptizedChurch"
                             label="Denominación"
                             options={denomination}
+                            readOnly={!updating}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
@@ -154,12 +166,14 @@ export default function SpiritualInfForm(props) {
                             values={values}
                             name="dateBaptized"
                             label="*Fecha"
+                            readOnly={!updating}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper
                             label={"Lugar"}
                             name={"palceBaptized"}
+                            readOnly={!updating}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
@@ -167,6 +181,7 @@ export default function SpiritualInfForm(props) {
                             name="becameMemberFor"
                             label="Se hizo miembro por"
                             options={memberFor}
+                            readOnly={!updating}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
@@ -174,35 +189,16 @@ export default function SpiritualInfForm(props) {
                             values={values}
                             name="becameMembreDate"
                             label="*Fecha de Inicio de Membresia"
+                            readOnly={!updating}
                           />
                         </Grid>
-                        {/* <Grid item xs={12} sm={6} md={6}>
-                          <TextfieldWrapper label={"Membresía Libro No"} name={"libroN"} />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6}>
-                          <TextfieldWrapper label={"Membresía Folio No"} name={"folioN"} />
-                        </Grid> */}
-                        {/* <Grid item xs={12} sm={6} md={6}>
-                          <MobileDatePicker2
-                            values={values}
-                            name="membershipRegistrationDate"
-                            label="Fecha de Registro de Membresía"
-                          />
-                        </Grid> */}
-                        {/* <Grid item xs={12} sm={6} md={6}>
-                          <MoTimePicker
-                            values={values}
-                            name="membershipRegistrationTime"
-                            label="Membresía Hora de Registro"
-                          />
-                        </Grid> */}
-
                         <Grid item xs={12} sm={6} md={6}>
                           <UploadImage
                             values={values}
                             name="baptizedCertificatePhoto"
                             label="Subir foto del Certificado"
                             width="70"
+                            disabled={!updating}
                           />
                         </Grid>
                       </Grid>
@@ -258,7 +254,9 @@ export default function SpiritualInfForm(props) {
                     variant=""
                     color="success"
                     icon={<DoneIcon />}
+                    disabled={!updating}
                     onClick={() => {
+
                       setStep(0);
                       handleSubmit();
                     }}

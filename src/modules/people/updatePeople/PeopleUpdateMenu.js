@@ -16,10 +16,27 @@ const colors = {
 const iid = "669822978bbd737451503885";
 // _id: "6678d4fea250754a0060969e",
 
-export default function PeopleUpdateMenu() {
-  const disabledEditing =true
+function getButtonsLabel(editing) {
+  const labels = {
+    see:{ 
+      general: "Inf. General",
+      membership: "Membresia",
+      user: "Usario"
+    }, 
+    edit:{ 
+      general: "Modificar Inf. General",
+      membership: "Modificar Membresia",
+      user: "Modificar Usario"
+    }
+  }
+  return editing? labels.edit: labels.see;
+}
+
+export default function PeopleUpdateMenu(props) {
+  const {disabledEditing} = props;
   const { id, ur } = useParams();
   const [activeStep, setActiveStep] = React.useState(3);
+  const [buttonLabel, setButtonLabel] = React.useState(getButtonsLabel(!disabledEditing));
   const history = useNavigate();
   const lastPath = getLastPathSS();
 
@@ -61,7 +78,8 @@ export default function PeopleUpdateMenu() {
     >
       <Stack direction="row" justifyContent="center" spacing={5}>
         <Chip
-          label="Modificar Inf General"
+          label={buttonLabel.general}
+          // label="Modificar Inf General"//buttonLabel
           variant={activeStep === 1 ? "" : "outlined"}
           color="success"
           // icon={<DoneIcon />}
@@ -72,7 +90,7 @@ export default function PeopleUpdateMenu() {
           }}
         />
         <Chip
-          label="Modificar Membrecia"
+          label={buttonLabel.membership}
           variant={activeStep === 2 ? "" : "outlined"}
           color="warning"
           // icon={<DoneIcon />}
@@ -83,7 +101,7 @@ export default function PeopleUpdateMenu() {
           }}
         />
         <Chip
-          label="Modificar Usuario"
+          label={buttonLabel.user}
           variant={activeStep === 3 ? "" : "outlined"}
           color="warning"
           // icon={<RestartAltIcon />}

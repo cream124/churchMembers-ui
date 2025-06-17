@@ -49,6 +49,7 @@ export default function PeopleForm(props) {
         return (
           <SpiritualInfForm
             peopleData={peopleData.spiritual}
+            updating={updating}
             handleNext={handleNextBack}
             colors={colors}
           />
@@ -57,6 +58,7 @@ export default function PeopleForm(props) {
         return (
           <LegalInfForm
             peopleData={peopleData.legal}
+            updating={updating}
             handleNext={handleNextBack}
             // saveData={saveData}
             colors={colors}

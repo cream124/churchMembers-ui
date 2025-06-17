@@ -147,12 +147,12 @@ export default function SearchMenu(props) {
     return (
       // <PanelComp>
         <Grid container spacing={1} alignItems="center">
-          <Grid item xs={0.6}>
+          <Grid item xs={2} md={0.6}>
             <Typography variant="h8" component="h4">
               Por:
             </Typography>
           </Grid>
-          <Grid item xs={3.2}>
+          <Grid item xs={6} md={3.2}>
             <Box sx={{ minWidth: 150 }}>
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select1">Tipo de búsqueda</InputLabel>

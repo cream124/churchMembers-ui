@@ -25,7 +25,7 @@ const PEOPLE_VALIDATION_BILL = Yup.object().shape({
 });
 
 export default function LegalInfForm(props) {
-  const { peopleData, colors, handleNext } = props;
+  const { peopleData, colors, handleNext, updating } = props;
   const [step, setStep] = React.useState(0);
 
   return (
@@ -66,6 +66,7 @@ export default function LegalInfForm(props) {
                 name="legalInformation"
                 checked={values.legalInformation}
                 label="Certificado de nacimiento"
+                disabled={!updating}
               />
               {values.legalInformation && (
                 <Grid container rowSpacing={2} columnSpacing={2}>
@@ -83,6 +84,7 @@ export default function LegalInfForm(props) {
                           <TextfieldWrapper
                             label={"*Oficialia de Regidtro Civil No."}
                             name={"oficialiaN"}
+                            readOnly={!updating}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
@@ -92,25 +94,28 @@ export default function LegalInfForm(props) {
                           <TextfieldWrapper
                             label={"*Partida No."}
                             name={"partidaN"}
+                            readOnly={!updating}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
-                          <TextfieldWrapper label={"*Folio No."} name={"folioN"} />
+                          <TextfieldWrapper label={"*Folio No."} name={"folioN"} readOnly={!updating}/>
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper
                             label={"Detartamento"}
                             name={"oficialiaDepartamento"}
+                            readOnly={!updating}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
-                          <TextfieldWrapper label={"Provincia"} name={"oficialiaProvincia"} />
+                          <TextfieldWrapper label={"Provincia"} name={"oficialiaProvincia"} readOnly={!updating}/>
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <MobileDatePicker2
                             values={values}
                             name="oficialiaDate"
                             label="*Fecha de Partida"
+                            readOnly={!updating}
                           />
                         </Grid>
                       </Grid>
@@ -125,24 +130,28 @@ export default function LegalInfForm(props) {
                           <TextfieldWrapper
                             label={"*Departamento"}
                             name={"departamentoNacimiento"}
+                            readOnly={!updating}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper
                             label={"*Provincia"}
                             name={"provinciaNacimiento"}
+                            readOnly={!updating}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper
                             label={"*Localidad"}
                             name={"localidadNacimiento"}
+                            readOnly={!updating}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper
                             label={"Nacionalidad"}
                             name={"nacionalidadNacimiento"}
+                            readOnly={!updating}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
@@ -150,6 +159,7 @@ export default function LegalInfForm(props) {
                             values={values}
                             name="fechaNacimiento"
                             label="*Fecha de Nacimiento"
+                            readOnly={!updating}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
@@ -157,6 +167,7 @@ export default function LegalInfForm(props) {
                             values={values}
                             name="horaNacimiento"
                             label="*Hora de Nacimiento"
+                            readOnly={!updating}
                           />
                         </Grid>
                       </Grid>
@@ -171,24 +182,28 @@ export default function LegalInfForm(props) {
                           <TextfieldWrapper
                             label={"Nombres Padre"}
                             name={"nombresPadre"}
+                            readOnly={!updating}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper
                             label={"Apellidos Padre"}
                             name={"apellidosPadre"}
+                            readOnly={!updating}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper
                             label={"Nombres Madre"}
                             name={"nombresMadre"}
+                            readOnly={!updating}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper
                             label={"Apellidos Madre"}
                             name={"apellidosMadre"}
+                            readOnly={!updating}
                           />
                         </Grid>
                       </Grid>
@@ -200,13 +215,14 @@ export default function LegalInfForm(props) {
                       <Grid container rowSpacing={2} columnSpacing={2}>
                         <Grid item xs={12} sm={12} md={12}></Grid>
                         <Grid item xs={12} sm={6} md={6}>
-                          <TextfieldWrapper label={"Localidad"} name={"localidadEmicion"} />
+                          <TextfieldWrapper label={"Localidad"} name={"localidadEmicion"} readOnly={!updating}/>
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <MobileDatePicker2
                             values={values}
                             name="fechaEmicion"
                             label="Fecha"
+                            readOnly={!updating}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
@@ -215,6 +231,7 @@ export default function LegalInfForm(props) {
                             name="certificatePhoto"
                             label="Subir foto del Certificado"
                             width="70"
+                            disabled={!updating}
                           />
                         </Grid>
                       </Grid>
@@ -239,17 +256,6 @@ export default function LegalInfForm(props) {
                         handleSubmit();
                       }}
                     />
-                    {/* <Chip
-                      label="Siguiente"
-                      variant=""
-                      color="warning"
-                      disabled={isSubmitting}
-                      icon={<NavigateNextIcon />}
-                      onClick={() => {
-                        setStep(1);
-                        handleSubmit();
-                      }}
-                    /> */}
                   </Stack>
                 </Grid>
                 <Grid item xs={12} sm={3} md={3}>
@@ -267,6 +273,7 @@ export default function LegalInfForm(props) {
                       label="Guardar"
                       variant=""
                       color="success"
+                      disabled={!updating}
                       icon={<DoneIcon />}
                       onClick={() => {
                         setStep(0);

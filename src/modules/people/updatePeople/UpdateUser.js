@@ -45,12 +45,14 @@ export default function UpdateUser(props) {
   const [errorMessage, setErrorMessage] = React.useState('')
   const [showState, setShowState] = React.useState(states);
 
-  const handleChange = (name, value) => {
-    setShowState({
-      ...showState,
-      [name]: value
-    });
-    setErrorMessage('');
+  const handleChange = (name, value, disabledEditing) => {
+    if(!disabledEditing){
+      setShowState({
+        ...showState,
+        [name]: value
+      });
+      setErrorMessage('');
+    }
   };
 
   const disabledEditingStaus = () => {

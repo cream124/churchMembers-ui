@@ -158,7 +158,7 @@ export default function UpdatePeople(props) {
 
   return (
       <PeopleForm
-        title="Actualizar Hermano"
+        title={ disabledEditing? "Datos del Hermano": "Actualizar Hermano"}
         updating={!disabledEditing}
         // data={{ ...getPersonDB.data?.person, updatingUser: false }}
         data={{ ...getPersonDB.data?.person}}
