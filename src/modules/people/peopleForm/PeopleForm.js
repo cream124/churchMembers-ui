@@ -29,7 +29,7 @@ const steps = [
 ];
 
 export default function PeopleForm(props) {
-  const { data, updating, savePeople, title, colors, classes } = props;
+  const { data, updating, savePeople, title, colors, message, resetMessage, classes } = props;
   // const classes = {}; //useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [peopleData, setPeopleData] = React.useState(data);
@@ -43,6 +43,8 @@ export default function PeopleForm(props) {
             updating={updating}
             handleNext={handleNextBack}
             colors={colors}
+            message={message}
+            resetMessage={resetMessage}
           />
         );
       case 1:
@@ -52,6 +54,8 @@ export default function PeopleForm(props) {
             updating={updating}
             handleNext={handleNextBack}
             colors={colors}
+            message={message}
+            resetMessage={resetMessage}
           />
         );
       case 2:
@@ -62,6 +66,8 @@ export default function PeopleForm(props) {
             handleNext={handleNextBack}
             // saveData={saveData}
             colors={colors}
+            message={message}
+            resetMessage={resetMessage}
           />
         );
       case 3:
@@ -122,7 +128,7 @@ export default function PeopleForm(props) {
 
     if (step === 0) {
       console.log("Saiving, data newValues", newValues);
-      await savePeople(newValues);
+      return savePeople(newValues);
       // values.saveValues = false;
       // setPeopleData(values);
     } else {

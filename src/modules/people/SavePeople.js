@@ -227,6 +227,7 @@ export default function SavePeople() {
         savePeople={savePeople}
         classes={classes}
         colors={colors}
+        updating={true}
       />
       <Snackbar
         open={open}

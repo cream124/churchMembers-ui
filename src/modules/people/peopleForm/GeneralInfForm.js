@@ -23,7 +23,7 @@ const PEOPLE_VALIDATION_BILL = Yup.object().shape({
 });
 
 export default function GeneralInfForm(props) {
-  const { peopleData, updating, colors, handleNext } = props;
+  const { peopleData, updating, colors, handleNext, message, resetMessage } = props;
   const [step, setStep] = React.useState(0);
   // const [updating, setUptating] = React.useState(true);
   // const [userUpdating, setUserUpdating] = React.useState(false);
@@ -41,7 +41,10 @@ export default function GeneralInfForm(props) {
             // alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
           }, 400);
-          handleNext(values, step, "general");
+          // handleNext(values, step, "general");
+          if (handleNext(values, step, "general")){
+            resetForm({ values: { ...values } });
+          };
         }}
       >
         {({ values, handleSubmit, resetForm }) => (
@@ -199,6 +202,11 @@ export default function GeneralInfForm(props) {
                 </Stack>
               </Grid>
               <Grid item xs={12} sm={3} md={3}>
+                {message.errorMessage.length > 2 &&
+                  <TypographyComp textcolor="	#FF0000" align="center">
+                    {message.errorMessage}
+                  </TypographyComp>
+                }
                 <Stack direction="row" justifyContent="end" spacing={2}>
                   <Chip
                     label="Reset"
@@ -207,6 +215,7 @@ export default function GeneralInfForm(props) {
                     icon={<RestartAltIcon />}
                     onClick={() => {
                       resetForm();
+                      resetMessage();
                     }}
                   />
                   <Chip

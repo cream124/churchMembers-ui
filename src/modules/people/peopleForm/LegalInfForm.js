@@ -25,7 +25,7 @@ const PEOPLE_VALIDATION_BILL = Yup.object().shape({
 });
 
 export default function LegalInfForm(props) {
-  const { peopleData, colors, handleNext, updating } = props;
+  const { peopleData, colors, handleNext, updating, message, resetMessage } = props;
   const [step, setStep] = React.useState(0);
 
   return (
@@ -46,7 +46,10 @@ export default function LegalInfForm(props) {
               // alert(JSON.stringify(values, null, 2));
               setSubmitting(false);
             }, 400);
-            handleNext(values, step, 'legal');
+            // handleNext(values, step, 'legal');
+            if (handleNext(values, step, "legal")){
+              resetForm({ values: { ...values } });
+            };
           }}
         >
           {({
@@ -98,7 +101,7 @@ export default function LegalInfForm(props) {
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
-                          <TextfieldWrapper label={"*Folio No."} name={"folioN"} readOnly={!updating}/>
+                          <TextfieldWrapper label={"*Folio No."} name={"folioN"} readOnly={!updating} />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <TextfieldWrapper
@@ -108,7 +111,7 @@ export default function LegalInfForm(props) {
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
-                          <TextfieldWrapper label={"Provincia"} name={"oficialiaProvincia"} readOnly={!updating}/>
+                          <TextfieldWrapper label={"Provincia"} name={"oficialiaProvincia"} readOnly={!updating} />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <MobileDatePicker2
@@ -215,7 +218,7 @@ export default function LegalInfForm(props) {
                       <Grid container rowSpacing={2} columnSpacing={2}>
                         <Grid item xs={12} sm={12} md={12}></Grid>
                         <Grid item xs={12} sm={6} md={6}>
-                          <TextfieldWrapper label={"Localidad"} name={"localidadEmicion"} readOnly={!updating}/>
+                          <TextfieldWrapper label={"Localidad"} name={"localidadEmicion"} readOnly={!updating} />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                           <MobileDatePicker2
@@ -259,6 +262,11 @@ export default function LegalInfForm(props) {
                   </Stack>
                 </Grid>
                 <Grid item xs={12} sm={3} md={3}>
+                  {message.errorMessage.length > 2 &&
+                    <TypographyComp textcolor="	#FF0000" align="center">
+                      {message.errorMessage}
+                    </TypographyComp>
+                  }
                   <Stack direction="row" justifyContent="end" spacing={2}>
                     <Chip
                       label="Reset"
@@ -267,6 +275,7 @@ export default function LegalInfForm(props) {
                       icon={<RestartAltIcon />}
                       onClick={() => {
                         resetForm();
+                        resetMessage();
                       }}
                     />
                     <Chip

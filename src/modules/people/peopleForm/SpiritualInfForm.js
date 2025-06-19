@@ -26,7 +26,7 @@ const PEOPLE_VALIDATION_BILL = Yup.object().shape({
 });
 
 export default function SpiritualInfForm(props) {
-  const { peopleData, colors, handleNext, updating } = props;
+  const { peopleData, colors, handleNext, updating, message, resetMessage } = props;
   const [step, setStep] = React.useState(0);
 
   return (
@@ -43,6 +43,9 @@ export default function SpiritualInfForm(props) {
             setSubmitting(false);
           }, 400);
           handleNext(values, step, "spiritual");
+          if (handleNext(values, step, "spiritual")){
+            resetForm({ values: { ...values } });
+          };
         }}
       >
         {({ values, handleSubmit, resetForm }) => (
@@ -239,6 +242,11 @@ export default function SpiritualInfForm(props) {
                 </Stack>
               </Grid>
               <Grid item xs={12} sm={3} md={3}>
+                {message.errorMessage.length > 2 &&
+                  <TypographyComp textcolor="	#FF0000" align="center">
+                    {message.errorMessage}
+                  </TypographyComp>
+                }
                 <Stack direction="row" justifyContent="end" spacing={2}>
                   <Chip
                     label="Reset"
@@ -247,6 +255,7 @@ export default function SpiritualInfForm(props) {
                     icon={<RestartAltIcon />}
                     onClick={() => {
                       resetForm();
+                      resetMessage();
                     }}
                   />
                   <Chip

@@ -68,7 +68,7 @@ export default function ActiveList() {
 
   const { updateStatePerson, errorUp, loadingUp, dataUp } = UpdateStatePersonsDB();
   const [columnVisibilityModel, setColumnVisibilityModel] = React.useState(columnsVisible);
-  const currentPath = "/active";
+  const currentPath = "/records";
 
   const setLastPath = () => {
     setLastPathSS(currentPath);
@@ -175,6 +175,7 @@ export default function ActiveList() {
         filterPersons={filterPersons}
         clickOnActiveItems={clickOnActiveItems}
         disabledButton={disabledButton}
+        hideButton={true}
       />
     )
 
@@ -235,10 +236,10 @@ export default function ActiveList() {
           onColumnVisibilityModelChange={(newModel) =>
             setColumnVisibilityModel(newModel)
           }
-          checkboxSelection
-          onRowSelectionModelChange={(newSelectionModel) => {
-            updateSelecteItems(newSelectionModel);
-          }}
+          // checkboxSelection
+          // onRowSelectionModelChange={(newSelectionModel) => {
+          //   updateSelecteItems(newSelectionModel);
+          // }}
 
         />
       </PanelComp>

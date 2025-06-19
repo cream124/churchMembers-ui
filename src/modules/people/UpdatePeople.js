@@ -36,6 +36,8 @@ import { getUserIdST, isRegisteredUserST } from "../../util/Storage";
 import { useParams } from "react-router-dom";
 import { textAsTitle } from "../../util/helper";
 import PeopleForm from "./peopleForm/PeopleForm";
+import SnackbarComponent from "../../component/Common/SnackbarComponent";
+import { ErrorMessage } from "formik";
 
 async function getPersonData(registeredUser, id) {
   let person = {
@@ -72,18 +74,26 @@ async function getPersonData(registeredUser, id) {
   return person;
 }
 
+const defaultMessage = {
+  severity: 'success',
+  messege: 'Se actualizo correctamente',
+  errorMessage: ''
+};
+
 export default function UpdatePeople(props) {
-  const {disabledEditing} = props;
+  const { disabledEditing } = props;
   const idRegister = getUserIdST();
   const { id } = useParams();
+  const [open, setOpen] = React.useState(false);
+  const [message, setMessage] = React.useState(defaultMessage);
 
   const { addPerson, error, loading, data } = SavePersonsDB();
   const updatePersonDB = UpdatePersonDB();
   const getPersonDB = GetPersonDB({ id });
   const history = useNavigate();
-  const colors ={
+  const colors = {
     // mainColor:"#EC4D11",
-    mainColor:" #d35400",
+    mainColor: " #d35400",
     // mainColor:"#6BBA1B",
     infTabColor: "transparent", //"#F8DAEF",
     // infTabColor: "#F8DAEF",
@@ -94,6 +104,10 @@ export default function UpdatePeople(props) {
     mainFormAttrubutes: {
       color: " #d35400"
     }
+  };
+
+  const resetMessage = () => {
+    setMessage(defaultMessage);
   };
 
   const updatePeople = async (data) => {
@@ -114,9 +128,17 @@ export default function UpdatePeople(props) {
 
       const response = await updatePersonDB.updatePerson({ variables: newData });
       console.log("-update response---", response.data?.updatePerson);
-      // setOpen(true);
+      setOpen(true);
+      setMessage(defaultMessage);
+      return true;
       // setErrorMessage('');
     } catch (error) {
+      setOpen(true);
+      setMessage({
+        severity: 'error',
+        messege: error.graphQLErrors[0].message,
+        errorMessage: error.graphQLErrors[0].message
+      });
       // setErrorMessage(error.graphQLErrors[0].message);
     }
   };
@@ -139,6 +161,7 @@ export default function UpdatePeople(props) {
       // setOpen(true);
       // setErrorMessage('');
       history("/addPerson3/" + response.data.createPerson._id);
+      return true;
     } catch (error) {
       console.log(error.graphQLErrors[0].message);
       // setErrorMessage(error.graphQLErrors[0].message);
@@ -147,9 +170,9 @@ export default function UpdatePeople(props) {
 
   const savePeople = async (data) => {
     if (!id) {
-      await saveNewPeople(data);
+      return saveNewPeople(data);
     } else {
-      await updatePeople(data);
+      return updatePeople(data);
     }
   };
 
@@ -157,14 +180,24 @@ export default function UpdatePeople(props) {
   if (getPersonDB.loading) return <div> loading.......</div>;
 
   return (
+    <>
       <PeopleForm
-        title={ disabledEditing? "Datos del Hermano": "Actualizar Hermano"}
+        title={disabledEditing ? "Datos del Hermano" : "Actualizar Hermano"}
         updating={!disabledEditing}
         // data={{ ...getPersonDB.data?.person, updatingUser: false }}
-        data={{ ...getPersonDB.data?.person}}
+        data={{ ...getPersonDB.data?.person }}
         savePeople={savePeople}
         colors={colors}
         classes={classes}
+        message={message}
+        resetMessage={resetMessage}
       />
+      <SnackbarComponent
+        open={open}
+        severity={message.severity}
+        setOpen={setOpen}
+        messege={message.messege}
+      />
+    </>
   );
 }
