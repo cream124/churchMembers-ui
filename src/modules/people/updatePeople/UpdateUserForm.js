@@ -73,9 +73,10 @@ export default function UpdateUserForm(props) {
             // alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
           }, 400);
-          save(values, showState);
+          if(save(values, showState) === true){
+            resetForm({ values: { ...values, password: '' } });
+          }
           // disabledEditingStaus();
-          resetForm({ values: { ...values, password: '' } });
         }}
       >
         {

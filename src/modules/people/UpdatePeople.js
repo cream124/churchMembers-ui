@@ -108,6 +108,7 @@ export default function UpdatePeople(props) {
 
   const resetMessage = () => {
     setMessage(defaultMessage);
+    setOpen(false);
   };
 
   const updatePeople = async (data) => {

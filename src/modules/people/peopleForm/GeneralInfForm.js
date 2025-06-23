@@ -15,6 +15,8 @@ import gender from "../../../component/data/gender.json";
 import civilStatus from "../../../component/data/civilStatus.json";
 import DatePickerCl from "../../../component/Common/Form/DatePickerCl";
 import TypographyComp from "../../../component/Common/TypographyComp";
+import { getLastPathSS } from "../../../util/Storage";
+import { useNavigate } from "react-router-dom";
 
 const PEOPLE_VALIDATION_BILL = Yup.object().shape({
   name: Yup.string()
@@ -25,6 +27,8 @@ const PEOPLE_VALIDATION_BILL = Yup.object().shape({
 export default function GeneralInfForm(props) {
   const { peopleData, updating, colors, handleNext, message, resetMessage } = props;
   const [step, setStep] = React.useState(0);
+  const history = useNavigate();
+  
   // const [updating, setUptating] = React.useState(true);
   // const [userUpdating, setUserUpdating] = React.useState(false);
 
@@ -41,8 +45,10 @@ export default function GeneralInfForm(props) {
             // alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
           }, 400);
-          // handleNext(values, step, "general");
-          if (handleNext(values, step, "general")){
+          // const updated = handleNext(values, step, "general");
+          // alert(JSON.stringify(updated, null, 2));
+          // if (updated === true){
+          if (handleNext(values, step, "general") === true) {
             resetForm({ values: { ...values } });
           };
         }}
@@ -234,10 +240,11 @@ export default function GeneralInfForm(props) {
                     variant="outlined"
                     color="success"
                     icon={<DoneIcon />}
-                  // onClick={() => {
-                  //   setStep(0);
-                  //   handleSubmit();
-                  // }}
+                    onClick={() => {
+                      history(`${getLastPathSS()}`);
+                      // setStep(0);
+                      // handleSubmit();
+                    }}
                   />
                 </Stack>
               </Grid>

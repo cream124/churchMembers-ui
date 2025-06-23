@@ -47,7 +47,7 @@ export default function LegalInfForm(props) {
               setSubmitting(false);
             }, 400);
             // handleNext(values, step, 'legal');
-            if (handleNext(values, step, "legal")){
+            if (handleNext(values, step, "legal") === true){
               resetForm({ values: { ...values } });
             };
           }}

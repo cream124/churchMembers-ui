@@ -92,6 +92,7 @@ export default function UpdateUser(props) {
       setErrorMessage('');
       disabledEditingStaus();
       setOpenSnackbar(true);
+      return true;
     } catch (error) {
       setErrorMessage(error.graphQLErrors[0].message);
       console.log('------error---------', error.graphQLErrors[0].message)

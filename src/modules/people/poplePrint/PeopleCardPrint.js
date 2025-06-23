@@ -2,7 +2,7 @@ import * as React from "react";
 import { useParams } from "react-router-dom";
 import { GetPersonToPrintDB } from "../../../api/PersonsDB";
 import PanelComp from "../../../component/Common/Panel/PanelComp";
-import { Avatar, Grid } from "@mui/material";
+import { Avatar, Grid, Stack } from "@mui/material";
 import TypographyComp from "../../../component/Common/TypographyComp";
 import NestedList from "../../example/NestedList";
 import PrintNestedListOld from "../../../component/Common/List/PrintNestedListOld";
@@ -10,6 +10,8 @@ import PrintNestedList from "../../../component/Common/List/PrintNestedList";
 import CustomizedList from "../../example/print/CustomizedList";
 import { PrintablePanel } from "../../../component/Common/Panel/PrintablePanel";
 import { getAge, getPrintDate } from "../../../util/utilDate";
+import { getPersonStatenName } from "../../../util/utilData";
+import HeaderReportForm from "../../../component/report/HeaderReportForm";
 
 const width = '170';
 const colors = {
@@ -114,11 +116,12 @@ const characteristic = [
   { name: "Sexo", value: "gender" },
   { name: "Miembro", value: "membershipType" },
   { name: "Antiguedad Membrecia", value: "memberAge" },
+  { name: "Estado de Registro", value: "registerState" },
   {
     name: "Ministerial", value: "phone", type: "menu", noIcon: true, collapsed: true,
     data: [
-      { name: "Anciano", value: "anciano" },
-      { name: "Maestro", value: "maestro" }
+      // { name: "Anciano", value: "anciano" },
+      // { name: "Maestro", value: "maestro" }
     ]
   },
 ];
@@ -148,7 +151,7 @@ const userInf = [
   {
     name: "Usuario del sistema", value: "user", type: "menu", dataType: "boolean", collapsed: true,
     data: [
-      { name: "Es usuario", value: "user", dataType: "boolean"  },
+      { name: "Es usuario", value: "user", dataType: "boolean" },
       { name: "Rol ", value: "level", dataType: "rol" },
     ]
   },
@@ -156,20 +159,20 @@ const userInf = [
 
 export default function PeopleCardPrint() {
   const { id } = useParams();
-  const ii="66837d01b2f59963f3586c92";
+  const ii = "66837d01b2f59963f3586c92";
   const { error, loading, data, refetch } = GetPersonToPrintDB({
     _id: id,
     // _id: ii,
   });
 
   const getMemberData = (data) => {
-    const memberData ={
+    const memberData = {
       age: data.age + ' Años',
       anciano: "2024 -2026",
       maestro: "2024",
       gender: data.gender,
       // memberAge: data.spiritual.becameMembreDate,
-      memberAge: getAge(data.spiritual.becameMembreDate).toString()+ ' Años',
+      memberAge: getAge(data.spiritual.becameMembreDate).toString() + ' Años',
       membershipType: data.membershipType,
       becameMemberFor: data.spiritual.becameMemberFor,
       libroN: data.spiritual.libroN,
@@ -179,6 +182,7 @@ export default function PeopleCardPrint() {
       updateDate: data.memberships[0]?.updateDate,
       description: data.memberships[0]?.description,
       state: data.memberships[0]?.state,
+      registerState: getPersonStatenName(data?.state),
     }
     return memberData;
   };
@@ -187,130 +191,118 @@ export default function PeopleCardPrint() {
   if (loading) return <div> loading.......</div>;
   return (
     // <div>
-      <PanelComp
-        // margin="0.7em"
-        padding="0.7em"
-        elevation="0"
-        color={"#f7dc6f"}
+    <PanelComp
+      // margin="0.7em"
+      padding="0.7em"
+      elevation="0"
+      color={"#f7dc6f"}
+    >
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
       >
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
+        <Grid item md={10} ms={6} xs={6}
         >
-          <Grid item md={10} ms={6} xs={6}
-          >
-            <PrintablePanel>
-              <PanelComp
-                margin="0.7em"
-                padding="0.7em"
-                elevation="0"
-                color={"transparent"}
+          <PrintablePanel>
+            <PanelComp
+              margin="0.7em"
+              padding="0.7em"
+              elevation="0"
+              color={"transparent"}
+            >
+              <Grid
+                container
+                direction="row"
+                justifyContent="center"
+                sx={{
+                  backgroundColor: `${colors.backgroundLeftColor} !important`,
+                  borderRadius: 3,
+                  padding: "1em"
+                }}
               >
-                <Grid
-                  container
-                  direction="row"
-                  justifyContent="center"
-                  sx={{
-                    backgroundColor: `${colors.backgroundLeftColor} !important`,
-                    borderRadius: 3,
-                  }}
-                >
-                  <Grid item xs={3}>
-                    <PanelComp
-                      margin="1.7em"
-                      padding="0.7em"
-                      elevation="0"
-                      color={"transparent"}
+                <Grid item xs={12}>
+                  <HeaderReportForm />
+                </Grid>
+                <Grid item xs={12}></Grid>
+                <Grid item xs={3}>
+                  <PanelComp
+                    margin="1.7em"
+                    padding="0.7em"
+                    elevation="0"
+                    color={"transparent"}
+                  >
+                    <Avatar
+                      src={data.person.photo}
+                      sx={{ width: Number(width), height: Number(width), margin: "auto" }}
                     >
-                      <Avatar
-                        src={data.person.photo}
-                        sx={{ width: Number(width), height: Number(width), margin: "auto" }}
-                      >
-                        A
-                      </Avatar>
-                    </PanelComp>
+                      A
+                    </Avatar>
+                  </PanelComp>
+
+                  <PrintNestedList
+                    tytle="Caracteristicas"
+                    labels={characteristic}
+                    data={getMemberData(data.person)}
+                    noIcon={true}
+                  />
+                </Grid>
+                <Grid item xs={9}>
+                  <PanelComp
+                    borderRadius="0"
+                    elevation="24"
+                    padding="2em"
+                  >
+                    <TypographyComp
+                      variant="h4"
+                      fontWeight='bold'
+                      align="left"
+                      // textcolor="#229954"
+                      sx={{ flexGrow: 1, margin: "1em", padding: "0em" }}
+                    >
+                      {`${data.person.name} ${data.person.lastName} ${data.person.motherLastName}`}
+                    </TypographyComp>
 
                     <PrintNestedList
-                      tytle="Caracteristicas"
-                      labels={characteristic}
-                      data={getMemberData(data.person)}
-                      noIcon={true}
+                      tytle="Informacion Personal"
+                      labels={personInf}
+                      data={data.person}
+                    // collapsed={true}
                     />
-                  </Grid>
-                  <Grid item xs={9}>
-                    <PanelComp
-                      borderRadius="0"
-                      elevation="24"
-                      padding="2em"
-                    >
-                      <PanelComp
-                        elevation="0"
-                        padding="0em"
-                        textAlign="right"
-                        color={"transparent"}
-                      >
-                        <TypographyComp
-                          variant="h6"
-                          align="right"
-                          fontWeight='bold'
-                          textcolor="#C0392B"
-                          sx={{ margin: "0em", padding: "0em" }}
-                        >
-                          {`Iglesia "Alto Pagador"`}
-                        </TypographyComp>
-                      </PanelComp>
+                    <PrintNestedList
+                      tytle="Informacion Espiritual"
+                      labels={spiritualInf}
+                      data={data.person.spiritual}
+                    // collapsed={true}
+                    />
 
-                      <TypographyComp
-                        variant="h4"
-                        fontWeight='bold'
-                        align="left"
-                        // textcolor="#229954"
-                        sx={{ flexGrow: 1, margin: "1em", padding: "0em" }}
-                      >
-                        {`${data.person.name} ${data.person.lastName} ${data.person.motherLastName}`}
-                      </TypographyComp>
+                    <PrintNestedList
+                      tytle="Membresia"
+                      labels={membershipInf}
+                      data={getMemberData(data.person)}
+                      collapsed={true}
+                    />
 
-                      <PrintNestedList
-                        tytle="Informacion Personal"
-                        labels={personInf}
-                        data={data.person}
-                      // collapsed={true}
-                      />
-                      <PrintNestedList
-                        tytle="Informacion Espiritual"
-                        labels={spiritualInf}
-                        data={data.person.spiritual}
-                      // collapsed={true}
-                      />
-
-                      <PrintNestedList
-                        tytle="Membresia"
-                        labels={membershipInf}
-                        data={getMemberData(data.person)}
-                        collapsed={true}
-                      />
-
-                      <PrintNestedList
-                        tytle="Informacion Legal"
-                        labels={legalInf}
-                        data={data.person.legal}
-                        collapsed={true}
-                      />
-                      <PrintNestedList
-                        tytle="Informacion de Usuario"
-                        labels={userInf}
-                        data={data.person}
-                        collapsed={true}
-                      />
-                    </PanelComp>
-                  </Grid>
+                    <PrintNestedList
+                      tytle="Informacion Legal"
+                      labels={legalInf}
+                      data={data.person.legal}
+                      collapsed={true}
+                    />
+                    <PrintNestedList
+                      tytle="Informacion de Usuario"
+                      labels={userInf}
+                      data={data.person}
+                      collapsed={true}
+                    />
+                  </PanelComp>
                 </Grid>
-              </PanelComp>
-            </PrintablePanel>
-          </Grid>
+              </Grid>
+            </PanelComp>
+          </PrintablePanel>
         </Grid>
-      </PanelComp>
+      </Grid>
+    </PanelComp>
     // </div>
   );
 

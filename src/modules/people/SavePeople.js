@@ -55,7 +55,7 @@ function getPersonData(idRegister) {
     address: "",
     location: "",
     state: "registered",
-    email: "hola@gmail.com",
+    email: "",
     registerId: idRegister,
     registerDate: dayjs().format(),
     approvalId: "",
@@ -74,16 +74,17 @@ function getPersonData(idRegister) {
       locality: "",
       placeAccept: "",
       namePlaceAccept: "",
-      dateAccept: "2024-05-31T04:00:00.000Z",
-      timeAccept: "2024-05-31T15:15:00.000Z",
-      // timeAccept: "2022-04-17T15:15",
+      dateAccept: "",
+      // dateAccept: "2024-05-31T04:00:00.000Z",
+      timeAccept: "",
+      // timeAccept: "2024-05-31T15:15:00.000Z",
       baptized: false,
       nameBaptizedChurch: "",
       denominationBaptizedChurch: "",
       palceBaptized: "",
-      dateBaptized: "2024-05-31T04:00:00.000Z",
+      dateBaptized: "",
       becameMemberFor: "",
-      becameMembreDate: "2024-05-31T04:00:00.000Z",
+      becameMembreDate: "",
       libroN: "",
       folioN: "",
       membershipRegistrationDate: "",
@@ -98,7 +99,7 @@ function getPersonData(idRegister) {
       folioN: "",
       oficialiaDepartamento: "",
       oficialiaProvincia: "",
-      oficialiaDate: "2024-05-31T04:00:00.000Z",
+      oficialiaDate: "",
       departamentoNacimiento: "",
       provinciaNacimiento: "",
       localidadNacimiento: "",
@@ -143,15 +144,17 @@ const colors = {
   }
   // sectionColor: "#ECD111"
 };
-
+const defaultMessage = {
+  severity: 'success',
+  messege: 'Se guardo correctamente.',
+  errorMessage: ''
+};
 export default function SavePeople() {
   const idRegister = getUserIdST();
   const { id } = useParams();
-
   const [body, setBody] = React.useState(getPersonData(idRegister));
-
   const [open, setOpen] = React.useState(false);
-
+  const [message, setMessage] = React.useState(defaultMessage);
   // const [showState, setShowState] = React.useState(body.christian);
   // const [showBaptized, setShowBaptized] = React.useState(body.christian);
   // const [showUserPanel, setShowUserPanel] = React.useState(body.user);
@@ -162,6 +165,11 @@ export default function SavePeople() {
   const updatePersonDB = UpdatePersonDB();
   // const getPersonDB = GetPersonDB({id});
   const history = useNavigate();
+  const resetMessage = () => {
+    setMessage(defaultMessage);
+    setOpen(false);
+  };
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -228,6 +236,8 @@ export default function SavePeople() {
         classes={classes}
         colors={colors}
         updating={true}
+        message={message}
+        resetMessage={resetMessage}
       />
       <Snackbar
         open={open}

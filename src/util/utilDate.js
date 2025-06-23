@@ -6,7 +6,7 @@ const timeFormat = 'HH:mm';
 // get a string and convert it to camelCase
 export function getAge(birthDate) {
     const age = parseInt(dayjs().diff(dayjs(birthDate), 'year'));
-    return age;
+    return age > 1? age: 0;
 }
 
 // **

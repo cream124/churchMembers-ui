@@ -42,8 +42,8 @@ export default function SpiritualInfForm(props) {
             // alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
           }, 400);
-          handleNext(values, step, "spiritual");
-          if (handleNext(values, step, "spiritual")){
+          // handleNext(values, step, "spiritual");
+          if (handleNext(values, step, "spiritual") === true){
             resetForm({ values: { ...values } });
           };
         }}
