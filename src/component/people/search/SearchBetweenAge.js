@@ -13,7 +13,7 @@ export default function SearchBetweenAge(props) {
   const selctState = () => {
     return (
       <>
-        <Grid item xs={2.4}>
+        <Grid item xs={8.2} md={2.4}>
           <TextfieldCommon
             name="startAge"
             type="number"
@@ -26,7 +26,7 @@ export default function SearchBetweenAge(props) {
             label={`${label} Inicio`}
           />
         </Grid>
-        <Grid item xs={1.2}>
+        <Grid item xs={4} md={1.7}>
           <FormControlLabel
             labelPlacement="top"
             control={
@@ -40,8 +40,8 @@ export default function SearchBetweenAge(props) {
             label="Hasta"
           />
         </Grid>
-        <Grid item xs={2.4}>
-          <Box sx={{ minWidth: 100 }}>
+        <Grid item xs={8} md={2.4}>
+          {/* <Box sx={{ minWidth: 100 }}> */}
             {toDate && (
               <TextfieldCommon
                 name="endAge"
@@ -55,7 +55,7 @@ export default function SearchBetweenAge(props) {
               />
             )
             }
-          </Box>
+          {/* </Box> */}
         </Grid>
       </>
     )

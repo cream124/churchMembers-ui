@@ -14,6 +14,7 @@ import SearchBrother from './searchBrother';
 import { getCurrentDate, getCurrentDateISO } from '../../util/utilDate';
 import CursorPaginationGrid from '../Common/DataGrid/CursorPaginationGrid';
 import { getUserIdST, setLastPathSS } from '../../util/Storage';
+import { getPersonState } from '../../util/utilData';
 
 const personsColums = activePersonsColums();
 const columns2 = personsColums.columns;
@@ -31,7 +32,7 @@ let filterJ =
     pageSize: 50
   }
 }
-
+const personState = getPersonState();
 
 export default function EditBrother() {
   const [searchType, setSearchType] = React.useState('birthdate');
@@ -158,6 +159,7 @@ export default function EditBrother() {
         endDate={endDate}
         setEndDate={setEndDate}
         filterPersons={filterPersons}
+        personState={personState}
         clickOnActiveItems={clickOnActiveItems}
         disabledButton={disabledButton}
         hideButton={true}

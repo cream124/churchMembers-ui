@@ -13,7 +13,7 @@ import { getAge, getPrintDate } from "../../../util/utilDate";
 import { getPersonStatenName } from "../../../util/utilData";
 import HeaderReportForm from "../../../component/report/HeaderReportForm";
 
-const width = '170';
+const width = '150';
 const colors = {
   mainColor: "#6BBA1B",
   backgroundLeftColor: "#E5E7E9",
@@ -218,14 +218,18 @@ export default function PeopleCardPrint() {
                 sx={{
                   backgroundColor: `${colors.backgroundLeftColor} !important`,
                   borderRadius: 3,
-                  padding: "1em"
+                  // paddingTop: "1em"
                 }}
               >
-                <Grid item xs={12}>
-                  <HeaderReportForm />
+                <Grid item xs={12}
+                  sx={{
+                    padding: "1.5em"
+                  }}
+                >
+                  <HeaderReportForm title=' ' />
                 </Grid>
-                <Grid item xs={12}></Grid>
-                <Grid item xs={3}>
+                {/* <Grid item xs={12}></Grid> */}
+                <Grid item xs={3.2}>
                   <PanelComp
                     margin="1.7em"
                     padding="0.7em"
@@ -247,7 +251,7 @@ export default function PeopleCardPrint() {
                     noIcon={true}
                   />
                 </Grid>
-                <Grid item xs={9}>
+                <Grid item xs={8.8}>
                   <PanelComp
                     borderRadius="0"
                     elevation="24"
@@ -257,7 +261,7 @@ export default function PeopleCardPrint() {
                       variant="h4"
                       fontWeight='bold'
                       align="left"
-                      // textcolor="#229954"
+                      textcolor="rgb(10, 95, 45)"
                       sx={{ flexGrow: 1, margin: "1em", padding: "0em" }}
                     >
                       {`${data.person.name} ${data.person.lastName} ${data.person.motherLastName}`}

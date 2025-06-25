@@ -8,8 +8,13 @@ export function getPersonStatenName(state) {
     const states = getPersonState();
     return states[state].name;
 }
-export function getPersonState() {
+export function getPersonState(type) {
     const states = {
+        all: {
+            name: "Todos",
+            actions:
+                [{ name: "Activar", action: "active" }, { name: "Denegar Registro", action: "registeredCancel" }]
+        },
         registered: {
             name: "Registrado",
             actions:
@@ -35,6 +40,9 @@ export function getPersonState() {
             actions:
                 [{ name: "Activar", action: "active" }, { name: "Eliminar", action: "deleted" }]
         },
+    }
+    if(type === 'print'){
+      delete states.deleted;    
     }
     return states;
 }

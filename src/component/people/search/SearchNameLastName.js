@@ -15,8 +15,8 @@ export default function SearchNameLastName(props) {
   const selctState = () => {
     return (
       <>
-        <Grid item xs={2.8}>
-          <Box sx={{ minWidth: 300 }}>
+        <Grid item xs={11} md={6}>
+          {/* <Box > */}
             <TextfieldCommon 
               name="name"
               handleChange={handleChange}
@@ -24,13 +24,13 @@ export default function SearchNameLastName(props) {
               margin="normal" 
               label={"Nombres / Apellidos"} 
               />
-          </Box>
+          {/* </Box> */}
         </Grid>
-        <Grid item xs={2.5}>
+        {/* <Grid item xs={2.5}>
           <Box sx={{ minWidth: 220 }}>
         
           </Box>
-        </Grid>
+        </Grid> */}
       </>
     )
   }

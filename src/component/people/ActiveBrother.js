@@ -14,6 +14,7 @@ import SearchBrother from './searchBrother';
 import { getCurrentDate, getCurrentDateISO } from '../../util/utilDate';
 import CursorPaginationGrid from '../Common/DataGrid/CursorPaginationGrid';
 import { getUserIdST, setLastPathSS } from '../../util/Storage';
+import { getPersonState } from '../../util/utilData';
 
 const personsColums = activePersonsColums();
 const columns2 = personsColums.columns;
@@ -37,6 +38,7 @@ const styleValues = {
   backgroundImage: '/images/camel.jpg',
   backgroundColorList: '#f2f3f4'
 }
+const personState = getPersonState();
 
 export default function ActiveBrother() {
   const [searchType, setSearchType] = React.useState('birthdate');
@@ -163,6 +165,7 @@ export default function ActiveBrother() {
         endDate={endDate}
         setEndDate={setEndDate}
         filterPersons={filterPersons}
+        personState={personState}
         clickOnActiveItems={clickOnActiveItems}
         disabledButton={disabledButton}
       />

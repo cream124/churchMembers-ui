@@ -15,7 +15,7 @@ export default function SearchBirthdate(props) {
   const selctState = () => {
     return (
       <>
-        <Grid item xs={2.7}>
+        <Grid item xs={11.5} md={2.7}>
           {/* <Box sx={{ minWidth: 70 }}> */}
             <DatePicherBasic
               date={startDate}
@@ -29,12 +29,12 @@ export default function SearchBirthdate(props) {
             />
           {/* </Box> */}
         </Grid>
-        <Grid item xs={0.8}>
+        <Grid item xs={2.8} md={1}>
           <Typography variant="h8" component="h4">
             Hasta
           </Typography>
         </Grid>
-        <Grid item xs={2.7}>
+        <Grid item xs={9} md={2.7}>
           {/* <Box sx={{ minWidth: 220 }}> */}
             <CustomDay
               label='Fecha Fin'

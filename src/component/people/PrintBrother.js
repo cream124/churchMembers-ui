@@ -29,6 +29,7 @@ import { getCurrentDate, getCurrentDateISO, getPrintDate } from '../../util/util
 import HeaderReportForm from '../report/HeaderReportForm';
 import MainPanel from '../Common/Panel/MainPanel';
 import TypographyComp from '../Common/TypographyComp';
+import { getPersonState } from '../../util/utilData';
 // import HeaderReportForm from '../report/HeaderReportForm';
 
 // const personsColums = activePersonsColums();
@@ -46,13 +47,15 @@ let filterJson =
 
 const dateToPrint = getPrintDate(getCurrentDateISO());
 const headerD = (state) => { return { title: "Hernamos", subTitle: `${state}`, subTitle2: "" } }
+const personState = getPersonState('print');
 
 export default function PrintBrother(props) {
   const { title, styleValues, columns, columnsVisible } = props;
   const [searchType, setSearchType] = React.useState('birthdate');
   const [startDate, setStartDate] = React.useState(getCurrentDate());
   const [endDate, setEndDate] = React.useState(startDate);
-  const [state, setState] = React.useState('active');
+  const [state, setState] = React.useState(filterJson.filter.state);
+  // const [state, setState] = React.useState('all');
   const [headerData, setHeaderData] = React.useState(headerD(state));
   const [field, setField] = React.useState('');
   const [value, setValue] = React.useState('');
@@ -77,7 +80,7 @@ export default function PrintBrother(props) {
   }, [state]);
 
   const setingHeaderData = (filter) => {
-    const states = { registered: "Registrados", active: "Activos", inactive: "Inactivos", deleted: "Eliminados", registeredCancel: "Registros Denegados" }
+    const states = { all: "Todos", registered: "Registrados", active: "Activos", inactive: "Inactivos", deleted: "Eliminados", registeredCancel: "Registros Denegados" }
     const searchLabel = {
       names: `Busqueda por nombres con "${filter.filter.value}"`,
       birthdate: `Con fecha de Cumpleaños entre: "${filter.filter.startDate} - ${filter.filter.endDate}"`,
@@ -207,6 +210,7 @@ export default function PrintBrother(props) {
         endDate={endDate}
         setEndDate={setEndDate}
         filterPersons={filterPersons}
+        personState={personState}
         clickOnActiveItems={clickOnActiveItems}
         disabledButton={disabledButton}
         hideButton={true}

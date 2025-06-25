@@ -16,15 +16,15 @@ export default function SearchByText(props) {
   const selctState = () => {
     return (
       <>
-        <Grid item xs={7}>
-          <Box sx={{ minWidth: 350 }}>
+        <Grid item xs={11} md={7}>
+          {/* <Box sx={{ minWidth: 350 }}> */}
             <TextfieldCommon 
               name="name"
               handleChange={handleChange}
               value={value} 
               margin="normal" label={label} 
               />
-          </Box>
+          {/* </Box> */}
         </Grid>
       </>
     )

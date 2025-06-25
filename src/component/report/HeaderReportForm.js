@@ -21,12 +21,12 @@ export default function HeaderReportForm(props) {
             alignItems: "flex-start",
           }}
         >
-          <Grid item xs={1.5}>
+          <Grid item xs={3.5} md={1}>
             <Avatar src={logo} sx={{ width: 80, height: 80, margin: "auto" }}>
               A
             </Avatar>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={8.5} md={6}>
             <Stack
               direction="column"
               spacing={0.1}
@@ -54,7 +54,7 @@ export default function HeaderReportForm(props) {
           {/* <Grid item xs={1} >
             .
           </Grid> */}
-          <Grid item xs={4} >
+          <Grid item xs={12} md={4}>
             {date &&
               <Stack
                 direction={"row"}

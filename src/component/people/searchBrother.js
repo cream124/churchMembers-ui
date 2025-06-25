@@ -40,16 +40,24 @@ export default function SearchBrother(props) {
     clickOnActiveItems,
     disabledButton,
     hideButton,
+    personState
   } = props;
 
-  const personState = getPersonState();
+  // const personState = getPersonState();
 
   const selctState = () => {
     return (
-      <Grid container spacing={1} alignItems="center" className={classes.containerRegistrationButtons}>
+      <Grid
+        container
+        spacing={1}
+        alignItems="center"
+        className={classes.containerRegistrationButtons}
+        sx={{ padding: "1em" }}
+      >
         <Grid item xs={4} md={1.5}>
           {/* <Paper elevation={24}> */}
           <Box sx={{ minWidth: 80 }}>
+
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Estado</InputLabel>
               <Select
@@ -61,55 +69,73 @@ export default function SearchBrother(props) {
                 // size="small"
                 onChange={handleChangeState}
               >
+                {Object.keys(personState).map((item, pos) => {
+                  return (
+                    <MenuItem key={pos} value={item}>
+                      {/* {item} */}
+                      {personState[item].name}
+                    </MenuItem>
+                  );
+                })}
+                {/* <MenuItem value={'all'}>Todos</MenuItem>
                 <MenuItem value={'registered'}>Registrado</MenuItem>
                 <MenuItem value={'active'}>Activo</MenuItem>
                 <MenuItem value={'inactive'}>Inactivo</MenuItem>
                 <MenuItem value={'deleted'}>Eliminado</MenuItem>
-                <MenuItem value={'registeredCancel'}>Registro Denegado</MenuItem>
+                <MenuItem value={'registeredCancel'}>Registro Denegado</MenuItem> */}
               </Select>
             </FormControl>
           </Box>
           {/* </Paper> */}
         </Grid>
         <Grid item xs={8}>
-          <PanelComp textAlign="left" >
-            {/* <Paper className={classes.searchPanel}> */}
-            <Stack
+          <PanelComp
+            textAlign="left"
+            padding="0.5em"
+          >
+            <Grid
+              container
               direction="row"
-              spacing={1.1}
               sx={{
-                justifyContent: "flex-start",
-                alignItems: "flex-start",
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={searchStatus}
-                    onChange={changeSearchStatus}
-                  />
-                } label="Buscar"
-              />
-              {searchStatus &&
-                <SearchMenu
-                  searchType={searchType}
-                  handleChangeSearchType={handleChangeSearchType}
-                  startDate={startDate}
-                  setStartDate={setStartDate}
-                  endDate={endDate}
-                  setEndDate={setEndDate}
-
-                  toDate={toDate}
-                  handleChangeToDate={handleChangeToDate}
-
-                  field={field}
-                  handleChangeField={handleChangeField}
-                  value={value}
-                  handleChangeValue={handleChangeValue}
-                  filterPersons={filterPersons}
+              <Grid item xs={11} md={2}>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={searchStatus}
+                      onChange={changeSearchStatus}
+                    />
+                  } label="Buscar"
                 />
-              }
-            </Stack>
+              </Grid>
+              <Grid item xs={11} md={9}>
+                {searchStatus &&
+                  <SearchMenu
+                    searchType={searchType}
+                    handleChangeSearchType={handleChangeSearchType}
+                    startDate={startDate}
+                    setStartDate={setStartDate}
+                    endDate={endDate}
+                    setEndDate={setEndDate}
+
+                    toDate={toDate}
+                    handleChangeToDate={handleChangeToDate}
+
+                    field={field}
+                    handleChangeField={handleChangeField}
+                    value={value}
+                    handleChangeValue={handleChangeValue}
+                    filterPersons={filterPersons}
+                  />
+                }
+              </Grid>
+            </Grid>
+
+
+            {/* </Stack> */}
 
           </PanelComp>
         </Grid>

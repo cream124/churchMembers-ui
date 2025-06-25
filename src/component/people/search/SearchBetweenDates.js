@@ -17,7 +17,7 @@ export default function SearchBetweenDates(props) {
   const selctState = () => {
     return (
       <>
-        <Grid item xs={2.7}>
+        <Grid item xs={8.2} md={2.7}>
             <DatePicherBasic
               date={startDate}
               dateChange={(newValue) => {
@@ -29,7 +29,7 @@ export default function SearchBetweenDates(props) {
               size="small"
             />
         </Grid>
-        <Grid item xs={1.1}>
+        <Grid item xs={4} md={1.7}>
           <FormControlLabel
             labelPlacement="top"
             control={
@@ -44,7 +44,7 @@ export default function SearchBetweenDates(props) {
 
           />
         </Grid>
-        <Grid item xs={2.7}>
+        <Grid item xs={8} md={2.7}>
             {toDate && (
               <CustomDay
                 label={`${label} Fin `}
